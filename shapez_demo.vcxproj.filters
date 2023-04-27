@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\hieasyx">
-      <UniqueIdentifier>{422642a8-c7c2-42ab-ab9f-56f00f94a3b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\hieasyx">
-      <UniqueIdentifier>{a9f25dbb-d831-4424-b8c8-2fb4c107d615}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\buildings">
       <UniqueIdentifier>{1d3dc507-d545-4f1f-9359-e383903c8545}</UniqueIdentifier>
     </Filter>
@@ -35,102 +29,6 @@
     </ClInclude>
     <ClInclude Include="BuildingBalancer.h">
       <Filter>头文件\buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiCanvas.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiContainer.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiDef.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiDrawingProperty.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiFPS.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiFunc.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGdiplus.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGif.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiIcon.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiMacro.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiMouseDrag.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiMusicMCI.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiStart.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiWindow.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\Button.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\ControlBase.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\HiGUI.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\Page.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\ProgressCtrl.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\ScrollBar.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiGUI\Static.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\HiSysGUI.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysButton.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysCheckBox.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysComboBox.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysControlBase.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysEdit.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysGroup.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysGroupBox.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysRadioButton.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX\HiSysGUI\SysStatic.h">
-      <Filter>头文件\hieasyx</Filter>
-    </ClInclude>
-    <ClInclude Include="HiEasyX.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>头文件</Filter>
@@ -164,87 +62,6 @@
     <ClCompile Include="app.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="HiEasyX\HiCanvas.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiContainer.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiDrawingProperty.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiFPS.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiFunc.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGdiplus.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGif.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiIcon.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiMouseDrag.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiMusicMCI.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiStart.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiWindow.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGUI\Button.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGUI\ControlBase.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGUI\Page.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGUI\ProgressCtrl.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGUI\ScrollBar.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiGUI\Static.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysButton.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysCheckBox.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysComboBox.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysControlBase.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysEdit.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysGroup.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysGroupBox.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysRadioButton.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
-    <ClCompile Include="HiEasyX\HiSysGUI\SysStatic.cpp">
-      <Filter>源文件\hieasyx</Filter>
-    </ClCompile>
     <ClCompile Include="Common.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -264,6 +81,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
