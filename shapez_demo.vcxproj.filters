@@ -13,55 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\shapez">
-      <UniqueIdentifier>{cbce7353-486a-4395-b4d8-10c69088256d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\shapez\buildings">
-      <UniqueIdentifier>{86d20afe-27c5-4ed1-9fce-64d104ac9fa5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\shapez">
-      <UniqueIdentifier>{8fa3b04f-72ed-41a0-8085-b10105030dc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\shapez\buildings">
-      <UniqueIdentifier>{1d3dc507-d545-4f1f-9359-e383903c8545}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\hieasyx">
       <UniqueIdentifier>{422642a8-c7c2-42ab-ab9f-56f00f94a3b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\hieasyx">
       <UniqueIdentifier>{a9f25dbb-d831-4424-b8c8-2fb4c107d615}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\buildings">
+      <UniqueIdentifier>{1d3dc507-d545-4f1f-9359-e383903c8545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\buildings">
+      <UniqueIdentifier>{86d20afe-27c5-4ed1-9fce-64d104ac9fa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BuildingBelt.h">
-      <Filter>头文件\shapez\buildings</Filter>
+      <Filter>头文件\buildings</Filter>
     </ClInclude>
     <ClInclude Include="Building.h">
-      <Filter>头文件\shapez\buildings</Filter>
+      <Filter>头文件\buildings</Filter>
     </ClInclude>
     <ClInclude Include="BuildingBalancer.h">
-      <Filter>头文件\shapez\buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>头文件\shapez</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogic.h">
-      <Filter>头文件\shapez</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMap.h">
-      <Filter>头文件\shapez</Filter>
-    </ClInclude>
-    <ClInclude Include="GameRenderer.h">
-      <Filter>头文件\shapez</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>头文件\shapez</Filter>
-    </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>头文件\shapez</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>头文件\shapez</Filter>
+      <Filter>头文件\buildings</Filter>
     </ClInclude>
     <ClInclude Include="HiEasyX\HiCanvas.h">
       <Filter>头文件\hieasyx</Filter>
@@ -159,34 +132,34 @@
     <ClInclude Include="HiEasyX.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRenderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BuildingBalancer.cpp">
-      <Filter>源文件\shapez\buildings</Filter>
+      <Filter>源文件\buildings</Filter>
     </ClCompile>
     <ClCompile Include="BuildingBelt.cpp">
-      <Filter>源文件\shapez\buildings</Filter>
-    </ClCompile>
-    <ClCompile Include="Common.cpp">
-      <Filter>源文件\shapez</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogic.cpp">
-      <Filter>源文件\shapez</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMap.cpp">
-      <Filter>源文件\shapez</Filter>
-    </ClCompile>
-    <ClCompile Include="GameRenderer.cpp">
-      <Filter>源文件\shapez</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>源文件\shapez</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>源文件\shapez</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>源文件\shapez</Filter>
+      <Filter>源文件\buildings</Filter>
     </ClCompile>
     <ClCompile Include="app.cpp">
       <Filter>源文件</Filter>
@@ -271,6 +244,27 @@
     </ClCompile>
     <ClCompile Include="HiEasyX\HiSysGUI\SysStatic.cpp">
       <Filter>源文件\hieasyx</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameRenderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

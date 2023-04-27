@@ -20,6 +20,10 @@ enum class ResourceType
 class GameMap
 {
 public:
+	vec2 center{50, 0};
+
+	float cell_size = 10;
+
 	GameMap();
 
 	void initialize(long long seed);

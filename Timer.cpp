@@ -1,5 +1,7 @@
 #include "Timer.h"
 
+Timer* current_timer = nullptr;
+
 void Timer::update()
 {
 	previous = current;

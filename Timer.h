@@ -4,9 +4,14 @@
 
 using namespace std::chrono;
 
+class Timer;
+
+extern Timer* current_timer;
+
 class Timer
 {
 public:
+
 	long long previous;
 	long long current;
 	long long delta_ms;
@@ -15,4 +20,3 @@ public:
 	void update();
 	void reset();
 };
-

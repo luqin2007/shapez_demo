@@ -1,21 +1,23 @@
 #include "Main.h"
 
+#include <iostream>
+
 void Main::run()
 {
 	initgraph(1024, 768);
-	game.initialize(0);
-	renderer.initialize();
-	bool closed = false;
-	renderer.initialize();
-	while (!closed)
+	game_.initialize(0);
+	renderer_.initialize();
+	while (hiex::IsAnyWindow())
 	{
-		// 0xf6f6f5
-		game.update();
-		renderer.update_env();
-		renderer.draw_map(game.map());
-		renderer.draw_ui();
-		renderer.draw_overlay();
-		_getch();
+		// game_.update();
+		BEGIN_TASK();
+		renderer_.update_env();
+		renderer_.draw_map(game_.map());
+		renderer_.draw_building(game_.map());
+		renderer_.draw_ui();
+		renderer_.draw_overlay();
+		END_TASK();
+		REDRAW_WINDOW();
 	}
 	closegraph();
 }
