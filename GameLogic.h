@@ -1,15 +1,13 @@
 #pragma once
 
-#include "HiEasyX.h"
-#include "HiEasyX/HiMouseDrag.h"
+#include <cmath>
+
 #include "GameMap.h"
 #include "Timer.h"
+#include "Common.h"
+#include "MouseHelper.h"
 
-class GameLogic;
-
-extern GameLogic* current_game;
-
-extern LRESULT CALLBACK handle_window_message(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam);
+using std::max;
 
 class GameLogic
 {
@@ -18,19 +16,23 @@ public:
 
 	void update();
 
-	void on_drag(int dx, int dy);
+	GameMap& map()
+	{
+		return map_;
+	}
 
-	void on_click(short x, short y);
-
-	void on_wheel_roll(short len);
-
-	GameMap& map();
-
+	Timer& timer()
+	{
+		return timer_;
+	}
+	
 private:
-	Timer timer_;
+	Timer timer_ = {};
 	GameMap map_;
 
-	// mouse
-	bool is_left_clicked_ = false;
-	hiex::MouseDrag drag_helper_;
+	void on_drag(float dx, float dy);
+
+	void on_click(float x, float y);
+
+	void on_wheel_roll(float len);
 };

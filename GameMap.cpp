@@ -1,13 +1,21 @@
 #include "GameMap.h"
 
+const ResourceType ResourceType::EMPTY = ResourceType(false, false, "");
+const ResourceType ResourceType::SHAPE_STAR = ResourceType(false, true, "star.png");
+const ResourceType ResourceType::SHAPE_RECT = ResourceType(false, true, "rect.png");
+const ResourceType ResourceType::SHAPE_CIRCLE = ResourceType(false, true, "circle.png");
+const ResourceType ResourceType::COLOR_BLUE = ResourceType(true, false, "blue.png");
+const ResourceType ResourceType::COLOR_YELLOW = ResourceType(true, false, "yellow.png");
+const ResourceType ResourceType::COLOR_RED = ResourceType(true, false, "red.png");
+
 GameMap::GameMap()
 {
 	for (int i = 0; i < 100; ++i)
 	{
 		for (int j = 0; j < 100; ++j)
 		{
-			resources[i][j] = ResourceType::EMPTY;
-			buildings[i][j] = nullptr;
+			resources_[i][j] = &ResourceType::EMPTY;
+			buildings_[i][j] = nullptr;
 		}
 	}
 }
@@ -30,14 +38,14 @@ void GameMap::initialize(long long seed)
 	}
 }
 
-void GameMap::set_resource(int x, int y, ResourceType type)
+void GameMap::set_resource(const int x, const int y, const ResourceType& type)
 {
-	resources[x][y] = type;
+	resources_[x][y] = &type;
 }
 
-ResourceType GameMap::get_resource(int x, int y) const
+const ResourceType& GameMap::get_resource(const int x, const int y) const
 {
-	return resources[x][y];
+	return *resources_[x][y];
 }
 
 void GameMap::set_building(BuildingContext* context, int count, ...)
@@ -46,18 +54,18 @@ void GameMap::set_building(BuildingContext* context, int count, ...)
 	va_start(list, count);
 	while (count--)
 	{
-		ivec2 p = va_arg(list, ivec2);
-		buildings[p.x][p.y] = context;
+		const ivec2 p = va_arg(list, ivec2);
+		buildings_[p.x][p.y] = context;
 	}
 	va_end(list);
 }
 
-void GameMap::set_building(BuildingContext* context, ivec2 pos)
+void GameMap::set_building(BuildingContext* context, const ivec2 pos)
 {
-	buildings[pos.x][pos.y] = context;
+	buildings_[pos.x][pos.y] = context;
 }
 
-BuildingContext* GameMap::get_building(int x, int y) const
+BuildingContext* GameMap::get_building(const int x, const int y) const
 {
-	return buildings[x][y];
+	return buildings_[x][y];
 }

@@ -1,23 +1,18 @@
 #include "Main.h"
 
-#include <iostream>
-
 void Main::run()
 {
-	initgraph(1024, 768);
+	window_.initialize();
 	game_.initialize(0);
 	renderer_.initialize();
-	while (hiex::IsAnyWindow())
+	while (window_.is_active())
 	{
-		// game_.update();
-		BEGIN_TASK();
+		game_.update();
 		renderer_.update_env();
-		renderer_.draw_map(game_.map());
-		renderer_.draw_building(game_.map());
-		renderer_.draw_ui();
-		renderer_.draw_overlay();
-		END_TASK();
-		REDRAW_WINDOW();
+		renderer_.draw(game_.map());
+		glfwSwapBuffers(window_.window());
+		glfwPollEvents();
 	}
-	closegraph();
+	
+	window_.destroy();
 }

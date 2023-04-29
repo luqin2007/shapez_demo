@@ -1,8 +1,10 @@
 #pragma once
 
-#include <string>
+#include <utility>
 
 #include "Common.h"
+
+using std::pair;
 
 enum class Part
 {
@@ -66,5 +68,5 @@ public:
 
 	ShapeItem colored(DyeItem& dye) const;
 
-	std::pair<ShapeItem, ShapeItem> cut() const;
+	pair<ShapeItem, ShapeItem> cut() const;
 };

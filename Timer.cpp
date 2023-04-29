@@ -1,11 +1,9 @@
 #include "Timer.h"
 
-Timer* current_timer = nullptr;
-
 void Timer::update()
 {
 	previous = current;
-	auto current_time = system_clock::now().time_since_epoch();
+	const auto current_time = system_clock::now().time_since_epoch();
 	current = duration_cast<microseconds>(current_time).count();
 	delta_ms = current - previous;
 	delta = delta_ms / 1000.0f;

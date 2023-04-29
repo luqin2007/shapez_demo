@@ -1,29 +1,63 @@
 #pragma once
 
 #include <string>
+#include <cmath>
+#include <iostream>
+#include <exception>
+#include <glad/glad.h>
+
+class GameWindow;
+class GameRenderer;
+class GameLogic;
+
+extern GameLogic* current_game;
+extern GameWindow* current_window;
+extern GameRenderer* current_renderer;
+
+using std::fabsf;
+using std::cerr;
+using std::cout;
+using std::endl;
+using std::exception;
 
 struct ivec2
 {
-	int x{0};
-	int y{0};
+	union
+	{
+		int x{0};
+		int w;
+	};
+
+	union
+	{
+		int y{0};
+		int h;
+	};
 
 	ivec2() = default;
 
-	ivec2(int x, int y)
-		: x(x), y(y)
+	ivec2(const int x, const int y): x(x), y(y)
 	{
 	}
 };
 
 struct vec2
 {
-	float x{0};
-	float y{0};
+	union
+	{
+		float x{0};
+		float w;
+	};
+
+	union
+	{
+		float y{0};
+		float h;
+	};
 
 	vec2() = default;
 
-	vec2(float x, float y)
-		: x(x), y(y)
+	vec2(const float x, const float y): x(x), y(y)
 	{
 	}
 };
@@ -37,28 +71,25 @@ enum class Side
 };
 
 /**
- * Ë³Ê±ÕëÐý×ª
+ * é¡ºæ—¶é’ˆæ—‹è½¬
  */
 Side operator++(Side side);
 
 /**
- * ÄæÊ±ÕëÐý×ª
+ * é€†æ—¶é’ˆæ—‹è½¬
  */
 Side operator--(Side side);
 
 /**
- * ·´·½Ïò
+ * åå‘
  */
 Side operator-(Side side);
 
 /**
- * ÏòÄ³Ò»·½ÏòÒÆ¶¯Ò»µ¥Î»
+ * ç§»åŠ¨
  */
 ivec2 operator+(const ivec2& pos, Side side);
 
-/**
- * ÑÕÉ« Ä£ÄâÃ¶¾Ù
- */
 class Color
 {
 public:
@@ -79,5 +110,15 @@ public:
 	bool operator==(const Color& o) const;
 
 private:
-	Color(std::string _name, int _mix);
+	Color(std::string name, int mix);
 };
+
+inline bool fneq(float a, float b)
+{
+	return fabsf(a - b) > 1e-5f;
+}
+
+void log_error(const char* name);
+
+template<typename T>
+void debug_buffer(GLuint name, int count);

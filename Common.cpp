@@ -1,39 +1,46 @@
 #include "Common.h"
 
-Side operator++(Side side)
+GameLogic* current_game = nullptr;
+GameWindow* current_window = nullptr;
+GameRenderer* current_renderer = nullptr;
+
+Side operator++(const Side side)
 {
 	switch (side)
 	{
 	case Side::UP: return Side::RIGHT;
 	case Side::RIGHT: return Side::DOWN;
 	case Side::DOWN: return Side::LEFT;
-	default: return Side::UP;
+	case Side::LEFT: return Side::UP;
 	}
+	return side;
 }
 
-Side operator--(Side side)
+Side operator--(const Side side)
 {
 	switch (side)
 	{
 	case Side::UP: return Side::LEFT;
 	case Side::LEFT: return Side::DOWN;
 	case Side::DOWN: return Side::RIGHT;
-	default: return Side::UP;
+	case Side::RIGHT: return Side::UP;
 	}
+	return side;
 }
 
-Side operator-(Side side)
+Side operator-(const Side side)
 {
 	switch (side)
 	{
 	case Side::UP: return Side::DOWN;
 	case Side::DOWN: return Side::UP;
 	case Side::LEFT: return Side::RIGHT;
-	default: return Side::LEFT;
+	case Side::RIGHT: return Side::LEFT;
 	}
+	return side;
 }
 
-ivec2 operator+(const ivec2& pos, Side side)
+ivec2 operator+(const ivec2& pos, const Side side)
 {
 	switch (side)
 	{
@@ -45,16 +52,15 @@ ivec2 operator+(const ivec2& pos, Side side)
 		return ivec2{pos.x - 1, pos.y};
 	case Side::RIGHT:
 		return ivec2{pos.x + 1, pos.y};
-	default:
-		return ivec2{pos};
 	}
+	return {pos.x, pos.y};
 }
 
-Color* _colors[10];
+Color* colors[10];
 
-Color::Color(std::string _name, const int _mix) : name(std::move(_name)), mix(_mix)
+Color::Color(std::string name, const int mix) : name(std::move(name)), mix(mix)
 {
-	_colors[_mix] = this;
+	colors[mix] = this;
 }
 
 const Color Color::uncolored{"uncolored", 0b000};
@@ -68,10 +74,67 @@ const Color Color::white{"white", 0b111};
 
 const Color& Color::operator+(const Color& o) const
 {
-	return *_colors[mix | o.mix];
+	return *colors[mix | o.mix];
 }
 
 bool Color::operator==(const Color& o) const
 {
 	return mix == o.mix;
+}
+
+void log_error(const char* name)
+{
+	const GLenum error = glGetError();
+	if (error == GL_NO_ERROR)return;
+	switch (error)
+	{
+	case GL_INVALID_ENUM:
+		cerr << "Found error in " << name << ": " << "GL_INVALID_ENUM" << endl;
+		break;
+	case GL_INVALID_VALUE:
+		cerr << "Found error in " << name << ": " << "GL_INVALID_VALUE" << endl;
+		break;
+	case GL_INVALID_OPERATION:
+		cerr << "Found error in " << name << ": " << "GL_INVALID_OPERATION" << endl;
+		break;
+	case GL_INVALID_FRAMEBUFFER_OPERATION:
+		cerr << "Found error in " << name << ": " << "GL_INVALID_FRAMEBUFFER_OPERATION" << endl;
+		break;
+	case GL_OUT_OF_MEMORY:
+		cerr << "Found error in " << name << ": " << "GL_OUT_OF_MEMORY" << endl;
+		break;
+	case GL_STACK_UNDERFLOW:
+		cerr << "Found error in " << name << ": " << "GL_STACK_UNDERFLOW" << endl;
+		break;
+	case GL_STACK_OVERFLOW:
+		cerr << "Found error in " << name << ": " << "GL_STACK_OVERFLOW" << endl;
+		break;
+	default:
+		cerr << "Found error in " << name << ": " << "Unknown error code" << endl;
+		break;
+	}
+
+	throw exception("GL ERROR!");
+}
+
+template<>
+void debug_buffer<float>(const GLuint name, int count)
+{
+	const float *buf = static_cast<float*>(glMapNamedBuffer(name, GL_READ_ONLY));
+	cout << "[";
+	while (count--)
+		cout << *buf++ << " ";
+	cout << "]" << endl;
+	glUnmapNamedBuffer(name);
+}
+
+template<>
+void debug_buffer<unsigned int>(const GLuint name, int count)
+{
+	const unsigned int* buf = static_cast<unsigned int*>(glMapNamedBuffer(name, GL_READ_ONLY));
+	cout << "[";
+	while (count--)
+		cout << *buf++ << " ";
+	cout << "]" << endl;
+	glUnmapNamedBuffer(name);
 }

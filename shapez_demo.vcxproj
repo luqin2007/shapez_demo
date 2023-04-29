@@ -73,6 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\SupportLibraries\vs_libs\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\SupportLibraries\vs_libs\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>D:\SupportLibraries\vs_libs\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -108,6 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,11 +141,15 @@
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameRenderer.h" />
+    <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MouseHelper.h" />
+    <ClInclude Include="Resouces.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\SupportLibraries\vs_libs\src\glad.c" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="BuildingBalancer.cpp" />
     <ClCompile Include="BuildingBelt.cpp" />
@@ -151,10 +157,111 @@
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameRenderer.cpp" />
-    <ClCompile Include="glad.c" />
+    <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MouseHelper.cpp" />
+    <ClCompile Include="Resouces.cpp" />
     <ClCompile Include="Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image\buildings\balancer.png" />
+    <Image Include="image\buildings\balancer_blue.png" />
+    <Image Include="image\buildings\belt_left_blue.png" />
+    <Image Include="image\buildings\belt_right_blue.png" />
+    <Image Include="image\buildings\belt_top_blue.png" />
+    <Image Include="image\buildings\cutter.png" />
+    <Image Include="image\buildings\cutter_blue.png" />
+    <Image Include="image\buildings\forward_0.png" />
+    <Image Include="image\buildings\forward_1.png" />
+    <Image Include="image\buildings\forward_10.png" />
+    <Image Include="image\buildings\forward_11.png" />
+    <Image Include="image\buildings\forward_12.png" />
+    <Image Include="image\buildings\forward_13.png" />
+    <Image Include="image\buildings\forward_2.png" />
+    <Image Include="image\buildings\forward_3.png" />
+    <Image Include="image\buildings\forward_4.png" />
+    <Image Include="image\buildings\forward_5.png" />
+    <Image Include="image\buildings\forward_6.png" />
+    <Image Include="image\buildings\forward_7.png" />
+    <Image Include="image\buildings\forward_8.png" />
+    <Image Include="image\buildings\forward_9.png" />
+    <Image Include="image\buildings\hub.png" />
+    <Image Include="image\buildings\left_0.png" />
+    <Image Include="image\buildings\left_1.png" />
+    <Image Include="image\buildings\left_10.png" />
+    <Image Include="image\buildings\left_11.png" />
+    <Image Include="image\buildings\left_12.png" />
+    <Image Include="image\buildings\left_13.png" />
+    <Image Include="image\buildings\left_2.png" />
+    <Image Include="image\buildings\left_3.png" />
+    <Image Include="image\buildings\left_4.png" />
+    <Image Include="image\buildings\left_5.png" />
+    <Image Include="image\buildings\left_6.png" />
+    <Image Include="image\buildings\left_7.png" />
+    <Image Include="image\buildings\left_8.png" />
+    <Image Include="image\buildings\left_9.png" />
+    <Image Include="image\buildings\miner-chainable.png" />
+    <Image Include="image\buildings\miner.png" />
+    <Image Include="image\buildings\miner_blue.png" />
+    <Image Include="image\buildings\mixer.png" />
+    <Image Include="image\buildings\mixer_blue.png" />
+    <Image Include="image\buildings\painter.png" />
+    <Image Include="image\buildings\painter_blue.png" />
+    <Image Include="image\buildings\right_0.png" />
+    <Image Include="image\buildings\right_1.png" />
+    <Image Include="image\buildings\right_10.png" />
+    <Image Include="image\buildings\right_11.png" />
+    <Image Include="image\buildings\right_12.png" />
+    <Image Include="image\buildings\right_13.png" />
+    <Image Include="image\buildings\right_2.png" />
+    <Image Include="image\buildings\right_3.png" />
+    <Image Include="image\buildings\right_4.png" />
+    <Image Include="image\buildings\right_5.png" />
+    <Image Include="image\buildings\right_6.png" />
+    <Image Include="image\buildings\right_7.png" />
+    <Image Include="image\buildings\right_8.png" />
+    <Image Include="image\buildings\right_9.png" />
+    <Image Include="image\buildings\rotater.png" />
+    <Image Include="image\buildings\rotater_blue.png" />
+    <Image Include="image\buildings\stacker.png" />
+    <Image Include="image\buildings\stacker_blue.png" />
+    <Image Include="image\buildings\trash.png" />
+    <Image Include="image\buildings\trash_blue.png" />
+    <Image Include="image\buildings\underground_belt_entry.png" />
+    <Image Include="image\buildings\underground_belt_entry_blue.png" />
+    <Image Include="image\buildings\underground_belt_exit.png" />
+    <Image Include="image\buildings\underground_belt_exit_blue.png" />
+    <Image Include="image\building_icons\balancer.png" />
+    <Image Include="image\building_icons\belt.png" />
+    <Image Include="image\building_icons\block.png" />
+    <Image Include="image\building_icons\cutter.png" />
+    <Image Include="image\building_icons\miner.png" />
+    <Image Include="image\building_icons\mixer.png" />
+    <Image Include="image\building_icons\painter.png" />
+    <Image Include="image\building_icons\rotater.png" />
+    <Image Include="image\building_icons\stacker.png" />
+    <Image Include="image\building_icons\trash.png" />
+    <Image Include="image\building_icons\underground_belt.png" />
+    <Image Include="image\colors\blue.png" />
+    <Image Include="image\colors\cyan.png" />
+    <Image Include="image\colors\green.png" />
+    <Image Include="image\colors\purple.png" />
+    <Image Include="image\colors\red.png" />
+    <Image Include="image\colors\uncolored.png" />
+    <Image Include="image\colors\white.png" />
+    <Image Include="image\colors\yellow.png" />
+    <Image Include="image\shapes\circle.png" />
+    <Image Include="image\shapes\rect.png" />
+    <Image Include="image\shapes\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glsl\cell_border.frag" />
+    <None Include="glsl\cell_border.vert" />
+    <None Include="glsl\tex.frag" />
+    <None Include="glsl\tex.vert" />
+    <None Include="glsl\tex_alpha.frag" />
+    <None Include="glsl\tex_alpha.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

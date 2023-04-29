@@ -25,7 +25,7 @@ ShapeItem ShapeItem::colored(DyeItem& dye) const
 	};
 }
 
-std::pair<ShapeItem, ShapeItem> ShapeItem::cut() const
+pair<ShapeItem, ShapeItem> ShapeItem::cut() const
 {
 	return {
 		{{Part::NONE, Color::uncolored}, down_left, {Part::NONE, Color::uncolored}, up_right},
