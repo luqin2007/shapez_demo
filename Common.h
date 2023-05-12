@@ -6,6 +6,9 @@
 #include <exception>
 #include <glad/glad.h>
 
+#define BUFFER_SIZE (4 * 11 * 4)
+#define CELL_COUNT 200
+
 class GameWindow;
 class GameRenderer;
 class GameLogic;
@@ -33,12 +36,6 @@ struct ivec2
 		int y{0};
 		int h;
 	};
-
-	ivec2() = default;
-
-	ivec2(const int x, const int y): x(x), y(y)
-	{
-	}
 };
 
 struct vec2
@@ -109,16 +106,28 @@ public:
 
 	bool operator==(const Color& o) const;
 
+	bool operator|(const Color& o) const;
+
 private:
 	Color(std::string name, int mix);
 };
 
-inline bool fneq(float a, float b)
+inline bool feq(const float a, const float b)
+{
+	return fabsf(a - b) <= 1e-5f;
+}
+
+inline bool fneq(const float a, const float b)
 {
 	return fabsf(a - b) > 1e-5f;
 }
 
+inline bool fneq(const vec2& a, const vec2& b)
+{
+	return fneq(a.x, b.x) || fneq(a.y, b.y);
+}
+
 void log_error(const char* name);
 
-template<typename T>
+template <typename T>
 void debug_buffer(GLuint name, int count);

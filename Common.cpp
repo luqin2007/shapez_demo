@@ -82,6 +82,11 @@ bool Color::operator==(const Color& o) const
 	return mix == o.mix;
 }
 
+bool Color::operator|(const Color& o) const
+{
+	return mix & o.mix == 0;
+}
+
 void log_error(const char* name)
 {
 	const GLenum error = glGetError();

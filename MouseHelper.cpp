@@ -3,7 +3,7 @@
 namespace MouseHelper
 {
 	bool last_left_clicked;
-	bool left_clicked;
+	bool left_clicked, mid_clicked;
 	bool pos_initialized;
 	float wheel_distance;
 	float x_pos, y_pos, last_x_pos, last_y_pos;
@@ -20,6 +20,7 @@ namespace MouseHelper
 	{
 		last_left_clicked = false;
 		left_clicked = false;
+		mid_clicked = false;
 		pos_initialized = false;
 		update();
 	}
@@ -32,6 +33,11 @@ namespace MouseHelper
 	bool is_left_drag()
 	{
 		return last_left_clicked && left_clicked;
+	}
+
+	bool is_mid_clicked()
+	{
+		return mid_clicked;
 	}
 
 	float x()
@@ -62,6 +68,11 @@ namespace MouseHelper
 	void set_left_click(const bool click)
 	{
 		left_clicked = click;
+	}
+
+	void set_mid_click(const bool click)
+	{
+		mid_clicked = click;
 	}
 
 	void set_position(const double x, const double y)

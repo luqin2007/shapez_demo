@@ -9,6 +9,9 @@ in vec2 fUV;
 out vec4 color;
 
 void main() {
+    if (fUV.x > 1 || fUV.x < -1) discard;
+    if (fUV.y > 1 || fUV.y < -1) discard;
+
     vec4 tColor = texture(tex, fUV);
-    color = vec4(tColor.xyz, tColor.w * alpha);
+    color = vec4(tColor.rgb, tColor.a * alpha);
 }

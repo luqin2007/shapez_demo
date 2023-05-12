@@ -8,6 +8,7 @@
 #include "MouseHelper.h"
 
 using std::max;
+using std::min;
 
 class GameLogic
 {
@@ -27,12 +28,14 @@ public:
 	}
 	
 private:
-	Timer timer_ = {};
+	Timer timer_;
 	GameMap map_;
 
 	void on_drag(float dx, float dy);
 
-	void on_click(float x, float y);
+	void on_click_left(float x, float y);
+
+	void on_click_middle();
 
 	void on_wheel_roll(float len);
 };

@@ -1,18 +1,36 @@
 #include "GameMap.h"
 
-const ResourceType ResourceType::EMPTY = ResourceType(false, false, "");
-const ResourceType ResourceType::SHAPE_STAR = ResourceType(false, true, "star.png");
-const ResourceType ResourceType::SHAPE_RECT = ResourceType(false, true, "rect.png");
-const ResourceType ResourceType::SHAPE_CIRCLE = ResourceType(false, true, "circle.png");
-const ResourceType ResourceType::COLOR_BLUE = ResourceType(true, false, "blue.png");
-const ResourceType ResourceType::COLOR_YELLOW = ResourceType(true, false, "yellow.png");
-const ResourceType ResourceType::COLOR_RED = ResourceType(true, false, "red.png");
+const ResourceType ResourceType::EMPTY = ResourceType(false, false, "", []() { return Item::EMPTY; });
+const ResourceType ResourceType::SHAPE_STAR = ResourceType(false, true, "star_uncolored.png", []()
+{
+	return ShapeItem{ColoredPart{Part::STAR, Color::uncolored}};
+});
+const ResourceType ResourceType::SHAPE_RECT = ResourceType(false, true, "rect_uncolored.png", []()
+{
+	return ShapeItem{ColoredPart{Part::RECT, Color::uncolored}};
+});
+const ResourceType ResourceType::SHAPE_CIRCLE = ResourceType(false, true, "circle_uncolored.png", []()
+{
+	return ShapeItem{ColoredPart{Part::FAN, Color::uncolored}};
+});
+const ResourceType ResourceType::COLOR_BLUE = ResourceType(true, false, "blue.png", []()
+{
+	return DyeItem{Color::blue};
+});
+const ResourceType ResourceType::COLOR_YELLOW = ResourceType(true, false, "yellow.png", []()
+{
+	return DyeItem{Color::yellow};
+});
+const ResourceType ResourceType::COLOR_RED = ResourceType(true, false, "red.png", []()
+{
+	return DyeItem{Color::red};
+});
 
 GameMap::GameMap()
 {
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < CELL_COUNT; ++i)
 	{
-		for (int j = 0; j < 100; ++j)
+		for (int j = 0; j < CELL_COUNT; ++j)
 		{
 			resources_[i][j] = &ResourceType::EMPTY;
 			buildings_[i][j] = nullptr;
@@ -22,19 +40,14 @@ GameMap::GameMap()
 
 void GameMap::initialize(long long seed)
 {
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < CELL_COUNT; ++i)
 	{
-		for (int j = 0; j < i; ++j)
-		{
-			set_resource(i, j, ResourceType::SHAPE_CIRCLE);
-			set_resource(99 - i, j, ResourceType::SHAPE_RECT);
-			set_resource(i, 99 - j, ResourceType::SHAPE_STAR);
-			set_resource(99 - i, 99 - j, ResourceType::COLOR_RED);
-		}
-		set_resource(40 + i * 2, 0, ResourceType::COLOR_BLUE);
-		set_resource(40 + i * 2 + 1, 0, ResourceType::COLOR_BLUE);
-		set_resource(40 + i * 2, 99, ResourceType::COLOR_BLUE);
-		set_resource(40 + i * 2 + 1, 99, ResourceType::COLOR_BLUE);
+		set_resource(0, i, ResourceType::SHAPE_CIRCLE);
+		set_resource(1, i, ResourceType::SHAPE_RECT);
+		set_resource(2, i, ResourceType::SHAPE_STAR);
+		set_resource(3, i, ResourceType::COLOR_RED);
+		set_resource(4, i, ResourceType::COLOR_BLUE);
+		set_resource(5, i, ResourceType::COLOR_YELLOW);
 	}
 }
 

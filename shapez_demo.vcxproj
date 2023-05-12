@@ -114,7 +114,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,34 +134,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractDrawer.h" />
+    <ClInclude Include="Atlas.h" />
     <ClInclude Include="Building.h" />
-    <ClInclude Include="BuildingBalancer.h" />
     <ClInclude Include="BuildingBelt.h" />
+    <ClInclude Include="BuildingHub.h" />
+    <ClInclude Include="BuildingMiner.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameRenderer.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="BorderDrawer.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MouseHelper.h" />
     <ClInclude Include="Resouces.h" />
+    <ClInclude Include="TextureInstanceDrawer.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\SupportLibraries\vs_libs\src\glad.c" />
+    <ClCompile Include="AbstractDrawer.cpp" />
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="BuildingBalancer.cpp" />
+    <ClCompile Include="Atlas.cpp" />
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="BuildingBelt.cpp" />
+    <ClCompile Include="BuildingHub.cpp" />
+    <ClCompile Include="BuildingMiner.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameRenderer.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="BorderDrawer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MouseHelper.cpp" />
     <ClCompile Include="Resouces.cpp" />
+    <ClCompile Include="TextureInstanceDrawer.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -251,19 +262,55 @@
     <Image Include="image\colors\uncolored.png" />
     <Image Include="image\colors\white.png" />
     <Image Include="image\colors\yellow.png" />
-    <Image Include="image\shapes\circle.png" />
-    <Image Include="image\shapes\rect.png" />
-    <Image Include="image\shapes\star.png" />
+    <Image Include="image\shapes\circle_blue.png" />
+    <Image Include="image\shapes\circle_cyan.png" />
+    <Image Include="image\shapes\circle_green.png" />
+    <Image Include="image\shapes\circle_purple.png" />
+    <Image Include="image\shapes\circle_red.png" />
+    <Image Include="image\shapes\circle_uncolored.png" />
+    <Image Include="image\shapes\circle_white.png" />
+    <Image Include="image\shapes\circle_yellow.png" />
+    <Image Include="image\shapes\rect_blue.png" />
+    <Image Include="image\shapes\rect_cyan.png" />
+    <Image Include="image\shapes\rect_green.png" />
+    <Image Include="image\shapes\rect_purple.png" />
+    <Image Include="image\shapes\rect_red.png" />
+    <Image Include="image\shapes\rect_uncolored.png" />
+    <Image Include="image\shapes\rect_white.png" />
+    <Image Include="image\shapes\rect_yellow.png" />
+    <Image Include="image\shapes\star_blue.png" />
+    <Image Include="image\shapes\star_cyan.png" />
+    <Image Include="image\shapes\star_green.png" />
+    <Image Include="image\shapes\star_purple.png" />
+    <Image Include="image\shapes\star_red.png" />
+    <Image Include="image\shapes\star_uncolored.png" />
+    <Image Include="image\shapes\star_white.png" />
+    <Image Include="image\shapes\star_yellow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl\cell_border.frag" />
     <None Include="glsl\cell_border.vert" />
-    <None Include="glsl\tex.frag" />
-    <None Include="glsl\tex.vert" />
+    <None Include="glsl\text.frag" />
+    <None Include="glsl\text.vert" />
     <None Include="glsl\tex_alpha.frag" />
-    <None Include="glsl\tex_alpha.vert" />
+    <None Include="glsl\tex_instance.vert" />
+    <None Include="image\shapes\circle.psd" />
+    <None Include="image\shapes\rect.psd" />
+    <None Include="image\shapes\star.psd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\glfw.3.3.8\build\native\glfw.targets" Condition="Exists('packages\glfw.3.3.8\build\native\glfw.targets')" />
+    <Import Project="packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets" Condition="Exists('packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" />
+    <Import Project="packages\freetype.2.8.0.1\build\native\freetype.targets" Condition="Exists('packages\freetype.2.8.0.1\build\native\freetype.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\glfw.3.3.8\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glfw.3.3.8\build\native\glfw.targets'))" />
+    <Error Condition="!Exists('packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets'))" />
+    <Error Condition="!Exists('packages\freetype.2.8.0.1\build\native\freetype.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\freetype.2.8.0.1\build\native\freetype.targets'))" />
+  </Target>
 </Project>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <utility>
+#include <typeinfo>
 
 #include "Common.h"
 
@@ -18,9 +19,14 @@ class Item
 {
 public:
 	static const Item EMPTY;
+
+	virtual bool operator==(const Item& o) const
+	{
+		return this == &o;
+	}
 };
 
-class DyeItem : Item
+class DyeItem : public Item
 {
 public:
 	const Color& color;
@@ -30,6 +36,8 @@ public:
 	}
 
 	DyeItem operator+(const DyeItem& o) const;
+
+	bool operator==(const Item&) const override;
 };
 
 class ColoredPart
@@ -45,9 +53,11 @@ public:
 	ColoredPart(const ColoredPart& p) = default;
 
 	ColoredPart colored(const Color& o) const;
+
+	bool operator==(const ColoredPart&) const;
 };
 
-class ShapeItem : Item
+class ShapeItem : public Item
 {
 public:
 	ColoredPart down_right;
@@ -66,7 +76,11 @@ public:
 
 	ShapeItem roll() const;
 
-	ShapeItem colored(DyeItem& dye) const;
+	ShapeItem colored(const DyeItem& dye) const;
 
 	pair<ShapeItem, ShapeItem> cut() const;
+
+	bool operator==(const Item&) const override;
+
+	ColoredPart operator[](int idx) const;
 };

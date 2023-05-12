@@ -2,10 +2,13 @@
 
 #include <cstdarg>
 #include <string>
+#include <functional>
 
 #include "Common.h"
+#include "Item.h"
 
 using std::string;
+using std::function;
 
 class BuildingContext;
 
@@ -21,12 +24,18 @@ public:
 	const static ResourceType COLOR_YELLOW;
 
 	const bool is_color, is_shape;
+	const function<Item()> create_item;
 
 	const string name;
 
+	bool operator==(const ResourceType& o) const
+	{
+		return this == &o;
+	}
+
 private:
-	ResourceType(const bool is_color, const bool is_shape, string name)
-		: is_color(is_color), is_shape(is_shape), name(std::move(name))
+	ResourceType(const bool is_color, const bool is_shape, string name, const function<Item()>& create_item)
+		: is_color(is_color), is_shape(is_shape), create_item(create_item), name(std::move(name))
 	{
 	}
 };
@@ -35,7 +44,7 @@ class GameMap
 {
 public:
 	// 屏幕中点对应第 center.x 行，第 center.y 列
-	vec2 center{50, 50};
+	vec2 center{CELL_COUNT / 2.0f, CELL_COUNT / 2.0f};
 
 	float cell_size = 100;
 
@@ -44,11 +53,6 @@ public:
 	void initialize(long long seed);
 
 	void set_resource(int x, int y, const ResourceType& type);
-
-	void set_resource(const ivec2 pos, const ResourceType& type)
-	{
-		set_resource(pos.x, pos.y, type);
-	}
 
 	const ResourceType& get_resource(int x, int y) const;
 
@@ -69,6 +73,6 @@ public:
 	}
 
 private:
-	const ResourceType* resources_[100][100]{};
-	BuildingContext* buildings_[100][100]{};
+	const ResourceType* resources_[CELL_COUNT][CELL_COUNT]{};
+	BuildingContext* buildings_[CELL_COUNT][CELL_COUNT]{};
 };

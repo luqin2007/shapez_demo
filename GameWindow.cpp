@@ -28,6 +28,10 @@ void GameWindow::listen_events() const
 		{
 			MouseHelper::set_left_click(action != GLFW_RELEASE);
 		}
+		else if (button == GLFW_MOUSE_BUTTON_MIDDLE)
+		{
+			MouseHelper::set_mid_click(action != GLFW_RELEASE);
+		}
 	});
 
 	glfwSetCursorPosCallback(window_, [](GLFWwindow*, const double x, const double y)
