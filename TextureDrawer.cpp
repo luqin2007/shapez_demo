@@ -16,7 +16,6 @@ void TextureDrawer::initialize()
 	glCreateVertexArrays(1, &vao_);
 	glBindVertexArray(vao_);
 	glEnableVertexAttribArray(0);
-	bind_indices();
 	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
 	glVertexAttribDivisor(0, 0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
@@ -118,7 +117,6 @@ void TextureDrawer::destroy()
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glUseProgram(0);
 
 	glDeleteProgram(program_);
