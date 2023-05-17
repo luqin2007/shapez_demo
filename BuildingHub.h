@@ -8,14 +8,28 @@ class BuildingHub;
 class HubContext : public BuildingContext
 {
 public:
+	/**
+	 * \brief 需求数量
+	 */
 	int total_count;
-	Item item;
-	int accept_count = 0;
-	int level = 0;
 
-	HubContext(const Building& building, const ivec2& pos, const Side direction, const int total_count,
-	           const Item& item)
-		: BuildingContext(building, pos, direction), total_count(total_count), item(item)
+	/**
+	 * \brief 需求物品
+	 */
+	Item item;
+
+	/**
+	 * \brief 已接受物品数量
+	 */
+	int accept_count = 0;
+
+	/**
+	 * \brief 等级
+	 */
+	int level = 1;
+
+	HubContext(const Building& building, const ivec2& pos, const Side direction, const int total_count, Item item)
+		: BuildingContext(building, pos, direction), total_count(total_count), item(std::move(item))
 	{
 	}
 };

@@ -7,6 +7,8 @@
 
 #include "BorderDrawer.h"
 #include "TextureInstanceDrawer.h"
+#include "TextureDrawer.h"
+#include "FontDrawer.h"
 #include "Atlas.h"
 #include "GameWindow.h"
 #include "Timer.h"
@@ -33,10 +35,11 @@ public:
 private:
 	vec2 edge_pos_[CELL_COUNT + 1], center_;
 	float width_ = 0, height_ = 0, cell_size_ = 0, edge_pos_base_[CELL_COUNT + 1] = {0};
-	GLuint buf_index_ = 0;
 
 	BorderDrawer border_drawer_{CELL_COUNT * 2 + 2};
-	TextureInstanceDrawer tex_drawer_{200};
+	// TextureInstanceDrawer tex_drawer_{200};
+	TextureDrawer tex_drawer_{ 200 };
+	FontDrawer font_drawer_{Resouces::root() / "font" / "MicrosoftYaHei.ttf"};
 
 	Atlas colors_{256, 72};
 	Atlas shapes_{512, 72, true};

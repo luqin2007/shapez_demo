@@ -10,11 +10,25 @@ using BI = pair<Item, float>;
 
 class BuildingBelt;
 
-enum class BeltType
+/**
+ * \brief 传送带类型
+ */
+enum class belt_type
 {
-	DIRECT,
-	LEFT,
-	RIGHT
+	/**
+	 * \brief 直线
+	 */
+	direct,
+
+	/**
+	 * \brief 向左转向
+	 */
+	left,
+
+	/**
+	 * \brief 向右转向
+	 */
+	right
 };
 
 class BeltContext : public BuildingContext
@@ -22,18 +36,24 @@ class BeltContext : public BuildingContext
 	friend BuildingBelt;
 
 public:
-	const BeltType type;
+	/**
+	 * \brief 传送带类型
+	 */
+	const belt_type type;
 
+	/**
+	 * \brief 传送带中的物品
+	 */
 	list<BI> items;
 
-	BeltContext(const Building& building, const ivec2& pos, const Side direction, const BeltType type):
+	BeltContext(const Building& building, const ivec2& pos, const Side direction, const belt_type type):
 		BuildingContext(building, pos, direction), type(type)
 	{
-		if (type == BeltType::LEFT)
+		if (type == belt_type::left)
 		{
 			output_ = --direction;
 		}
-		else if (type == BeltType::RIGHT)
+		else if (type == belt_type::right)
 		{
 			output_ = ++direction;
 		}
@@ -54,6 +74,9 @@ private:
 	 */
 	const int max_item_count_ = 5;
 
+	/**
+	 * \brief 输出方向
+	 */
 	Side output_;
 };
 

@@ -1,4 +1,4 @@
-#version 440 core
+#version 460 core
 
 layout (location = 1) uniform sampler2D tex;
 

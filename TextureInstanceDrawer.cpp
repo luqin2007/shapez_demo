@@ -1,33 +1,34 @@
 #include "TextureInstanceDrawer.h"
 
-void TextureInstanceDrawer::initialize(GLuint index)
+void TextureInstanceDrawer::initialize()
 {
-	indices_ = index;
-
 	cout << " Create texture buffers" << endl;
-	glCreateBuffers(1, &vertices_);
-	glBindBuffer(GL_ARRAY_BUFFER, vertices_);
-	glNamedBufferStorage(vertices_, total_ * 8 * sizeof(float), 0, GL_MAP_READ_BIT | GL_MAP_WRITE_BIT);
-	glCreateBuffers(1, &v_indices_);
-	glBindBuffer(GL_ARRAY_BUFFER, v_indices_);
-	glNamedBufferStorage(v_indices_, total_ * 4 * sizeof(int), 0, GL_MAP_READ_BIT | GL_MAP_WRITE_BIT);
+	glCreateBuffers(1, &buffer_);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
+	glNamedBufferStorage(buffer_, total_ * 8 * sizeof(float), 0, GL_MAP_READ_BIT | GL_MAP_WRITE_BIT);
+	glCreateBuffers(1, &indices_);
+	glBindBuffer(GL_ARRAY_BUFFER, indices_);
+	glNamedBufferStorage(indices_, total_ * 4 * sizeof(int), 0, GL_MAP_READ_BIT | GL_MAP_WRITE_BIT);
 
 	create_program(program_, "tex_instance.vert", "tex_alpha.frag");
+	glUseProgram(program_);
+	glUniform1i(1, 0);
+	glUniform1f(2, 1);
 
 	cout << " Create tex vertex object..." << endl;
 	constexpr GLsizei v_size = 8 * sizeof(float);
 	glCreateVertexArrays(1, &vao_);
 	glBindVertexArray(vao_);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_);
+	bind_indices();
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertices_);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, v_size, 0);
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, vertices_);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, v_size, reinterpret_cast<const void*>(4 * sizeof(float)));
 	glEnableVertexAttribArray(2);
-	glVertexAttribDivisor(2, 1);
-	glBindBuffer(GL_ARRAY_BUFFER, v_indices_);
+	glVertexAttribDivisor(2, 6);
+	glBindBuffer(GL_ARRAY_BUFFER, indices_);
 	glVertexAttribPointer(2, 1, GL_INT, GL_FALSE, 0, 0);
 }
 
@@ -62,8 +63,8 @@ void TextureInstanceDrawer::push(const float x0, const float y0, const float x1,
 {
 	if (!buf_vertices_)
 	{
-		buf_vertices_ = static_cast<float*>(glMapNamedBuffer(vertices_, GL_WRITE_ONLY));
-		buf_indices_ = static_cast<int*>(glMapNamedBuffer(v_indices_, GL_WRITE_ONLY));
+		buf_vertices_ = static_cast<float*>(glMapNamedBuffer(buffer_, GL_WRITE_ONLY));
+		buf_indices_ = static_cast<int*>(glMapNamedBuffer(indices_, GL_WRITE_ONLY));
 		count_ = 0;
 	}
 
@@ -91,8 +92,8 @@ void TextureInstanceDrawer::draw()
 {
 	if (buf_vertices_)
 	{
-		glUnmapNamedBuffer(vertices_);
-		glUnmapNamedBuffer(v_indices_);
+		glUnmapNamedBuffer(buffer_);
+		glUnmapNamedBuffer(indices_);
 		buf_vertices_ = nullptr;
 		buf_indices_ = nullptr;
 	}
@@ -107,8 +108,8 @@ void TextureInstanceDrawer::destroy()
 {
 	if (buf_vertices_)
 	{
-		glUnmapNamedBuffer(vertices_);
-		glUnmapNamedBuffer(v_indices_);
+		glUnmapNamedBuffer(buffer_);
+		glUnmapNamedBuffer(indices_);
 		buf_vertices_ = nullptr;
 		buf_indices_ = nullptr;
 	}
@@ -119,8 +120,6 @@ void TextureInstanceDrawer::destroy()
 
 	glDeleteProgram(program_);
 	glDeleteVertexArrays(1, &vao_);
-	glDeleteBuffers(1, &vertices_);
-	glDeleteBuffers(1, &v_indices_);
-
-	indices_ = 0;
+	glDeleteBuffers(1, &buffer_);
+	glDeleteBuffers(1, &indices_);
 }

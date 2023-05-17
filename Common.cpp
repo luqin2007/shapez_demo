@@ -4,6 +4,8 @@ GameLogic* current_game = nullptr;
 GameWindow* current_window = nullptr;
 GameRenderer* current_renderer = nullptr;
 
+static int image_id = 0;
+
 Side operator++(const Side side)
 {
 	switch (side)
@@ -120,6 +122,31 @@ void log_error(const char* name)
 	}
 
 	throw exception("GL ERROR!");
+}
+
+int next_texture_id()
+{
+	return image_id++;
+}
+
+GLsizei ex2(const GLsizei n)
+{
+	GLsizei nn = 512;
+	if (n <= nn)
+	{
+		while (nn / 2 > n)
+		{
+			nn /= 2;
+		}
+	}
+	else
+	{
+		while (nn < n)
+		{
+			nn *= 2;
+		}
+	}
+	return nn;
 }
 
 template<>

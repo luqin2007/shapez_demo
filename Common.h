@@ -23,6 +23,11 @@ using std::cout;
 using std::endl;
 using std::exception;
 
+struct UV
+{
+	float u, v, w, h;
+};
+
 struct ivec2
 {
 	union
@@ -131,3 +136,7 @@ void log_error(const char* name);
 
 template <typename T>
 void debug_buffer(GLuint name, int count);
+
+int next_texture_id();
+
+GLsizei ex2(const GLsizei n);

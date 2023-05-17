@@ -8,17 +8,17 @@ void GameRenderer::initialize()
 
 	cout << "GameRenderer initializing..." << endl;
 
-	cout << "Create shared instance buffer" << endl;
-	const unsigned int index[6]{0, 1, 3, 1, 2, 3};
-	glCreateBuffers(1, &buf_index_);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf_index_);
-	glNamedBufferStorage(buf_index_, sizeof index, index, GL_MAP_READ_BIT);
+	cout << "Initialize font..." << endl;
+	// font_drawer_.update("Hello World!", 16);
+	font_drawer_.initialize();
+	log_error("font initialize");
 
 	cout << "Initialize drawers..." << endl;
 	border_drawer_.initialize();
-	tex_drawer_.initialize(buf_index_);
+	tex_drawer_.initialize();
+	log_error("drawer initialize");
 
-	cout << "Initialize images..." << endl;
+	cout << "Initialize image atlas..." << endl;
 	colors_.initialize();
 	colors_ << Resouces::root() / "image" / "colors" / "blue.png"
 		<< Resouces::root() / "image" / "colors" / "cyan.png"
@@ -29,6 +29,7 @@ void GameRenderer::initialize()
 		<< Resouces::root() / "image" / "colors" / "white.png"
 		<< Resouces::root() / "image" / "colors" / "yellow.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
+	log_error("color image initialize");
 
 	shapes_.initialize();
 	shapes_ << Resouces::root() / "image" / "shapes" / "circle_blue.png"
@@ -56,6 +57,7 @@ void GameRenderer::initialize()
 		<< Resouces::root() / "image" / "shapes" / "star_white.png"
 		<< Resouces::root() / "image" / "shapes" / "star_yellow.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
+	log_error("shape image initialize");
 
 	icons_.initialize();
 	icons_ << Resouces::root() / "image" / "building_icons" / "balancer.png"
@@ -70,6 +72,7 @@ void GameRenderer::initialize()
 		<< Resouces::root() / "image" / "building_icons" / "trash.png"
 		<< Resouces::root() / "image" / "building_icons" / "underground_belt.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
+	log_error("icon image initialize");
 
 	buildings_small_.initialize();
 	buildings_small_ << Resouces::root() / "image" / "buildings" / "belt_left_blue.png"
@@ -129,6 +132,7 @@ void GameRenderer::initialize()
 		<< Resouces::root() / "image" / "buildings" / "underground_belt_exit.png"
 		<< Resouces::root() / "image" / "buildings" / "underground_belt_exit_blue.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
+	log_error("building0 image initialize");
 
 	buildings_middle_.initialize();
 	buildings_middle_ << Resouces::root() / "image" / "buildings" / "balancer.png"
@@ -142,12 +146,13 @@ void GameRenderer::initialize()
 		<< Resouces::root() / "image" / "buildings" / "stacker.png"
 		<< Resouces::root() / "image" / "buildings" / "stacker_blue.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
+	log_error("building1 image initialize");
 
 	buildings_large_.initialize();
 	buildings_large_ << Resouces::root() / "image" / "buildings" / "hub.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
+	log_error("building2 image initialize");
 
-	log_error("all renderer initialize");
 	cout << "GameRenderer initialize finished." << endl;
 }
 
@@ -185,15 +190,15 @@ void GameRenderer::destroy()
 {
 	border_drawer_.destroy();
 	tex_drawer_.destroy();
+	font_drawer_.destroy();
+	AbstractDrawer::destroy_static();
+
 	colors_.destroy();
 	shapes_.destroy();
 	icons_.destroy();
 	buildings_small_.destroy();
 	buildings_middle_.destroy();
 	buildings_large_.destroy();
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glDeleteBuffers(1, &buf_index_);
 }
 
 void GameRenderer::update_cell_size(const GameMap& map)

@@ -93,9 +93,6 @@
     <ClInclude Include="AbstractDrawer.h">
       <Filter>头文件\gl_util</Filter>
     </ClInclude>
-    <ClInclude Include="Atlas.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="BuildingMiner.h">
       <Filter>头文件\buildings</Filter>
     </ClInclude>
@@ -104,6 +101,15 @@
     </ClInclude>
     <ClInclude Include="BuildingHub.h">
       <Filter>头文件\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="FontDrawer.h">
+      <Filter>头文件\gl_util</Filter>
+    </ClInclude>
+    <ClInclude Include="Atlas.h">
+      <Filter>头文件\gl_util</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureDrawer.h">
+      <Filter>头文件\gl_util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +158,6 @@
     <ClCompile Include="AbstractDrawer.cpp">
       <Filter>源文件\gl_util</Filter>
     </ClCompile>
-    <ClCompile Include="Atlas.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>源文件\buildings</Filter>
     </ClCompile>
@@ -166,6 +169,15 @@
     </ClCompile>
     <ClCompile Include="BuildingHub.cpp">
       <Filter>源文件\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="FontDrawer.cpp">
+      <Filter>源文件\gl_util</Filter>
+    </ClCompile>
+    <ClCompile Include="Atlas.cpp">
+      <Filter>源文件\gl_util</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureDrawer.cpp">
+      <Filter>源文件\gl_util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,10 +535,13 @@
       <Filter>资源文件\image\psd</Filter>
     </None>
     <None Include="packages.config" />
-    <None Include="glsl\text.frag">
+    <None Include="glsl\font.frag">
       <Filter>资源文件\glsl</Filter>
     </None>
-    <None Include="glsl\text.vert">
+    <None Include="glsl\font.vert">
+      <Filter>资源文件\glsl</Filter>
+    </None>
+    <None Include="glsl\tex_single.vert">
       <Filter>资源文件\glsl</Filter>
     </None>
   </ItemGroup>
