@@ -2,12 +2,12 @@
 
 void ShapeDrawer::initialize()
 {
-	// »º³åÇø
+	// ç¼“å†²åŒº
 	glCreateBuffers(1, &buffer_);
 	create_program(program_, "only_pos.vert", "uni_color.frag", true);
 	glCreateVertexArrays(1, &vao_);
 
-	// ¶¥µãÊý×é¶ÔÏó
+	// é¡¶ç‚¹æ•°ç»„å¯¹è±¡
 	glBindVertexArray(vao_);
 	bind_indices();
 	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
@@ -39,12 +39,12 @@ void ShapeDrawer::rect(const float x0, const float y0, const float x1, const flo
 
 void ShapeDrawer::destroy() const
 {
-	// ½â³ý°ó¶¨
+	// è§£é™¤ç»‘å®š
 	glUseProgram(0);
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	// É¾³ý¶ÔÏó
+	// åˆ é™¤å¯¹è±¡
 	glDeleteProgram(program_);
 	glDeleteVertexArrays(1, &vao_);
 	glDeleteBuffers(1, &buffer_);

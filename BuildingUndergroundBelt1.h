@@ -26,7 +26,7 @@ private:
 };
 
 /**
- * \brief ´«ËÍÆ÷£¨ÊäÈë¶Ë£©
+ * \brief ä¼ é€å™¨ï¼ˆè¾“å…¥ç«¯ï¼‰
  */
 class BuildingUndergroundBelt1 final : public Building
 {

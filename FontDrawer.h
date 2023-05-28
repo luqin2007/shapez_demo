@@ -12,7 +12,7 @@
 // using std::max;
 //
 // /**
-//  * \brief 文本渲染，未实现
+//  * \brief 鏂囨湰娓叉煋锛屾湭瀹炵幇
 //  */
 // class FontDrawer : public AbstractDrawer
 // {

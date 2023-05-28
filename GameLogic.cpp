@@ -35,7 +35,7 @@ void GameLogic::update()
 
 void GameLogic::destroy()
 {
-	// ±£´æ´æµµ
+	// ä¿å­˜å­˜æ¡£
 }
 
 void GameLogic::on_resize(const int width, const int height)

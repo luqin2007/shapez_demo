@@ -25,7 +25,7 @@ private:
 };
 
 /**
- * \brief ´«ËÍÆ÷£¨·¢ËÍ¶Ë£©
+ * \brief ä¼ é€å™¨ï¼ˆå‘é€ç«¯ï¼‰
  */
 class BuildingUndergroundBelt2 final : public TickableBuilding
 {

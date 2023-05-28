@@ -2,11 +2,11 @@
 
 void Main::run()
 {
-	// ³õÊ¼»¯
+	// åˆå§‹åŒ–
 	window_.initialize();
 	game_.initialize(Timer::time());
 	renderer_.initialize();
-	// ÓÎÏ·Ñ­»·
+	// æ¸¸æˆå¾ªç¯
 	while (window_.is_active())
 	{
 		game_.update();
@@ -14,7 +14,7 @@ void Main::run()
 		glfwSwapBuffers(window_.window());
 		glfwPollEvents();
 	}
-	// ½áÊø
+	// ç»“æŸ
 	renderer_.destroy();
 	game_.destroy();
 	window_.destroy();

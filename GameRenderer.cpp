@@ -314,7 +314,6 @@ void GameRenderer::draw_ui()
 	p0 += div;
 	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvUnder.u, uvUnder.v, uvUnder.w,  uvUnder.h);
 	p0 += div;
-	p0 += div; 
 	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvCutter.u, uvCutter.v, uvCutter.w, uvCutter.h);
 	p0 += div;
 	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvMixer.u, uvMixer.v, uvMixer.w, uvMixer.h);

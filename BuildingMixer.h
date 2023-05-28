@@ -20,7 +20,7 @@ private:
 };
 
 /**
- * \brief ÑÕÉ«»ìºÏÆ÷
+ * \brief é¢œè‰²æ··åˆå™¨
  */
 class BuildingMixer final : public TickableBuilding
 {

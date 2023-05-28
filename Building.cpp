@@ -5,7 +5,7 @@ bool Building::can_place(const Vec2I& pos, const Side direction, const GameMap& 
 	Vec2I x0 = pos;
 	const Side direction_right = --direction;
 	const auto s = size_as_vec(size);
-	// ¼ì²éÃ¿¸öÎ»ÖÃÊÇ·ñÓĞ½¨Öş
+	// æ£€æŸ¥æ¯ä¸ªä½ç½®æ˜¯å¦æœ‰å»ºç­‘
 	for (int i = 0; i < s.x; ++i)
 	{
 		Vec2I y0 = x0;
@@ -58,7 +58,7 @@ bool Building::send_dye(const Vec2I& pos, const Side direction, const Color colo
 	if (BuildingContext* t_context = map.get_building(target);
 		t_context && t_context->building.can_receive_dye(color, target, opposite, *t_context))
 	{
-		// ·¢ËÍ
+		// å‘é€
 		t_context->building.receive_dye(color, target, opposite, *t_context);
 		return true;
 	}
@@ -73,7 +73,7 @@ bool Building::send_shape(const Vec2I& pos, const Side direction, const ColoredS
 	if (BuildingContext* t_context = map.get_building(target);
 		t_context && t_context->building.can_receive_shape(shape, target, opposite, *t_context))
 	{
-		// ·¢ËÍ
+		// å‘é€
 		t_context->building.receive_shape(shape, target, opposite, *t_context);
 		return true;
 	}

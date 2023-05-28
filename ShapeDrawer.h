@@ -3,18 +3,18 @@
 #include "AbstractDrawer.h"
 
 /**
- * \brief »æÖÆ¼òµ¥Í¼ĞÎ
+ * \brief ç»˜åˆ¶ç®€å•å›¾å½¢
  */
 class ShapeDrawer : public AbstractDrawer
 {
 public:
 	/**
-	 * \brief ³õÊ¼»¯
+	 * \brief åˆå§‹åŒ–
 	 */
 	void initialize();
 
 	/**
-	 * \brief »æÖÆ¾ØĞÎ
+	 * \brief ç»˜åˆ¶çŸ©å½¢
 	 * \param x0 x0
 	 * \param y0 y0
 	 * \param x1 x1
@@ -27,7 +27,7 @@ public:
 	void rect(float x0, float y0, float x1, float y1, float r, float g, float b, float a = 1) const;
 
 	/**
-	 * \brief Ïú»Ù
+	 * \brief é”€æ¯
 	 */
 	void destroy() const;
 };

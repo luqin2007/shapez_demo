@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * \brief ÐÎ×´
+ * \brief å½¢çŠ¶
  */
 enum class Shape
 {

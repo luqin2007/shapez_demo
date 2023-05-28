@@ -27,15 +27,15 @@ void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& fra
 {
 	cout << " Create program with " << vert << " and " << frag << "..." << endl;
 	program = glCreateProgram();
-	// 创建、编译顶点着色器
+	// 鍒涘缓銆佺紪璇戦《鐐圭潃鑹插櫒
 	const path vp = ROOT / "glsl" / vert;
 	cout << "  Loading shader " << vp.string() << endl;
 	const GLuint sp = create_shader(GL_VERTEX_SHADER, vp);
-	// 创建、编译片元着色器
+	// 鍒涘缓銆佺紪璇戠墖鍏冪潃鑹插櫒
 	const path vf = ROOT / "glsl" / frag;
 	cout << "  Loading shader " << vf.string() << endl;
 	const GLuint sf = create_shader(GL_FRAGMENT_SHADER, vf);
-	// 创建、链接着色器程序
+	// 鍒涘缓銆侀摼鎺ョ潃鑹插櫒绋嬪簭
 	glAttachShader(program, sp);
 	glAttachShader(program, sf);
 	glLinkProgram(program);
@@ -43,7 +43,7 @@ void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& fra
 	glDetachShader(program, sf);
 	glDeleteShader(sp);
 	glDeleteShader(sf);
-	// 校验程序链接结果
+	// 鏍￠獙绋嬪簭閾炬帴缁撴灉
 	GLint param;
 	glGetProgramiv(program, GL_LINK_STATUS, &param);
 	if (param != GL_TRUE)
@@ -51,13 +51,13 @@ void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& fra
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &param);
 		const auto msg = new GLchar[param + 1];
 		glGetProgramInfoLog(program, param, &param, msg);
-		// 清理环境
+		// 娓呯悊鐜
 		glDeleteProgram(program);
 		program = 0;
 		cerr << msg << endl;
 		delete[] msg;
 	}
-	// 记录需要更新的着色器程序
+	// 璁板綍闇�瑕佹洿鏂扮殑鐫�鑹插櫒绋嬪簭
 	if (resize)
 	{
 		resizeable_program_.push_back(program);
@@ -70,7 +70,7 @@ GLuint AbstractDrawer::create_shader(const GLenum type, const path& p)
 	const GLuint shader = glCreateShader(type);
 	glShaderSource(shader, 1, &str, reinterpret_cast<const GLint*>(&len));
 	glCompileShader(shader);
-	// 校验编译结果
+	// 鏍￠獙缂栬瘧缁撴灉
 	GLint param;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &param);
 	if (param != GL_TRUE)

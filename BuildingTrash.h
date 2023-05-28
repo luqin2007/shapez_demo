@@ -12,7 +12,7 @@ public:
 };
 
 /**
- * \brief À¬»øÍ°£¬ÒÆ³ıËùÓĞÎïÆ·
+ * \brief åƒåœ¾æ¡¶ï¼Œç§»é™¤æ‰€æœ‰ç‰©å“
  */
 class BuildingTrash : public Building
 {

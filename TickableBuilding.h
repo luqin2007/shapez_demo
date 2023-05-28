@@ -12,17 +12,17 @@ constexpr time_ms SLOW = 2000;
 enum class BuildingStatus
 {
 	/**
-	 * \brief ×´Ì¬£º¿ÕÏĞ£¨ÎŞÊäÈë»òÊäÈë²»×ã£©
+	 * \brief çŠ¶æ€ï¼šç©ºé—²ï¼ˆæ— è¾“å…¥æˆ–è¾“å…¥ä¸è¶³ï¼‰
 	 */
 	waiting,
 
 	/**
-	 * \brief ×´Ì¬£ºÔËĞĞÖĞ
+	 * \brief çŠ¶æ€ï¼šè¿è¡Œä¸­
 	 */
 	running,
 
 	/**
-	 * \brief ×´Ì¬£º×èÈû£¨²úÎïÎŞ·¨ÍêÈ«Êä³ö£©
+	 * \brief çŠ¶æ€ï¼šé˜»å¡ï¼ˆäº§ç‰©æ— æ³•å®Œå…¨è¾“å‡ºï¼‰
 	 */
 	blocking
 };
@@ -41,24 +41,24 @@ public:
 
 protected:
 	/**
-	 * \brief µ±Ç°¹¤×÷×´Ì¬
+	 * \brief å½“å‰å·¥ä½œçŠ¶æ€
 	 */
 	BuildingStatus status_ = BuildingStatus::waiting;
 
 	/**
-	 * \brief µ±Ç°Ö´ĞĞÊ±¼ä
+	 * \brief å½“å‰æ‰§è¡Œæ—¶é—´
 	 */
 	time_ms current_time_ = 0;
 
 	/**
-	 * \brief ĞèÒªµÄ×ÜÊ±¼ä
+	 * \brief éœ€è¦çš„æ€»æ—¶é—´
 	 */
 	const time_ms required_time_;
 };
 
 
 /**
- * \brief ĞèÒªÊ±¼ä´¦ÀíµÄ½¨ÖşÀàĞÍ
+ * \brief éœ€è¦æ—¶é—´å¤„ç†çš„å»ºç­‘ç±»å‹
  */
 class TickableBuilding : public Building
 {
@@ -71,19 +71,19 @@ protected:
 	}
 
 	/**
-	 * \brief ¼ì²éÊÇ·ñ¿ÉÒÔÔËĞĞ
+	 * \brief æ£€æŸ¥æ˜¯å¦å¯ä»¥è¿è¡Œ
 	 */
 	virtual bool can_start(TickableContext& context, const GameMap& map) const = 0;
 
 	/**
-	 * \brief Ã¿´Îµ±´¦ÓÚ×èÈû×´Ì¬Ê±µÄĞĞÎª
-	 * \return Èô·µ»Ø true£¬Ôò±íÊ¾×èÈû×´Ì¬½áÊø
+	 * \brief æ¯æ¬¡å½“å¤„äºé˜»å¡çŠ¶æ€æ—¶çš„è¡Œä¸º
+	 * \return è‹¥è¿”å› trueï¼Œåˆ™è¡¨ç¤ºé˜»å¡çŠ¶æ€ç»“æŸ
 	 */
 	virtual bool on_blocking(TickableContext& context, const GameMap& map) const = 0;
 
 	/**
-	 * \brief µ±Ò»ÂÖ²Ù×÷½áÊøÊ±µÄĞĞÎª
-	 * \return Èô·µ»Ø false£¬Ôò½øÈë×èÈû×´Ì¬
+	 * \brief å½“ä¸€è½®æ“ä½œç»“æŸæ—¶çš„è¡Œä¸º
+	 * \return è‹¥è¿”å› falseï¼Œåˆ™è¿›å…¥é˜»å¡çŠ¶æ€
 	 */
 	virtual bool on_finished(TickableContext& context, const GameMap& map) const = 0;
 

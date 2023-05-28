@@ -17,134 +17,134 @@ enum class ItemType;
 enum class Color;
 
 /**
- * \brief ½¨ÖşÀàĞÍ£¬Ö»±£´æ½¨ÖşµÄĞĞÎª£¬²»±£´æ½¨ÖşÊı¾İ
+ * \brief å»ºç­‘ç±»å‹ï¼Œåªä¿å­˜å»ºç­‘çš„è¡Œä¸ºï¼Œä¸ä¿å­˜å»ºç­‘æ•°æ®
  */
 class Building
 {
 public:
 	/**
-	 * \brief ½¨Öş´óĞ¡ 
+	 * \brief å»ºç­‘å¤§å° 
 	 */
 	BuildingSize size;
 
 	/**
-	 * \brief ²âÊÔÊÇ·ñÄÜÕı³£·ÅÏÂ
-	 * \param pos ½¨ÖşËùÔÚÎ»ÖÃ
-	 * \param direction ½¨Öş·½Ïò
-	 * \param map µØÍ¼
+	 * \brief æµ‹è¯•æ˜¯å¦èƒ½æ­£å¸¸æ”¾ä¸‹
+	 * \param pos å»ºç­‘æ‰€åœ¨ä½ç½®
+	 * \param direction å»ºç­‘æ–¹å‘
+	 * \param map åœ°å›¾
 	 */
 	[[nodiscard]]
 	bool can_place(const Vec2I& pos, Side direction, const GameMap& map) const;
 
 	/**
-	 * \brief ¸ù¾İ½¨ÖşÉú³ÉÊı¾İ
-	 * \param pos ½¨ÖşÎ»ÖÃ
-	 * \param direction ·½Ïò
-	 * \return Êı¾İ
+	 * \brief æ ¹æ®å»ºç­‘ç”Ÿæˆæ•°æ®
+	 * \param pos å»ºç­‘ä½ç½®
+	 * \param direction æ–¹å‘
+	 * \return æ•°æ®
 	 */
 	[[nodiscard]]
 	virtual BuildingContext build_context(const Vec2I& pos, Side direction) const = 0;
 
 	/**
-	 * \brief ÅĞ¶Ï¶ÔÓ¦Î»ÖÃÊÇ·ñ¿ÉÄÜ½ÓÊÕÎïÆ·ÊäÈë£¬ÓÃÓÚ´«ËÍ´øµÈ¿ÉÁ¬½Ó½¨Öş¼ì²é
-	 * \param pos Ä¿±êµ¥Ôª
-	 * \param side ÊäÈë·½Ïò
-	 * \param context ½¨ÖşÊı¾İ
+	 * \brief åˆ¤æ–­å¯¹åº”ä½ç½®æ˜¯å¦å¯èƒ½æ¥æ”¶ç‰©å“è¾“å…¥ï¼Œç”¨äºä¼ é€å¸¦ç­‰å¯è¿æ¥å»ºç­‘æ£€æŸ¥
+	 * \param pos ç›®æ ‡å•å…ƒ
+	 * \param side è¾“å…¥æ–¹å‘
+	 * \param context å»ºç­‘æ•°æ®
 	 */
 	[[nodiscard]]
 	virtual bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const = 0;
 
 	/**
-	 * \brief ÅĞ¶Ï¶ÔÓ¦Î»ÖÃÊÇ·ñ¿ÉÒÔÊäÈëÄ³È¾ÁÏ£¬ÓÃÓÚÊµ¼ÊÎïÆ·ÊäÈëĞ£Ñé
-	 * \param color ÊäÈëµÄÈ¾ÁÏ
-	 * \param pos Ä¿±êµ¥Ôª
-	 * \param side ÊäÈë·½Ïò
-	 * \param context ½¨ÖşÊı¾İ
+	 * \brief åˆ¤æ–­å¯¹åº”ä½ç½®æ˜¯å¦å¯ä»¥è¾“å…¥æŸæŸ“æ–™ï¼Œç”¨äºå®é™…ç‰©å“è¾“å…¥æ ¡éªŒ
+	 * \param color è¾“å…¥çš„æŸ“æ–™
+	 * \param pos ç›®æ ‡å•å…ƒ
+	 * \param side è¾“å…¥æ–¹å‘
+	 * \param context å»ºç­‘æ•°æ®
 	 */
 	[[nodiscard]]
 	virtual bool can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const = 0;
 
 	/**
-	 * \brief ÅĞ¶Ï¶ÔÓ¦Î»ÖÃÊÇ·ñ¿ÉÒÔÊäÈëÄ³Í¼ĞÎ£¬ÓÃÓÚÊµ¼ÊÎïÆ·ÊäÈëĞ£Ñé
-	 * \param shape ÊäÈëµÄÎïÆ·
-	 * \param pos Ä¿±êµ¥Ôª
-	 * \param side ÊäÈë·½Ïò
-	 * \param context ½¨ÖşÊı¾İ
+	 * \brief åˆ¤æ–­å¯¹åº”ä½ç½®æ˜¯å¦å¯ä»¥è¾“å…¥æŸå›¾å½¢ï¼Œç”¨äºå®é™…ç‰©å“è¾“å…¥æ ¡éªŒ
+	 * \param shape è¾“å…¥çš„ç‰©å“
+	 * \param pos ç›®æ ‡å•å…ƒ
+	 * \param side è¾“å…¥æ–¹å‘
+	 * \param context å»ºç­‘æ•°æ®
 	 */
 	[[nodiscard]]
 	virtual bool can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side, const BuildingContext& context) const = 0;
 
 	/**
-	 * \brief µ±½¨Öş·ÅÏÂÊ±µ÷ÓÃ
-	 * \param context ·ÅÏÂµÄ½¨Öş
+	 * \brief å½“å»ºç­‘æ”¾ä¸‹æ—¶è°ƒç”¨
+	 * \param context æ”¾ä¸‹çš„å»ºç­‘
 	 */
 	virtual void on_placed(BuildingContext& context)
 	{
 	}
 
 	/**
-	 * \brief ´ÓÄ³Î»ÖÃ½ÓÊÕÈ¾ÁÏ£¬µ÷ÓÃ¸Ã·½·¨Ö®Ç°Ó¦µ±±£Ö¤Í¨¹ı can_receive_dye ¼ìÑé
-	 * \param color ÊäÈëÎïÆ·
-	 * \param pos Ä¿±êµ¥Ôª
-	 * \param side ÊäÈë·½Ïò
-	 * \param context ½¨ÖşÊı¾İ
+	 * \brief ä»æŸä½ç½®æ¥æ”¶æŸ“æ–™ï¼Œè°ƒç”¨è¯¥æ–¹æ³•ä¹‹å‰åº”å½“ä¿è¯é€šè¿‡ can_receive_dye æ£€éªŒ
+	 * \param color è¾“å…¥ç‰©å“
+	 * \param pos ç›®æ ‡å•å…ƒ
+	 * \param side è¾“å…¥æ–¹å‘
+	 * \param context å»ºç­‘æ•°æ®
 	 */
 	virtual void receive_dye(Color color, const Vec2I& pos, Side side, BuildingContext& context) const = 0;
 
 	/**
-	 * \brief ´ÓÄ³Î»ÖÃ½ÓÊÕÍ¼ĞÎÎïÆ·£¬µ÷ÓÃ¸Ã·½·¨Ö®Ç°Ó¦µ±±£Ö¤Í¨¹ı can_receive_shape ¼ìÑé
-	 * \param shape ÊäÈëÎïÆ·
-	 * \param pos Ä¿±êµ¥Ôª
-	 * \param side ÊäÈë·½Ïò
-	 * \param context ½¨ÖşÊı¾İ
+	 * \brief ä»æŸä½ç½®æ¥æ”¶å›¾å½¢ç‰©å“ï¼Œè°ƒç”¨è¯¥æ–¹æ³•ä¹‹å‰åº”å½“ä¿è¯é€šè¿‡ can_receive_shape æ£€éªŒ
+	 * \param shape è¾“å…¥ç‰©å“
+	 * \param pos ç›®æ ‡å•å…ƒ
+	 * \param side è¾“å…¥æ–¹å‘
+	 * \param context å»ºç­‘æ•°æ®
 	 */
 	virtual void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side, BuildingContext& context) const = 0;
 
 	/**
-	 *\brief ¸üĞÂ½¨Öş×´Ì¬
+	 *\brief æ›´æ–°å»ºç­‘çŠ¶æ€
 	 */
 	virtual void update(BuildingContext& context, GameMap& map) const = 0;
 	
 	/**
-	 * \brief ½«½¨Öş´óĞ¡Ã¶¾Ù×ª»»Îª Vec2I ±íÊ¾µÄ´óĞ¡
-	 * \param size ½¨Öş´óĞ¡
-	 * \return ÒÔ Vec2I ĞÎÊ½±íÊ¾µÄ½¨Öş´óĞ¡
+	 * \brief å°†å»ºç­‘å¤§å°æšä¸¾è½¬æ¢ä¸º Vec2I è¡¨ç¤ºçš„å¤§å°
+	 * \param size å»ºç­‘å¤§å°
+	 * \return ä»¥ Vec2I å½¢å¼è¡¨ç¤ºçš„å»ºç­‘å¤§å°
 	 */
 	static Vec2I size_as_vec(BuildingSize size);
 
 	/**
-	 * \brief »ñÈ¡½¨ÖşÕ¼ÓÃµÄËùÓĞ·½¿é
-	 * \param pos ½¨ÖşËùÔÚÎ»ÖÃ
-	 * \param size ½¨Öş´óĞ¡
-	 * \param direction ½¨Öş·½Ïò
-	 * \return ËùÓĞ·½Ïò
+	 * \brief è·å–å»ºç­‘å ç”¨çš„æ‰€æœ‰æ–¹å—
+	 * \param pos å»ºç­‘æ‰€åœ¨ä½ç½®
+	 * \param size å»ºç­‘å¤§å°
+	 * \param direction å»ºç­‘æ–¹å‘
+	 * \return æ‰€æœ‰æ–¹å‘
 	 */
 	static vector<Vec2I> all_positions(const Vec2I& pos, BuildingSize size, Side direction);
 
 	/**
-	 * \brief ³¢ÊÔÏòÄ³¸ö·½Ïò·¢ËÍÈ¾ÁÏ
-	 * \param pos ·¢³öµã
-	 * \param direction ·¢ËÍ·½Ïò
-	 * \param color ·¢ËÍÈ¾ÁÏ
-	 * \param map µØÍ¼
-	 * \return ÊÇ·ñ³É¹¦·¢ËÍ
+	 * \brief å°è¯•å‘æŸä¸ªæ–¹å‘å‘é€æŸ“æ–™
+	 * \param pos å‘å‡ºç‚¹
+	 * \param direction å‘é€æ–¹å‘
+	 * \param color å‘é€æŸ“æ–™
+	 * \param map åœ°å›¾
+	 * \return æ˜¯å¦æˆåŠŸå‘é€
 	 */
 	static bool send_dye(const Vec2I& pos, Side direction, Color color, const GameMap& map);
 
 	/**
-	 * \brief ³¢ÊÔÏòÄ³¸ö·½Ïò·¢ËÍÎïÆ·
-	 * \param pos ·¢³öµã
-	 * \param direction ·¢ËÍ·½Ïò
-	 * \param shape ·¢ËÍĞÎ×´
-	 * \param map µØÍ¼
-	 * \return ÊÇ·ñ³É¹¦·¢ËÍ
+	 * \brief å°è¯•å‘æŸä¸ªæ–¹å‘å‘é€ç‰©å“
+	 * \param pos å‘å‡ºç‚¹
+	 * \param direction å‘é€æ–¹å‘
+	 * \param shape å‘é€å½¢çŠ¶
+	 * \param map åœ°å›¾
+	 * \return æ˜¯å¦æˆåŠŸå‘é€
 	 */
 	static bool send_shape(const Vec2I& pos, Side direction, const ColoredShapes& shape, const GameMap& map);
 
 protected:
 	/**
-	 * \brief ²»¹«¿ªµÄ¹¹Ôìº¯Êı£¬½öÓÉ¶ÔÓ¦ÀàĞÍ´´½¨
-	 * \param size ½¨Öş´óĞ¡
+	 * \brief ä¸å…¬å¼€çš„æ„é€ å‡½æ•°ï¼Œä»…ç”±å¯¹åº”ç±»å‹åˆ›å»º
+	 * \param size å»ºç­‘å¤§å°
 	 */
 	explicit Building(const BuildingSize size) : size(size)
 	{

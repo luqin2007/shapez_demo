@@ -16,17 +16,17 @@ class BeltContext : public BuildingContext
 
 public:
 	/**
-	 * \brief ´«ËÍ´øÉÏµÄÎïÆ·
+	 * \brief ä¼ é€å¸¦ä¸Šçš„ç‰©å“
 	 */
 	ItemType types[4]{ItemType::none, ItemType::none, ItemType::none, ItemType::none};
 	int indices[4]{0, 0, 0, 0};
-	// Êı×éÄ£ÄâÑ­»·Á´±í
+	// æ•°ç»„æ¨¡æ‹Ÿå¾ªç¯é“¾è¡¨
 	Color dyes[4];
 	ColoredShapes shapes[4];
 	int p_dye = 0, p_shape = 0;
 
 	/**
-	 * \brief ´«ËÍ´øÉÏÎïÆ·µÄÎ»ÖÃ
+	 * \brief ä¼ é€å¸¦ä¸Šç‰©å“çš„ä½ç½®
 	 */
 	float item_pos[4]{0, 0, 0, 0};
 
@@ -37,28 +37,28 @@ public:
 
 private:
 	/**
-	 * \brief Ã¿ÃëÇ°½øËÙ¶È
+	 * \brief æ¯ç§’å‰è¿›é€Ÿåº¦
 	 */
 	const float speed_ = 0.25f;
 
 	/**
-	 * \brief Ã¿¸öÎ»ÖÃÎïÆ·µÄ×î´ó¿ÉÄÜÎ»ÖÃ
+	 * \brief æ¯ä¸ªä½ç½®ç‰©å“çš„æœ€å¤§å¯èƒ½ä½ç½®
 	 */
 	const float max_pos_[4]{0, 0.34f, 0.67f, 1.01f};
 
 	/**
-	 * \brief µ±Ç°´«ËÍ´øÉÏÎïÆ·¸öÊı
+	 * \brief å½“å‰ä¼ é€å¸¦ä¸Šç‰©å“ä¸ªæ•°
 	 */
 	int p_item_ = 3;
 
 	/**
-	 * \brief Êä³öÎ»ÖÃ
+	 * \brief è¾“å‡ºä½ç½®
 	 */
 	const Side output_;
 };
 
 /**
- * \brief ´«ËÍ´ø£¨Ö±£©
+ * \brief ä¼ é€å¸¦ï¼ˆç›´ï¼‰
  */
 class BuildingBelt : public Building
 {
@@ -93,7 +93,7 @@ protected:
 };
 
 /**
- * \brief ´«ËÍ´ø£ºÏò×ó×ªÍä
+ * \brief ä¼ é€å¸¦ï¼šå‘å·¦è½¬å¼¯
  */
 class BuildingBeltL final : public BuildingBelt
 {
@@ -107,7 +107,7 @@ private:
 };
 
 /**
- * \brief ´«ËÍ´ø£ºÏòÓÒ×ªÍä
+ * \brief ä¼ é€å¸¦ï¼šå‘å³è½¬å¼¯
  */
 class BuildingBeltR final : public BuildingBelt
 {

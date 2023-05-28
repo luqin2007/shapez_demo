@@ -10,7 +10,7 @@ void TickableBuilding::update(BuildingContext& context, GameMap& map) const
 
 		if (can_start(ctx, map))
 		{
-			// ¿ªÊ¼ÔËĞĞ
+			// å¼€å§‹è¿è¡Œ
 			ctx.current_time_ = 0;
 			ctx.status_ = BuildingStatus::running;
 		}
@@ -21,15 +21,15 @@ void TickableBuilding::update(BuildingContext& context, GameMap& map) const
 		ctx.current_time_ += current_game->timer().delta_ms;
 		if (ctx.current_time_ >= ctx.required_time_)
 		{
-			// ÈÎÎñ½áÊø
+			// ä»»åŠ¡ç»“æŸ
 			if (on_finished(ctx, map))
 			{
-				// ½øÈë¿ÕÏĞ×´Ì¬
+				// è¿›å…¥ç©ºé—²çŠ¶æ€
 				ctx.status_ = BuildingStatus::waiting;
 			}
 			else
 			{
-				// ½øÈë×èÈû×´Ì¬
+				// è¿›å…¥é˜»å¡çŠ¶æ€
 				ctx.status_ = BuildingStatus::blocking;
 			}
 		}
@@ -39,7 +39,7 @@ void TickableBuilding::update(BuildingContext& context, GameMap& map) const
 
 		if (on_blocking(ctx, map))
 		{
-			// ½øÈë¿ÕÏĞ×´Ì¬
+			// è¿›å…¥ç©ºé—²çŠ¶æ€
 			ctx.status_ = BuildingStatus::waiting;
 		}
 		break;

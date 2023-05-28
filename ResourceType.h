@@ -13,7 +13,7 @@ static std::string icon_names[] =
 };
 
 /**
- * \brief µØÍ¼×ÊÔ´
+ * \brief åœ°å›¾èµ„æº
  */
 enum class ResourceType
 {
@@ -37,9 +37,9 @@ inline bool is_shape(const ResourceType res)
 }
 
 /**
- * \brief »ñÈ¡×ÊÔ´¶ÔÓ¦²ÄÖÊÍ¼±ê
- * \param type ×ÊÔ´ÀàĞÍ
- * \return ²ÄÖÊÃû
+ * \brief è·å–èµ„æºå¯¹åº”æè´¨å›¾æ ‡
+ * \param type èµ„æºç±»å‹
+ * \return æè´¨å
  */
 inline std::string& resource_icon(ResourceType type)
 {

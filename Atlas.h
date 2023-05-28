@@ -18,7 +18,7 @@ using std::endl;
 using std::exception;
 
 /**
- * \brief ±íÊ¾µØÍ¼¼¯ÖĞµÄÒ»¸öÍ¼Æ¬
+ * \brief è¡¨ç¤ºåœ°å›¾é›†ä¸­çš„ä¸€ä¸ªå›¾ç‰‡
  */
 struct Rect
 {
@@ -26,7 +26,7 @@ struct Rect
 };
 
 /**
- * \brief µØÍ¼¼¯£¬½«¶àÕÅÍ¼Æ¬¼¯ºÏµ½Ò»ÕÅÍ¼ÖĞ£¬ÒªÇóÃ¿ÕÅÍ¼Æ¬µÄ´óĞ¡ÏàÍ¬»òÏà½ü
+ * \brief åœ°å›¾é›†ï¼Œå°†å¤šå¼ å›¾ç‰‡é›†åˆåˆ°ä¸€å¼ å›¾ä¸­ï¼Œè¦æ±‚æ¯å¼ å›¾ç‰‡çš„å¤§å°ç›¸åŒæˆ–ç›¸è¿‘
  */
 class Atlas
 {
@@ -43,12 +43,12 @@ public:
 	}
 
 	/**
-	 * \brief ³õÊ¼»¯
+	 * \brief åˆå§‹åŒ–
 	 */
 	void initialize();
 
 	/**
-	 * \brief Ïú»Ù
+	 * \brief é”€æ¯
 	 */
 	void destroy() const;
 
@@ -58,16 +58,16 @@ public:
 	}
 
 	/**
-	 * \brief ÏòµØÍ¼¼¯ÖĞµ¼ÈëÍ¼Æ¬£¬Ó¦µ±ÔÚ initialize ·½·¨Ö®ºóµ÷ÓÃ
-	 * \param p Í¼Æ¬ÍêÕûÂ·¾¶
-	 * \return µ±Ç°µØÍ¼¼¯
+	 * \brief å‘åœ°å›¾é›†ä¸­å¯¼å…¥å›¾ç‰‡ï¼Œåº”å½“åœ¨ initialize æ–¹æ³•ä¹‹åè°ƒç”¨
+	 * \param p å›¾ç‰‡å®Œæ•´è·¯å¾„
+	 * \return å½“å‰åœ°å›¾é›†
 	 */
 	Atlas& operator<<(const path& p);
 
 	/**
-	 * \brief µØÍ¼¼¯Éú³ÉÍê³ÉÊ±µ÷ÓÃ
-	 * \param gen_mipmap ÊÇ·ñĞèÒªÉú³É mipmap
-	 * \return µ±Ç°µØÍ¼¼¯
+	 * \brief åœ°å›¾é›†ç”Ÿæˆå®Œæˆæ—¶è°ƒç”¨
+	 * \param gen_mipmap æ˜¯å¦éœ€è¦ç”Ÿæˆ mipmap
+	 * \return å½“å‰åœ°å›¾é›†
 	 */
 	Atlas& operator<<(const bool gen_mipmap);
 

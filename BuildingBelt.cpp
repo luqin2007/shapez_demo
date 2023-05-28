@@ -62,7 +62,7 @@ void BuildingBelt::update(BuildingContext& context, GameMap& map) const
 		}
 	}
 
-	// ¿ÉÊä³ö
+	// å¯è¾“å‡º
 	bool send = false;
 	if (ctx.types[3] == ItemType::dye)
 	{
@@ -74,7 +74,7 @@ void BuildingBelt::update(BuildingContext& context, GameMap& map) const
 	}
 	if (send)
 	{
-		// Ç¨ÒÆ
+		// è¿ç§»
 		ctx.types[3] = ctx.types[2];
 		ctx.types[2] = ctx.types[1];
 		ctx.types[1] = ctx.types[0];

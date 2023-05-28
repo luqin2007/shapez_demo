@@ -16,7 +16,7 @@ bool BuildingHub::can_receive_dye(Color color, const Vec2I& pos, Side side, cons
 }
 
 bool BuildingHub::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
-                                    const BuildingContext& context) const
+									const BuildingContext& context) const
 {
 	return true;
 }
@@ -51,8 +51,8 @@ void BuildingHub::set_next_level(HubContext& context)
 	Shape shape;
 	auto color = Color::uncolored;
 
-	// Ëæ»úĞÎ×´
-	// 1/3 ¸ÅÂÊÈÎÒâĞÎ×´
+	// éšæœºå½¢çŠ¶
+	// 1/3 æ¦‚ç‡ä»»æ„å½¢çŠ¶
 	switch (random_int() % 3)
 	{
 	case 0:
@@ -66,10 +66,10 @@ void BuildingHub::set_next_level(HubContext& context)
 		shape = Shape::star;
 		break;
 	}
-	// Ëæ»úÑÕÉ«
-	// >= 10 ¼¶£º75% Á½ÖÖ»ìºÏÉ«£»18.75% µ¥É«£»6.25% °×É«
-	// >= 5 ¼¶£º75% µ¥É«£»25% ÎŞÉ«
-	// < 5 ¼¶£ºÎŞÉ«
+	// éšæœºé¢œè‰²
+	// >= 10 çº§ï¼š75% ä¸¤ç§æ··åˆè‰²ï¼›18.75% å•è‰²ï¼›6.25% ç™½è‰²
+	// >= 5 çº§ï¼š75% å•è‰²ï¼›25% æ— è‰²
+	// < 5 çº§ï¼šæ— è‰²
 	if (context.level >= 10)
 	{
 		switch (random_int() % 4)

@@ -15,25 +15,25 @@ using std::unique_ptr;
 class BuildingContext;
 
 /**
- * \brief ÓÎÏ·µØÍ¼
+ * \brief æ¸¸æˆåœ°å›¾
  */
 class GameMap
 {
 public:
 	/**
-	 * \brief ÆÁÄ»ÖĞµã¶ÔÓ¦µÚ center.x ĞĞ£¬µÚ center.y ÁĞ
+	 * \brief å±å¹•ä¸­ç‚¹å¯¹åº”ç¬¬ center.x è¡Œï¼Œç¬¬ center.y åˆ—
 	 */
 	Vec2 center{CELL_COUNT / 2.0f, CELL_COUNT / 2.0f};
 
 	/**
-	 * \brief Ã¿Ò»¸öµ¥Ôª¸ñµÄ³¤¶È
+	 * \brief æ¯ä¸€ä¸ªå•å…ƒæ ¼çš„é•¿åº¦
 	 */
 	float cell_size = 100;
 
 	GameMap();
 
 	/**
-	 * \brief ³õÊ¼»¯
+	 * \brief åˆå§‹åŒ–
 	 */
 	void initialize();
 
@@ -61,12 +61,12 @@ public:
 
 private:
 	/**
-	 * \brief µØÍ¼×ÊÔ´
+	 * \brief åœ°å›¾èµ„æº
 	 */
 	ResourceType resources_[CELL_COUNT][CELL_COUNT]{};
 
 	/**
-	 * \brief µØÍ¼½¨Öş
+	 * \brief åœ°å›¾å»ºç­‘
 	 */
 	BuildingContext* buildings_[CELL_COUNT][CELL_COUNT]{};
 };

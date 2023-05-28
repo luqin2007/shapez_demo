@@ -5,11 +5,11 @@
 void BorderDrawer::initialize()
 {
 	create_program(program_, "cell_border.vert", "cell_border.frag", true);
-	// ¶¥µã»º³åÇø
+	// é¡¶ç‚¹ç¼“å†²åŒº
 	glCreateBuffers(1, &buffer_);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
 	glNamedBufferStorage(buffer_, total_ * 4 * sizeof(float), nullptr, GL_MAP_WRITE_BIT | GL_MAP_READ_BIT);
-	// ¶¥µãÊý×é¶ÔÏó
+	// é¡¶ç‚¹æ•°ç»„å¯¹è±¡
 	glCreateVertexArrays(1, &vao_);
 	glBindVertexArray(vao_);
 	glEnableVertexAttribArray(0);
@@ -37,7 +37,7 @@ void BorderDrawer::push(const float x0, const float y0, const float x1, const fl
 	*buf_++ = y1;
 	count_++;
 
-	// »º³åÇøÂúÊ±Ö±½Ó»æÖÆ
+	// ç¼“å†²åŒºæ»¡æ—¶ç›´æŽ¥ç»˜åˆ¶
 	if (count_ == total_)
 	{
 		draw();
@@ -46,14 +46,14 @@ void BorderDrawer::push(const float x0, const float y0, const float x1, const fl
 
 void BorderDrawer::draw()
 {
-	// ½â³ý»º³åÇøÓ³Éä
+	// è§£é™¤ç¼“å†²åŒºæ˜ å°„
 	if (buf_)
 	{
 		glUnmapNamedBuffer(buffer_);
 		buf_ = nullptr;
 	}
 
-	// »æÖÆ
+	// ç»˜åˆ¶
 	if (count_)
 	{
 		glDrawArrays(GL_LINES, 0, count_ * 2);
@@ -63,7 +63,7 @@ void BorderDrawer::draw()
 
 void BorderDrawer::destroy()
 {
-	// ½â³ý°ó¶¨
+	// è§£é™¤ç»‘å®š
 	if (buf_)
 	{
 		glUnmapNamedBuffer(buffer_);
@@ -73,7 +73,7 @@ void BorderDrawer::destroy()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	// É¾³ý¶ÔÏó
+	// åˆ é™¤å¯¹è±¡
 	glDeleteProgram(program_);
 	glDeleteVertexArrays(1, &vao_);
 	glDeleteBuffers(1, &buffer_);

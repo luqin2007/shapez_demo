@@ -17,7 +17,7 @@ using std::filesystem::path;
 class GameRenderer;
 
 /**
- * \brief »æÖÆÀà
+ * \brief ç»˜åˆ¶ç±»
  */
 class AbstractDrawer
 {
@@ -25,45 +25,45 @@ class AbstractDrawer
 
 public:
 	/**
-	 * \brief ¶Ô»æÖÆÀà¹²Ïí×ÊÔ´µÄÊÍ·Å
+	 * \brief å¯¹ç»˜åˆ¶ç±»å…±äº«èµ„æºçš„é‡Šæ”¾
 	 */
 	static void destroy_static();
 
 protected:
 	/**
-	 * \brief »æÖÆÊ¹ÓÃµÄ×ÅÉ«Æ÷³ÌĞò
+	 * \brief ç»˜åˆ¶ä½¿ç”¨çš„ç€è‰²å™¨ç¨‹åº
 	 */
 	GLuint program_ = 0;
 
 	/**
-	 * \brief »æÖÆÊ¹ÓÃµÄ¶¥µãÊı×é¶ÔÏó
+	 * \brief ç»˜åˆ¶ä½¿ç”¨çš„é¡¶ç‚¹æ•°ç»„å¯¹è±¡
 	 */
 	GLuint vao_ = 0;
 
 	/**
-	 * \brief ¶¥µã»º³åÇø¶ÔÏó
+	 * \brief é¡¶ç‚¹ç¼“å†²åŒºå¯¹è±¡
 	 */
 	GLuint buffer_ = 0;
 
 	/**
-	 * \brief ´´½¨×ÅÉ«Æ÷³ÌĞò
-	 * \param program ×ÅÉ«Æ÷³ÌĞò±äÁ¿
-	 * \param vert ¶¥µã×ÅÉ«Æ÷±äÁ¿
-	 * \param frag Æ¬Ôª×ÅÉ«Æ÷±äÁ¿
-	 * \param resize µ±´°¿Ú´óĞ¡·¢Éú±ä»¯Ê±£¬¸üĞÂ¸Ã×ÅÉ«Æ÷³ÌĞò
+	 * \brief åˆ›å»ºç€è‰²å™¨ç¨‹åº
+	 * \param program ç€è‰²å™¨ç¨‹åºå˜é‡
+	 * \param vert é¡¶ç‚¹ç€è‰²å™¨å˜é‡
+	 * \param frag ç‰‡å…ƒç€è‰²å™¨å˜é‡
+	 * \param resize å½“çª—å£å¤§å°å‘ç”Ÿå˜åŒ–æ—¶ï¼Œæ›´æ–°è¯¥ç€è‰²å™¨ç¨‹åº
 	 */
 	static void create_program(GLuint& program, string&& vert, string&& frag, bool resize);
 
 	/**
-	 * \brief ´´½¨×ÅÉ«Æ÷
-	 * \param type ×ÅÉ«Æ÷ÀàĞÍ
-	 * \param p ×ÅÉ«Æ÷Â·¾¶
-	 * \return ´´½¨µÄ×ÅÉ«Æ÷ id£¬´´½¨Ê§°ÜÔò·µ»Ø 0
+	 * \brief åˆ›å»ºç€è‰²å™¨
+	 * \param type ç€è‰²å™¨ç±»å‹
+	 * \param p ç€è‰²å™¨è·¯å¾„
+	 * \return åˆ›å»ºçš„ç€è‰²å™¨ idï¼Œåˆ›å»ºå¤±è´¥åˆ™è¿”å› 0
 	 */
 	static GLuint create_shader(const GLenum type, const path& p);
 
 	/**
-	 * \brief °ó¶¨ÓÃÓÚ»æÖÆ·½¿éµÄ¶¥µãÊı×é»º³åÇø
+	 * \brief ç»‘å®šç”¨äºç»˜åˆ¶æ–¹å—çš„é¡¶ç‚¹æ•°ç»„ç¼“å†²åŒº
 	 */
 	static void bind_indices();
 
@@ -71,16 +71,16 @@ private:
 	inline static GLuint indices_buffer_ = 0;
 
 	/**
-	 * \brief ĞèÒªÔÚ´°¿Ú³ß´ç·¢Éú±ä»¯Ê±¸üĞÂµÄ×ÅÉ«Æ÷³ÌĞò
+	 * \brief éœ€è¦åœ¨çª—å£å°ºå¯¸å‘ç”Ÿå˜åŒ–æ—¶æ›´æ–°çš„ç€è‰²å™¨ç¨‹åº
 	 *
-	 * ÒªÇó location=0 µÄ uniform ±äÁ¿Îª vec2 ÀàĞÍµÄ±äÁ¿±íÊ¾ width ¼° height
+	 * è¦æ±‚ location=0 çš„ uniform å˜é‡ä¸º vec2 ç±»å‹çš„å˜é‡è¡¨ç¤º width åŠ height
 	 */
 	inline static vector<GLuint> resizeable_program_;
 
 	/**
-	 * \brief µ±´°¿Ú´óĞ¡·¢Éú±ä»¯Ê±µ÷ÓÃ
-	 * \param width ´°¿Ú¿í¶È
-	 * \param height ´°¿Ú¸ß¶È
+	 * \brief å½“çª—å£å¤§å°å‘ç”Ÿå˜åŒ–æ—¶è°ƒç”¨
+	 * \param width çª—å£å®½åº¦
+	 * \param height çª—å£é«˜åº¦
 	 */
 	static void resize(GLfloat width, GLfloat height);
 };

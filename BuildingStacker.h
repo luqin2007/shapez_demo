@@ -16,9 +16,9 @@ public:
 	}
 
 private:
-	// 输入
+	// 杈撳叆
 	bool is_left_input_ = false, is_right_input_ = false;
-	// 颜色组分
+	// 棰滆壊缁勫垎
 	ColoredShapes shapes_;
 };
 

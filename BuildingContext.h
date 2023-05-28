@@ -6,23 +6,23 @@ class Building;
 enum class Side;
 
 /**
- * \brief ½¨ÖşÔÚµØÍ¼ÉÏµÄÊı¾İ
+ * \brief å»ºç­‘åœ¨åœ°å›¾ä¸Šçš„æ•°æ®
  */
 class BuildingContext
 {
 public:
 	/**
-	 * \brief ½¨ÖşÀàĞÍ
+	 * \brief å»ºç­‘ç±»å‹
 	 */
 	const Building& building;
 
 	/**
-	 * \brief ·ÅÖÃÎ»ÖÃ
+	 * \brief æ”¾ç½®ä½ç½®
 	 */
 	Vec2I pos;
 
 	/**
-	 * \brief Ö÷ÒªÊä³ö·½Ïò£¨Í¨³£Îª up£©
+	 * \brief ä¸»è¦è¾“å‡ºæ–¹å‘ï¼ˆé€šå¸¸ä¸º upï¼‰
 	 */
 	Side direction;
 	

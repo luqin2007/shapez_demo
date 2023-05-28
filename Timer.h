@@ -5,33 +5,33 @@
 using time_ms = std::chrono::microseconds::rep;
 
 /**
- * \brief ¼ÆÊ±Æ÷
+ * \brief è®¡æ—¶å™¨
  */
 class Timer
 {
 public:
 	/// <summary>
-	/// Ê±¼ä½Úµã
+	/// æ—¶é—´èŠ‚ç‚¹
 	/// </summary>
 	time_ms start_ms = 0, previous_ms = 0, current_ms = 0;
 
 	/// <summary>
-	/// Ê±¼ä¼ä¸ô
+	/// æ—¶é—´é—´éš”
 	/// </summary>
 	time_ms delta_ms = 0, running_ms = 0;
 
 	/// <summary>
-	/// µ¥Î» s
+	/// å•ä½ s
 	/// </summary>
 	float delta = 0, running = 0;
 
 	/**
-	 * \brief ¸üĞÂ£ºÍÆ½øµ½ÏÂÒ»Ö¡
+	 * \brief æ›´æ–°ï¼šæ¨è¿›åˆ°ä¸‹ä¸€å¸§
 	 */
 	void update();
 
 	/**
-	 * \brief ÖØÖÃ/³õÊ¼»¯
+	 * \brief é‡ç½®/åˆå§‹åŒ–
 	 */
 	void reset();
 

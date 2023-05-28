@@ -11,7 +11,7 @@ using std::fstream;
 using std::endl;
 
 /**
- * \brief ´¿ÎÄ±¾
+ * \brief çº¯æ–‡æœ¬
  */
 struct Text
 {
@@ -38,7 +38,7 @@ struct Text
 };
 
 /**
- * \brief Ê¹ÓÃ stb_image ¶ÁµÄÍ¼Æ¬
+ * \brief ä½¿ç”¨ stb_image è¯»çš„å›¾ç‰‡
  */
 struct Image
 {
@@ -50,20 +50,20 @@ struct Image
 };
 
 /**
- * \brief µ±Ç°Â·¾¶
+ * \brief å½“å‰è·¯å¾„
  */
 #define ROOT (current_path())
 
 /**
- * \brief ¶ÁÎÄ±¾
- * \param p Â·¾¶
- * \return ÎÄ±¾
+ * \brief è¯»æ–‡æœ¬
+ * \param p è·¯å¾„
+ * \return æ–‡æœ¬
  */
 Text read_text(const path& p);
 
 /**
- * \brief ¶ÁÍ¼Æ¬
- * \param p Â·¾¶
- * \return Í¼Æ¬
+ * \brief è¯»å›¾ç‰‡
+ * \param p è·¯å¾„
+ * \return å›¾ç‰‡
  */
 Image load_image(const path& p);

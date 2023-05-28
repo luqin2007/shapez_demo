@@ -26,20 +26,20 @@ Atlas& Atlas::operator<<(const path& p)
 {
 	cout << "  Loading image " << p.string();
 
-	// 每个单元均已填满
+	// 姣忎釜鍗曞厓鍧囧凡濉弧
 	if (row_ > count_per_col_)
 		throw exception("This atlas is too small to accept more texture.");
 
-	// 计算行、列偏移
+	// 璁＄畻琛屻�佸垪鍋忕Щ
 	const GLint off_x = col_ * cell_width_;
 	const GLint off_y = row_ * cell_height_;
 
-	// 加载图片
+	// 鍔犺浇鍥剧墖
 	const auto [width, height, channels, data] = load_image(p);
 	glTextureSubImage2D(texture_, 0, off_x, off_y, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	const string filename = p.filename().string();
 
-	// 生成图片位置
+	// 鐢熸垚鍥剧墖浣嶇疆
 	const auto xx = static_cast<float>(off_x), yy = static_cast<float>(off_y);
 	const auto ww = static_cast<float>(width), hh = static_cast<float>(height);
 	const Rect uv = {xx / width_, yy / height_, ww / width_, hh / height_};

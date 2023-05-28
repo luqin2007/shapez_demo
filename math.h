@@ -4,17 +4,17 @@
 #include <random>
 
 /**
- * \brief ÅĞ¶ÏÁ½¸ö¸¡µãÊıÊÇ·ñÏàµÈ
+ * \brief åˆ¤æ–­ä¸¤ä¸ªæµ®ç‚¹æ•°æ˜¯å¦ç›¸ç­‰
  * \param a a
  * \param b b
- * \return ÏàµÈ
+ * \return ç›¸ç­‰
  */
 inline bool feq(const float a, const float b)
 {
 	return std::fabsf(a - b) <= FLT_EPSILON;
 }
 
-// c++ Ëæ»úÊı
+// c++ éšæœºæ•°
 static std::random_device rd;
 static std::mt19937_64 engine{};
 static std::uniform_int_distribution int_distribution{0, 99};
@@ -26,8 +26,8 @@ inline void random_seed(const long long seed)
 }
 
 /**
- * \brief »ñÈ¡Ò»¸öÕûĞÎËæ»úÊı£¬Ëæ»úÊı·¶Î§Îª [0, 100)
- * \return Ëæ»úÊı
+ * \brief è·å–ä¸€ä¸ªæ•´å½¢éšæœºæ•°ï¼Œéšæœºæ•°èŒƒå›´ä¸º [0, 100)
+ * \return éšæœºæ•°
  */
 inline int random_int()
 {
@@ -35,8 +35,8 @@ inline int random_int()
 }
 
 /**
- * \brief »ñÈ¡Ò»¸ö¸¡µãËæ»úÊı£¬Ëæ»úÊı·¶Î§Îª [0, 1]
- * \return Ëæ»úÊı
+ * \brief è·å–ä¸€ä¸ªæµ®ç‚¹éšæœºæ•°ï¼Œéšæœºæ•°èŒƒå›´ä¸º [0, 1]
+ * \return éšæœºæ•°
  */
 inline float random()
 {

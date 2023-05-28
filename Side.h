@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * \brief ·½Ïò
+ * \brief æ–¹å‘
  */
 enum class Side
 {
@@ -12,16 +12,16 @@ enum class Side
 };
 
 /**
- * Ë³Ê±ÕëĞı×ª
+ * é¡ºæ—¶é’ˆæ—‹è½¬
  */
 Side operator++(Side side);
 
 /**
- * ÄæÊ±ÕëĞı×ª
+ * é€†æ—¶é’ˆæ—‹è½¬
  */
 Side operator--(Side side);
 
 /**
- * ·´Ïò
+ * åå‘
  */
 Side operator-(Side side);

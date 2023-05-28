@@ -59,12 +59,12 @@ bool BuildingBalancer::on_finished(TickableContext& context, const GameMap& map)
 
 bool BuildingBalancer::can_receive(const Side side, const BuildingContext& context) const
 {
-	// 方向正确
+	// 鏂瑰悜姝ｇ‘
 	if (side != -context.direction)
 	{
 		return false;
 	}
-	// 位置空闲
+	// 浣嶇疆绌洪棽
 	if (const auto& ctx = cast(context);
 		ctx.types_.size() == ctx.max_items_)
 		return false;
@@ -83,7 +83,7 @@ void BuildingBalancer::send_first_item(BalancerContext& context, const GameMap& 
 			{
 				context.types_.pop();
 				context.colors_.pop();
-				// 交替输出
+				// 浜ゆ浛杈撳嚭
 				context.side_ = !context.side_;
 			}
 			else if (send_dye(context.pos + (--context.direction), context.direction, context.colors_.front(), map))
@@ -98,7 +98,7 @@ void BuildingBalancer::send_first_item(BalancerContext& context, const GameMap& 
 			{
 				context.types_.pop();
 				context.shapes_.pop();
-				// 交替输出
+				// 浜ゆ浛杈撳嚭
 				context.side_ = !context.side_;
 			}
 			else if (send_shape(context.pos + (--context.direction), context.direction, context.shapes_.front(), map))
@@ -116,7 +116,7 @@ void BuildingBalancer::send_first_item(BalancerContext& context, const GameMap& 
 			{
 				context.types_.pop();
 				context.colors_.pop();
-				// 交替输出
+				// 浜ゆ浛杈撳嚭
 				context.side_ = !context.side_;
 			}
 			else if (send_dye(context.pos, context.direction, context.colors_.front(), map))
@@ -131,7 +131,7 @@ void BuildingBalancer::send_first_item(BalancerContext& context, const GameMap& 
 			{
 				context.types_.pop();
 				context.shapes_.pop();
-				// 交替输出
+				// 浜ゆ浛杈撳嚭
 				context.side_ = !context.side_;
 			}
 			else if (send_shape(context.pos, context.direction, context.shapes_.front(), map))

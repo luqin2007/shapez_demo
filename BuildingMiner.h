@@ -16,7 +16,7 @@ public:
 };
 
 /**
- * \brief ²É¾òÆ÷
+ * \brief é‡‡æ˜å™¨
  */
 class BuildingMiner final : public TickableBuilding
 {

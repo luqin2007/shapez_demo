@@ -3,60 +3,60 @@
 #include "AbstractDrawer.h"
 
 /**
- * \brief ÓÃÓÚ±ß½çµÄÖ±ÏßäÖÈ¾£¬ÑÕÉ«Îª 0xF6F6F6
+ * \brief ç”¨äºè¾¹ç•Œçš„ç›´çº¿æ¸²æŸ“ï¼Œé¢œè‰²ä¸º 0xF6F6F6
  */
 class BorderDrawer: public AbstractDrawer
 {
 public:
 	/**
-	 * \param count ÅúÁ¿»æÖÆ¸öÊı
+	 * \param count æ‰¹é‡ç»˜åˆ¶ä¸ªæ•°
 	 */
 	explicit BorderDrawer(const int count) : total_(count)
 	{
 	}
 
 	/**
-	 * \brief ³õÊ¼»¯
+	 * \brief åˆå§‹åŒ–
 	 */
 	void initialize();
 
 	/**
-	 * \brief ×¼±¸»æÖÆ
+	 * \brief å‡†å¤‡ç»˜åˆ¶
 	 */
 	void begin() const;
 
 	/**
-	 * \brief ´«ÈëÒ»ÌõÖ±ÏßµÄÁ½¸ö¶¥Ïß
-	 * \param x0 µÚÒ»¸ö¶¥µãµÄ x ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param y0 µÚÒ»¸ö¶¥µãµÄ y ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param x1 µÚ¶ş¸ö¶¥µãµÄ x ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param y1 µÚ¶ş¸ö¶¥µãµÄ y ×ø±ê£¬µ¥Î»ÏñËØ
+	 * \brief ä¼ å…¥ä¸€æ¡ç›´çº¿çš„ä¸¤ä¸ªé¡¶çº¿
+	 * \param x0 ç¬¬ä¸€ä¸ªé¡¶ç‚¹çš„ x åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param y0 ç¬¬ä¸€ä¸ªé¡¶ç‚¹çš„ y åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param x1 ç¬¬äºŒä¸ªé¡¶ç‚¹çš„ x åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param y1 ç¬¬äºŒä¸ªé¡¶ç‚¹çš„ y åæ ‡ï¼Œå•ä½åƒç´ 
 	 */
 	void push(float x0, float y0, float x1, float y1);
 
 	/**
-	 * \brief »æÖÆÒÑ»º´æ¶¥µã
+	 * \brief ç»˜åˆ¶å·²ç¼“å­˜é¡¶ç‚¹
 	 */
 	void draw();
 
 	/**
-	 * \brief Ïú»Ù
+	 * \brief é”€æ¯
 	 */
 	void destroy();
 
 private:
 	/**
-	 * \brief ÅúÁ¿»æÖÆ×î´óÁ¿
+	 * \brief æ‰¹é‡ç»˜åˆ¶æœ€å¤§é‡
 	 */
 	const int total_;
 
 	/**
-	 * \brief Î´±»»æÖÆÖ±ÏßÁ¿
+	 * \brief æœªè¢«ç»˜åˆ¶ç›´çº¿é‡
 	 */
 	int count_ = 0;
 
 	/**
-	 * \brief ¶¥µã»º³åÇøÖ¸Õë
+	 * \brief é¡¶ç‚¹ç¼“å†²åŒºæŒ‡é’ˆ
 	 */
 	float* buf_ = nullptr;
 };

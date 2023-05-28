@@ -20,33 +20,33 @@ public:
 
 private:
 	/**
-	 * \brief Æ½ºâÆ÷ÖĞ³ÖÓĞµÄÍ¼ĞÎ
+	 * \brief å¹³è¡¡å™¨ä¸­æŒæœ‰çš„å›¾å½¢
 	 */
 	queue<ColoredShapes> shapes_;
 
 	/**
-	 * \brief Æ½ºâÆ÷ÖĞ³ÖÓĞµÄÑÕÉ«
+	 * \brief å¹³è¡¡å™¨ä¸­æŒæœ‰çš„é¢œè‰²
 	 */
 	queue<Color> colors_;
 
 	/**
-	 * \brief Æ½ºâÆ÷ÖĞÎïÆ·µÄÀàĞÍĞòÁĞ
+	 * \brief å¹³è¡¡å™¨ä¸­ç‰©å“çš„ç±»å‹åºåˆ—
 	 */
 	queue<ItemType> types_;
 
 	/**
-	 * \brief ÏÂÒ»´ÎÓÅÏÈÊä³ö·½Ïò
+	 * \brief ä¸‹ä¸€æ¬¡ä¼˜å…ˆè¾“å‡ºæ–¹å‘
 	 */
 	int side_ = 0;
 
 	/**
-	 * \brief ¿É½ÓÊÜµÄÎïÆ·¸öÊı
+	 * \brief å¯æ¥å—çš„ç‰©å“ä¸ªæ•°
 	 */
 	queue<unique_ptr<ItemType>>::size_type max_items_ = 3;
 };
 
 /**
- * \brief Æ½ºâÆ÷£ºÁ½¸öÊäÈë£¬Á½¸öÊä³ö½»ÌæÊä³ö
+ * \brief å¹³è¡¡å™¨ï¼šä¸¤ä¸ªè¾“å…¥ï¼Œä¸¤ä¸ªè¾“å‡ºäº¤æ›¿è¾“å‡º
  */
 class BuildingBalancer final : public TickableBuilding
 {

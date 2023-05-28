@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * \brief 物品类型
+ * \brief 鐗╁搧绫诲瀷
  */
 enum class ItemType
 {

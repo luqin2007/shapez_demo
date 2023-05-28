@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * \brief µØÍ¼ÖĞµ¥Ôª¸ñµÄ¸öÊı
+ * \brief åœ°å›¾ä¸­å•å…ƒæ ¼çš„ä¸ªæ•°
  */
 constexpr int CELL_COUNT = 200;
 
@@ -10,31 +10,31 @@ class GameRenderer;
 class GameLogic;
 
 /**
- * \brief µ±Ç°ÔËĞĞÖĞµÄÓÎÏ·
+ * \brief å½“å‰è¿è¡Œä¸­çš„æ¸¸æˆ
  */
 extern GameLogic* current_game;
 
 /**
- * \brief µ±Ç°ÔËĞĞÖĞµÄÓÎÏ·´°¿Ú
+ * \brief å½“å‰è¿è¡Œä¸­çš„æ¸¸æˆçª—å£
  */
 extern GameWindow* current_window;
 
 /**
- * \brief µ±Ç°ÔËĞĞÖĞµÄÓÎÏ·äÖÈ¾Æ÷
+ * \brief å½“å‰è¿è¡Œä¸­çš„æ¸¸æˆæ¸²æŸ“å™¨
  */
 extern GameRenderer* current_renderer;
 
 static int image_id = 0;
 
 /**
- * \brief µ÷ÊÔÓÃ£¬Ğ£Ñé GL ´íÎó
- * \param name Òì³£Ô­Òò
+ * \brief è°ƒè¯•ç”¨ï¼Œæ ¡éªŒ GL é”™è¯¯
+ * \param name å¼‚å¸¸åŸå› 
  */
 void log_error(const char* name);
 
 /**
- * \brief »ñÈ¡Ò»¸ö¿ÉÓÃµÄµÄÎÆÀíÎ»
- * \return ¿ÉÓÃÎÆÀíÎ»
+ * \brief è·å–ä¸€ä¸ªå¯ç”¨çš„çš„çº¹ç†ä½
+ * \return å¯ç”¨çº¹ç†ä½
  */
 inline int next_texture_id()
 {

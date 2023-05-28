@@ -22,7 +22,7 @@ private:
 };
 
 /**
- * \brief 切割器：将图形物品从中间切成两个
+ * \brief 鍒囧壊鍣細灏嗗浘褰㈢墿鍝佷粠涓棿鍒囨垚涓や釜
  */
 class BuildingCutter final : public TickableBuilding
 {

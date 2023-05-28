@@ -27,7 +27,7 @@ Text read_text(const path& p)
 {
 	Text text;
 
-	// 校验路径
+	// 鏍￠獙璺緞
 	using namespace std::filesystem;
 	if (!is_regular_file(p))
 	{
@@ -35,7 +35,7 @@ Text read_text(const path& p)
 		return text;
 	}
 
-	// 按字节读文件
+	// 鎸夊瓧鑺傝鏂囦欢
 	fstream fs;
 	fs.open(p);
 	text << file_size(p);

@@ -9,7 +9,7 @@
 using std::pair;
 
 /**
- * \brief ÓÉÈ¾É«ºóµÄĞÎ×´×é³ÉµÄÎïÆ·
+ * \brief ç”±æŸ“è‰²åçš„å½¢çŠ¶ç»„æˆçš„ç‰©å“
  */
 struct ColoredShapes
 {
@@ -21,19 +21,19 @@ struct ColoredShapes
 	static ColoredShapes from_resource(ResourceType type);
 
 	/**
-	 * \brief Ë³Ê±ÕëĞı×ªÎïÆ·
+	 * \brief é¡ºæ—¶é’ˆæ—‹è½¬ç‰©å“
 	 */
 	void operator++();
 
 	/**
-	 * \brief ÄæÊ±ÕëĞı×ªÎïÆ·
+	 * \brief é€†æ—¶é’ˆæ—‹è½¬ç‰©å“
 	 */
 	void operator--();
 
 	/**
-	 * \brief Ğ£Ñé¸ÃĞÎ×´ÊÇ·ñ¿ÉÒÔ±»¸ø¶¨ÑÕÉ«È¾É«
-	 * \param color ÑÕÉ«
-	 * \return ÊÇ·ñ¿É±»È¾É«
+	 * \brief æ ¡éªŒè¯¥å½¢çŠ¶æ˜¯å¦å¯ä»¥è¢«ç»™å®šé¢œè‰²æŸ“è‰²
+	 * \param color é¢œè‰²
+	 * \return æ˜¯å¦å¯è¢«æŸ“è‰²
 	 */
 	bool operator|(Color color) const;
 

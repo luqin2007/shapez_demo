@@ -14,7 +14,7 @@ static std::string color_names[]
 };
 
 /**
- * \brief ±íÊ¾ÑÕÉ«
+ * \brief è¡¨ç¤ºé¢œè‰²
  */
 enum class Color
 {
@@ -29,9 +29,9 @@ enum class Color
 };
 
 /**
- * \brief »ñÈ¡ÑÕÉ«Ãû×Ö·û´®£¬ÓëÎÆÀí²ÄÖÊÓĞ¹Ø
- * \param color ÑÕÉ«
- * \return ÑÕÉ«Ãû
+ * \brief è·å–é¢œè‰²åå­—ç¬¦ä¸²ï¼Œä¸çº¹ç†æè´¨æœ‰å…³
+ * \param color é¢œè‰²
+ * \return é¢œè‰²å
  */
 inline std::string& color_icon(const Color color)
 {
@@ -39,10 +39,10 @@ inline std::string& color_icon(const Color color)
 }
 
 /**
- * \brief Ğ£ÑéÁ½¸öÑÕÉ«ÊÇ·ñ¿ÉÒÔ»ìºÏ
- * \param color1 ÑÕÉ«1
- * \param color2 ÑÕÉ«2
- * \return ÊÇ·ñ¿É»ìºÏ
+ * \brief æ ¡éªŒä¸¤ä¸ªé¢œè‰²æ˜¯å¦å¯ä»¥æ··åˆ
+ * \param color1 é¢œè‰²1
+ * \param color2 é¢œè‰²2
+ * \return æ˜¯å¦å¯æ··åˆ
  */
 inline bool operator|(Color color1, Color color2)
 {
@@ -50,10 +50,10 @@ inline bool operator|(Color color1, Color color2)
 }
 
 /**
- * \brief »ñÈ¡Á½¸öÑÕÉ«»ìºÏºóµÄ½á¹û
- * \param color1 ÑÕÉ«1
- * \param color2 ÑÕÉ«2
- * \return »ìºÏºóµÄÑÕÉ«
+ * \brief è·å–ä¸¤ä¸ªé¢œè‰²æ··åˆåçš„ç»“æœ
+ * \param color1 é¢œè‰²1
+ * \param color2 é¢œè‰²2
+ * \return æ··åˆåçš„é¢œè‰²
  */
 inline Color operator+(Color color1, Color color2)
 {

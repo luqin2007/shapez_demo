@@ -11,8 +11,8 @@ class GameLogic
 {
 public:
 	/**
-	 * \brief ÓÎÏ·³õÊ¼»¯
-	 * \param seed ÓÎÏ·³õÊ¼»¯ÖÖ×Ó
+	 * \brief æ¸¸æˆåˆå§‹åŒ–
+	 * \param seed æ¸¸æˆåˆå§‹åŒ–ç§å­
 	 */
 	void initialize(long long seed);
 
@@ -38,7 +38,7 @@ private:
 
 	int width_ = 0, height_ = 0;
 
-	// µ±Ç°Êó±ê³ÖÓĞµÄ½¨Öş
+	// å½“å‰é¼ æ ‡æŒæœ‰çš„å»ºç­‘
 	int current_building_ = 0;
 	int current_building_variant_ = 0;
 	Side current_side_ = Side::up;

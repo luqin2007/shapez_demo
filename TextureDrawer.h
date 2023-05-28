@@ -3,9 +3,9 @@
 #include "AbstractDrawer.h"
 
 /**
- * \brief ÅúÁ¿ÔÚµØÍ¼ÉÏ»æÖÆÎÆÀí£¬Ã¿¸ö¾ØĞÎĞèÒª 24 ¸ö float
+ * \brief æ‰¹é‡åœ¨åœ°å›¾ä¸Šç»˜åˆ¶çº¹ç†ï¼Œæ¯ä¸ªçŸ©å½¢éœ€è¦ 24 ä¸ª float
  *
- * ¸ø¶¨ÎÆÀí´ïµ½×î´óÊıÁ¿ºó»áÖ±½Ó»æÖÆ£¬·ñÔòµ± draw µ÷ÓÃÊ±»æÖÆ
+ * ç»™å®šçº¹ç†è¾¾åˆ°æœ€å¤§æ•°é‡åä¼šç›´æ¥ç»˜åˆ¶ï¼Œå¦åˆ™å½“ draw è°ƒç”¨æ—¶ç»˜åˆ¶
  */
 class TextureDrawer : public AbstractDrawer
 {
@@ -15,47 +15,47 @@ public:
 	}
 
 	/**
-	 * \brief ³õÊ¼»¯
+	 * \brief åˆå§‹åŒ–
 	 */
 	void initialize();
 	
 	/**
-	 * \brief ×¼±¸¿ªÊ¼»æÖÆ
+	 * \brief å‡†å¤‡å¼€å§‹ç»˜åˆ¶
 	 */
 	void begin() const;
 
 	/**
-	 * \brief ÉèÖÃÎÆÀíË÷Òı
-	 * \param tex ÎÆÀíË÷Òı
+	 * \brief è®¾ç½®çº¹ç†ç´¢å¼•
+	 * \param tex çº¹ç†ç´¢å¼•
 	 */
 	void tex(GLint tex);
 
 	/**
-	 * \brief °ëÍ¸Ã÷ÎÆÀí
-	 * \param alpha ÎÆÀíÕûÌå alpha Öµ
+	 * \brief åŠé€æ˜çº¹ç†
+	 * \param alpha çº¹ç†æ•´ä½“ alpha å€¼
 	 */
 	void alpha(GLfloat alpha);
 
 	/**
-	 * \brief ²åÈëÎÆÀí
-	 * \param x0 ×óÉÏ½Ç¶¥µãµÄ x ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param y0 ×óÉÏ½Ç¶¥µãµÄ y ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param x1 ÓÒÏÂ½Ç¶¥µãµÄ x ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param y1 ÓÒÏÂ½Ç¶¥µãµÄ y ×ø±ê£¬µ¥Î»ÏñËØ
-	 * \param u ×óÉÏ½Ç¶¥µã x ÎÆÀí×ø±ê
-	 * \param v ×óÉÏ½Ç¶¥µã y ÎÆÀí×ø±ê
-	 * \param w ÎÆÀí¿í¶È£¬[0, 1]
-	 * \param h ÎÆÀí¸ß¶È£¬[0, 1]
+	 * \brief æ’å…¥çº¹ç†
+	 * \param x0 å·¦ä¸Šè§’é¡¶ç‚¹çš„ x åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param y0 å·¦ä¸Šè§’é¡¶ç‚¹çš„ y åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param x1 å³ä¸‹è§’é¡¶ç‚¹çš„ x åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param y1 å³ä¸‹è§’é¡¶ç‚¹çš„ y åæ ‡ï¼Œå•ä½åƒç´ 
+	 * \param u å·¦ä¸Šè§’é¡¶ç‚¹ x çº¹ç†åæ ‡
+	 * \param v å·¦ä¸Šè§’é¡¶ç‚¹ y çº¹ç†åæ ‡
+	 * \param w çº¹ç†å®½åº¦ï¼Œ[0, 1]
+	 * \param h çº¹ç†é«˜åº¦ï¼Œ[0, 1]
 	 */
 	void push(float x0, float y0, float x1, float y1, float u, float v, float w, float h);
 
 	/**
-	 * \brief »æÖÆ
+	 * \brief ç»˜åˆ¶
 	 */
 	void draw();
 
 	/**
-	 * \brief Ïú»Ù
+	 * \brief é”€æ¯
 	 */
 	void destroy();
 
