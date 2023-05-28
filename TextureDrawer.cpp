@@ -1,18 +1,18 @@
 #include "TextureDrawer.h"
 
+#include "./math.h"
+
 void TextureDrawer::initialize()
 {
-	cout << " Create texture buffers" << endl;
 	glCreateBuffers(1, &buffer_);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer_);
 	glNamedBufferStorage(buffer_, total_ * 24 * sizeof(float), 0, GL_MAP_READ_BIT | GL_MAP_WRITE_BIT);
 
-	create_program(program_, "tex_single.vert", "tex_alpha.frag");
+	create_program(program_, "tex_single.vert", "tex_alpha.frag", true);
 	glUseProgram(program_);
 	glUniform1i(1, 0);
 	glUniform1f(2, 1.0f);
 
-	cout << " Create tex vertex object..." << endl;
 	glCreateVertexArrays(1, &vao_);
 	glBindVertexArray(vao_);
 	glEnableVertexAttribArray(0);
@@ -39,7 +39,7 @@ void TextureDrawer::tex(const GLint tex)
 
 void TextureDrawer::alpha(const GLfloat alpha)
 {
-	if (fneq(alpha, alpha_))
+	if (!feq(alpha, alpha_))
 	{
 		draw();
 		alpha_ = alpha;
@@ -55,36 +55,39 @@ void TextureDrawer::push(const float x0, const float y0, const float x1, const f
 		buf_ = static_cast<float*>(glMapNamedBuffer(buffer_, GL_WRITE_ONLY));
 	}
 
+	const float uu = u + w;
+	const float vv = v + h;
+
 	*buf_++ = x0;
 	*buf_++ = y0;
 	*buf_++ = u;
-	*buf_++ = v;
-
-	*buf_++ = x0;
-	*buf_++ = y1;
-	*buf_++ = u;
-	*buf_++ = v + h;
-
-	*buf_++ = x1;
-	*buf_++ = y0;
-	*buf_++ = u + w;
-	*buf_++ = v;
+	*buf_++ = vv;
 
 	*buf_++ = x0;
 	*buf_++ = y1;
 	*buf_++ = u;
-	*buf_++ = v + h;
-
-	*buf_++ = x1;
-	*buf_++ = y1;
-	*buf_++ = u + w;
-	*buf_++ = v + h;
+	*buf_++ = v;
 
 	*buf_++ = x1;
 	*buf_++ = y0;
-	*buf_++ = u + w;
+	*buf_++ = uu;
+	*buf_++ = vv;
+
+	*buf_++ = x0;
+	*buf_++ = y1;
+	*buf_++ = u;
 	*buf_++ = v;
-	
+
+	*buf_++ = x1;
+	*buf_++ = y1;
+	*buf_++ = uu;
+	*buf_++ = v;
+
+	*buf_++ = x1;
+	*buf_++ = y0;
+	*buf_++ = uu;
+	*buf_++ = vv;
+
 	count_++;
 	if (count_ == total_)
 	{

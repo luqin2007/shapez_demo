@@ -8,7 +8,6 @@
 
 #include <glad/glad.h>
 
-#include "Resouces.h"
 #include "Common.h"
 
 using std::map;
@@ -18,6 +17,17 @@ using std::cout;
 using std::endl;
 using std::exception;
 
+/**
+ * \brief 表示地图集中的一个图片
+ */
+struct Rect
+{
+	float u, v, w, h;
+};
+
+/**
+ * \brief 地图集，将多张图片集合到一张图中，要求每张图片的大小相同或相近
+ */
 class Atlas
 {
 public:
@@ -32,8 +42,14 @@ public:
 	{
 	}
 
+	/**
+	 * \brief 初始化
+	 */
 	void initialize();
-	
+
+	/**
+	 * \brief 销毁
+	 */
 	void destroy() const;
 
 	operator GLint() const
@@ -41,15 +57,29 @@ public:
 		return index_;
 	}
 
+	/**
+	 * \brief 向地图集中导入图片，应当在 initialize 方法之后调用
+	 * \param p 图片完整路径
+	 * \return 当前地图集
+	 */
 	Atlas& operator<<(const path& p);
 
-	const UV& operator[](const string& name);
+	/**
+	 * \brief 地图集生成完成时调用
+	 * \param gen_mipmap 是否需要生成 mipmap
+	 * \return 当前地图集
+	 */
+	Atlas& operator<<(const bool gen_mipmap);
+
+	const Rect& operator[](const string& name);
+
+	const Rect& operator[](const char* name);
 
 private:
 	const float width_, height_;
 	const int cell_width_, cell_height_, count_per_row_, count_per_col_, index_;
 	const bool m4_;
-	map<string, UV> atlas_;
+	map<string, Rect> atlas_;
 
 	int row_ = 0, col_ = 0;
 

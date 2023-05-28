@@ -10,7 +10,7 @@ public:
 	void run();
 private:
 	GameWindow window_;
-	GameLogic game_ = GameLogic();
-	GameRenderer renderer_ = GameRenderer();
+	GameLogic game_;
+	GameRenderer renderer_;
 };
 

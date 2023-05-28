@@ -1,14 +1,9 @@
 #pragma once
 
-#include <glad/glad.h>
-
-#include "Common.h"
 #include "AbstractDrawer.h"
 
 /**
  * \brief 用于边界的直线渲染，颜色为 0xF6F6F6
- *
- * 每次 push 后，若顶点个数达到上限，则直接绘制；否则，等到 draw 方法调用时绘制
  */
 class BorderDrawer: public AbstractDrawer
 {

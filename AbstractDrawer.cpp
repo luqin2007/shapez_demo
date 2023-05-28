@@ -1,13 +1,6 @@
 #include "AbstractDrawer.h"
 
-void AbstractDrawer::resize(const GLfloat width, const GLfloat height) const
-{
-	if (program_)
-	{
-		glUseProgram(program_);
-		glUniform2f(0, width, height);
-	}
-}
+#include "resouces.h"
 
 void AbstractDrawer::destroy_static()
 {
@@ -17,18 +10,32 @@ void AbstractDrawer::destroy_static()
 		glDeleteBuffers(1, &indices_buffer_);
 		indices_buffer_ = 0;
 	}
+
+	resizeable_program_.clear();
 }
 
-void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& frag)
+void AbstractDrawer::resize(const GLfloat width, const GLfloat height)
+{
+	for (const GLuint program : resizeable_program_)
+	{
+		glUseProgram(program);
+		glUniform2f(0, width, height);
+	}
+}
+
+void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& frag, bool resize)
 {
 	cout << " Create program with " << vert << " and " << frag << "..." << endl;
 	program = glCreateProgram();
-	const path vp = Resouces::root() / "glsl" / vert;
+	// 创建、编译顶点着色器
+	const path vp = ROOT / "glsl" / vert;
 	cout << "  Loading shader " << vp.string() << endl;
 	const GLuint sp = create_shader(GL_VERTEX_SHADER, vp);
-	const path vf = Resouces::root() / "glsl" / frag;
+	// 创建、编译片元着色器
+	const path vf = ROOT / "glsl" / frag;
 	cout << "  Loading shader " << vf.string() << endl;
 	const GLuint sf = create_shader(GL_FRAGMENT_SHADER, vf);
+	// 创建、链接着色器程序
 	glAttachShader(program, sp);
 	glAttachShader(program, sf);
 	glLinkProgram(program);
@@ -36,6 +43,7 @@ void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& fra
 	glDetachShader(program, sf);
 	glDeleteShader(sp);
 	glDeleteShader(sf);
+	// 校验程序链接结果
 	GLint param;
 	glGetProgramiv(program, GL_LINK_STATUS, &param);
 	if (param != GL_TRUE)
@@ -43,20 +51,26 @@ void AbstractDrawer::create_program(GLuint& program, string&& vert, string&& fra
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &param);
 		const auto msg = new GLchar[param + 1];
 		glGetProgramInfoLog(program, param, &param, msg);
+		// 清理环境
 		glDeleteProgram(program);
 		program = 0;
 		cerr << msg << endl;
 		delete[] msg;
 	}
+	// 记录需要更新的着色器程序
+	if (resize)
+	{
+		resizeable_program_.push_back(program);
+	}
 }
 
 GLuint AbstractDrawer::create_shader(const GLenum type, const path& p)
 {
-	const auto [len, str] = Resouces::read_text(p);
+	const auto [len, str] = read_text(p);
 	const GLuint shader = glCreateShader(type);
 	glShaderSource(shader, 1, &str, reinterpret_cast<const GLint*>(&len));
 	glCompileShader(shader);
-
+	// 校验编译结果
 	GLint param;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &param);
 	if (param != GL_TRUE)

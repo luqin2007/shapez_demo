@@ -1,11 +1,13 @@
 #include "GameLogic.h"
 
+#include "MouseHelper.h"
+
 void GameLogic::initialize(const long long seed)
 {
 	current_game = this;
-
+	random_seed(seed);
 	timer_.reset();
-	map_.initialize(seed);
+	map_.initialize();
 	MouseHelper::initialize();
 }
 
@@ -29,6 +31,16 @@ void GameLogic::update()
 
 	on_wheel_roll(MouseHelper::wheel());
 	MouseHelper::update();
+}
+
+void GameLogic::destroy()
+{
+	// ±£´æ´æµµ
+}
+
+void GameLogic::on_resize(const int width, const int height)
+{
+
 }
 
 void GameLogic::on_drag(const float dx, const float dy)

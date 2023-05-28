@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\buildings">
-      <UniqueIdentifier>{1d3dc507-d545-4f1f-9359-e383903c8545}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\buildings">
-      <UniqueIdentifier>{86d20afe-27c5-4ed1-9fce-64d104ac9fa5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\image">
       <UniqueIdentifier>{479e67f5-7a05-4cad-a9bd-40ad896b5026}</UniqueIdentifier>
     </Filter>
@@ -40,22 +34,37 @@
     <Filter Include="源文件\lib">
       <UniqueIdentifier>{fdcfd367-1d7a-4be3-a6c1-3f3c828793de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\gl_util">
-      <UniqueIdentifier>{538f0257-5742-4cc9-a183-90db00fc2e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\gl_util">
-      <UniqueIdentifier>{85a57e5c-32fa-41a8-b594-82afc2e8b6fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\image\psd">
       <UniqueIdentifier>{031b78dd-5d94-4255-889c-c0716efdaa6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\render">
+      <UniqueIdentifier>{85a57e5c-32fa-41a8-b594-82afc2e8b6fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\render">
+      <UniqueIdentifier>{538f0257-5742-4cc9-a183-90db00fc2e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\building">
+      <UniqueIdentifier>{86d20afe-27c5-4ed1-9fce-64d104ac9fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\building">
+      <UniqueIdentifier>{1d3dc507-d545-4f1f-9359-e383903c8545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\util">
+      <UniqueIdentifier>{ee6eb8e0-7312-44b2-bf25-39c55ffa6d0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\util">
+      <UniqueIdentifier>{a44dac73-9206-4d75-813c-91cb5d1c3572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\component">
+      <UniqueIdentifier>{5f89b49d-33da-43ee-ba57-b5d5f1fe6723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\component">
+      <UniqueIdentifier>{f9e49b06-0c45-4e98-ad66-f96b1df770b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Building.h">
-      <Filter>头文件\buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic.h">
       <Filter>头文件</Filter>
@@ -66,57 +75,114 @@
     <ClInclude Include="GameRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Main.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GameWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MouseHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Resouces.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="BorderDrawer.h">
-      <Filter>头文件\gl_util</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureInstanceDrawer.h">
-      <Filter>头文件\gl_util</Filter>
+      <Filter>头文件\render</Filter>
     </ClInclude>
     <ClInclude Include="AbstractDrawer.h">
-      <Filter>头文件\gl_util</Filter>
+      <Filter>头文件\render</Filter>
     </ClInclude>
     <ClInclude Include="BuildingMiner.h">
-      <Filter>头文件\buildings</Filter>
+      <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="BuildingBelt.h">
-      <Filter>头文件\buildings</Filter>
+      <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="BuildingHub.h">
-      <Filter>头文件\buildings</Filter>
+      <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="FontDrawer.h">
-      <Filter>头文件\gl_util</Filter>
+      <Filter>头文件\render</Filter>
     </ClInclude>
     <ClInclude Include="Atlas.h">
-      <Filter>头文件\gl_util</Filter>
+      <Filter>头文件\render</Filter>
     </ClInclude>
     <ClInclude Include="TextureDrawer.h">
-      <Filter>头文件\gl_util</Filter>
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeDrawer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingContext.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="vec.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="resouces.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingBalancer.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingPainter.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingCutter.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingMixer.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingRotater.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingStacker.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingTrash.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingUndergroundBelt1.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="TickableBuilding.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingUndergroundBelt2.h">
+      <Filter>头文件\building</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseHelper.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>头文件\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Side.h">
+      <Filter>头文件\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceType.h">
+      <Filter>头文件\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemType.h">
+      <Filter>头文件\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>头文件\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ColoredShapes.h">
+      <Filter>头文件\component</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingSize.h">
+      <Filter>头文件\component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Common.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GameLogic.cpp">
@@ -128,56 +194,92 @@
     <ClCompile Include="GameRenderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GameWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Resouces.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SupportLibraries\vs_libs\src\glad.c">
       <Filter>源文件\lib</Filter>
     </ClCompile>
     <ClCompile Include="BorderDrawer.cpp">
-      <Filter>源文件\gl_util</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureInstanceDrawer.cpp">
-      <Filter>源文件\gl_util</Filter>
+      <Filter>源文件\render</Filter>
     </ClCompile>
     <ClCompile Include="AbstractDrawer.cpp">
-      <Filter>源文件\gl_util</Filter>
+      <Filter>源文件\render</Filter>
     </ClCompile>
     <ClCompile Include="Building.cpp">
-      <Filter>源文件\buildings</Filter>
+      <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="BuildingMiner.cpp">
-      <Filter>源文件\buildings</Filter>
+      <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="BuildingBelt.cpp">
-      <Filter>源文件\buildings</Filter>
+      <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="BuildingHub.cpp">
-      <Filter>源文件\buildings</Filter>
+      <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="FontDrawer.cpp">
-      <Filter>源文件\gl_util</Filter>
+      <Filter>源文件\render</Filter>
     </ClCompile>
     <ClCompile Include="Atlas.cpp">
-      <Filter>源文件\gl_util</Filter>
+      <Filter>源文件\render</Filter>
     </ClCompile>
     <ClCompile Include="TextureDrawer.cpp">
-      <Filter>源文件\gl_util</Filter>
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeDrawer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>源文件\util</Filter>
+    </ClCompile>
+    <ClCompile Include="resouces.cpp">
+      <Filter>源文件\util</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingBalancer.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingCutter.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingMixer.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingPainter.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingRotater.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingStacker.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingTrash.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingUndergroundBelt1.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>源文件\util</Filter>
+    </ClCompile>
+    <ClCompile Include="TickableBuilding.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingUndergroundBelt2.cpp">
+      <Filter>源文件\building</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseHelper.cpp">
+      <Filter>源文件\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Side.cpp">
+      <Filter>源文件\component</Filter>
+    </ClCompile>
+    <ClCompile Include="ColoredShapes.cpp">
+      <Filter>源文件\component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -542,6 +644,12 @@
       <Filter>资源文件\glsl</Filter>
     </None>
     <None Include="glsl\tex_single.vert">
+      <Filter>资源文件\glsl</Filter>
+    </None>
+    <None Include="glsl\direct.frag">
+      <Filter>资源文件\glsl</Filter>
+    </None>
+    <None Include="glsl\shape.vert">
       <Filter>资源文件\glsl</Filter>
     </None>
   </ItemGroup>

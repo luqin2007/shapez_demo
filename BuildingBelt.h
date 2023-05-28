@@ -1,35 +1,14 @@
 #pragma once
 
-#include <list>
-
 #include "Building.h"
-#include "Common.h"
+#include "BuildingContext.h"
+#include "ColoredShapes.h"
+#include "ItemType.h"
 
 using std::list;
-using BI = pair<Item, float>;
+using std::pair;
 
 class BuildingBelt;
-
-/**
- * \brief 传送带类型
- */
-enum class belt_type
-{
-	/**
-	 * \brief 直线
-	 */
-	direct,
-
-	/**
-	 * \brief 向左转向
-	 */
-	left,
-
-	/**
-	 * \brief 向右转向
-	 */
-	right
-};
 
 class BeltContext : public BuildingContext
 {
@@ -37,65 +16,71 @@ class BeltContext : public BuildingContext
 
 public:
 	/**
-	 * \brief 传送带类型
+	 * \brief 传送带上的物品
 	 */
-	const belt_type type;
+	ItemType types[4]{ItemType::none, ItemType::none, ItemType::none, ItemType::none};
+	int indices[4]{0, 0, 0, 0};
+	// 数组模拟循环链表
+	Color dyes[4];
+	ColoredShapes shapes[4];
+	int p_dye = 0, p_shape = 0;
 
 	/**
-	 * \brief 传送带中的物品
+	 * \brief 传送带上物品的位置
 	 */
-	list<BI> items;
+	float item_pos[4]{0, 0, 0, 0};
 
-	BeltContext(const Building& building, const ivec2& pos, const Side direction, const belt_type type):
-		BuildingContext(building, pos, direction), type(type)
+	BeltContext(const Building& building, const Vec2I& pos, const Side direction, const Side output) :
+		BuildingContext(building, pos, direction), output_(output)
 	{
-		if (type == belt_type::left)
-		{
-			output_ = --direction;
-		}
-		else if (type == belt_type::right)
-		{
-			output_ = ++direction;
-		}
-		else
-		{
-			output_ = direction;
-		}
 	}
 
 private:
 	/**
-	 * \brief 每 ms 前进速度
+	 * \brief 每秒前进速度
 	 */
-	const float speed_ = 0.2f;
+	const float speed_ = 0.25f;
 
 	/**
-	 * \brief 传送带最多接收多少物品
+	 * \brief 每个位置物品的最大可能位置
 	 */
-	const int max_item_count_ = 5;
+	const float max_pos_[4]{0, 0.34f, 0.67f, 1.01f};
 
 	/**
-	 * \brief 输出方向
+	 * \brief 当前传送带上物品个数
 	 */
-	Side output_;
+	int p_item_ = 3;
+
+	/**
+	 * \brief 输出位置
+	 */
+	const Side output_;
 };
 
 /**
- * \brief 传送带
+ * \brief 传送带（直）
  */
 class BuildingBelt : public Building
 {
 public:
-	explicit BuildingBelt(): Building({1, 1})
+	static const BuildingBelt instance;
+
+	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+	[[nodiscard]] bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const override;
+	[[nodiscard]] bool
+	can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const override;
+	[[nodiscard]] bool can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	                                     const BuildingContext& context) const override;
+	void receive_dye(Color color, const Vec2I& pos, Side side, BuildingContext& context) const override;
+	void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	                   BuildingContext& context) const override;
+	void update(BuildingContext& context, GameMap& map) const override;
+
+protected:
+	BuildingBelt() : Building(BuildingSize::small)
 	{
 	}
 
-	bool can_receive(const ivec2& pos, Side side, const BuildingContext& context) const override;
-	bool can_receive_item(const Item& item, const ivec2& pos, Side side, const BuildingContext& context) const override;
-	void receive(Item item, const ivec2& pos, Side side, BuildingContext& context) const override;
-	void update(BuildingContext& context, const GameMap& map) const override;
-
-private:
 	static BeltContext& cast(BuildingContext& context)
 	{
 		return static_cast<BeltContext&>(context);
@@ -105,4 +90,32 @@ private:
 	{
 		return static_cast<const BeltContext&>(context);
 	}
+};
+
+/**
+ * \brief 传送带：向左转弯
+ */
+class BuildingBeltL final : public BuildingBelt
+{
+public:
+	static const BuildingBeltL instance;
+
+	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+
+private:
+	BuildingBeltL() = default;
+};
+
+/**
+ * \brief 传送带：向右转弯
+ */
+class BuildingBeltR final : public BuildingBelt
+{
+public:
+	static const BuildingBeltR instance;
+
+	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+
+private:
+	BuildingBeltR() = default;
 };

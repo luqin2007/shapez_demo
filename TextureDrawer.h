@@ -1,10 +1,9 @@
 #pragma once
 
 #include "AbstractDrawer.h"
-#include "Common.h"
 
 /**
- * \brief 批量绘制纹理，每个矩形需要 24 个 float
+ * \brief 批量在地图上绘制纹理，每个矩形需要 24 个 float
  *
  * 给定纹理达到最大数量后会直接绘制，否则当 draw 调用时绘制
  */
@@ -19,7 +18,7 @@ public:
 	 * \brief 初始化
 	 */
 	void initialize();
-
+	
 	/**
 	 * \brief 准备开始绘制
 	 */

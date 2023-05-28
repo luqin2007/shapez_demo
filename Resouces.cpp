@@ -1,4 +1,6 @@
-#include "Resouces.h"
+#include <iostream>
+
+#include "resouces.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -21,40 +23,39 @@ Image::~Image()
 	}
 }
 
-path Resouces::root()
-{
-	return current_path();
-}
-
-Text Resouces::read_text(const path& p)
+Text read_text(const path& p)
 {
 	Text text;
 
+	// 校验路径
 	using namespace std::filesystem;
 	if (!is_regular_file(p))
 	{
-		cerr << "File " << p.string() << " is not a regular file." << endl;
+		std::cerr << "File " << p.string() << " is not a regular file." << endl;
 		return text;
 	}
 
-	text << file_size(p);
+	// 按字节读文件
 	fstream fs;
 	fs.open(p);
+	text << file_size(p);
 	while (!fs.eof())
+	{
 		text << fs.get();
+	}
 	text.end();
 	fs.close();
 	return text;
 }
 
-Image Resouces::load_image(const path& p)
+Image load_image(const path& p)
 {
 	Image img = {};
 
 	using namespace std::filesystem;
 	if (!is_regular_file(p))
 	{
-		cerr << "File " << p.string() << " is not a regular file." << endl;
+		std::cerr << "File " << p.string() << " is not a regular file." << endl;
 		return img;
 	}
 

@@ -1,7 +1,10 @@
 #pragma once
 
 #include "Building.h"
-#include "Common.h"
+#include "BuildingContext.h"
+#include "ColoredShapes.h"
+
+using std::make_unique;
 
 class BuildingHub;
 
@@ -9,45 +12,55 @@ class HubContext : public BuildingContext
 {
 public:
 	/**
-	 * \brief ĞèÇóÊıÁ¿
+	 * \brief å½“å‰ç­‰çº§éœ€è¦çš„ç‰©å“ä¸ªæ•°
 	 */
-	int total_count;
+	int total_count = 0;
 
 	/**
-	 * \brief ĞèÇóÎïÆ·
+	 * \brief å½“å‰ç­‰çº§éœ€è¦çš„ç‰©å“ç±»å‹
 	 */
-	Item item;
+	ColoredShapes shapes;
 
 	/**
-	 * \brief ÒÑ½ÓÊÜÎïÆ·ÊıÁ¿
+	 * \brief å½“å‰ç­‰çº§å·²æäº¤ç‰©å“ä¸ªæ•°
 	 */
 	int accept_count = 0;
 
 	/**
-	 * \brief µÈ¼¶
+	 * \brief å½“å‰ç­‰çº§
 	 */
-	int level = 1;
+	int level = 0;
 
-	HubContext(const Building& building, const ivec2& pos, const Side direction, const int total_count, Item item)
-		: BuildingContext(building, pos, direction), total_count(total_count), item(std::move(item))
+	HubContext(const Building& building, const Vec2I& pos, const Side direction)
+		: BuildingContext(building, pos, direction)
 	{
 	}
 };
 
-class BuildingHub : public Building
+/**
+ * \brief ä¸­å¿ƒ ä»»åŠ¡æäº¤å™¨
+ */
+class BuildingHub final : public Building
 {
 public:
-	explicit BuildingHub()
-		: Building({4, 4})
+	static const BuildingHub instance;
+
+	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+	[[nodiscard]] bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const override;
+	[[nodiscard]] bool
+	can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const override;
+	[[nodiscard]] bool can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	                                     const BuildingContext& context) const override;
+	void receive_dye(Color color, const Vec2I& pos, Side side, BuildingContext& context) const override;
+	void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	                   BuildingContext& context) const override;
+	void update(BuildingContext& context, GameMap& map) const override;
+
+private:
+	BuildingHub() : Building(BuildingSize::special)
 	{
 	}
 
-	bool can_receive(const ivec2& pos, Side side, const BuildingContext& context) const override;
-	bool can_receive_item(const Item& item, const ivec2& pos, Side side, const BuildingContext& context) const override;
-	void receive(Item item, const ivec2& pos, Side side, BuildingContext& context) const override;
-	void update(BuildingContext& context, const GameMap& map) const override;
-
-private:
 	static HubContext& cast(BuildingContext& context)
 	{
 		return static_cast<HubContext&>(context);

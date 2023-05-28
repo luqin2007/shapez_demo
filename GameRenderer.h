@@ -3,18 +3,15 @@
 #include <iostream>
 #include <map>
 
-#include <glad/glad.h>
-
 #include "BorderDrawer.h"
-#include "TextureInstanceDrawer.h"
-#include "TextureDrawer.h"
 #include "FontDrawer.h"
 #include "Atlas.h"
-#include "GameWindow.h"
-#include "Timer.h"
 #include "GameMap.h"
-#include "Resouces.h"
+#include "resouces.h"
 #include "Common.h"
+#include "TextureDrawer.h"
+#include "ShapeDrawer.h"
+#include "vec.h"
 
 using std::map;
 using std::cout;
@@ -26,20 +23,18 @@ class GameRenderer
 public:
 	void initialize();
 
-	void update_env(const GameMap& map);
-
-	void draw(const GameMap& map);
+	void update(GameLogic& logic);
 
 	void destroy();
 
 private:
-	vec2 edge_pos_[CELL_COUNT + 1], center_;
+	Vec2 edge_pos_[CELL_COUNT + 1], center_;
 	float width_ = 0, height_ = 0, cell_size_ = 0, edge_pos_base_[CELL_COUNT + 1] = {0};
 
-	BorderDrawer border_drawer_{CELL_COUNT * 2 + 2};
-	// TextureInstanceDrawer tex_drawer_{200};
-	TextureDrawer tex_drawer_{ 200 };
-	FontDrawer font_drawer_{Resouces::root() / "font" / "MicrosoftYaHei.ttf"};
+	BorderDrawer map_border_drawer_{CELL_COUNT * 2 + 2};
+	TextureDrawer tex_drawer_{200};
+	ShapeDrawer shape_drawer_;
+	// FontDrawer font_drawer_{ROOT / "font" / "MicrosoftYaHei.ttf"};
 
 	Atlas colors_{256, 72};
 	Atlas shapes_{512, 72, true};
@@ -51,7 +46,7 @@ private:
 	void update_cell_size(const GameMap& map);
 
 	void update_cell_position(const GameMap& map, bool force);
-
+	
 	void draw_cells();
 
 	void draw_map_resources(const GameMap& map);

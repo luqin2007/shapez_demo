@@ -1,5 +1,7 @@
-#include "GameWindow.h"
+#include <glad/glad.h>
 
+#include "GameWindow.h"
+#include "GameLogic.h"
 #include "MouseHelper.h"
 
 void GameWindow::create_window()
@@ -61,6 +63,11 @@ void GameWindow::on_resize(const int width, const int height)
 	width_ = width;
 	height_ = height;
 	glViewport(0, 0, width, height);
+
+	if (current_game)
+	{
+		current_game->on_resize(width, height);
+	}
 }
 
 bool GameWindow::is_active() const

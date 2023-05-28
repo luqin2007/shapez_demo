@@ -1,142 +1,42 @@
 #pragma once
 
-#include <string>
-#include <cmath>
-#include <iostream>
-#include <exception>
-#include <glad/glad.h>
-
-#define BUFFER_SIZE (4 * 11 * 4)
-#define CELL_COUNT 200
+/**
+ * \brief µØÍ¼ÖĞµ¥Ôª¸ñµÄ¸öÊı
+ */
+constexpr int CELL_COUNT = 200;
 
 class GameWindow;
 class GameRenderer;
 class GameLogic;
 
+/**
+ * \brief µ±Ç°ÔËĞĞÖĞµÄÓÎÏ·
+ */
 extern GameLogic* current_game;
+
+/**
+ * \brief µ±Ç°ÔËĞĞÖĞµÄÓÎÏ·´°¿Ú
+ */
 extern GameWindow* current_window;
+
+/**
+ * \brief µ±Ç°ÔËĞĞÖĞµÄÓÎÏ·äÖÈ¾Æ÷
+ */
 extern GameRenderer* current_renderer;
 
-using std::fabsf;
-using std::cerr;
-using std::cout;
-using std::endl;
-using std::exception;
-
-struct UV
-{
-	float u, v, w, h;
-};
-
-struct ivec2
-{
-	union
-	{
-		int x{0};
-		int w;
-	};
-
-	union
-	{
-		int y{0};
-		int h;
-	};
-};
-
-struct vec2
-{
-	union
-	{
-		float x{0};
-		float w;
-	};
-
-	union
-	{
-		float y{0};
-		float h;
-	};
-
-	vec2() = default;
-
-	vec2(const float x, const float y): x(x), y(y)
-	{
-	}
-};
-
-enum class Side
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-};
+static int image_id = 0;
 
 /**
- * é¡ºæ—¶é’ˆæ—‹è½¬
+ * \brief µ÷ÊÔÓÃ£¬Ğ£Ñé GL ´íÎó
+ * \param name Òì³£Ô­Òò
  */
-Side operator++(Side side);
-
-/**
- * é€†æ—¶é’ˆæ—‹è½¬
- */
-Side operator--(Side side);
-
-/**
- * åå‘
- */
-Side operator-(Side side);
-
-/**
- * ç§»åŠ¨
- */
-ivec2 operator+(const ivec2& pos, Side side);
-
-class Color
-{
-public:
-	const std::string name;
-	const int mix;
-
-	const static Color uncolored;
-	const static Color red;
-	const static Color green;
-	const static Color blue;
-	const static Color yellow;
-	const static Color cyan;
-	const static Color purple;
-	const static Color white;
-
-	const Color& operator+(const Color& o) const;
-
-	bool operator==(const Color& o) const;
-
-	bool operator|(const Color& o) const;
-
-private:
-	Color(std::string name, int mix);
-};
-
-inline bool feq(const float a, const float b)
-{
-	return fabsf(a - b) <= 1e-5f;
-}
-
-inline bool fneq(const float a, const float b)
-{
-	return fabsf(a - b) > 1e-5f;
-}
-
-inline bool fneq(const vec2& a, const vec2& b)
-{
-	return fneq(a.x, b.x) || fneq(a.y, b.y);
-}
-
 void log_error(const char* name);
 
-template <typename T>
-void debug_buffer(GLuint name, int count);
-
-int next_texture_id();
-
-GLsizei ex2(const GLsizei n);
+/**
+ * \brief »ñÈ¡Ò»¸ö¿ÉÓÃµÄµÄÎÆÀíÎ»
+ * \return ¿ÉÓÃÎÆÀíÎ»
+ */
+inline int next_texture_id()
+{
+	return image_id++;
+}

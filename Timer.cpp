@@ -3,18 +3,18 @@
 void Timer::update()
 {
 	previous_ms = current_ms;
-	current_ms = duration_cast<microseconds>(system_clock::now().time_since_epoch()).count();
+	current_ms = time();
 
+	// 更新时间间隔
 	delta_ms = current_ms - previous_ms;
-	delta = delta_ms / 1000.0f;
-
 	running_ms = current_ms - start_ms;
-	running = running_ms / 1000.0f;
+	delta = static_cast<float>(delta_ms) / 1000.0f;
+	running = static_cast<float>(running_ms) / 1000.0f;
 }
 
 void Timer::reset()
 {
-	start_ms = duration_cast<microseconds>(system_clock::now().time_since_epoch()).count();
+	start_ms = time();
 	current_ms = start_ms;
 	previous_ms = start_ms;
 
@@ -23,4 +23,10 @@ void Timer::reset()
 
 	delta_ms = 0;
 	delta = 0;
+}
+
+long long Timer::time()
+{
+	using namespace std::chrono;
+	return duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() / 1000;
 }
