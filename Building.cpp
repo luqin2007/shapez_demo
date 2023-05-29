@@ -1,6 +1,6 @@
 #include "Building.h"
 
-bool Building::can_place(const Vec2I& pos, const Side direction, const GameMap& map) const
+bool Building::can_place(const Vec2I& pos, const BuildingSize size, const Side direction, const GameMap& map)
 {
 	Vec2I x0 = pos;
 	const Side direction_right = --direction;

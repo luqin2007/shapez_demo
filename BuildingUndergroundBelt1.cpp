@@ -1,11 +1,10 @@
 #include "BuildingUndergroundBelt1.h"
 
 #include "GameLogic.h"
-#include "BuildingUndergroundBelt2.h"
 
-BuildingContext BuildingUndergroundBelt1::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingUndergroundBelt1::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(UndergroundBelt1Context{*this, pos, direction});
+	return new UndergroundBelt1Context{*this, pos, direction};
 }
 
 bool BuildingUndergroundBelt1::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
@@ -49,13 +48,13 @@ void BuildingUndergroundBelt1::update(BuildingContext& context, GameMap& map) co
 		return;
 	}
 
-	auto* target = map.get_building(ctx.target_);
+	BuildingContext* target = map.get_building(ctx.target_);
 	if (!target)
 	{
 		return;
 	}
 
-	auto* building = dynamic_cast<const BuildingUndergroundBelt2*>(&target->building);
+	const auto* building = dynamic_cast<const BuildingUndergroundBelt2*>(&target->building);
 	if (!building)
 	{
 		return;
@@ -75,4 +74,9 @@ void BuildingUndergroundBelt1::update(BuildingContext& context, GameMap& map) co
 			building->receive_shape(ctx.shapes_, context.pos, -context.direction, *target);
 		}
 	}
+}
+
+void BuildingUndergroundBelt1::free_context(BuildingContext* context) const
+{
+	delete static_cast<UndergroundBelt1Context*>(context);
 }

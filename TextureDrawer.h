@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractDrawer.h"
+#include "Side.h"
 
 /**
  * \brief 批量在地图上绘制纹理，每个矩形需要 24 个 float
@@ -46,8 +47,9 @@ public:
 	 * \param v 左上角顶点 y 纹理坐标
 	 * \param w 纹理宽度，[0, 1]
 	 * \param h 纹理高度，[0, 1]
+	 * \param side 纹理方向
 	 */
-	void push(float x0, float y0, float x1, float y1, float u, float v, float w, float h);
+	void push(float x0, float y0, float x1, float y1, float u, float v, float w, float h, Side side = Side::up);
 
 	/**
 	 * \brief 绘制

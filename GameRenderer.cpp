@@ -2,12 +2,16 @@
 
 #include <glad/glad.h>
 
+#include "Building.h"
 #include "GameLogic.h"
 #include "GameWindow.h"
+#include "MouseHelper.h"
 #include "Timer.h"
 
 void GameRenderer::initialize()
 {
+	current_renderer = this;
+
 	glClearColor(0.99f, 0.99f, 0.98f, 1);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -147,23 +151,17 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "buildings" / "stacker_blue.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	buildings_large_.initialize();
-	buildings_large_ << ROOT / "image" / "buildings" / "hub.png";
+	buildings_special_.initialize();
+	buildings_special_ << ROOT / "image" / "buildings" / "hub.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
+	on_resize(current_window->width(), current_window->height());
 	cout << "GameRenderer initialize finished." << endl;
 }
 
 void GameRenderer::update(GameLogic& logic)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	if (!feq(width_, current_window->width()) && !feq(height_, current_window->height()))
-	{
-		width_ = current_window->width();
-		height_ = current_window->height();
-		AbstractDrawer::resize(width_, height_);
-	}
 
 	update_cell_size(logic.map());
 	update_cell_position(logic.map(), false);
@@ -191,7 +189,18 @@ void GameRenderer::destroy()
 	icons_.destroy();
 	buildings_small_.destroy();
 	buildings_middle_.destroy();
-	buildings_large_.destroy();
+	buildings_special_.destroy();
+}
+
+void GameRenderer::on_resize(const int width, const int height)
+{
+	width_ = width;
+	height_ = height;
+	AbstractDrawer::resize(width_, height_);
+
+	char buf[300];
+	sprintf_s(buf, "Shapez Demo %dx%d center=(%.2f,%.2f)", width, height, center_.x, center_.y);
+	glfwSetWindowTitle(current_window->window(), buf);
 }
 
 void GameRenderer::update_cell_size(const GameMap& map)
@@ -218,7 +227,8 @@ void GameRenderer::update_cell_position(const GameMap& map, const bool force)
 		center_.y = map.center.y;
 
 		char buf[300];
-		sprintf_s(buf, "Shapez Demo %.2fx%.2f center=(%.2f,%.2f)", width_, height_, center_.x, center_.y);
+		sprintf_s(buf, "Shapez Demo %dx%d center=(%.2f,%.2f)", static_cast<int>(width_), static_cast<int>(height_),
+		          center_.x, center_.y);
 		glfwSetWindowTitle(current_window->window(), buf);
 
 		const float xx = -center_.x * cell_size_ + width_ / 2;
@@ -283,48 +293,83 @@ void GameRenderer::draw_building(const GameMap& map)
 
 void GameRenderer::draw_ui()
 {
-	const float x0 = (width_ - 800) / 2;
-	const float y0 = height_ - 80, y1 = y0 + 50;
-	shape_drawer_.rect(x0, y0, x0 + 800, y1, 0, 0, 0, 0.2f);
+	if (current_window && current_game)
+	{
+		const float mouse_x = MouseHelper::x();
+		const float mouse_y = MouseHelper::y();
 
-	float p0 = x0 + 20;
-	tex_drawer_.begin();
-	tex_drawer_.tex(icons_);
-	tex_drawer_.alpha(0.5f);
+		// 背景
+		const auto x0 = static_cast<float>(current_window->button_p0.x);
+		const auto y0 = static_cast<float>(current_window->button_p0.y);
+		const auto x1 = static_cast<float>(current_window->button_p1.x);
+		const auto y1 = static_cast<float>(current_window->button_p1.y);
+		shape_drawer_.rect(x0, y0, x1, y1, 0, 0, 0, 0.2f);
 
-	const auto& uvBalancer = icons_["balancer.png"];
-	const auto& uvBelt = icons_["belt.png"];
-	const auto& uvCutter = icons_["cutter.png"];
-	const auto& uvMiner = icons_["miner.png"];
-	const auto& uvMixer = icons_["mixer.png"];
-	const auto& uvPainter = icons_["painter.png"];
-	const auto& uvRotater = icons_["rotater.png"];
-	const auto& uvStacker = icons_["stacker.png"];
-	const auto& uvTrash = icons_["trash.png"];
-	const auto& uvUnder = icons_["underground_belt.png"];
+		// 按钮
+		tex_drawer_.begin();
+		tex_drawer_.tex(icons_);
+		tex_drawer_.alpha(0.3f);
+		for (const auto& [name, p0] : current_window->buttons)
+		{
+			constexpr float sp = 5;
+			const auto x = static_cast<float>(p0.x);
+			const auto y = static_cast<float>(p0.y);
 
-	constexpr float div = 70, sp = 5;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvMiner.u, uvMiner.v, uvMiner.w, uvMiner.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvBelt.u, uvBelt.v, uvBelt.w, uvBelt.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvBalancer.u, uvBalancer.v, uvBalancer.w, uvBalancer.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvRotater.u, uvRotater.v, uvRotater.w, uvRotater.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvUnder.u, uvUnder.v, uvUnder.w,  uvUnder.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvCutter.u, uvCutter.v, uvCutter.w, uvCutter.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvMixer.u, uvMixer.v, uvMixer.w, uvMixer.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvPainter.u, uvPainter.v, uvPainter.w, uvPainter.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvStacker.u, uvStacker.v, uvStacker.w, uvStacker.h);
-	p0 += div;
-	tex_drawer_.push(p0 + sp, y0 + sp, p0 + 50 - sp, y1 - sp, uvTrash.u, uvTrash.v, uvTrash.w, uvTrash.h);
+			const bool selected = !current_game->current_building
+				&& is_in(x, mouse_x, GameWindow::button_size_f)
+				&& is_in(y, mouse_y, GameWindow::button_size_f);
 
-	tex_drawer_.draw();
+			if (selected)
+			{
+				tex_drawer_.alpha(1);
+			}
+
+			const auto& [u, v, w, h] = icons_[current_game->buildings[name]->tex_icon];
+			tex_drawer_.push(x + sp, y + sp, x + GameWindow::button_size_f - sp, y + GameWindow::button_size_f - sp, u, v, w, h);
+
+			if (selected)
+			{
+				tex_drawer_.alpha(0.3f);
+			}
+		}
+		// 选中
+		if (current_game->current_building)
+		{
+			tex_drawer_.alpha(1);
+			float w, h;
+			const Rect *uv = nullptr;
+			switch (current_game->current_building->size)
+			{
+			case BuildingSize::small:
+				tex_drawer_.tex(buildings_small_);
+				w = h = cell_size_;
+				uv = &buildings_small_[current_game->current_building->tex_hover];
+				break;
+			case BuildingSize::middle:
+				tex_drawer_.tex(buildings_middle_);
+				uv = &buildings_middle_[current_game->current_building->tex_hover];
+				w = cell_size_ * 2;
+				h = cell_size_;
+				break;
+			case BuildingSize::large:
+				tex_drawer_.tex(buildings_large_);
+				uv = &buildings_large_[current_game->current_building->tex_hover];
+				w = cell_size_ * 3;
+				h = cell_size_;
+				break;
+			case BuildingSize::special:
+				tex_drawer_.tex(buildings_special_);
+				uv = &buildings_special_[current_game->current_building->tex_hover];
+				w = h = cell_size_ * 4;
+				break;
+			}
+
+			const float xx = mouse_x - cell_size_ / 2;
+			const float yy = mouse_y - cell_size_ / 2;
+			tex_drawer_.push(xx, yy, xx + w, yy + h, uv->u, uv->v, uv->w, uv->h, current_game->current_side);
+		}
+		tex_drawer_.draw();
+	}
 }
 
 void GameRenderer::draw_overlay()

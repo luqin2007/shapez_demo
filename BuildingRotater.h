@@ -26,7 +26,7 @@ private:
 class BuildingRotater : public TickableBuilding
 {
 public:
-	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+	[[nodiscard]] BuildingContext* build_context(const Vec2I& pos, Side direction) const override;
 	[[nodiscard]] bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const override;
 	[[nodiscard]] bool
 	can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const override;
@@ -35,6 +35,7 @@ public:
 	void receive_dye(Color color, const Vec2I& pos, Side side, BuildingContext& context) const override;
 	void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
 	                   BuildingContext& context) const override;
+	void free_context(BuildingContext* context) const override;
 
 protected:
 	bool can_start(TickableContext& context, const GameMap& map) const override;
@@ -43,7 +44,7 @@ protected:
 
 	virtual void rotate_item(ColoredShapes& shape) const = 0;
 
-	BuildingRotater() : TickableBuilding(BuildingSize::small)
+	BuildingRotater() : TickableBuilding(BuildingSize::small, "rotater.png", "rotater.png", "rotater_blue.png")
 	{
 	}
 
@@ -64,10 +65,13 @@ protected:
 class BuildingRotaterL final : public BuildingRotater
 {
 public:
-	static const BuildingRotaterL instance;
+	static const BuildingRotaterL& instance()
+	{
+		static BuildingRotaterL b;
+		return b;
+	}
 
 protected:
-
 	void rotate_item(ColoredShapes& item) const override
 	{
 		--item;
@@ -80,9 +84,18 @@ protected:
 class BuildingRotaterR final : public BuildingRotater
 {
 public:
-	static const BuildingRotaterR instance;
+	static const BuildingRotaterR& instance()
+	{
+		static BuildingRotaterR b;
+		return b;
+	}
 
 protected:
+	BuildingRotaterR()
+	{
+		next_variant = &BuildingRotaterL::instance();
+		const_cast<BuildingRotaterL&>(BuildingRotaterL::instance()).next_variant = this;
+	}
 
 	void rotate_item(ColoredShapes& item) const override
 	{

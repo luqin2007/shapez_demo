@@ -2,9 +2,9 @@
 
 #include "ItemType.h"
 
-BuildingContext BuildingBalancer::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingBalancer::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(BalancerContext(*this, pos, direction));
+	return new BalancerContext(*this, pos, direction);
 }
 
 bool BuildingBalancer::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
@@ -36,6 +36,11 @@ void BuildingBalancer::receive_shape(const ColoredShapes& shape, const Vec2I& po
 	auto& ctx = cast(context);
 	ctx.shapes_.push(shape);
 	ctx.types_.push(ItemType::shape);
+}
+
+void BuildingBalancer::free_context(BuildingContext* context) const
+{
+	delete static_cast<BalancerContext*>(context);
 }
 
 bool BuildingBalancer::can_start(TickableContext& context, const GameMap& map) const

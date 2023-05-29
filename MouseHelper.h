@@ -10,6 +10,8 @@ namespace MouseHelper
 
 	extern bool is_left_drag();
 
+	extern bool is_right_clicked();
+
 	extern bool is_mid_clicked();
 
 	extern float x();
@@ -26,7 +28,9 @@ namespace MouseHelper
 
 	extern void set_mid_click(bool click);
 
-	extern void set_position(const double x, const double y);
+	extern void set_right_click(bool click);
+
+	extern void set_position(double x, double y);
 
 	extern void set_wheel(double v);
 };

@@ -43,9 +43,13 @@ public:
 class BuildingHub final : public Building
 {
 public:
-	static const BuildingHub instance;
+	static const BuildingHub& instance()
+	{
+		static BuildingHub b;
+		return b;
+	}
 
-	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+	[[nodiscard]] BuildingContext* build_context(const Vec2I& pos, Side direction) const override;
 	[[nodiscard]] bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const override;
 	[[nodiscard]] bool
 	can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const override;
@@ -55,9 +59,10 @@ public:
 	void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
 	                   BuildingContext& context) const override;
 	void update(BuildingContext& context, GameMap& map) const override;
+	void free_context(BuildingContext* context) const override;
 
 private:
-	BuildingHub() : Building(BuildingSize::special)
+	BuildingHub() : Building(BuildingSize::special, "hub.png", "hub.png", "hub.png")
 	{
 	}
 

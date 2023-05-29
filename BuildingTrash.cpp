@@ -1,8 +1,8 @@
 #include "BuildingTrash.h"
 
-BuildingContext BuildingTrash::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingTrash::build_context(const Vec2I& pos, const Side direction) const
 {
-	return TrashContext(*this, pos, direction);
+	return new BuildingContext(*this, pos, direction);
 }
 
 bool BuildingTrash::can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const
@@ -32,4 +32,9 @@ void BuildingTrash::receive_shape(const ColoredShapes& shape, const Vec2I& pos, 
 
 void BuildingTrash::update(BuildingContext& context, GameMap& map) const
 {
+}
+
+void BuildingTrash::free_context(BuildingContext* context) const
+{
+	delete context;
 }

@@ -47,8 +47,8 @@ void TextureDrawer::alpha(const GLfloat alpha)
 	}
 }
 
-void TextureDrawer::push(const float x0, const float y0, const float x1, const float y1,
-                         const float u, const float v, const float w, const float h)
+void TextureDrawer::push(const float x0, const float y0, float x1, float y1,
+                         const float u, const float v, const float w, const float h, const Side side)
 {
 	if (!buf_)
 	{
@@ -58,35 +58,150 @@ void TextureDrawer::push(const float x0, const float y0, const float x1, const f
 	const float uu = u + w;
 	const float vv = v + h;
 
-	*buf_++ = x0;
-	*buf_++ = y0;
-	*buf_++ = u;
-	*buf_++ = vv;
+	const float dx = x1 - x0;
+	const float dy = y1 - y0;
 
-	*buf_++ = x0;
-	*buf_++ = y1;
-	*buf_++ = u;
-	*buf_++ = v;
+	switch (side)
+	{
+	case Side::up:
+		// 正向
+		*buf_++ = x0;
+		*buf_++ = y0;
+		*buf_++ = u;
+		*buf_++ = vv;
 
-	*buf_++ = x1;
-	*buf_++ = y0;
-	*buf_++ = uu;
-	*buf_++ = vv;
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = v;
 
-	*buf_++ = x0;
-	*buf_++ = y1;
-	*buf_++ = u;
-	*buf_++ = v;
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = vv;
 
-	*buf_++ = x1;
-	*buf_++ = y1;
-	*buf_++ = uu;
-	*buf_++ = v;
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = v;
 
-	*buf_++ = x1;
-	*buf_++ = y0;
-	*buf_++ = uu;
-	*buf_++ = vv;
+		*buf_++ = x1;
+		*buf_++ = y1;
+		*buf_++ = uu;
+		*buf_++ = v;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = vv;
+		break;
+
+	case Side::down:
+		// 向下
+		*buf_++ = x0;
+		*buf_++ = y0;
+		*buf_++ = u;
+		*buf_++ = v;
+
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = vv;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = v;
+
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = vv;
+
+		*buf_++ = x1;
+		*buf_++ = y1;
+		*buf_++ = uu;
+		*buf_++ = vv;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = v;
+		break;
+
+	case Side::left:
+		// 逆时针 90°
+		x1 = x0 + dy;
+		y1 = y0 + dx;
+
+		*buf_++ = x0;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = vv;
+
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = vv;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = v;
+
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = vv;
+
+		*buf_++ = x1;
+		*buf_++ = y1;
+		*buf_++ = u;
+		*buf_++ = v;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = uu;
+		*buf_++ = v;
+		break;
+
+	case Side::right:
+		// 顺时针 90°
+		x1 = x0 + dy;
+		y1 = y0 + dx;
+
+		*buf_++ = x0;
+		*buf_++ = y0;
+		*buf_++ = u;
+		*buf_++ = v;
+
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = uu;
+		*buf_++ = v;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = u;
+		*buf_++ = vv;
+
+		*buf_++ = x0;
+		*buf_++ = y1;
+		*buf_++ = uu;
+		*buf_++ = v;
+
+		*buf_++ = x1;
+		*buf_++ = y1;
+		*buf_++ = uu;
+		*buf_++ = vv;
+
+		*buf_++ = x1;
+		*buf_++ = y0;
+		*buf_++ = u;
+		*buf_++ = vv;
+		break;
+	}
+
 
 	count_++;
 	if (count_ == total_)

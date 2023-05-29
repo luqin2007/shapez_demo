@@ -4,6 +4,7 @@
 #include <memory>
 #include <functional>
 
+#include "Building.h"
 #include "Common.h"
 #include "ResourceType.h"
 #include "vec.h"
@@ -11,8 +12,6 @@
 using std::string;
 using std::function;
 using std::unique_ptr;
-
-class BuildingContext;
 
 /**
  * \brief 游戏地图
@@ -46,7 +45,7 @@ public:
 		return get_resource(pos.x, pos.y);
 	}
 
-	void set_building(BuildingContext* context);
+	bool set_building(int x, int y, const Building* building, Side direction);
 
 	[[nodiscard]]
 	BuildingContext* get_building(int x, int y) const;
@@ -57,7 +56,7 @@ public:
 		return get_building(pos.x, pos.y);
 	}
 
-	void update_cell_size_and_position();
+	void remove_building(int x, int y);
 
 private:
 	/**

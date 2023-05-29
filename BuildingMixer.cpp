@@ -2,11 +2,9 @@
 
 #include "GameLogic.h"
 
-class Item;
-
-BuildingContext BuildingMixer::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingMixer::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(MixerContext{*this, pos, direction});
+	return new MixerContext{ *this, pos, direction };
 }
 
 bool BuildingMixer::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
@@ -34,6 +32,16 @@ bool BuildingMixer::can_receive_shape(const ColoredShapes& shape, const Vec2I& p
 void BuildingMixer::receive_dye(const Color color, const Vec2I& pos, Side side, BuildingContext& context) const
 {
 	(pos == context.pos ? cast(context).color1_ : cast(context).color2_) = color;
+}
+
+void BuildingMixer::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	BuildingContext& context) const
+{
+}
+
+void BuildingMixer::free_context(BuildingContext* context) const
+{
+	delete static_cast<MixerContext*>(context);
 }
 
 bool BuildingMixer::can_start(TickableContext& context, const GameMap& map) const

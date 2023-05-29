@@ -1,11 +1,16 @@
 #include "BuildingPainter.h"
 
-BuildingContext BuildingPainter::build_context(const Vec2I& pos, Side direction) const
+BuildingContext* BuildingPainter::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(PainterContext(*this, pos, direction));
+	return new PainterContext(*this, pos, direction);
 }
 
-bool BuildingPainter::can_receive_dye(Color color, const Vec2I& pos, const Side side,
+bool BuildingPainter::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
+{
+	return pos == context.pos ? side == ++context.direction : side == -context.direction;
+}
+
+bool BuildingPainter::can_receive_dye(const Color color, const Vec2I& pos, const Side side,
                                       const BuildingContext& context) const
 {
 	const auto& ctx = cast(context);
@@ -34,6 +39,11 @@ void BuildingPainter::receive_shape(const ColoredShapes& shape, const Vec2I& pos
 	auto& ctx = cast(context);
 	ctx.has_shape_ = true;
 	ctx.shapes_ = shape;
+}
+
+void BuildingPainter::free_context(BuildingContext* context) const
+{
+	delete static_cast<PainterContext*>(context);
 }
 
 bool BuildingPainter::can_start(TickableContext& context, const GameMap& map) const

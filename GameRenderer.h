@@ -27,6 +27,8 @@ public:
 
 	void destroy();
 
+	void on_resize(int width, int height);
+
 private:
 	Vec2 edge_pos_[CELL_COUNT + 1], center_;
 	float width_ = 0, height_ = 0, cell_size_ = 0, edge_pos_base_[CELL_COUNT + 1] = {0};
@@ -41,7 +43,8 @@ private:
 	Atlas icons_{512, 128};
 	Atlas buildings_small_{2048, 192};
 	Atlas buildings_middle_{1024, 2048, 384, 192};
-	Atlas buildings_large_{1024, 768};
+	Atlas buildings_large_{ 0, 0, 756, 192 };
+	Atlas buildings_special_{1024, 768};
 
 	void update_cell_size(const GameMap& map);
 

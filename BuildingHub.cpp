@@ -1,8 +1,8 @@
 #include "BuildingHub.h"
 
-BuildingContext BuildingHub::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingHub::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(HubContext(*this, pos, direction));
+	return new HubContext(*this, pos, direction);
 }
 
 bool BuildingHub::can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const
@@ -40,6 +40,11 @@ void BuildingHub::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Si
 
 void BuildingHub::update(BuildingContext& context, GameMap& map) const
 {
+}
+
+void BuildingHub::free_context(BuildingContext* context) const
+{
+	delete static_cast<HubContext*>(context);
 }
 
 void BuildingHub::set_next_level(HubContext& context)

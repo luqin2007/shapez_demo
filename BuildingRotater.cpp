@@ -2,9 +2,9 @@
 
 #include "ColoredShapes.h"
 
-BuildingContext BuildingRotater::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingRotater::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(RotaterContext(*this, pos, direction));
+	return new RotaterContext(*this, pos, direction);
 }
 
 bool BuildingRotater::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
@@ -33,6 +33,11 @@ void BuildingRotater::receive_shape(const ColoredShapes& shape, const Vec2I& pos
 	auto& ctx = cast(context);
 	ctx.has_shape_ = true;
 	ctx.shapes_ = shape;
+}
+
+void BuildingRotater::free_context(BuildingContext* context) const
+{
+	delete static_cast<RotaterContext*>(context);
 }
 
 bool BuildingRotater::can_start(TickableContext& context, const GameMap& map) const

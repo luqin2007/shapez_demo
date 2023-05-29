@@ -24,19 +24,8 @@ extern GameWindow* current_window;
  */
 extern GameRenderer* current_renderer;
 
-static int image_id = 0;
-
 /**
  * \brief 调试用，校验 GL 错误
  * \param name 异常原因
  */
 void log_error(const char* name);
-
-/**
- * \brief 获取一个可用的的纹理位
- * \return 可用纹理位
- */
-inline int next_texture_id()
-{
-	return image_id++;
-}

@@ -1,10 +1,29 @@
 #include "BuildingBelt.h"
 
-#include "GameLogic.h"
-
-BuildingContext BuildingBelt::build_context(const Vec2I& pos, Side direction) const
+static string tex_forward[14]
 {
-	return static_cast<BuildingContext>(BeltContext(*this, pos, direction, direction));
+	"forward_0.png", "forward_1.png", "forward_2.png", "forward_3.png", "forward_4.png",
+	"forward_5.png", "forward_6.png", "forward_7.png", "forward_8.png", "forward_9.png",
+	"forward_10.png", "forward_11.png", "forward_12.png", "forward_13.png",
+};
+
+static string tex_left[14]
+{
+	"left_0.png", "left_1.png", "left_2.png", "left_3.png", "left_4.png",
+	"left_5.png", "left_6.png", "left_7.png", "left_8.png", "left_9.png",
+	"left_10.png", "left_11.png", "left_12.png", "left_13.png",
+};
+
+static string tex_right[14]
+{
+	"right_0.png", "right_1.png", "right_2.png", "right_3.png", "right_4.png",
+	"right_5.png", "right_6.png", "right_7.png", "right_8.png", "right_9.png",
+	"right_10.png", "right_11.png", "right_12.png", "right_13.png",
+};
+
+BuildingContext* BuildingBelt::build_context(const Vec2I& pos, Side direction) const
+{
+	return new BeltContext(*this, pos, direction, direction);
 }
 
 bool BuildingBelt::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
@@ -18,7 +37,7 @@ bool BuildingBelt::can_receive_dye(Color color, const Vec2I& pos, Side side, con
 	return can_receive(pos, side, context) && ctx.p_item_ != 3 && ctx.item_pos[ctx.p_item_] > ctx.max_pos_[1];
 }
 
-bool BuildingBelt::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+bool BuildingBelt::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, const Side side,
                                      const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
@@ -91,12 +110,32 @@ void BuildingBelt::update(BuildingContext& context, GameMap& map) const
 	}
 }
 
-BuildingContext BuildingBeltL::build_context(const Vec2I& pos, const Side direction) const
+const string& BuildingBelt::get_building_texture(const BuildingContext& context) const
 {
-	return static_cast<BuildingContext>(BeltContext(*this, pos, direction, --direction));
+	return tex_forward[((current_game->timer().running_ms - cast(context).place_time_) / 10) % 14];
 }
 
-BuildingContext BuildingBeltR::build_context(const Vec2I& pos, const Side direction) const
+void BuildingBelt::free_context(BuildingContext* context) const
 {
-	return static_cast<BuildingContext>(BeltContext(*this, pos, direction, ++direction));
+	delete static_cast<BeltContext*>(context);
+}
+
+BuildingContext* BuildingBeltL::build_context(const Vec2I& pos, const Side direction) const
+{
+	return new BeltContext(*this, pos, direction, --direction);
+}
+
+const string& BuildingBeltL::get_building_texture(const BuildingContext& context) const
+{
+	return tex_left[((current_game->timer().running_ms - cast(context).place_time_) / 10) % 14];
+}
+
+BuildingContext* BuildingBeltR::build_context(const Vec2I& pos, const Side direction) const
+{
+	return new BeltContext(*this, pos, direction, ++direction);
+}
+
+const string& BuildingBeltR::get_building_texture(const BuildingContext& context) const
+{
+	return tex_right[((current_game->timer().running_ms - cast(context).place_time_) / 10) % 14];
 }

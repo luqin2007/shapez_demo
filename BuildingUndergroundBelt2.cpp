@@ -2,9 +2,9 @@
 
 #include "ItemType.h"
 
-BuildingContext BuildingUndergroundBelt2::build_context(const Vec2I& pos, const Side direction) const
+BuildingContext* BuildingUndergroundBelt2::build_context(const Vec2I& pos, const Side direction) const
 {
-	return static_cast<BuildingContext>(UndergroundBelt2Context{*this, pos, direction});
+	return new UndergroundBelt2Context{*this, pos, direction};
 }
 
 bool BuildingUndergroundBelt2::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
@@ -38,6 +38,11 @@ void BuildingUndergroundBelt2::receive_shape(const ColoredShapes& shape, const V
 	auto& ctx = cast(context);
 	ctx.shapes_ = shape;
 	ctx.type_ = ItemType::shape;
+}
+
+void BuildingUndergroundBelt2::free_context(BuildingContext* context) const
+{
+	delete static_cast<UndergroundBelt2Context*>(context);
 }
 
 bool BuildingUndergroundBelt2::can_start(TickableContext& context, const GameMap& map) const

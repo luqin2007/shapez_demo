@@ -5,9 +5,9 @@
 #include "Building.h"
 #include "BuildingContext.h"
 
-constexpr time_ms FAST = 500;
-constexpr time_ms MIDDLE = 1000;
-constexpr time_ms SLOW = 2000;
+constexpr time_t FAST = 500;
+constexpr time_t MIDDLE = 1000;
+constexpr time_t SLOW = 2000;
 
 enum class BuildingStatus
 {
@@ -34,7 +34,7 @@ class TickableContext : public BuildingContext
 	friend TickableBuilding;
 
 public:
-	TickableContext(const Building& building, const Vec2I& pos, const Side direction, const time_ms required_time)
+	TickableContext(const Building& building, const Vec2I& pos, const Side direction, const time_t required_time)
 		: BuildingContext(building, pos, direction), required_time_(required_time)
 	{
 	}
@@ -48,12 +48,12 @@ protected:
 	/**
 	 * \brief 当前执行时间
 	 */
-	time_ms current_time_ = 0;
+	time_t current_time_ = 0;
 
 	/**
 	 * \brief 需要的总时间
 	 */
-	const time_ms required_time_;
+	const time_t required_time_;
 };
 
 
@@ -66,7 +66,8 @@ public:
 	void update(BuildingContext& context, GameMap& map) const override;
 
 protected:
-	explicit TickableBuilding(const BuildingSize size): Building(size)
+	TickableBuilding(const BuildingSize size, const string& tex_icon, const string& tex_building, const string& tex_hover)
+		: Building(size, tex_icon, tex_building, tex_hover)
 	{
 	}
 

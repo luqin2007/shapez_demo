@@ -42,3 +42,8 @@ inline float random()
 {
 	return static_cast<float>(real_distribution(engine));
 }
+
+inline bool is_in(const float v0, const float v, const float length)
+{
+	return v >= v0 && v < v0 + length;
+}

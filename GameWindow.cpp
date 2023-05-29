@@ -2,6 +2,7 @@
 
 #include "GameWindow.h"
 #include "GameLogic.h"
+#include "GameRenderer.h"
 #include "MouseHelper.h"
 
 void GameWindow::create_window()
@@ -34,6 +35,10 @@ void GameWindow::listen_events() const
 		{
 			MouseHelper::set_mid_click(action != GLFW_RELEASE);
 		}
+		else if (button == GLFW_MOUSE_BUTTON_RIGHT)
+		{
+			MouseHelper::set_right_click(action != GLFW_RELEASE);
+		}
 	});
 
 	glfwSetCursorPosCallback(window_, [](GLFWwindow*, const double x, const double y)
@@ -50,6 +55,22 @@ void GameWindow::listen_events() const
 	{
 		current_window->on_resize(width, height);
 	});
+
+	glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		if (action == GLFW_PRESS)
+		{
+			current_window->on_key_press(key);
+		}
+	});
+}
+
+void GameWindow::on_key_press(const int key)
+{
+	if (current_game)
+	{
+		current_game->on_key_press(key);
+	}
 }
 
 void GameWindow::destroy() const
@@ -68,6 +89,42 @@ void GameWindow::on_resize(const int width, const int height)
 	{
 		current_game->on_resize(width, height);
 	}
+
+	if (current_renderer)
+	{
+		current_renderer->on_resize(width, height);
+	}
+
+	// 更新 UI 位置
+	const int x0 = (width - 720) / 2;
+	const int y0 = height - 80, y1 = y0 + 50;
+	button_p0.x = x0;
+	button_p0.y = y0;
+	button_p1.x = x0 + 720;
+	button_p1.y = y0 + button_size;
+
+	constexpr int div = 70;
+	int p0 = x0 + 20;
+
+	buttons["miner"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["belt"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["balancer"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["rotater"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["underground_belt"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["cutter"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["mixer"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["painter"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["stacker"] = Vec2I{ p0, y0 };
+	p0 += div;
+	buttons["trash"] = Vec2I{ p0, y0 };
 }
 
 bool GameWindow::is_active() const

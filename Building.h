@@ -12,6 +12,7 @@
 
 using std::vector;
 using std::unique_ptr;
+using std::string;
 
 enum class ItemType;
 enum class Color;
@@ -25,16 +26,27 @@ public:
 	/**
 	 * \brief 建筑大小 
 	 */
-	BuildingSize size;
+	const BuildingSize size;
 
 	/**
-	 * \brief 测试是否能正常放下
-	 * \param pos 建筑所在位置
-	 * \param direction 建筑方向
-	 * \param map 地图
+	 * \brief 图标纹理名称
 	 */
-	[[nodiscard]]
-	bool can_place(const Vec2I& pos, Side direction, const GameMap& map) const;
+	const string tex_icon;
+
+	/**
+	 * \brief 持有时纹理名称
+	 */
+	const string tex_hover;
+
+	/**
+	 * \brief 放下后纹理名称
+	 */
+	const string tex_building;
+
+	/**
+	 * \brief 下一个变种的引用
+	 */
+	const Building* next_variant = this;
 
 	/**
 	 * \brief 根据建筑生成数据
@@ -43,7 +55,13 @@ public:
 	 * \return 数据
 	 */
 	[[nodiscard]]
-	virtual BuildingContext build_context(const Vec2I& pos, Side direction) const = 0;
+	virtual BuildingContext* build_context(const Vec2I& pos, Side direction) const = 0;
+
+	/**
+	 * \brief 用于释放建筑数据
+	 * \param context 建筑数据
+	 */
+	virtual void free_context(BuildingContext* context) const = 0;
 
 	/**
 	 * \brief 判断对应位置是否可能接收物品输入，用于传送带等可连接建筑检查
@@ -72,13 +90,14 @@ public:
 	 * \param context 建筑数据
 	 */
 	[[nodiscard]]
-	virtual bool can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side, const BuildingContext& context) const = 0;
+	virtual bool can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	                               const BuildingContext& context) const = 0;
 
 	/**
 	 * \brief 当建筑放下时调用
 	 * \param context 放下的建筑
 	 */
-	virtual void on_placed(BuildingContext& context)
+	virtual void on_placed(BuildingContext& context) const
 	{
 	}
 
@@ -98,13 +117,34 @@ public:
 	 * \param side 输入方向
 	 * \param context 建筑数据
 	 */
-	virtual void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side, BuildingContext& context) const = 0;
+	virtual void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
+	                           BuildingContext& context) const = 0;
+
+	/**
+	 * \brief 获取当前显示的纹理贴图
+	 * \param context 建筑数据
+	 * \return 贴图纹理
+	 */
+	[[nodiscard]] virtual const string& get_building_texture(const BuildingContext& context) const
+	{
+		return tex_building;
+	}
 
 	/**
 	 *\brief 更新建筑状态
 	 */
 	virtual void update(BuildingContext& context, GameMap& map) const = 0;
-	
+
+	/**
+	 * \brief 测试是否能正常放下
+	 * \param pos 建筑所在位置
+	 * \param size 建筑大小
+	 * \param direction 建筑方向
+	 * \param map 游戏地图
+	 */
+	[[nodiscard]]
+	static bool can_place(const Vec2I& pos, BuildingSize size, Side direction, const GameMap& map);
+
 	/**
 	 * \brief 将建筑大小枚举转换为 Vec2I 表示的大小
 	 * \param size 建筑大小
@@ -141,16 +181,6 @@ public:
 	 */
 	static bool send_shape(const Vec2I& pos, Side direction, const ColoredShapes& shape, const GameMap& map);
 
-protected:
-	/**
-	 * \brief 不公开的构造函数，仅由对应类型创建
-	 * \param size 建筑大小
-	 */
-	explicit Building(const BuildingSize size) : size(size)
-	{
-	}
-
-public:
 	Building(const Building&) = delete;
 
 	Building(Building&&) = delete;
@@ -160,4 +190,18 @@ public:
 	Building& operator=(const Building&) = delete;
 
 	Building& operator=(const Building&&) = delete;
+
+protected:
+	/**
+	 * \brief 不公开的构造函数，仅由对应类型创建
+	 * \param size 建筑大小
+	 * \param tex_icon 图标纹理名称
+	 * \param tex_hover 持有时纹理名称
+	 * \param tex_building 放下后纹理名称
+	 */
+	Building(const BuildingSize size, string tex_icon, string tex_building, string tex_hover)
+		: size(size), tex_icon(std::move(tex_icon)), tex_hover(std::move(tex_hover)),
+		  tex_building(std::move(tex_building))
+	{
+	}
 };

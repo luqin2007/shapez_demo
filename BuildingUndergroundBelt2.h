@@ -30,9 +30,13 @@ private:
 class BuildingUndergroundBelt2 final : public TickableBuilding
 {
 public:
-	static const BuildingUndergroundBelt2 instance;
+	static const BuildingUndergroundBelt2& instance()
+	{
+		static BuildingUndergroundBelt2 b;
+		return b;
+	}
 
-	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+	[[nodiscard]] BuildingContext* build_context(const Vec2I& pos, Side direction) const override;
 	[[nodiscard]] bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const override;
 	[[nodiscard]] bool
 	can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const override;
@@ -41,9 +45,11 @@ public:
 	void receive_dye(Color color, const Vec2I& pos, Side side, BuildingContext& context) const override;
 	void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
 	                   BuildingContext& context) const override;
+	void free_context(BuildingContext* context) const override;
 
 protected:
-	BuildingUndergroundBelt2() : TickableBuilding(BuildingSize::small)
+	BuildingUndergroundBelt2() : TickableBuilding(BuildingSize::small, "underground_belt.png",
+	                                              "underground_belt_exit_blue.png", "underground_belt_exit.png")
 	{
 	}
 

@@ -5,6 +5,8 @@
 #include "ColoredShapes.h"
 #include "ItemType.h"
 
+#include "BuildingUndergroundBelt2.h"
+
 class BuildingUndergroundBelt1;
 
 class UndergroundBelt1Context : public BuildingContext
@@ -31,9 +33,13 @@ private:
 class BuildingUndergroundBelt1 final : public Building
 {
 public:
-	static const BuildingUndergroundBelt1 instance;
+	static const BuildingUndergroundBelt1& instance()
+	{
+		static BuildingUndergroundBelt1 b;
+		return b;
+	}
 
-	[[nodiscard]] BuildingContext build_context(const Vec2I& pos, Side direction) const override;
+	[[nodiscard]] BuildingContext* build_context(const Vec2I& pos, Side direction) const override;
 	[[nodiscard]] bool can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const override;
 	[[nodiscard]] bool
 	can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const override;
@@ -43,10 +49,14 @@ public:
 	void receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
 	                   BuildingContext& context) const override;
 	void update(BuildingContext& context, GameMap& map) const override;
+	void free_context(BuildingContext* context) const override;
 
 protected:
-	BuildingUndergroundBelt1() : Building(BuildingSize::small)
+	BuildingUndergroundBelt1() : Building(BuildingSize::small, "underground_belt.png", "underground_belt_entry.png",
+	                                      "underground_belt_entry_blue.png")
 	{
+		next_variant = &BuildingUndergroundBelt2::instance();
+		const_cast<BuildingUndergroundBelt2&>(BuildingUndergroundBelt2::instance()).next_variant = this;
 	}
 
 	static const UndergroundBelt1Context& cast(const BuildingContext& context)
