@@ -67,12 +67,6 @@ void GameLogic::destroy()
 	// 保存存档
 }
 
-void GameLogic::on_resize(const int width, const int height)
-{
-	width_ = width;
-	height_ = height;
-}
-
 void GameLogic::on_drag(const float dx, const float dy)
 {
 	map_.center.x = map_.center.x - dx / map_.cell_size;
@@ -85,12 +79,14 @@ void GameLogic::on_click_left(const float x, const float y)
 	{
 		if (current_building)
 		{
-			const int mx = static_cast<int>(map_.center.x - width_ / 2.0f + x);
-			const int my = static_cast<int>(map_.center.y - height_ / 2.0f + y);
-			if (map_.set_building(mx, my, current_building, current_side))
+			const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - x) / map_.cell_size);
+			const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - y) / map_.cell_size);
+			cout << mx << " " << my << endl;
+			if (map_.set_building(my, mx, current_building, current_side))
 			{
 				current_building = nullptr;
 				current_side = Side::up;
+				glfwSetInputMode(current_window->window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			}
 		}
 		else
@@ -118,9 +114,9 @@ void GameLogic::on_click_right(const float x, const float y)
 	}
 	else
 	{
-		const int mx = static_cast<int>(map_.center.x - width_ / 2.0f + x);
-		const int my = static_cast<int>(map_.center.y - height_ / 2.0f + y);
-		map_.remove_building(mx, my);
+		const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - x) / map_.cell_size);
+		const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - y) / map_.cell_size);
+		map_.remove_building(my, mx);
 	}
 }
 

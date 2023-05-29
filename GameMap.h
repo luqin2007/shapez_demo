@@ -4,10 +4,12 @@
 #include <memory>
 #include <functional>
 
-#include "Building.h"
 #include "Common.h"
 #include "ResourceType.h"
 #include "vec.h"
+
+class Building;
+class BuildingContext;
 
 using std::string;
 using std::function;

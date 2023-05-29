@@ -163,8 +163,7 @@ void GameRenderer::update(GameLogic& logic)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	update_cell_size(logic.map());
-	update_cell_position(logic.map(), false);
+	update_cells(logic.map());
 
 	draw_cells();
 	draw_map_resources(logic.map());
@@ -194,51 +193,24 @@ void GameRenderer::destroy()
 
 void GameRenderer::on_resize(const int width, const int height)
 {
-	width_ = width;
-	height_ = height;
-	AbstractDrawer::resize(width_, height_);
-
-	char buf[300];
-	sprintf_s(buf, "Shapez Demo %dx%d center=(%.2f,%.2f)", width, height, center_.x, center_.y);
-	glfwSetWindowTitle(current_window->window(), buf);
+	AbstractDrawer::resize(width, height);
 }
 
-void GameRenderer::update_cell_size(const GameMap& map)
+void GameRenderer::update_cells(const GameMap& map)
 {
-	if (!feq(cell_size_, map.cell_size))
+	edge_pos_base_[0] = 0;
+	for (int i = 1; i <= CELL_COUNT; ++i)
 	{
-		cell_size_ = map.cell_size;
-
-		edge_pos_base_[0] = 0;
-		for (int i = 1; i <= CELL_COUNT; ++i)
-		{
-			edge_pos_base_[i] = edge_pos_base_[i - 1] + cell_size_;
-		}
-
-		update_cell_position(map, true);
+		edge_pos_base_[i] = edge_pos_base_[i - 1] + map.cell_size;
 	}
-}
 
-void GameRenderer::update_cell_position(const GameMap& map, const bool force)
-{
-	if (force || center_ != map.center)
+	const float xx = -map.center.x * map.cell_size + current_window->width() / 2.0f;
+	const float yy = -map.center.y * map.cell_size + current_window->height() / 2.0f;
+
+	for (int i = 0; i <= CELL_COUNT; ++i)
 	{
-		center_.x = map.center.x;
-		center_.y = map.center.y;
-
-		char buf[300];
-		sprintf_s(buf, "Shapez Demo %dx%d center=(%.2f,%.2f)", static_cast<int>(width_), static_cast<int>(height_),
-		          center_.x, center_.y);
-		glfwSetWindowTitle(current_window->window(), buf);
-
-		const float xx = -center_.x * cell_size_ + width_ / 2;
-		const float yy = -center_.y * cell_size_ + height_ / 2;
-
-		for (int i = 0; i <= CELL_COUNT; ++i)
-		{
-			edge_pos_[i].x = edge_pos_base_[i] + xx;
-			edge_pos_[i].y = edge_pos_base_[i] + yy;
-		}
+		edge_pos_[i].x = edge_pos_base_[i] + xx;
+		edge_pos_[i].y = edge_pos_base_[i] + yy;
 	}
 }
 
@@ -289,6 +261,49 @@ void GameRenderer::draw_map_resources(const GameMap& map)
 
 void GameRenderer::draw_building(const GameMap& map)
 {
+	tex_drawer_.begin();
+	tex_drawer_.alpha(1);
+
+	for (int i = 0; i < CELL_COUNT; ++i)
+	{
+		for (int j = 0; j < CELL_COUNT; ++j)
+		{
+			if (const BuildingContext* ctx = map.get_building(i, j); ctx && ctx->pos.x == i && ctx->pos.y == j)
+			{
+				int row, col;
+				Atlas* at = nullptr;
+
+				switch (ctx->building.size)
+				{
+				case BuildingSize::small:
+					at = &buildings_small_;
+					row = col = 1;
+					break;
+				case BuildingSize::middle:
+					at = &buildings_middle_;
+					row = 1;
+					col = 2;
+					break;
+				case BuildingSize::large:
+					at = &buildings_large_;
+					row = 1;
+					col = 3;
+					break;
+				case BuildingSize::special:
+					at = &buildings_special_;
+					row = 4;
+					col = 4;
+					break;
+				}
+
+				tex_drawer_.tex(*at);
+				auto& [u, v, w, h] = (*at)[ctx->building.get_building_texture(*ctx)];
+				tex_drawer_.push(edge_pos_[j].x, edge_pos_[i].y, edge_pos_[j + col].x, edge_pos_[i + row].y, u, v, w, h, ctx->direction);
+			}
+		}
+	}
+
+	tex_drawer_.draw();
 }
 
 void GameRenderer::draw_ui()
@@ -325,7 +340,8 @@ void GameRenderer::draw_ui()
 			}
 
 			const auto& [u, v, w, h] = icons_[current_game->buildings[name]->tex_icon];
-			tex_drawer_.push(x + sp, y + sp, x + GameWindow::button_size_f - sp, y + GameWindow::button_size_f - sp, u, v, w, h);
+			tex_drawer_.push(x + sp, y + sp, x + GameWindow::button_size_f - sp, y + GameWindow::button_size_f - sp, u,
+			                 v, w, h);
 
 			if (selected)
 			{
@@ -333,39 +349,40 @@ void GameRenderer::draw_ui()
 			}
 		}
 		// 选中
+		float cell_size = current_game->map().cell_size;
 		if (current_game->current_building)
 		{
 			tex_drawer_.alpha(1);
 			float w, h;
-			const Rect *uv = nullptr;
+			const Rect* uv = nullptr;
 			switch (current_game->current_building->size)
 			{
 			case BuildingSize::small:
 				tex_drawer_.tex(buildings_small_);
-				w = h = cell_size_;
+				w = h = cell_size;
 				uv = &buildings_small_[current_game->current_building->tex_hover];
 				break;
 			case BuildingSize::middle:
 				tex_drawer_.tex(buildings_middle_);
 				uv = &buildings_middle_[current_game->current_building->tex_hover];
-				w = cell_size_ * 2;
-				h = cell_size_;
+				w = cell_size * 2;
+				h = cell_size;
 				break;
 			case BuildingSize::large:
 				tex_drawer_.tex(buildings_large_);
 				uv = &buildings_large_[current_game->current_building->tex_hover];
-				w = cell_size_ * 3;
-				h = cell_size_;
+				w = cell_size * 3;
+				h = cell_size;
 				break;
 			case BuildingSize::special:
 				tex_drawer_.tex(buildings_special_);
 				uv = &buildings_special_[current_game->current_building->tex_hover];
-				w = h = cell_size_ * 4;
+				w = h = cell_size * 4;
 				break;
 			}
 
-			const float xx = mouse_x - cell_size_ / 2;
-			const float yy = mouse_y - cell_size_ / 2;
+			const float xx = mouse_x - cell_size / 2;
+			const float yy = mouse_y - cell_size / 2;
 			tex_drawer_.push(xx, yy, xx + w, yy + h, uv->u, uv->v, uv->w, uv->h, current_game->current_side);
 		}
 		tex_drawer_.draw();

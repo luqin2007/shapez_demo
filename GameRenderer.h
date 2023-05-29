@@ -30,8 +30,8 @@ public:
 	void on_resize(int width, int height);
 
 private:
-	Vec2 edge_pos_[CELL_COUNT + 1], center_;
-	float width_ = 0, height_ = 0, cell_size_ = 0, edge_pos_base_[CELL_COUNT + 1] = {0};
+	Vec2 edge_pos_[CELL_COUNT + 1];
+	float edge_pos_base_[CELL_COUNT + 1] = {0};
 
 	BorderDrawer map_border_drawer_{CELL_COUNT * 2 + 2};
 	TextureDrawer tex_drawer_{200};
@@ -46,10 +46,8 @@ private:
 	Atlas buildings_large_{ 0, 0, 756, 192 };
 	Atlas buildings_special_{1024, 768};
 
-	void update_cell_size(const GameMap& map);
+	void update_cells(const GameMap& map);
 
-	void update_cell_position(const GameMap& map, bool force);
-	
 	void draw_cells();
 
 	void draw_map_resources(const GameMap& map);

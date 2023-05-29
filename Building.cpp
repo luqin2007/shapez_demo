@@ -11,7 +11,7 @@ bool Building::can_place(const Vec2I& pos, const BuildingSize size, const Side d
 		Vec2I y0 = x0;
 		for (int j = 0; j < s.y; ++j)
 		{
-			if (map.get_building(i, j)) return false;
+			if (map.get_building(i + pos.x, j + pos.y)) return false;
 			y0 = y0 + direction;
 		}
 		x0 = x0 + direction_right;
@@ -36,11 +36,11 @@ vector<Vec2I> Building::all_positions(const Vec2I& pos, const BuildingSize size,
 {
 	vector<Vec2I> cells;
 	const Vec2I size_vec = size_as_vec(size);
+	const Side off = ++direction;
 	Vec2I x0 = pos;
 	for (int i = 0; i < size_vec.x; ++i)
 	{
 		Vec2I y0 = x0;
-		const Side off = ++direction;
 		for (int j = 0; j < size_vec.y; ++j)
 		{
 			cells.push_back(y0);

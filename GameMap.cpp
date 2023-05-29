@@ -30,34 +30,46 @@ void GameMap::initialize()
 
 ResourceType GameMap::get_resource(const int x, const int y) const
 {
-	return resources_[x][y];
+	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT)
+	{
+		return resources_[x][y];
+	}
+
+	return ResourceType::none;
 }
 
 bool GameMap::set_building(const int x, const int y, const Building* building, const Side direction)
 {
-	if (const auto pos = Vec2I{x, y};
-		Building::can_place(pos, building->size, direction, this))
+	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT)
 	{
-		BuildingContext* ctx = building->build_context(pos, direction);
-		for (const auto& p : Building::all_positions(pos, building->size, direction))
-			buildings_[p.x][p.y] = ctx;
+		if (const auto pos = Vec2I{ x, y };
+		Building::can_place(pos, building->size, direction, *this))
+		{
+			BuildingContext* ctx = building->build_context(pos, direction);
+			for (const auto& p : Building::all_positions(pos, building->size, direction))
+				buildings_[p.x][p.y] = ctx;
 
-		building->on_placed(*ctx);
+			building->on_placed(*ctx);
 
-		return true;
+			return true;
+		}
 	}
-
 	return false;
 }
 
 BuildingContext* GameMap::get_building(const int x, const int y) const
 {
-	return buildings_[x][y];
+	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT)
+	{
+		return buildings_[x][y];
+	}
+
+	return nullptr;
 }
 
 void GameMap::remove_building(const int x, const int y)
 {
-	if (buildings_[x][y])
+	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT && buildings_[x][y])
 	{
 		BuildingContext* ctx = buildings_[x][y];
 		// 清除记录

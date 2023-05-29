@@ -83,5 +83,5 @@ private:
 
 	GLuint texture_ = 0;
 
-	static int image_id_ = 0;
+	inline static int image_id_ = 0;
 };

@@ -66,4 +66,6 @@ private:
 	void listen_events() const;
 
 	void on_key_press(int key);
+
+	void update_window_title();
 };

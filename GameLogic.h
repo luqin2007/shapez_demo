@@ -32,8 +32,6 @@ public:
 
 	void destroy();
 
-	void on_resize(const int width, const int height);
-
 	GameMap& map()
 	{
 		return map_;
@@ -53,8 +51,6 @@ public:
 private:
 	Timer timer_;
 	GameMap map_;
-
-	int width_ = 0, height_ = 0;
 
 	/**
 	 * \brief 鼠标拖动

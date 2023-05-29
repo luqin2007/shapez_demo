@@ -26,13 +26,13 @@ struct Vec2I
 		switch (side)
 		{
 		case Side::up:
-			return Vec2I{ x, y + 1 };
-		case Side::down:
-			return Vec2I{ x, y - 1 };
-		case Side::left:
 			return Vec2I{ x - 1, y };
-		case Side::right:
+		case Side::down:
 			return Vec2I{ x + 1, y };
+		case Side::left:
+			return Vec2I{ x, y - 1 };
+		case Side::right:
+			return Vec2I{ x, y + 1 };
 		}
 		return Vec2I{ x, y };
 	}
