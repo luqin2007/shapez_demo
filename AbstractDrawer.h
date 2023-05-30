@@ -14,20 +14,23 @@ using std::cerr;
 using std::endl;
 using std::filesystem::path;
 
-class GameRenderer;
-
 /**
  * \brief 绘制类
  */
 class AbstractDrawer
 {
-	friend GameRenderer;
-
 public:
 	/**
 	 * \brief 对绘制类共享资源的释放
 	 */
 	static void destroy_static();
+
+	/**
+	 * \brief 当窗口大小发生变化时调用
+	 * \param width 窗口宽度
+	 * \param height 窗口高度
+	 */
+	static void resize(GLfloat width, GLfloat height);
 
 protected:
 	/**
@@ -76,11 +79,4 @@ private:
 	 * 要求 location=0 的 uniform 变量为 vec2 类型的变量表示 width 及 height
 	 */
 	inline static vector<GLuint> resizeable_program_;
-
-	/**
-	 * \brief 当窗口大小发生变化时调用
-	 * \param width 窗口宽度
-	 * \param height 窗口高度
-	 */
-	static void resize(GLfloat width, GLfloat height);
 };

@@ -17,13 +17,6 @@ class GameWindow
 {
 public:
 
-	// UI
-	// 底部按钮
-	map<string, Vec2I> buttons;
-	Vec2I button_p0, button_p1;
-	constexpr static int button_size = 50;
-	constexpr static float button_size_f = 50;
-
 	void initialize()
 	{
 		current_window = this;
@@ -40,23 +33,23 @@ public:
 
 	void destroy() const;
 
-	GLFWwindow* window() const
+	[[nodiscard]] GLFWwindow* window() const
 	{
 		return window_;
 	}
 
-	[[nodiscard]]
-	int width() const
+	[[nodiscard]] int width() const
 	{
 		return width_;
 	}
-
-	[[nodiscard]]
-	int height() const
+	
+	[[nodiscard]] int height() const
 	{
 		return height_;
 	}
 
+	void update_window_title() const;
+	
 private:
 	GLFWwindow* window_ = nullptr;
 	int width_ = 1024, height_ = 768;
@@ -64,8 +57,4 @@ private:
 	void create_window();
 
 	void listen_events() const;
-
-	void on_key_press(int key);
-
-	void update_window_title();
 };

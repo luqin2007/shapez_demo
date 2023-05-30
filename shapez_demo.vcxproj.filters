@@ -87,13 +87,13 @@
     <ClInclude Include="AbstractDrawer.h">
       <Filter>头文件\render</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingMiner.h">
+    <ClInclude Include="Miner.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingBelt.h">
+    <ClInclude Include="Belt.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingHub.h">
+    <ClInclude Include="Hub.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="FontDrawer.h">
@@ -123,28 +123,28 @@
     <ClInclude Include="resouces.h">
       <Filter>头文件\util</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingBalancer.h">
+    <ClInclude Include="Balancer.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingPainter.h">
+    <ClInclude Include="Painter.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingCutter.h">
+    <ClInclude Include="Cutter.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingMixer.h">
+    <ClInclude Include="Mixer.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingRotater.h">
+    <ClInclude Include="Rotater.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingStacker.h">
+    <ClInclude Include="Stacker.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingTrash.h">
+    <ClInclude Include="Trash.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingUndergroundBelt1.h">
+    <ClInclude Include="UndergroundBelt1.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
@@ -153,7 +153,7 @@
     <ClInclude Include="TickableBuilding.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingUndergroundBelt2.h">
+    <ClInclude Include="UndergroundBelt2.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
     <ClInclude Include="MouseHelper.h">
@@ -177,17 +177,50 @@
     <ClInclude Include="ColoredShapes.h">
       <Filter>头文件\component</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingSize.h">
-      <Filter>头文件\component</Filter>
+    <ClInclude Include="app.cpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="PainterRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="MinerRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="BalancerRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="BeltRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CutterRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="HubRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="MixerRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="RotaterRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="StackerRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashRenderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="UndergroundBelt1Renderer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
+    <ClInclude Include="UndergroundBelt2Renderer.h">
+      <Filter>头文件\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogic.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GameMap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -212,13 +245,13 @@
     <ClCompile Include="Building.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingMiner.cpp">
+    <ClCompile Include="Miner.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingBelt.cpp">
+    <ClCompile Include="Belt.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingHub.cpp">
+    <ClCompile Include="Hub.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="FontDrawer.cpp">
@@ -239,28 +272,28 @@
     <ClCompile Include="resouces.cpp">
       <Filter>源文件\util</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingBalancer.cpp">
+    <ClCompile Include="Balancer.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingCutter.cpp">
+    <ClCompile Include="Cutter.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingMixer.cpp">
+    <ClCompile Include="Mixer.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingPainter.cpp">
+    <ClCompile Include="Painter.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingRotater.cpp">
+    <ClCompile Include="Rotater.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingStacker.cpp">
+    <ClCompile Include="Stacker.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingTrash.cpp">
+    <ClCompile Include="Trash.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingUndergroundBelt1.cpp">
+    <ClCompile Include="UndergroundBelt1.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
@@ -269,7 +302,7 @@
     <ClCompile Include="TickableBuilding.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingUndergroundBelt2.cpp">
+    <ClCompile Include="UndergroundBelt2.cpp">
       <Filter>源文件\building</Filter>
     </ClCompile>
     <ClCompile Include="MouseHelper.cpp">
@@ -280,6 +313,45 @@
     </ClCompile>
     <ClCompile Include="ColoredShapes.cpp">
       <Filter>源文件\component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PainterRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="MinerRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="BalancerRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="BeltRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CutterRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="HubRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="MixerRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="RotaterRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="StackerRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="UndergroundBelt1Renderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="UndergroundBelt2Renderer.cpp">
+      <Filter>源文件\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -612,6 +684,12 @@
     </Image>
     <Image Include="image\shapes\star_yellow.png">
       <Filter>资源文件\image\shapes</Filter>
+    </Image>
+    <Image Include="image\buildings\rotater-ccw.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\rotater-ccw_blue.png">
+      <Filter>资源文件\image\buildings</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

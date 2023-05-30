@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 
 #include "Building.h"
+#include "Miner.h"
+#include "BuildingRenderer.h"
 #include "GameLogic.h"
 #include "GameWindow.h"
 #include "MouseHelper.h"
@@ -22,13 +24,13 @@ void GameRenderer::initialize()
 	// font_drawer_.initialize();
 
 	cout << "Initialize drawers..." << endl;
-	map_border_drawer_.initialize();
-	tex_drawer_.initialize();
-	shape_drawer_.initialize();
+	map_border_drawer.initialize();
+	tex_drawer.initialize();
+	shape_drawer.initialize();
 
 	cout << "Initialize image atlas..." << endl;
-	colors_.initialize();
-	colors_ << ROOT / "image" / "colors" / "blue.png"
+	colors.initialize();
+	colors << ROOT / "image" / "colors" / "blue.png"
 		<< ROOT / "image" / "colors" / "cyan.png"
 		<< ROOT / "image" / "colors" / "green.png"
 		<< ROOT / "image" / "colors" / "purple.png"
@@ -38,8 +40,8 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "colors" / "yellow.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	shapes_.initialize();
-	shapes_ << ROOT / "image" / "shapes" / "circle_blue.png"
+	shapes.initialize();
+	shapes << ROOT / "image" / "shapes" / "circle_blue.png"
 		<< ROOT / "image" / "shapes" / "circle_cyan.png"
 		<< ROOT / "image" / "shapes" / "circle_green.png"
 		<< ROOT / "image" / "shapes" / "circle_purple.png"
@@ -65,8 +67,8 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "shapes" / "star_yellow.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	icons_.initialize();
-	icons_ << ROOT / "image" / "building_icons" / "balancer.png"
+	icons.initialize();
+	icons << ROOT / "image" / "building_icons" / "balancer.png"
 		<< ROOT / "image" / "building_icons" / "belt.png"
 		<< ROOT / "image" / "building_icons" / "block.png"
 		<< ROOT / "image" / "building_icons" / "cutter.png"
@@ -79,8 +81,8 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "building_icons" / "underground_belt.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	buildings_small_.initialize();
-	buildings_small_ << ROOT / "image" / "buildings" / "belt_left_blue.png"
+	buildings_small.initialize();
+	buildings_small << ROOT / "image" / "buildings" / "belt_left_blue.png"
 		<< ROOT / "image" / "buildings" / "belt_right_blue.png"
 		<< ROOT / "image" / "buildings" / "belt_top_blue.png"
 		<< ROOT / "image" / "buildings" / "forward_0.png"
@@ -135,11 +137,13 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "buildings" / "underground_belt_entry.png"
 		<< ROOT / "image" / "buildings" / "underground_belt_entry_blue.png"
 		<< ROOT / "image" / "buildings" / "underground_belt_exit.png"
-		<< ROOT / "image" / "buildings" / "underground_belt_exit_blue.png";
+		<< ROOT / "image" / "buildings" / "underground_belt_exit_blue.png"
+		<< ROOT / "image" / "buildings" / "rotater-ccw.png"
+		<< ROOT / "image" / "buildings" / "rotater-ccw_blue.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	buildings_middle_.initialize();
-	buildings_middle_ << ROOT / "image" / "buildings" / "balancer.png"
+	buildings_middle.initialize();
+	buildings_middle << ROOT / "image" / "buildings" / "balancer.png"
 		<< ROOT / "image" / "buildings" / "balancer_blue.png"
 		<< ROOT / "image" / "buildings" / "cutter.png"
 		<< ROOT / "image" / "buildings" / "cutter_blue.png"
@@ -151,244 +155,228 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "buildings" / "stacker_blue.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	buildings_special_.initialize();
-	buildings_special_ << ROOT / "image" / "buildings" / "hub.png";
+	buildings_special.initialize();
+	buildings_special << ROOT / "image" / "buildings" / "hub.png";
 	glGenerateMipmap(GL_TEXTURE_2D);
-
-	on_resize(current_window->width(), current_window->height());
+	// 适应窗口大小
+	const int width = current_window->width();
+	const int height = current_window->height();
+	AbstractDrawer::resize(width, height);
+	update_cell_size(current_game->map());
+	update_cell_position(current_game->map(), width, height);
 	cout << "GameRenderer initialize finished." << endl;
 }
 
-void GameRenderer::update(GameLogic& logic)
+void GameRenderer::update(const GameLogic& game)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	update_cells(logic.map());
+	const auto& map = game.map();
 
 	draw_cells();
-	draw_map_resources(logic.map());
-	draw_building(logic.map());
-	log_error("draw_building");
-	draw_ui();
-	log_error("draw_ui");
-	draw_overlay();
-	log_error("draw_overlay");
+	draw_map_resources(map);
+	draw_building(game, map);
+	draw_ui(game);
+	draw_overlay(game, map);
 }
 
 void GameRenderer::destroy()
 {
-	map_border_drawer_.destroy();
-	tex_drawer_.destroy();
+	map_border_drawer.destroy();
+	tex_drawer.destroy();
 	// font_drawer_.destroy();
-	shape_drawer_.destroy();
+	shape_drawer.destroy();
 	AbstractDrawer::destroy_static();
 
-	colors_.destroy();
-	shapes_.destroy();
-	icons_.destroy();
-	buildings_small_.destroy();
-	buildings_middle_.destroy();
-	buildings_special_.destroy();
+	colors.destroy();
+	shapes.destroy();
+	icons.destroy();
+	buildings_small.destroy();
+	buildings_middle.destroy();
+	buildings_special.destroy();
 }
 
-void GameRenderer::on_resize(const int width, const int height)
+void GameRenderer::update_cell_size(const GameMap& map)
 {
-	AbstractDrawer::resize(width, height);
-}
-
-void GameRenderer::update_cells(const GameMap& map)
-{
-	edge_pos_base_[0] = 0;
+	edge_pos_base[0] = 0;
 	for (int i = 1; i <= CELL_COUNT; ++i)
 	{
-		edge_pos_base_[i] = edge_pos_base_[i - 1] + map.cell_size;
+		edge_pos_base[i] = edge_pos_base[i - 1] + map.cell_size;
 	}
+}
 
-	const float xx = -map.center.x * map.cell_size + current_window->width() / 2.0f;
-	const float yy = -map.center.y * map.cell_size + current_window->height() / 2.0f;
+auto GameRenderer::update_cell_position(const GameMap& map, const float width, const float height) -> void
+{
+	const float xx = -map.center.x * map.cell_size + width / 2.0f;
+	const float yy = -map.center.y * map.cell_size + height / 2.0f;
+
+	bool is_set[4] = {false, false, false, false};
 
 	for (int i = 0; i <= CELL_COUNT; ++i)
 	{
-		edge_pos_[i].x = edge_pos_base_[i] + xx;
-		edge_pos_[i].y = edge_pos_base_[i] + yy;
+		edge_pos[i].x = edge_pos_base[i] + xx;
+		if (!is_set[0])
+		{
+			// 左上角 列
+			if (i == CELL_COUNT)
+			{
+				cell0_.y = CELL_COUNT;
+				is_set[0] = true;
+			}
+			else if (edge_pos[i].x > 0)
+			{
+				cell0_.y = i == 0 ? 0 : i - 1;
+				is_set[0] = true;
+			}
+		}
+		if (!is_set[1])
+		{
+			// 右下角 列
+			if (edge_pos[i].x >= width || i == CELL_COUNT)
+			{
+				cell1_.y = i;
+				is_set[1] = true;
+			}
+		}
+
+		edge_pos[i].y = edge_pos_base[i] + yy;
+		if (!is_set[2])
+		{
+			// 左上角 行
+			if (i == CELL_COUNT)
+			{
+				cell0_.x = CELL_COUNT;
+				is_set[2] = true;
+			}
+			else if (edge_pos[i].y > 0)
+			{
+				cell0_.x = i == 0 ? 0 : i - 1;
+				is_set[2] = true;
+			}
+		}
+		if (!is_set[3])
+		{
+			// 右下角 行
+			if (edge_pos[i].y >= width || i == CELL_COUNT)
+			{
+				cell1_.x = i;
+				is_set[3] = true;
+			}
+		}
 	}
 }
 
 void GameRenderer::draw_cells()
 {
-	map_border_drawer_.begin();
+	map_border_drawer.begin();
 
 	for (int i = 0; i <= CELL_COUNT; i++)
 	{
-		map_border_drawer_.push(edge_pos_[0].x, edge_pos_[i].y, edge_pos_[CELL_COUNT].x, edge_pos_[i].y);
+		map_border_drawer.push(edge_pos[0].x, edge_pos[i].y, edge_pos[CELL_COUNT].x, edge_pos[i].y);
 	}
 
 	for (int i = 0; i <= CELL_COUNT; i++)
 	{
-		map_border_drawer_.push(edge_pos_[i].x, edge_pos_[0].y, edge_pos_[i].x, edge_pos_[CELL_COUNT].y);
+		map_border_drawer.push(edge_pos[i].x, edge_pos[0].y, edge_pos[i].x, edge_pos[CELL_COUNT].y);
 	}
 
-	map_border_drawer_.draw();
+	map_border_drawer.draw();
 }
 
 void GameRenderer::draw_map_resources(const GameMap& map)
 {
-	tex_drawer_.begin();
+	tex_drawer.begin();
 
-	tex_drawer_.alpha(0.4f);
-	tex_drawer_.tex(colors_);
+	tex_drawer.alpha(0.5f);
+	tex_drawer.tex(colors);
 
-	for (int i = 0; i < CELL_COUNT; i++)
-		for (int j = 0; j < CELL_COUNT; ++j)
-			if (const ResourceType& res = map.get_resource(i, j); is_color(res))
-			{
-				const auto& [u, v, w, h] = colors_[resource_icon(res)];
-				tex_drawer_.push(edge_pos_[j].x, edge_pos_[i].y, edge_pos_[j + 1].x, edge_pos_[i + 1].y, u, v, w, h);
-			}
+	const float sp = map.cell_size / 3.5f;
 
-	tex_drawer_.tex(shapes_);
+	for (int i = cell0_.x; i < cell1_.x; i++)
+	{
+		for (int j = cell0_.y; j < cell1_.y; ++j)
+		{
+			// 选择纹理集
+			const ResourceType& res = map.get_resource(i, j);
+			Atlas& at = is_color(res) ? colors : shapes;
+			tex_drawer.tex(at);
+			// 是否被挖掘
+			const BuildingContext* ctx = map.get_building(i, j);
+			const bool mining = ctx && ctx->building == Miner::instance();
+			// 绘制
+			const auto& [u, v, w, h] = at[resource_icon(res)];
+			tex_drawer.push(edge_pos[j].x + sp, edge_pos[i].y + sp,
+			                edge_pos[j + 1].x - sp, edge_pos[i + 1].y - sp, u, v, w, h, Side::up, mining);
+		}
+	}
 
-	for (int i = 0; i < CELL_COUNT; i++)
-		for (int j = 0; j < CELL_COUNT; ++j)
-			if (const ResourceType& res = map.get_resource(i, j); is_shape(res))
-			{
-				const auto& [u, v, w, h] = shapes_[resource_icon(res)];
-				tex_drawer_.push(edge_pos_[j].x, edge_pos_[i].y, edge_pos_[j + 1].x, edge_pos_[i + 1].y, u, v, w, h);
-			}
-
-	tex_drawer_.draw();
+	tex_drawer.draw();
 }
 
-void GameRenderer::draw_building(const GameMap& map)
+void GameRenderer::draw_building(const GameLogic& game, const GameMap& map)
 {
-	tex_drawer_.begin();
-	tex_drawer_.alpha(1);
+	tex_drawer.begin();
 
-	for (int i = 0; i < CELL_COUNT; ++i)
+	// 地图上的建筑
+	for (int i = cell0_.x; i < cell1_.x; i++)
 	{
-		for (int j = 0; j < CELL_COUNT; ++j)
+		for (int j = cell0_.y; j < cell1_.y; ++j)
 		{
 			if (const BuildingContext* ctx = map.get_building(i, j); ctx && ctx->pos.x == i && ctx->pos.y == j)
 			{
-				int row, col;
-				Atlas* at = nullptr;
-
-				switch (ctx->building.size)
-				{
-				case BuildingSize::small:
-					at = &buildings_small_;
-					row = col = 1;
-					break;
-				case BuildingSize::middle:
-					at = &buildings_middle_;
-					row = 1;
-					col = 2;
-					break;
-				case BuildingSize::large:
-					at = &buildings_large_;
-					row = 1;
-					col = 3;
-					break;
-				case BuildingSize::special:
-					at = &buildings_special_;
-					row = 4;
-					col = 4;
-					break;
-				}
-
-				tex_drawer_.tex(*at);
-				auto& [u, v, w, h] = (*at)[ctx->building.get_building_texture(*ctx)];
-				tex_drawer_.push(edge_pos_[j].x, edge_pos_[i].y, edge_pos_[j + col].x, edge_pos_[i + row].y, u, v, w, h, ctx->direction);
+				ctx->building.get_renderer().draw_building(i, j, *ctx, *this, map);
 			}
 		}
 	}
 
-	tex_drawer_.draw();
+	tex_drawer.draw();
 }
 
-void GameRenderer::draw_ui()
+void GameRenderer::draw_ui(const GameLogic& game)
 {
-	if (current_window && current_game)
+	// 背景
+	const auto x0 = static_cast<float>(game.button_p0.x);
+	const auto y0 = static_cast<float>(game.button_p0.y);
+	const auto x1 = static_cast<float>(game.button_p1.x);
+	const auto y1 = static_cast<float>(game.button_p1.y);
+	shape_drawer.rect(x0, y0, x1, y1, 0, 0, 0, 0.2f);
+
+	// 按钮
+	tex_drawer.begin();
+	for (const auto& [name, p0] : game.buttons)
 	{
-		const float mouse_x = MouseHelper::x();
-		const float mouse_y = MouseHelper::y();
-
-		// 背景
-		const auto x0 = static_cast<float>(current_window->button_p0.x);
-		const auto y0 = static_cast<float>(current_window->button_p0.y);
-		const auto x1 = static_cast<float>(current_window->button_p1.x);
-		const auto y1 = static_cast<float>(current_window->button_p1.y);
-		shape_drawer_.rect(x0, y0, x1, y1, 0, 0, 0, 0.2f);
-
-		// 按钮
-		tex_drawer_.begin();
-		tex_drawer_.tex(icons_);
-		tex_drawer_.alpha(0.3f);
-		for (const auto& [name, p0] : current_window->buttons)
-		{
-			constexpr float sp = 5;
-			const auto x = static_cast<float>(p0.x);
-			const auto y = static_cast<float>(p0.y);
-
-			const bool selected = !current_game->current_building
-				&& is_in(x, mouse_x, GameWindow::button_size_f)
-				&& is_in(y, mouse_y, GameWindow::button_size_f);
-
-			if (selected)
-			{
-				tex_drawer_.alpha(1);
-			}
-
-			const auto& [u, v, w, h] = icons_[current_game->buildings[name]->tex_icon];
-			tex_drawer_.push(x + sp, y + sp, x + GameWindow::button_size_f - sp, y + GameWindow::button_size_f - sp, u,
-			                 v, w, h);
-
-			if (selected)
-			{
-				tex_drawer_.alpha(0.3f);
-			}
-		}
-		// 选中
-		float cell_size = current_game->map().cell_size;
-		if (current_game->current_building)
-		{
-			tex_drawer_.alpha(1);
-			float w, h;
-			const Rect* uv = nullptr;
-			switch (current_game->current_building->size)
-			{
-			case BuildingSize::small:
-				tex_drawer_.tex(buildings_small_);
-				w = h = cell_size;
-				uv = &buildings_small_[current_game->current_building->tex_hover];
-				break;
-			case BuildingSize::middle:
-				tex_drawer_.tex(buildings_middle_);
-				uv = &buildings_middle_[current_game->current_building->tex_hover];
-				w = cell_size * 2;
-				h = cell_size;
-				break;
-			case BuildingSize::large:
-				tex_drawer_.tex(buildings_large_);
-				uv = &buildings_large_[current_game->current_building->tex_hover];
-				w = cell_size * 3;
-				h = cell_size;
-				break;
-			case BuildingSize::special:
-				tex_drawer_.tex(buildings_special_);
-				uv = &buildings_special_[current_game->current_building->tex_hover];
-				w = h = cell_size * 4;
-				break;
-			}
-
-			const float xx = mouse_x - cell_size / 2;
-			const float yy = mouse_y - cell_size / 2;
-			tex_drawer_.push(xx, yy, xx + w, yy + h, uv->u, uv->v, uv->w, uv->h, current_game->current_side);
-		}
-		tex_drawer_.draw();
+		const auto x = static_cast<float>(p0.x);
+		const auto y = static_cast<float>(p0.y);
+		const Building* building = game.buildings.at(name);
+		building->get_renderer().draw_icon(x, y, BUTTON_SIZE, *this);
 	}
+
+	tex_drawer.draw();
 }
 
-void GameRenderer::draw_overlay()
+void GameRenderer::draw_overlay(const GameLogic& game, const GameMap& map)
 {
+	tex_drawer.begin();
+
+	// 地图上的建筑
+	for (int i = cell0_.x; i < cell1_.x; i++)
+	{
+		for (int j = cell0_.y; j < cell1_.y; ++j)
+		{
+			if (const BuildingContext* ctx = map.get_building(i, j); ctx && ctx->pos.x == i && ctx->pos.y == j)
+			{
+				ctx->building.get_renderer().draw_overlay(i, j, *ctx, *this, map);
+			}
+		}
+	}
+
+	// 鼠标持有的建筑
+	const float cell_size = map.cell_size;
+	if (game.current_building)
+	{
+		const float xx = MouseHelper::x() - cell_size / 2;
+		const float yy = MouseHelper::y() - cell_size / 2;
+		game.current_building->get_renderer().draw_holding(xx, yy, game.current_side, *this, map);
+	}
+
+	tex_drawer.draw();
 }

@@ -17,7 +17,7 @@ struct Vec2I
 		int h{};
 	};
 
-	explicit Vec2I(const int x = 0, const int y = 0) : x(x), y(y)
+	Vec2I(const int x = 0, const int y = 0) : x(x), y(y)
 	{
 	}
 

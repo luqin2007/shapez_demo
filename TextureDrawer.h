@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractDrawer.h"
+#include "Atlas.h"
 #include "Side.h"
 
 /**
@@ -23,13 +24,13 @@ public:
 	/**
 	 * \brief 准备开始绘制
 	 */
-	void begin() const;
+	void begin();
 
 	/**
 	 * \brief 设置纹理索引
-	 * \param tex 纹理索引
+	 * \param atlas 地图集
 	 */
-	void tex(GLint tex);
+	void tex(const Atlas& atlas);
 
 	/**
 	 * \brief 半透明纹理
@@ -48,9 +49,10 @@ public:
 	 * \param w 纹理宽度，[0, 1]
 	 * \param h 纹理高度，[0, 1]
 	 * \param side 纹理方向
+	 * \param opaque 是否以不透明的形式渲染
 	 */
-	void push(float x0, float y0, float x1, float y1, float u, float v, float w, float h, Side side = Side::up);
-
+	void push(float x0, float y0, float x1, float y1, float u, float v, float w, float h, Side side = Side::up, bool opaque = false);
+	
 	/**
 	 * \brief 绘制
 	 */
@@ -65,6 +67,8 @@ private:
 	const int total_;
 	int count_ = 0;
 	GLint tex_ = 0;
-	GLfloat alpha_ = 0;
+	GLfloat alpha_ = 1;
+	// 不透明状态
+	GLfloat op_alpha_ = -1;
 	float* buf_ = nullptr;
 };

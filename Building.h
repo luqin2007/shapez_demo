@@ -6,7 +6,6 @@
 #include "vec.h"
 
 #include "GameMap.h"
-#include "BuildingSize.h"
 #include "BuildingContext.h"
 #include "ColoredShapes.h"
 
@@ -16,6 +15,7 @@ using std::string;
 
 enum class ItemType;
 enum class Color;
+class BuildingRenderer;
 
 /**
  * \brief 建筑类型，只保存建筑的行为，不保存建筑数据
@@ -23,26 +23,6 @@ enum class Color;
 class Building
 {
 public:
-	/**
-	 * \brief 建筑大小 
-	 */
-	const BuildingSize size;
-
-	/**
-	 * \brief 图标纹理名称
-	 */
-	const string tex_icon;
-
-	/**
-	 * \brief 持有时纹理名称
-	 */
-	const string tex_hover;
-
-	/**
-	 * \brief 放下后纹理名称
-	 */
-	const string tex_building;
-
 	/**
 	 * \brief 下一个变种的引用
 	 */
@@ -121,45 +101,33 @@ public:
 	                           BuildingContext& context) const = 0;
 
 	/**
-	 * \brief 获取当前显示的纹理贴图
-	 * \param context 建筑数据
-	 * \return 贴图纹理
-	 */
-	[[nodiscard]] virtual const string& get_building_texture(const BuildingContext& context) const
-	{
-		return tex_building;
-	}
-
-	/**
 	 *\brief 更新建筑状态
 	 */
 	virtual void update(BuildingContext& context, GameMap& map) const = 0;
 
 	/**
+	 * \brief 获取建筑渲染器
+	 * \return 建筑渲染器
+	 */
+	[[nodiscard]]
+	virtual const BuildingRenderer& get_renderer() const = 0;
+
+	/**
 	 * \brief 测试是否能正常放下
 	 * \param pos 建筑所在位置
-	 * \param size 建筑大小
 	 * \param direction 建筑方向
 	 * \param map 游戏地图
 	 */
 	[[nodiscard]]
-	static bool can_place(const Vec2I& pos, BuildingSize size, Side direction, const GameMap& map);
-
-	/**
-	 * \brief 将建筑大小枚举转换为 Vec2I 表示的大小
-	 * \param size 建筑大小
-	 * \return 以 Vec2I 形式表示的建筑大小
-	 */
-	static Vec2I size_as_vec(BuildingSize size);
+	virtual bool can_place(const Vec2I& pos, Side direction, const GameMap& map) const;
 
 	/**
 	 * \brief 获取建筑占用的所有方块
 	 * \param pos 建筑所在位置
-	 * \param size 建筑大小
 	 * \param direction 建筑方向
 	 * \return 所有方向
 	 */
-	static vector<Vec2I> all_positions(const Vec2I& pos, BuildingSize size, Side direction);
+	[[nodiscard]] virtual vector<Vec2I> all_positions(const Vec2I& pos, Side direction) const = 0;
 
 	/**
 	 * \brief 尝试向某个方向发送染料
@@ -191,17 +159,19 @@ public:
 
 	Building& operator=(const Building&&) = delete;
 
+	bool operator==(const Building& o) const
+	{
+		return this == &o;
+	}
+
 protected:
 	/**
 	 * \brief 不公开的构造函数，仅由对应类型创建
-	 * \param size 建筑大小
-	 * \param tex_icon 图标纹理名称
-	 * \param tex_hover 持有时纹理名称
-	 * \param tex_building 放下后纹理名称
 	 */
-	Building(const BuildingSize size, string tex_icon, string tex_building, string tex_hover)
-		: size(size), tex_icon(std::move(tex_icon)), tex_hover(std::move(tex_hover)),
-		  tex_building(std::move(tex_building))
-	{
-	}
+	Building() = default;
+
+	static vector<Vec2I> pos_small(const Vec2I& pos);
+	static vector<Vec2I> pos_middle(const Vec2I& pos, Side direction);
+	static vector<Vec2I> pos_large(const Vec2I& pos, Side direction);
+	static vector<Vec2I> pos_special(const Vec2I& pos);
 };

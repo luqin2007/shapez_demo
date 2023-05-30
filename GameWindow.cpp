@@ -50,7 +50,6 @@ void GameWindow::listen_events() const
 	glfwSetScrollCallback(window_, [](GLFWwindow*, double, const double y)
 	{
 		MouseHelper::set_wheel(y);
-		current_window->update_window_title();
 	});
 
 	glfwSetFramebufferSizeCallback(window_, [](GLFWwindow*, const int width, const int height)
@@ -58,37 +57,33 @@ void GameWindow::listen_events() const
 		current_window->on_resize(width, height);
 	});
 
-	glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+	glfwSetKeyCallback(window_, [](GLFWwindow*, const int key, int, const int action, int)
 	{
-		if (action == GLFW_PRESS)
+		if (action == GLFW_PRESS && current_game)
 		{
-			current_window->on_key_press(key);
+			current_game->on_key_press(key);
 		}
 	});
 }
 
-void GameWindow::on_key_press(const int key)
+void GameWindow::update_window_title() const
 {
-	if (current_game)
-	{
-		current_game->on_key_press(key);
-	}
-}
-
-void GameWindow::update_window_title()
-{
-	if (current_game)
+	if (current_game && current_renderer)
 	{
 		char buf[300];
-		auto& center = current_game->map().center;
-		float mx = MouseHelper::x();
-		float my = MouseHelper::y();
-		float cell_size = current_game->map().cell_size;
-		int gx = static_cast<int>(center.x - (width_ / 2.0f - mx) / cell_size);
-		int gy = static_cast<int>(center.y - (height_ / 2.0f - my) / cell_size);
-		sprintf_s(buf, "Shapez Demo %dx%d center=(%.2f,%.2f) cursor=(%.2f,%.2f on window)/(%d,%d on map) CellSize=%.2f",
-		          width_, height_, center.x, center.y, mx, my, gx, gy, cell_size);
-		glfwSetWindowTitle(current_window->window(), buf);
+		const auto& center = current_game->map().center;
+		const float mx = MouseHelper::x();
+		const float my = MouseHelper::y();
+		const float cell_size = current_game->map().cell_size;
+		const int gx = center.x - (width_ / 2.0f - mx) / cell_size;
+		const int gy = center.y - (height_ / 2.0f - my) / cell_size;
+		if (sprintf_s(
+			buf, "Shapez Demo %dx%d center=(%.2f,%.2f) cursor=(%.2f,%.2f)/(%d,%d) cell=%.2f render=(%d,%d)-(%d,%d)",
+			width_, height_, center.x, center.y, mx, my, gx, gy, cell_size, 
+			current_renderer->cell0_.x, current_renderer->cell0_.y, current_renderer->cell1_.x, current_renderer->cell1_.y))
+		{
+			glfwSetWindowTitle(current_window->window(), buf);
+		}
 	}
 }
 
@@ -103,45 +98,22 @@ void GameWindow::on_resize(const int width, const int height)
 	width_ = width;
 	height_ = height;
 	glViewport(0, 0, width, height);
-	
+
+	// 更新按钮
+	if (current_game)
+	{
+		current_game->update_button_positions(width, height);
+	}
+
+	// 更新渲染器
 	if (current_renderer)
 	{
-		current_renderer->on_resize(width, height);
+		AbstractDrawer::resize(width, height);
+		current_renderer->update_cell_position(current_game->map(), width, height);
 	}
 
 	// 更新标题栏
 	update_window_title();
-
-	// 更新 UI 位置
-	const int x0 = (width - 720) / 2;
-	const int y0 = height - 80, y1 = y0 + 50;
-	button_p0.x = x0;
-	button_p0.y = y0;
-	button_p1.x = x0 + 720;
-	button_p1.y = y0 + button_size;
-
-	constexpr int div = 70;
-	int p0 = x0 + 20;
-
-	buttons["miner"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["belt"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["balancer"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["rotater"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["underground_belt"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["cutter"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["mixer"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["painter"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["stacker"] = Vec2I{p0, y0};
-	p0 += div;
-	buttons["trash"] = Vec2I{p0, y0};
 }
 
 bool GameWindow::is_active() const

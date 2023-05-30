@@ -66,10 +66,7 @@ public:
 	void update(BuildingContext& context, GameMap& map) const override;
 
 protected:
-	TickableBuilding(const BuildingSize size, const string& tex_icon, const string& tex_building, const string& tex_hover)
-		: Building(size, tex_icon, tex_building, tex_hover)
-	{
-	}
+	TickableBuilding() = default;
 
 	/**
 	 * \brief 检查是否可以运行

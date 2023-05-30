@@ -21,15 +21,18 @@ void TextureDrawer::initialize()
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
-void TextureDrawer::begin() const
+void TextureDrawer::begin()
 {
 	glUseProgram(program_);
 	glBindVertexArray(vao_);
+
+	alpha(1);
+	op_alpha_ = -1;
 }
 
-void TextureDrawer::tex(const GLint tex)
+void TextureDrawer::tex(const Atlas& atlas)
 {
-	if (tex != tex_)
+	if (const GLint tex = atlas.index_; tex != tex_)
 	{
 		draw();
 		tex_ = tex;
@@ -48,8 +51,25 @@ void TextureDrawer::alpha(const GLfloat alpha)
 }
 
 void TextureDrawer::push(const float x0, const float y0, float x1, float y1,
-                         const float u, const float v, const float w, const float h, const Side side)
+                         const float u, const float v, const float w, const float h, const Side side, const bool opaque)
 {
+	if (opaque)
+	{
+		if (!feq(1.0f, alpha_))
+		{
+			op_alpha_ = alpha_;
+			alpha(1);
+		}
+	}
+	else
+	{
+		if (op_alpha_ >= 0 && !feq(alpha_, op_alpha_))
+		{
+			alpha(op_alpha_);
+			op_alpha_ = -1;
+		}
+	}
+
 	if (!buf_)
 	{
 		buf_ = static_cast<float*>(glMapNamedBuffer(buffer_, GL_WRITE_ONLY));
@@ -201,7 +221,6 @@ void TextureDrawer::push(const float x0, const float y0, float x1, float y1,
 		*buf_++ = vv;
 		break;
 	}
-
 
 	count_++;
 	if (count_ == total_)

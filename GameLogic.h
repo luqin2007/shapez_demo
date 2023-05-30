@@ -12,15 +12,20 @@ using std::map;
 
 class Building;
 
+constexpr int BUTTON_SIZE = 50;
+
 class GameLogic
 {
 public:
-
 	// 当前鼠标持有的建筑
 	const Building* current_building = nullptr;
 	Side current_side = Side::up;
 	Vec2I current_building_data{ 0, 0 };
 	map<string, const Building*> buildings;
+
+	// 底部按钮
+	map<string, Vec2I> buttons;
+	Vec2I button_p0, button_p1;
 
 	/**
 	 * \brief 游戏初始化
@@ -37,6 +42,11 @@ public:
 		return map_;
 	}
 
+	const GameMap& map() const
+	{
+		return map_;
+	}
+
 	Timer& timer()
 	{
 		return timer_;
@@ -47,6 +57,13 @@ public:
 	 * \param key 按下的键
 	 */
 	void on_key_press(int key);
+
+	/**
+	 * \brief 重新计算底部按钮
+	 * \param width 窗口宽
+	 * \param height 窗口高
+	 */
+	void update_button_positions(int width, int height);
 
 private:
 	Timer timer_;

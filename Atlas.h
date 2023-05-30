@@ -15,6 +15,8 @@ using std::cout;
 using std::endl;
 using std::exception;
 
+class TextureDrawer;
+
 /**
  * \brief 表示地图集中的一个图片
  */
@@ -28,6 +30,8 @@ struct Rect
  */
 class Atlas
 {
+	friend TextureDrawer;
+
 public:
 	Atlas(const float width, const float height, const int cell_width, const int cell_height, const bool m4 = false):
 		width_(width), height_(height), cell_width_(cell_width), cell_height_(cell_height),
@@ -49,12 +53,7 @@ public:
 	 * \brief 销毁
 	 */
 	void destroy() const;
-
-	operator GLint() const
-	{
-		return index_;
-	}
-
+	
 	/**
 	 * \brief 向地图集中导入图片，应当在 initialize 方法之后调用
 	 * \param p 图片完整路径
@@ -69,9 +68,13 @@ public:
 	 */
 	Atlas& operator<<(const bool gen_mipmap);
 
-	const Rect& operator[](const string& name);
+	const Rect& operator[](const string& name) const;
 
-	const Rect& operator[](const char* name);
+	const Rect& operator[](const char* name) const;
+
+	Rect& operator[](const string& name);
+
+	Rect& operator[](const char* name);
 
 private:
 	const float width_, height_;

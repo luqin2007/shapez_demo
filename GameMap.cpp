@@ -2,6 +2,7 @@
 
 #include "Building.h"
 #include "BuildingContext.h"
+#include "Hub.h"
 
 GameMap::GameMap()
 {
@@ -17,6 +18,7 @@ GameMap::GameMap()
 
 void GameMap::initialize()
 {
+	// 初始化资源
 	for (int i = 0; i < CELL_COUNT; ++i)
 	{
 		resources_[0][i] = ResourceType::shape_circle;
@@ -26,6 +28,9 @@ void GameMap::initialize()
 		resources_[4][i] = ResourceType::color_blue;
 		resources_[5][i] = ResourceType::color_green;
 	}
+
+	// 初始化 hub
+	set_building(CELL_COUNT / 2 - 2, CELL_COUNT / 2 - 2, &Hub::instance(), Side::up);
 }
 
 ResourceType GameMap::get_resource(const int x, const int y) const
@@ -42,11 +47,11 @@ bool GameMap::set_building(const int x, const int y, const Building* building, c
 {
 	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT)
 	{
-		if (const auto pos = Vec2I{ x, y };
-		Building::can_place(pos, building->size, direction, *this))
+		if (const auto pos = Vec2I{x, y};
+			building->can_place(pos, direction, *this))
 		{
 			BuildingContext* ctx = building->build_context(pos, direction);
-			for (const auto& p : Building::all_positions(pos, building->size, direction))
+			for (const auto& p : building->all_positions(pos, direction))
 				buildings_[p.x][p.y] = ctx;
 
 			building->on_placed(*ctx);
@@ -69,11 +74,13 @@ BuildingContext* GameMap::get_building(const int x, const int y) const
 
 void GameMap::remove_building(const int x, const int y)
 {
-	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT && buildings_[x][y])
+	if (x >= 0 && x < CELL_COUNT && y >= 0 && y < CELL_COUNT
+		// 不能移除任务中心！！！
+		&& buildings_[x][y] && buildings_[x][y]->building != Hub::instance())
 	{
 		BuildingContext* ctx = buildings_[x][y];
 		// 清除记录
-		for (const auto& pos : Building::all_positions(ctx->pos, ctx->building.size, ctx->direction))
+		for (const auto& pos : ctx->building.all_positions(ctx->pos, ctx->direction))
 		{
 			buildings_[pos.x][pos.y] = nullptr;
 		}

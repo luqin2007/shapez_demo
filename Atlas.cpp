@@ -75,12 +75,22 @@ Atlas& Atlas::operator<<(const bool gen_mipmap)
 	return *this;
 }
 
-const Rect& Atlas::operator[](const string& name)
+const Rect& Atlas::operator[](const string& name) const
+{
+	return atlas_.at(name);
+}
+
+const Rect& Atlas::operator[](const char* name) const
+{
+	return atlas_.at(name);
+}
+
+Rect& Atlas::operator[](const string& name)
 {
 	return atlas_[name];
 }
 
-const Rect& Atlas::operator[](const char* name)
+Rect& Atlas::operator[](const char* name)
 {
 	return atlas_[name];
 }
