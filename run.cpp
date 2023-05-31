@@ -1,8 +1,9 @@
+
 #include "Main.h"
 
 int main()
 {
-	Main main;
-	main.run();
+	Main app;
+	app.run();
 	return 0;
 }

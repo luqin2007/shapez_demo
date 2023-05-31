@@ -8,65 +8,61 @@
 void BeltRenderer::draw_building(const int row, const int col, const BuildingContext& context, GameRenderer& renderer,
                                  const GameMap& map) const
 {
-	renderer.tex_drawer.tex(renderer.buildings_small);
 	const BeltContext& ctx = Belt::cast(context);
 	const int index = (current_game->timer().running_ms / delta_time_) % 14;
-	auto& [u, v, w, h] = get_building_uv(index, renderer);
 	const float x0 = renderer.edge_pos[col].x;
 	const float y0 = renderer.edge_pos[row].y;
 	const float x1 = renderer.edge_pos[col + 1].x;
 	const float y1 = renderer.edge_pos[row + 1].y;
-	renderer.tex_drawer.push(x0, y0, x1, y1, u, v, w, h, context.direction);
+	renderer.tex_drawer.push(x0 - EXT_SIZE, y0 - EXT_SIZE, x1 + EXT_SIZE, y1 + EXT_SIZE, renderer.atlas, get_building_tex(index), context.direction);
 }
 
-void BeltRenderer::draw_holding(float x, float y, Side direction, GameRenderer& renderer, const GameMap& map) const
+void BeltRenderer::draw_holding(const float x, const float y, const Side direction, GameRenderer& renderer,
+                                const GameMap& map) const
 {
-	auto& [u, v, w, h] = get_holding_uv(renderer);
-	renderer.tex_drawer.tex(renderer.buildings_small);
-	renderer.tex_drawer.push(x, y, x + map.cell_size, y + map.cell_size, u, v, w, h, direction);
+	renderer.tex_drawer.push(x - EXT_SIZE, y - EXT_SIZE, x + map.cell_size + EXT_SIZE, y + map.cell_size + EXT_SIZE,
+							 renderer.atlas, get_holding_tex(), direction);
 }
 
-void BeltRenderer::draw_icon(float x, float y, float size, GameRenderer& renderer) const
+void BeltRenderer::draw_icon(const float x, const float y, float size, GameRenderer& renderer) const
 {
-	renderer.tex_drawer.tex(renderer.icons);
 	renderer.tex_drawer.alpha(ICON_ALPHA);
 	const float mouse_x = MouseHelper::x();
 	const float mouse_y = MouseHelper::y();
 	const bool selected = !current_game->current_building
 		&& is_in(x, mouse_x, BUTTON_SIZE)
 		&& is_in(y, mouse_y, BUTTON_SIZE);
-	const auto& [u, v, w, h] = renderer.icons["belt.png"];
 	renderer.tex_drawer.push(x + ICON_PADDING, y + ICON_PADDING,
 	                         x + BUTTON_SIZE - ICON_PADDING, y + BUTTON_SIZE - ICON_PADDING,
-	                         u, v, w, h, Side::up, selected);
+							 renderer.atlas, "belt_icon.png", Side::up, selected);
 }
 
-const Rect& BeltDirectRenderer::get_building_uv(const int index, GameRenderer& renderer) const
+const string& BeltDirectRenderer::get_building_tex(const int index) const
 {
-	return renderer.buildings_small[tex_forward_[index]];
+	return tex_forward_[index];
 }
 
-const Rect& BeltDirectRenderer::get_holding_uv(const GameRenderer& renderer) const
+const string& BeltDirectRenderer::get_holding_tex() const
 {
-	return renderer.buildings_small["belt_top_blue.png"];
+	return holding_;
 }
 
-const Rect& BeltLeftRenderer::get_building_uv(const int index, GameRenderer& renderer) const
+const string& BeltLeftRenderer::get_building_tex(const int index) const
 {
-	return renderer.buildings_small[tex_left_[index]];
+	return tex_left_[index];
 }
 
-const Rect& BeltLeftRenderer::get_holding_uv(const GameRenderer& renderer) const
+const string& BeltLeftRenderer::get_holding_tex() const
 {
-	return renderer.buildings_small["belt_left_blue.png"];
+	return holding_;
 }
 
-const Rect& BeltRightRenderer::get_building_uv(const int index, GameRenderer& renderer) const
+const string& BeltRightRenderer::get_building_tex(const int index) const
 {
-	return renderer.buildings_small[tex_right_[index]];
+	return tex_right_[index];
 }
 
-const Rect& BeltRightRenderer::get_holding_uv(const GameRenderer& renderer) const
+const string& BeltRightRenderer::get_holding_tex() const
 {
-	return renderer.buildings_small["belt_right_blue.png"];
+	return holding_;
 }

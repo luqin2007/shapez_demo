@@ -90,5 +90,7 @@ const BuildingRenderer& UndergroundBelt1::get_renderer() const
 
 vector<Vec2I> UndergroundBelt1::all_positions(const Vec2I& pos, Side direction) const
 {
-	return pos_small(pos);
+	vector<Vec2I> p;
+	p.push_back(pos);
+	return p;
 }

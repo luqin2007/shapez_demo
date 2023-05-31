@@ -20,17 +20,11 @@ public:
 	 * \brief 初始化
 	 */
 	void initialize();
-	
+
 	/**
 	 * \brief 准备开始绘制
 	 */
 	void begin();
-
-	/**
-	 * \brief 设置纹理索引
-	 * \param atlas 地图集
-	 */
-	void tex(const Atlas& atlas);
 
 	/**
 	 * \brief 半透明纹理
@@ -44,15 +38,14 @@ public:
 	 * \param y0 左上角顶点的 y 坐标，单位像素
 	 * \param x1 右下角顶点的 x 坐标，单位像素
 	 * \param y1 右下角顶点的 y 坐标，单位像素
-	 * \param u 左上角顶点 x 纹理坐标
-	 * \param v 左上角顶点 y 纹理坐标
-	 * \param w 纹理宽度，[0, 1]
-	 * \param h 纹理高度，[0, 1]
+	 * \param atlas 所在纹理集
+	 * \param name 纹理名称
 	 * \param side 纹理方向
 	 * \param opaque 是否以不透明的形式渲染
 	 */
-	void push(float x0, float y0, float x1, float y1, float u, float v, float w, float h, Side side = Side::up, bool opaque = false);
-	
+	void push(float x0, float y0, float x1, float y1, const Atlas& atlas, const string& name, Side side = Side::up,
+	          bool opaque = false);
+
 	/**
 	 * \brief 绘制
 	 */
@@ -71,4 +64,9 @@ private:
 	// 不透明状态
 	GLfloat op_alpha_ = -1;
 	float* buf_ = nullptr;
+
+	inline void push_vertices(float x0, float y0, float u0, float v0,
+							  float x1, float y1, float u1, float v1,
+							  float x2, float y2, float u2, float v2,
+							  float x3, float y3, float u3, float v3);
 };

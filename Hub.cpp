@@ -57,7 +57,15 @@ const BuildingRenderer& Hub::get_renderer() const
 
 vector<Vec2I> Hub::all_positions(const Vec2I& pos, Side direction) const
 {
-	return pos_special(pos);
+	vector<Vec2I> p;
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			p.emplace_back(pos.x + i, pos.y + j);
+		}
+	}
+	return p;
 }
 
 void Hub::set_next_level(HubContext& context)

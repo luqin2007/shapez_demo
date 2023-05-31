@@ -13,8 +13,8 @@ public:
 protected:
 	time_t delta_time_ = 40;
 
-	[[nodiscard]] virtual const Rect& get_building_uv(int index, GameRenderer& renderer) const = 0;
-	[[nodiscard]] virtual const Rect& get_holding_uv(const GameRenderer& renderer) const = 0;
+	[[nodiscard]] virtual const string& get_building_tex(int index) const = 0;
+	[[nodiscard]] virtual const string& get_holding_tex() const = 0;
 };
 
 class BeltDirectRenderer final : public BeltRenderer
@@ -30,8 +30,10 @@ protected:
 		"forward_10.png", "forward_11.png", "forward_12.png", "forward_13.png",
 	};
 
-	[[nodiscard]] const Rect& get_building_uv(int index, GameRenderer& renderer) const override;
-	[[nodiscard]] const Rect& get_holding_uv(const GameRenderer& renderer) const override;
+	const string holding_ = "belt_top_blue.png";
+
+	[[nodiscard]] const string& get_building_tex(int index) const override;
+	[[nodiscard]] const string& get_holding_tex() const override;
 };
 
 class BeltLeftRenderer final : public BeltRenderer
@@ -47,8 +49,10 @@ protected:
 		"left_10.png", "left_11.png", "left_12.png", "left_13.png",
 	};
 
-	[[nodiscard]] const Rect& get_building_uv(int index, GameRenderer& renderer) const override;
-	[[nodiscard]] const Rect& get_holding_uv(const GameRenderer& renderer) const override;
+	const string holding_ = "belt_left_blue.png";
+
+	[[nodiscard]] const string& get_building_tex(int index) const override;
+	[[nodiscard]] const string& get_holding_tex() const override;
 };
 
 class BeltRightRenderer final : public BeltRenderer
@@ -64,6 +68,8 @@ protected:
 		"right_10.png", "right_11.png", "right_12.png", "right_13.png",
 	};
 
-	[[nodiscard]] const Rect& get_building_uv(int index, GameRenderer& renderer) const override;
-	[[nodiscard]] const Rect& get_holding_uv(const GameRenderer& renderer) const override;
+	const string holding_ = "belt_right_blue.png";
+
+	[[nodiscard]] const string& get_building_tex(int index) const override;
+	[[nodiscard]] const string& get_holding_tex() const override;
 };

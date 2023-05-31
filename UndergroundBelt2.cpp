@@ -54,7 +54,9 @@ const BuildingRenderer& UndergroundBelt2::get_renderer() const
 
 vector<Vec2I> UndergroundBelt2::all_positions(const Vec2I& pos, Side direction) const
 {
-	return pos_small(pos);
+	vector<Vec2I> p;
+	p.push_back(pos);
+	return p;
 }
 
 bool UndergroundBelt2::can_start(TickableContext& context, const GameMap& map) const

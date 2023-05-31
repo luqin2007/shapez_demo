@@ -93,7 +93,9 @@ void Belt::free_context(BuildingContext* context) const
 
 vector<Vec2I> Belt::all_positions(const Vec2I& pos, Side direction) const
 {
-	return pos_small(pos);
+	vector<Vec2I> p;
+	p.push_back(pos);
+	return p;
 }
 
 BuildingContext* BeltDirect::build_context(const Vec2I& pos, const Side direction) const

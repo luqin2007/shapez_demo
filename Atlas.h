@@ -26,34 +26,67 @@ struct Rect
 };
 
 /**
- * \brief 地图集，将多张图片集合到一张图中，要求每张图片的大小相同或相近
+ * \brief .9 图配置
+ */
+struct dot9
+{
+	float up, down, left, right;
+
+	dot9() = default;
+
+	dot9(const float left, const float right, const float up, const float down):
+		up(up), down(down), left(left), right(right)
+	{
+	}
+
+	dot9(const float x, const float y): up(y), down(y), left(x), right(x)
+	{
+	}
+};
+
+enum class Action
+{
+	/**
+	 * \brief 将给定图片划分为 4 份分别储存
+	 */
+	m4,
+	/**
+	 * \brief 生成 Mipmap
+	 */
+	mipmap,
+	/**
+	 * \brief 图片存储完成
+	 */
+	finished
+};
+
+/**
+ * \brief 地图集，将多张图片集合到一张图中，每张图片的长宽应与给定单元长度的倍数相同或相近以最大限度利用空间
  */
 class Atlas
 {
 	friend TextureDrawer;
 
 public:
-	Atlas(const float width, const float height, const int cell_width, const int cell_height, const bool m4 = false):
-		width_(width), height_(height), cell_width_(cell_width), cell_height_(cell_height),
-		count_per_row_(static_cast<int>(width) / cell_width), count_per_col_(static_cast<int>(height) / cell_height),
-		index_(image_id_++), m4_(m4)
-	{
-	}
-
-	Atlas(const float size, const int cell_size, const bool m4 = false) : Atlas(size, size, cell_size, cell_size, m4)
-	{
-	}
+	/**
+	 * \brief 地图集
+	 * \param width 地图集宽度
+	 * \param height 地图集高度
+	 * \param cell_width 每个单元宽度
+	 * \param cell_height 每个单元高度
+	 */
+	Atlas(const float width, const float height, const int cell_width, const int cell_height);
 
 	/**
 	 * \brief 初始化
 	 */
-	void initialize();
+	Atlas& initialize();
 
 	/**
 	 * \brief 销毁
 	 */
 	void destroy() const;
-	
+
 	/**
 	 * \brief 向地图集中导入图片，应当在 initialize 方法之后调用
 	 * \param p 图片完整路径
@@ -62,15 +95,18 @@ public:
 	Atlas& operator<<(const path& p);
 
 	/**
-	 * \brief 地图集生成完成时调用
-	 * \param gen_mipmap 是否需要生成 mipmap
+	 * \brief 控制地图集
+	 * \param action 控制行为
 	 * \return 当前地图集
 	 */
-	Atlas& operator<<(const bool gen_mipmap);
+	Atlas& operator<<(Action action);
 
-	const Rect& operator[](const string& name) const;
-
-	const Rect& operator[](const char* name) const;
+	/**
+	 * \brief 导入 .9 图
+	 * \data 上下左右偏移量
+	 * \return 当前地图集
+	 */
+	Atlas& operator<<(dot9 data);
 
 	Rect& operator[](const string& name);
 
@@ -78,13 +114,20 @@ public:
 
 private:
 	const float width_, height_;
-	const int cell_width_, cell_height_, count_per_row_, count_per_col_, index_;
-	const bool m4_;
+	const int cell_width_, cell_height_, col_count_, row_count_, index_;
+	bool m4_ = false;
 	map<string, Rect> atlas_;
-
-	int row_ = 0, col_ = 0;
+	map<string, dot9> dot9s_;
 
 	GLuint texture_ = 0;
 
+	bool** is_space_used_ = nullptr;
+	int best_cell_width_ = 0, best_cell_height_ = 0;
+
+	bool has_d9_ = false;
+	dot9 d9_{0, 0, 0, 0};
+
 	inline static int image_id_ = 0;
+
+	int bcd(int a, int b);
 };

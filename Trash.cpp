@@ -49,5 +49,7 @@ const BuildingRenderer& Trash::get_renderer() const
 
 vector<Vec2I> Trash::all_positions(const Vec2I& pos, Side direction) const
 {
-	return pos_small(pos);
+	vector<Vec2I> p;
+	p.push_back(pos);
+	return p;
 }

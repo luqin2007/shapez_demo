@@ -53,7 +53,10 @@ const BuildingRenderer& Mixer::get_renderer() const
 
 vector<Vec2I> Mixer::all_positions(const Vec2I& pos, const Side direction) const
 {
-	return pos_middle(pos, direction);
+	vector<Vec2I> p;
+	p.push_back(pos);
+	p.push_back(pos + ++direction);
+	return p;
 }
 
 bool Mixer::can_start(TickableContext& context, const GameMap& map) const

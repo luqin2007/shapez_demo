@@ -29,60 +29,21 @@ void GameRenderer::initialize()
 	shape_drawer.initialize();
 
 	cout << "Initialize image atlas..." << endl;
-	colors.initialize();
-	colors << ROOT / "image" / "colors" / "blue.png"
-		<< ROOT / "image" / "colors" / "cyan.png"
-		<< ROOT / "image" / "colors" / "green.png"
-		<< ROOT / "image" / "colors" / "purple.png"
-		<< ROOT / "image" / "colors" / "red.png"
-		<< ROOT / "image" / "colors" / "uncolored.png"
-		<< ROOT / "image" / "colors" / "white.png"
-		<< ROOT / "image" / "colors" / "yellow.png";
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	shapes.initialize();
-	shapes << ROOT / "image" / "shapes" / "circle_blue.png"
-		<< ROOT / "image" / "shapes" / "circle_cyan.png"
-		<< ROOT / "image" / "shapes" / "circle_green.png"
-		<< ROOT / "image" / "shapes" / "circle_purple.png"
-		<< ROOT / "image" / "shapes" / "circle_red.png"
-		<< ROOT / "image" / "shapes" / "circle_uncolored.png"
-		<< ROOT / "image" / "shapes" / "circle_white.png"
-		<< ROOT / "image" / "shapes" / "circle_yellow.png"
-		<< ROOT / "image" / "shapes" / "rect_blue.png"
-		<< ROOT / "image" / "shapes" / "rect_cyan.png"
-		<< ROOT / "image" / "shapes" / "rect_green.png"
-		<< ROOT / "image" / "shapes" / "rect_purple.png"
-		<< ROOT / "image" / "shapes" / "rect_red.png"
-		<< ROOT / "image" / "shapes" / "rect_uncolored.png"
-		<< ROOT / "image" / "shapes" / "rect_white.png"
-		<< ROOT / "image" / "shapes" / "rect_yellow.png"
-		<< ROOT / "image" / "shapes" / "star_blue.png"
-		<< ROOT / "image" / "shapes" / "star_cyan.png"
-		<< ROOT / "image" / "shapes" / "star_green.png"
-		<< ROOT / "image" / "shapes" / "star_purple.png"
-		<< ROOT / "image" / "shapes" / "star_red.png"
-		<< ROOT / "image" / "shapes" / "star_uncolored.png"
-		<< ROOT / "image" / "shapes" / "star_white.png"
-		<< ROOT / "image" / "shapes" / "star_yellow.png";
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	icons.initialize();
-	icons << ROOT / "image" / "building_icons" / "balancer.png"
-		<< ROOT / "image" / "building_icons" / "belt.png"
-		<< ROOT / "image" / "building_icons" / "block.png"
-		<< ROOT / "image" / "building_icons" / "cutter.png"
-		<< ROOT / "image" / "building_icons" / "miner.png"
-		<< ROOT / "image" / "building_icons" / "mixer.png"
-		<< ROOT / "image" / "building_icons" / "painter.png"
-		<< ROOT / "image" / "building_icons" / "rotater.png"
-		<< ROOT / "image" / "building_icons" / "stacker.png"
-		<< ROOT / "image" / "building_icons" / "trash.png"
-		<< ROOT / "image" / "building_icons" / "underground_belt.png";
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	buildings_small.initialize();
-	buildings_small << ROOT / "image" / "buildings" / "belt_left_blue.png"
+	atlas.initialize()
+		// icon
+		<< ROOT / "image" / "buildings" / "balancer_icon.png"
+		<< ROOT / "image" / "buildings" / "belt_icon.png"
+		<< ROOT / "image" / "buildings" / "block_icon.png"
+		<< ROOT / "image" / "buildings" / "cutter_icon.png"
+		<< ROOT / "image" / "buildings" / "miner_icon.png"
+		<< ROOT / "image" / "buildings" / "mixer_icon.png"
+		<< ROOT / "image" / "buildings" / "painter_icon.png"
+		<< ROOT / "image" / "buildings" / "rotater_icon.png"
+		<< ROOT / "image" / "buildings" / "stacker_icon.png"
+		<< ROOT / "image" / "buildings" / "trash_icon.png"
+		<< ROOT / "image" / "buildings" / "underground_belt_icon.png"
+		// 1x1
+		<< ROOT / "image" / "buildings" / "belt_left_blue.png"
 		<< ROOT / "image" / "buildings" / "belt_right_blue.png"
 		<< ROOT / "image" / "buildings" / "belt_top_blue.png"
 		<< ROOT / "image" / "buildings" / "forward_0.png"
@@ -139,11 +100,9 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "buildings" / "underground_belt_exit.png"
 		<< ROOT / "image" / "buildings" / "underground_belt_exit_blue.png"
 		<< ROOT / "image" / "buildings" / "rotater-ccw.png"
-		<< ROOT / "image" / "buildings" / "rotater-ccw_blue.png";
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	buildings_middle.initialize();
-	buildings_middle << ROOT / "image" / "buildings" / "balancer.png"
+		<< ROOT / "image" / "buildings" / "rotater-ccw_blue.png"
+		// 2x2
+		<< ROOT / "image" / "buildings" / "balancer.png"
 		<< ROOT / "image" / "buildings" / "balancer_blue.png"
 		<< ROOT / "image" / "buildings" / "cutter.png"
 		<< ROOT / "image" / "buildings" / "cutter_blue.png"
@@ -152,12 +111,51 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "buildings" / "painter.png"
 		<< ROOT / "image" / "buildings" / "painter_blue.png"
 		<< ROOT / "image" / "buildings" / "stacker.png"
-		<< ROOT / "image" / "buildings" / "stacker_blue.png";
-	glGenerateMipmap(GL_TEXTURE_2D);
+		<< ROOT / "image" / "buildings" / "stacker_blue.png"
+		// 4x4
+		<< ROOT / "image" / "buildings" / "hub.png"
+		// misc
+		<< dot9{8, 10}
+		<< ROOT / "image" / "misc" / "slot_bad_arrow.png"
+		<< ROOT / "image" / "misc" / "slot_good_arrow.png"
+		<< ROOT / "image" / "misc" / "storage_overlay.png"
+		// resource
+		<< ROOT / "image" / "resources" / "blue.png"
+		<< ROOT / "image" / "resources" / "cyan.png"
+		<< ROOT / "image" / "resources" / "green.png"
+		<< ROOT / "image" / "resources" / "purple.png"
+		<< ROOT / "image" / "resources" / "red.png"
+		<< ROOT / "image" / "resources" / "uncolored.png"
+		<< ROOT / "image" / "resources" / "white.png"
+		<< ROOT / "image" / "resources" / "yellow.png"
+		<< Action::m4
+		<< ROOT / "image" / "resources" / "circle_blue.png"
+		<< ROOT / "image" / "resources" / "circle_cyan.png"
+		<< ROOT / "image" / "resources" / "circle_green.png"
+		<< ROOT / "image" / "resources" / "circle_purple.png"
+		<< ROOT / "image" / "resources" / "circle_red.png"
+		<< ROOT / "image" / "resources" / "circle_uncolored.png"
+		<< ROOT / "image" / "resources" / "circle_white.png"
+		<< ROOT / "image" / "resources" / "circle_yellow.png"
+		<< ROOT / "image" / "resources" / "rect_blue.png"
+		<< ROOT / "image" / "resources" / "rect_cyan.png"
+		<< ROOT / "image" / "resources" / "rect_green.png"
+		<< ROOT / "image" / "resources" / "rect_purple.png"
+		<< ROOT / "image" / "resources" / "rect_red.png"
+		<< ROOT / "image" / "resources" / "rect_uncolored.png"
+		<< ROOT / "image" / "resources" / "rect_white.png"
+		<< ROOT / "image" / "resources" / "rect_yellow.png"
+		<< ROOT / "image" / "resources" / "star_blue.png"
+		<< ROOT / "image" / "resources" / "star_cyan.png"
+		<< ROOT / "image" / "resources" / "star_green.png"
+		<< ROOT / "image" / "resources" / "star_purple.png"
+		<< ROOT / "image" / "resources" / "star_red.png"
+		<< ROOT / "image" / "resources" / "star_uncolored.png"
+		<< ROOT / "image" / "resources" / "star_white.png"
+		<< ROOT / "image" / "resources" / "star_yellow.png"
+		<< Action::mipmap
+		<< Action::finished;
 
-	buildings_special.initialize();
-	buildings_special << ROOT / "image" / "buildings" / "hub.png";
-	glGenerateMipmap(GL_TEXTURE_2D);
 	// 适应窗口大小
 	const int width = current_window->width();
 	const int height = current_window->height();
@@ -187,12 +185,7 @@ void GameRenderer::destroy()
 	shape_drawer.destroy();
 	AbstractDrawer::destroy_static();
 
-	colors.destroy();
-	shapes.destroy();
-	icons.destroy();
-	buildings_small.destroy();
-	buildings_middle.destroy();
-	buildings_special.destroy();
+	atlas.destroy();
 }
 
 void GameRenderer::update_cell_size(const GameMap& map)
@@ -287,7 +280,6 @@ void GameRenderer::draw_map_resources(const GameMap& map)
 	tex_drawer.begin();
 
 	tex_drawer.alpha(0.5f);
-	tex_drawer.tex(colors);
 
 	const float sp = map.cell_size / 3.5f;
 
@@ -295,17 +287,16 @@ void GameRenderer::draw_map_resources(const GameMap& map)
 	{
 		for (int j = cell0_.y; j < cell1_.y; ++j)
 		{
-			// 选择纹理集
 			const ResourceType& res = map.get_resource(i, j);
-			Atlas& at = is_color(res) ? colors : shapes;
-			tex_drawer.tex(at);
-			// 是否被挖掘
-			const BuildingContext* ctx = map.get_building(i, j);
-			const bool mining = ctx && ctx->building == Miner::instance();
-			// 绘制
-			const auto& [u, v, w, h] = at[resource_icon(res)];
-			tex_drawer.push(edge_pos[j].x + sp, edge_pos[i].y + sp,
-			                edge_pos[j + 1].x - sp, edge_pos[i + 1].y - sp, u, v, w, h, Side::up, mining);
+			if (has_icon(res))
+			{
+				// 是否被挖掘
+				const BuildingContext* ctx = map.get_building(i, j);
+				const bool mining = ctx && ctx->building == Miner::instance();
+				// 绘制
+				tex_drawer.push(edge_pos[j].x + sp, edge_pos[i].y + sp, edge_pos[j + 1].x - sp, edge_pos[i + 1].y - sp,
+								atlas, resource_icon(res), Side::up, mining);
+			}
 		}
 	}
 
@@ -333,15 +324,15 @@ void GameRenderer::draw_building(const GameLogic& game, const GameMap& map)
 
 void GameRenderer::draw_ui(const GameLogic& game)
 {
+	tex_drawer.begin();
 	// 背景
-	const auto x0 = static_cast<float>(game.button_p0.x);
-	const auto y0 = static_cast<float>(game.button_p0.y);
-	const auto x1 = static_cast<float>(game.button_p1.x);
-	const auto y1 = static_cast<float>(game.button_p1.y);
-	shape_drawer.rect(x0, y0, x1, y1, 0, 0, 0, 0.2f);
+	const auto x0 = static_cast<float>(game.icon_bg0.x);
+	const auto y0 = static_cast<float>(game.icon_bg0.y);
+	const auto x1 = static_cast<float>(game.icon_bg1.x);
+	const auto y1 = static_cast<float>(game.icon_bg1.y);
+	tex_drawer.push(x0, y0, x1, y1, atlas, "storage_overlay.png");
 
 	// 按钮
-	tex_drawer.begin();
 	for (const auto& [name, p0] : game.buttons)
 	{
 		const auto x = static_cast<float>(p0.x);

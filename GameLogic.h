@@ -25,7 +25,7 @@ public:
 
 	// 底部按钮
 	map<string, Vec2I> buttons;
-	Vec2I button_p0, button_p1;
+	Vec2I icon_bg0, icon_bg1;
 
 	/**
 	 * \brief 游戏初始化

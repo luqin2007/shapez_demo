@@ -21,6 +21,7 @@ using std::endl;
 class GameRenderer
 {
 	friend GameWindow;
+
 public:
 	/**
 	 * \brief 基于窗口的每条边所在位置 x y 坐标，单位像素
@@ -29,27 +30,21 @@ public:
 	/**
 	 * \brief 基于地图的每条边所在原始位置的 x y 坐标，单位像素
 	 */
-	float edge_pos_base[CELL_COUNT + 1] = { 0 };
+	float edge_pos_base[CELL_COUNT + 1] = {0};
 
-	BorderDrawer map_border_drawer{ CELL_COUNT * 2 + 2 };
-	TextureDrawer tex_drawer{ 200 };
+	BorderDrawer map_border_drawer{CELL_COUNT * 2 + 2};
+	TextureDrawer tex_drawer{200};
 	ShapeDrawer shape_drawer;
 	// FontDrawer font_drawer_{ROOT / "font" / "MicrosoftYaHei.ttf"};
 
-	Atlas colors{ 256, 72 };
-	Atlas shapes{ 512, 72, true };
-	Atlas icons{ 512, 128 };
-	Atlas buildings_small{ 2048, 192 };
-	Atlas buildings_middle{ 1024, 2048, 384, 192 };
-	Atlas buildings_large{ 0, 0, 756, 192 };
-	Atlas buildings_special{ 1024, 768 };
+	Atlas atlas{4096, 2048, 48, 60};
 
 	void initialize();
 
 	void update(const GameLogic& game);
 
 	void destroy();
-	
+
 	/**
 	 * \brief 当网格尺寸大小变化时调用，重新计算基于地图的每个网格的位置
 	 * \param map 地图
@@ -65,7 +60,6 @@ public:
 	void update_cell_position(const GameMap& map, float width, float height);
 
 private:
-	
 	/// <summary>
 	/// cell0_：左上角网格坐标，可被完整显示的第一个点的前一个
 	///	cell1_：右下角网格坐标，可被完整显示的最后一个点的后一个

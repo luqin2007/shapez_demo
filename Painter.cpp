@@ -56,7 +56,10 @@ const BuildingRenderer& Painter::get_renderer() const
 
 vector<Vec2I> Painter::all_positions(const Vec2I& pos, const Side direction) const
 {
-	return pos_middle(pos, direction);
+	vector<Vec2I> p;
+	p.push_back(pos);
+	p.push_back(pos + ++direction);
+	return p;
 }
 
 bool Painter::can_start(TickableContext& context, const GameMap& map) const

@@ -12,20 +12,20 @@ public:
 	void draw_icon(float x, float y, float size, GameRenderer& renderer) const override;
 
 protected:
-	[[nodiscard]] virtual const Rect& get_building_uv(const GameRenderer& renderer) const = 0;
-	[[nodiscard]] virtual const Rect& get_holding_uv(const GameRenderer& renderer) const = 0;
+	[[nodiscard]] virtual const string& get_building_tex() const = 0;
+	[[nodiscard]] virtual const string& get_holding_tex() const = 0;
 };
 
 class RotaterCWRenderer final : public RotaterRenderer
 {
 protected:
-	[[nodiscard]] const Rect& get_building_uv(const GameRenderer& renderer) const override;
-	[[nodiscard]] const Rect& get_holding_uv(const GameRenderer& renderer) const override;
+	[[nodiscard]] const string& get_building_tex() const override;
+	[[nodiscard]] const string& get_holding_tex() const override;
 };
 
 class RotaterCCWRenderer final : public RotaterRenderer
 {
 protected:
-	[[nodiscard]] const Rect& get_building_uv(const GameRenderer& renderer) const override;
-	[[nodiscard]] const Rect& get_holding_uv(const GameRenderer& renderer) const override;
+	[[nodiscard]] const string& get_building_tex() const override;
+	[[nodiscard]] const string& get_holding_tex() const override;
 };

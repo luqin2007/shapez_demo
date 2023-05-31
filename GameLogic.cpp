@@ -95,7 +95,6 @@ void GameLogic::on_click_left(const float x, const float y)
 		{
 			const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - x) / map_.cell_size);
 			const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - y) / map_.cell_size);
-			cout << mx << " " << my << endl;
 			if (map_.set_building(my, mx, current_building, current_side))
 			{
 				current_building = nullptr;
@@ -197,18 +196,19 @@ void GameLogic::on_key_press(const int key)
 
 void GameLogic::update_button_positions(const int width, const int height)
 {
+	constexpr int padding_x = 30;
+	constexpr int padding_y = 10;
+	constexpr int div = 70;
 
 	// 更新 UI 位置
 	const int x0 = (width - 720) / 2;
 	const int y0 = height - 80;
-	button_p0.x = x0;
-	button_p0.y = y0;
-	button_p1.x = x0 + 720;
-	button_p1.y = y0 + BUTTON_SIZE;
+	icon_bg0.x = x0 - padding_x;
+	icon_bg0.y = y0 - padding_y;
+	icon_bg1.x = x0 + 720 + padding_x;
+	icon_bg1.y = y0 + BUTTON_SIZE + padding_y;
 
-	constexpr int div = 70;
-	int p0 = x0 + 20;
-
+	int p0 = x0 + padding_x;
 	buttons["miner"] = Vec2I{ p0, y0 };
 	p0 += div;
 	buttons["belt"] = Vec2I{ p0, y0 };

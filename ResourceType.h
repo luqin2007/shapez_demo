@@ -26,14 +26,9 @@ enum class ResourceType
 	color_green
 };
 
-inline bool is_color(const ResourceType res)
+inline bool has_icon(const ResourceType res)
 {
-	return res == ResourceType::color_red || res == ResourceType::color_blue || res == ResourceType::color_green;
-}
-
-inline bool is_shape(const ResourceType res)
-{
-	return res == ResourceType::shape_circle || res == ResourceType::shape_rect || res == ResourceType::shape_star;
+	return res != ResourceType::none;
 }
 
 /**

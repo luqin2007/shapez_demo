@@ -16,26 +16,14 @@
     <Filter Include="资源文件\image">
       <UniqueIdentifier>{479e67f5-7a05-4cad-a9bd-40ad896b5026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\image\building_icons">
-      <UniqueIdentifier>{c3f820ee-d5fd-4ff8-942d-c5c2b2f0b732}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\image\colors">
-      <UniqueIdentifier>{e64f5806-d709-4a1a-9945-256a6837fd82}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\image\buildings">
       <UniqueIdentifier>{f2b1d165-4e4d-470d-94e2-ba3e155ce3c2}</UniqueIdentifier>
     </Filter>
     <Filter Include="资源文件\glsl">
       <UniqueIdentifier>{c87619a4-c28f-4df8-9b4b-41786bf38ee1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\image\shapes">
-      <UniqueIdentifier>{437d9816-65ca-45e5-aca1-0e9b7038de2e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\lib">
       <UniqueIdentifier>{fdcfd367-1d7a-4be3-a6c1-3f3c828793de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\image\psd">
-      <UniqueIdentifier>{031b78dd-5d94-4255-889c-c0716efdaa6a}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\render">
       <UniqueIdentifier>{85a57e5c-32fa-41a8-b594-82afc2e8b6fb}</UniqueIdentifier>
@@ -60,6 +48,12 @@
     </Filter>
     <Filter Include="源文件\component">
       <UniqueIdentifier>{f9e49b06-0c45-4e98-ad66-f96b1df770b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\image\misc">
+      <UniqueIdentifier>{8c9c3510-c6d6-4f1f-a56a-3c493d243595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\image\resources">
+      <UniqueIdentifier>{32c8deb6-a07f-447c-ab02-f394599a978d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +170,6 @@
     </ClInclude>
     <ClInclude Include="ColoredShapes.h">
       <Filter>头文件\component</Filter>
-    </ClInclude>
-    <ClInclude Include="app.cpp">
-      <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="BuildingRenderer.h">
       <Filter>头文件\render</Filter>
@@ -353,32 +344,11 @@
     <ClCompile Include="UndergroundBelt2Renderer.cpp">
       <Filter>源文件\render</Filter>
     </ClCompile>
+    <ClCompile Include="run.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="image\colors\blue.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\cyan.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\green.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\purple.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\red.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\uncolored.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\white.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
-    <Image Include="image\colors\yellow.png">
-      <Filter>资源文件\image\colors</Filter>
-    </Image>
     <Image Include="image\buildings\balancer.png">
       <Filter>资源文件\image\buildings</Filter>
     </Image>
@@ -580,116 +550,149 @@
     <Image Include="image\buildings\underground_belt_exit_blue.png">
       <Filter>资源文件\image\buildings</Filter>
     </Image>
-    <Image Include="image\building_icons\balancer.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\belt.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\block.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\cutter.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\miner.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\mixer.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\painter.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\rotater.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\stacker.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\trash.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\building_icons\underground_belt.png">
-      <Filter>资源文件\image\building_icons</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_blue.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_cyan.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_green.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_purple.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_red.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_uncolored.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_white.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\circle_yellow.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_blue.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_cyan.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_green.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_purple.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_red.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_uncolored.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_white.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\rect_yellow.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_blue.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_cyan.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_green.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_purple.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_red.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_uncolored.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_white.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
-    <Image Include="image\shapes\star_yellow.png">
-      <Filter>资源文件\image\shapes</Filter>
-    </Image>
     <Image Include="image\buildings\rotater-ccw.png">
       <Filter>资源文件\image\buildings</Filter>
     </Image>
     <Image Include="image\buildings\rotater-ccw_blue.png">
       <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\misc\slot_bad_arrow.png">
+      <Filter>资源文件\image\misc</Filter>
+    </Image>
+    <Image Include="image\misc\slot_good_arrow.png">
+      <Filter>资源文件\image\misc</Filter>
+    </Image>
+    <Image Include="image\misc\storage_overlay.png">
+      <Filter>资源文件\image\misc</Filter>
+    </Image>
+    <Image Include="image\buildings\balancer_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\belt_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\block_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\cutter_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\miner_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\mixer_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\painter_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\rotater_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\stacker_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\trash_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\buildings\underground_belt_icon.png">
+      <Filter>资源文件\image\buildings</Filter>
+    </Image>
+    <Image Include="image\resources\blue.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_blue.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_cyan.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_green.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_purple.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_red.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_uncolored.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_white.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\circle_yellow.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\cyan.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\green.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\purple.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_blue.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_cyan.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_green.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_purple.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_red.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_uncolored.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_white.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\rect_yellow.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\red.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_blue.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_cyan.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_green.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_purple.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_red.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_uncolored.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_white.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\star_yellow.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\uncolored.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\white.png">
+      <Filter>资源文件\image\resources</Filter>
+    </Image>
+    <Image Include="image\resources\yellow.png">
+      <Filter>资源文件\image\resources</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -704,15 +707,6 @@
     </None>
     <None Include="glsl\tex_instance.vert">
       <Filter>资源文件\glsl</Filter>
-    </None>
-    <None Include="image\shapes\circle.psd">
-      <Filter>资源文件\image\psd</Filter>
-    </None>
-    <None Include="image\shapes\rect.psd">
-      <Filter>资源文件\image\psd</Filter>
-    </None>
-    <None Include="image\shapes\star.psd">
-      <Filter>资源文件\image\psd</Filter>
     </None>
     <None Include="packages.config" />
     <None Include="glsl\font.frag">
@@ -729,6 +723,15 @@
     </None>
     <None Include="glsl\shape.vert">
       <Filter>资源文件\glsl</Filter>
+    </None>
+    <None Include="image\resources\circle.psd">
+      <Filter>资源文件\image\resources</Filter>
+    </None>
+    <None Include="image\resources\rect.psd">
+      <Filter>资源文件\image\resources</Filter>
+    </None>
+    <None Include="image\resources\star.psd">
+      <Filter>资源文件\image\resources</Filter>
     </None>
   </ItemGroup>
 </Project>

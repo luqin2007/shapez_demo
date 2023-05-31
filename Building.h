@@ -169,9 +169,4 @@ protected:
 	 * \brief 不公开的构造函数，仅由对应类型创建
 	 */
 	Building() = default;
-
-	static vector<Vec2I> pos_small(const Vec2I& pos);
-	static vector<Vec2I> pos_middle(const Vec2I& pos, Side direction);
-	static vector<Vec2I> pos_large(const Vec2I& pos, Side direction);
-	static vector<Vec2I> pos_special(const Vec2I& pos);
 };
