@@ -29,16 +29,18 @@ enum class BuildingStatus
 
 class TickableBuilding;
 
+class MinerRenderer;
+
 class TickableContext : public BuildingContext
 {
 	friend TickableBuilding;
-
+	friend MinerRenderer;
 public:
 	TickableContext(const Building& building, const Vec2I& pos, const Side direction, const time_t required_time)
 		: BuildingContext(building, pos, direction), required_time_(required_time)
 	{
 	}
-
+	
 protected:
 	/**
 	 * \brief 当前工作状态
@@ -65,6 +67,15 @@ class TickableBuilding : public Building
 public:
 	void update(BuildingContext& context, GameMap& map) const override;
 
+	static TickableContext& cast(BuildingContext& context)
+	{
+		return static_cast<TickableContext&>(context);
+	}
+
+	static const TickableContext& cast(const BuildingContext& context)
+	{
+		return static_cast<const TickableContext&>(context);
+	}
 protected:
 	TickableBuilding() = default;
 
@@ -84,9 +95,4 @@ protected:
 	 * \return 若返回 false，则进入阻塞状态
 	 */
 	virtual bool on_finished(TickableContext& context, const GameMap& map) const = 0;
-
-	static TickableContext& cast(BuildingContext& context)
-	{
-		return static_cast<TickableContext&>(context);
-	}
 };

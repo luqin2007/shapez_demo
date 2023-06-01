@@ -12,53 +12,52 @@ using std::pair;
 
 class Belt;
 class Belts;
+class BeltDirectRenderer;
+class BeltLeftRenderer;
+class BeltRightRenderer;
 
 class BeltContext final : public BuildingContext
 {
 	friend Belt;
-
-public:
+	friend BeltDirectRenderer;
+	friend BeltLeftRenderer;
+	friend BeltRightRenderer;
+	
 	/**
 	 * \brief 传送带上的物品
 	 */
-	ItemType types[4]{ItemType::none, ItemType::none, ItemType::none, ItemType::none};
-	int indices[4]{0, 0, 0, 0};
-	// 数组模拟循环链表
-	Color dyes[4]{};
-	ColoredShapes shapes[4]{};
-	int p_dye = 0, p_shape = 0;
-	time_t place_time_;
+	ItemType item_types_[2] = {ItemType::none, ItemType::none};
+	Color dyes_[2] = {Color::uncolored, Color::uncolored};
+	ColoredShapes shapes_[2];
+	int first_ = 0, second_ = 1;
 
-	/**
-	 * \brief 传送带上物品的位置
-	 */
-	float item_pos[4]{0, 0, 0, 0};
-
-	BeltContext(const Building& building, const Vec2I& pos, const Side direction, const Side output):
-		BuildingContext(building, pos, direction), place_time_(current_game->timer().running_ms), output_(output)
-	{
-	}
-
-private:
 	/**
 	 * \brief 每秒前进速度
 	 */
-	const float speed_ = 0.25f;
-
-	/**
-	 * \brief 每个位置物品的最大可能位置
-	 */
-	const float max_pos_[4]{0, 0.34f, 0.67f, 1.01f};
+	const float speed_ = 0.025f;
+	time_t place_time_;
 
 	/**
 	 * \brief 当前传送带上物品个数
 	 */
-	int p_item_ = 3;
+	int item_count_ = 0;
 
 	/**
 	 * \brief 输出位置
 	 */
 	const Side output_;
+
+	/**
+	 * \brief 传送带上物品的位置
+	 */
+	float item_pos_[2] = {0, 0};
+
+public:
+	BeltContext(const Building& building, const Vec2I& pos, const Side direction, const Side output):
+		BuildingContext(building, pos, direction), place_time_(current_game->timer().running_ms), output_(output)
+	{
+	}
+
 };
 
 /**

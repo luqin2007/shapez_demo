@@ -68,23 +68,23 @@ MinerRenderer::p2 MinerRenderer::offset_item(const Side direction, const float c
 	{
 	case Side::up:
 		return {
-			{x0 + 0.3f * cell_size, y0 - (pp + 0.1f) * cell_size},
-			{x1 - 0.3f * cell_size, y0 - (pp - 0.3f) * cell_size}
+			{x0 + 0.25f * cell_size, y0 - (pp - 0.3f) * cell_size},
+			{x1 - 0.25f * cell_size, y0 - (pp + 0.2f) * cell_size}
 		};
 	case Side::down:
 		return {
-			{x0 + 0.3f * cell_size, y1 + (pp - 0.3f) * cell_size},
-			{x1 - 0.3f * cell_size, y1 + (pp + 0.1f) * cell_size}
+			{x0 + 0.25f * cell_size, y1 + (pp - 0.3f) * cell_size},
+			{x1 - 0.25f * cell_size, y1 + (pp + 0.2f) * cell_size}
 		};
 	case Side::left:
 		return {
-			{x0 - (pp - 0.3f) * cell_size, y0 + 0.3f * cell_size},
-			{x0 - (pp + 0.1f) * cell_size, y1 - 0.3f * cell_size}
+			{x0 - (pp - 0.3f) * cell_size, y0 + 0.25f * cell_size},
+			{x0 - (pp + 0.2f) * cell_size, y1 - 0.25f * cell_size}
 		};
 	case Side::right:
 		return {
-			{x1 + (pp - 0.3f) * cell_size, y0 + 0.3f * cell_size},
-			{x1 + (pp + 0.1f) * cell_size, y1 - 0.3f * cell_size}
+			{x1 + (pp - 0.3f) * cell_size, y0 + 0.25f * cell_size},
+			{x1 + (pp + 0.2f) * cell_size, y1 - 0.25f * cell_size}
 		};
 	}
 	return {};

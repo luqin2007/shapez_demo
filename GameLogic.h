@@ -13,6 +13,7 @@ using std::map;
 class Building;
 
 constexpr int BUTTON_SIZE = 50;
+constexpr int BUTTON_PADDING = 10;
 
 class GameLogic
 {

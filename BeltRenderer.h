@@ -2,6 +2,12 @@
 #include "Atlas.h"
 #include "BuildingRenderer.h"
 
+class BeltContext;
+
+class BeltDirect;
+class BeltLeft;
+class BeltRight;
+
 class BeltRenderer : public BuildingRenderer
 {
 public:
@@ -12,13 +18,20 @@ public:
 
 protected:
 	time_t delta_time_ = 40;
+	const string holding_;
+
+	explicit BeltRenderer(string holding): holding_(std::move(holding))
+	{
+	}
 
 	[[nodiscard]] virtual const string& get_building_tex(int index) const = 0;
-	[[nodiscard]] virtual const string& get_holding_tex() const = 0;
+	virtual void draw_items(float x0, float y0, float x1, float y1,
+	                        float cell_size, const BeltContext& context, GameRenderer& renderer) const = 0;
 };
 
 class BeltDirectRenderer final : public BeltRenderer
 {
+	friend BeltDirect;
 protected:
 	/**
 	 * \brief 动画纹理
@@ -30,14 +43,18 @@ protected:
 		"forward_10.png", "forward_11.png", "forward_12.png", "forward_13.png",
 	};
 
-	const string holding_ = "belt_top_blue.png";
+	BeltDirectRenderer() : BeltRenderer("belt_top_blue.png")
+	{
+	}
 
 	[[nodiscard]] const string& get_building_tex(int index) const override;
-	[[nodiscard]] const string& get_holding_tex() const override;
+	void draw_items(float x0, float y0, float x1, float y1,
+	                float cell_size, const BeltContext& context, GameRenderer& renderer) const override;
 };
 
 class BeltLeftRenderer final : public BeltRenderer
 {
+	friend BeltLeft;
 protected:
 	/**
 	 * \brief 动画纹理
@@ -49,14 +66,18 @@ protected:
 		"left_10.png", "left_11.png", "left_12.png", "left_13.png",
 	};
 
-	const string holding_ = "belt_left_blue.png";
+	BeltLeftRenderer() : BeltRenderer("belt_left_blue.png")
+	{
+	}
 
 	[[nodiscard]] const string& get_building_tex(int index) const override;
-	[[nodiscard]] const string& get_holding_tex() const override;
+	void draw_items(float x0, float y0, float x1, float y1,
+	                float cell_size, const BeltContext& context, GameRenderer& renderer) const override;
 };
 
 class BeltRightRenderer final : public BeltRenderer
 {
+	friend BeltRight;
 protected:
 	/**
 	 * \brief 动画纹理
@@ -68,8 +89,11 @@ protected:
 		"right_10.png", "right_11.png", "right_12.png", "right_13.png",
 	};
 
-	const string holding_ = "belt_right_blue.png";
+	BeltRightRenderer(): BeltRenderer("belt_right_blue.png")
+	{
+	}
 
 	[[nodiscard]] const string& get_building_tex(int index) const override;
-	[[nodiscard]] const string& get_holding_tex() const override;
+	void draw_items(float x0, float y0, float x1, float y1,
+	                float cell_size, const BeltContext& context, GameRenderer& renderer) const override;
 };

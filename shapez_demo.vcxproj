@@ -315,6 +315,7 @@
     <Image Include="image\buildings\underground_belt_exit.png" />
     <Image Include="image\buildings\underground_belt_exit_blue.png" />
     <Image Include="image\buildings\underground_belt_icon.png" />
+    <Image Include="image\misc\button_background.png" />
     <Image Include="image\misc\slot_bad_arrow.png" />
     <Image Include="image\misc\slot_good_arrow.png" />
     <Image Include="image\misc\storage_overlay.png" />

@@ -3,7 +3,6 @@
 #include "BuildingContext.h"
 #include "GameLogic.h"
 #include "GameRenderer.h"
-#include "MouseHelper.h"
 
 void UndergroundBelt1Renderer::draw_building(const int row, const int col, const BuildingContext& context,
                                              GameRenderer& renderer, const GameMap& map) const
@@ -25,13 +24,7 @@ void UndergroundBelt1Renderer::draw_holding(const float x, const float y, const 
 
 void UndergroundBelt1Renderer::draw_icon(const float x, const float y, float size, GameRenderer& renderer) const
 {
-	renderer.tex_drawer.alpha(ICON_ALPHA);
-	const float mouse_x = MouseHelper::x();
-	const float mouse_y = MouseHelper::y();
-	const bool selected = !current_game->current_building
-		&& is_in(x, mouse_x, BUTTON_SIZE)
-		&& is_in(y, mouse_y, BUTTON_SIZE);
 	renderer.tex_drawer.push(x + ICON_PADDING, y + ICON_PADDING,
 	                         x + BUTTON_SIZE - ICON_PADDING, y + BUTTON_SIZE - ICON_PADDING,
-	                         renderer.atlas, "underground_belt_icon.png", Side::up, selected);
+	                         renderer.atlas, "underground_belt_icon.png", Side::up);
 }

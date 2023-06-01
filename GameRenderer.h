@@ -37,7 +37,7 @@ public:
 	ShapeDrawer shape_drawer;
 	// FontDrawer font_drawer_{ROOT / "font" / "MicrosoftYaHei.ttf"};
 
-	Atlas atlas{4096, 2048, 48, 60};
+	Atlas atlas{4096, 2048, 12, 12};
 
 	void initialize();
 

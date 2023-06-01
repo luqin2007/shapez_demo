@@ -57,7 +57,7 @@ struct Vec2
 		float h{};
 	};
 
-	explicit Vec2(const float x = 0, const float y = 0) : x(x), y(y)
+	Vec2(const float x = 0, const float y = 0) : x(x), y(y)
 	{
 	}
 

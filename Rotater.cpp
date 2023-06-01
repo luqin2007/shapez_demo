@@ -70,14 +70,12 @@ bool Rotater::on_finished(TickableContext& context, const GameMap& map) const
 
 const BuildingRenderer& RotaterCW::get_renderer() const
 {
-	static RotaterCWRenderer renderer;
-	return renderer;
+	return RotaterRenderer::cw();
 }
 
 const BuildingRenderer& RotaterCCW::get_renderer() const
 {
-	static RotaterCCWRenderer renderer;
-	return renderer;
+	return RotaterRenderer::ccw();
 }
 
 const Rotater& Rotaters::cw()

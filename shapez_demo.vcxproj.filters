@@ -694,6 +694,9 @@
     <Image Include="image\resources\yellow.png">
       <Filter>资源文件\image\resources</Filter>
     </Image>
+    <Image Include="image\misc\button_background.png">
+      <Filter>资源文件\image\misc</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl\cell_border.frag">

@@ -65,8 +65,7 @@ private:
 	GLfloat op_alpha_ = -1;
 	float* buf_ = nullptr;
 
-	inline void push_vertices(float x0, float y0, float u0, float v0,
-							  float x1, float y1, float u1, float v1,
-							  float x2, float y2, float u2, float v2,
-							  float x3, float y3, float u3, float v3);
+	inline void push_vertices(float x0, float y0, float x1, float y1,
+	                          float u0, float v0, float u1, float v1,
+	                          float u2, float v2, float u3, float v3);
 };

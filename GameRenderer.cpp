@@ -115,10 +115,12 @@ void GameRenderer::initialize()
 		// 4x4
 		<< ROOT / "image" / "buildings" / "hub.png"
 		// misc
-		<< dot9{8, 10}
 		<< ROOT / "image" / "misc" / "slot_bad_arrow.png"
 		<< ROOT / "image" / "misc" / "slot_good_arrow.png"
+		<< dot9{8, 10}
 		<< ROOT / "image" / "misc" / "storage_overlay.png"
+		<< dot9{12, 12}
+		<< ROOT / "image" / "misc" / "button_background.png"
 		// resource
 		<< ROOT / "image" / "resources" / "blue.png"
 		<< ROOT / "image" / "resources" / "cyan.png"
@@ -295,7 +297,7 @@ void GameRenderer::draw_map_resources(const GameMap& map)
 				const bool mining = ctx && ctx->building == Miner::instance();
 				// 绘制
 				tex_drawer.push(edge_pos[j].x + sp, edge_pos[i].y + sp, edge_pos[j + 1].x - sp, edge_pos[i + 1].y - sp,
-								atlas, resource_icon(res), Side::up, mining);
+				                atlas, resource_icon(res), Side::up, mining);
 			}
 		}
 	}
@@ -330,15 +332,30 @@ void GameRenderer::draw_ui(const GameLogic& game)
 	const auto y0 = static_cast<float>(game.icon_bg0.y);
 	const auto x1 = static_cast<float>(game.icon_bg1.x);
 	const auto y1 = static_cast<float>(game.icon_bg1.y);
-	tex_drawer.push(x0, y0, x1, y1, atlas, "storage_overlay.png");
+	tex_drawer.alpha(0.1f);
+	tex_drawer.push(x0, y0, x1, y1, atlas, "button_background.png");
 
 	// 按钮
+	tex_drawer.alpha(1);
 	for (const auto& [name, p0] : game.buttons)
 	{
 		const auto x = static_cast<float>(p0.x);
 		const auto y = static_cast<float>(p0.y);
 		const Building* building = game.buildings.at(name);
 		building->get_renderer().draw_icon(x, y, BUTTON_SIZE, *this);
+
+		const float mouse_x = MouseHelper::x();
+		const float mouse_y = MouseHelper::y();
+		if (!current_game->current_building
+			&& is_in(x, mouse_x, BUTTON_SIZE)
+			&& is_in(y, mouse_y, BUTTON_SIZE))
+		{
+			tex_drawer.alpha(0.5f);
+			tex_drawer.push(x - BUTTON_PADDING, y - BUTTON_PADDING,
+			                x + BUTTON_SIZE + BUTTON_PADDING, y + BUTTON_SIZE + BUTTON_PADDING,
+			                atlas, "button_background.png");
+			tex_drawer.alpha(1);
+		}
 	}
 
 	tex_drawer.draw();

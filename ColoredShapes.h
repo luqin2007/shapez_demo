@@ -2,9 +2,11 @@
 
 #include <utility>
 
+#include "Atlas.h"
 #include "Color.h"
 #include "ResourceType.h"
 #include "Shape.h"
+#include "Side.h"
 
 using std::pair;
 
@@ -13,10 +15,10 @@ using std::pair;
  */
 struct ColoredShapes
 {
-	pair<Color, Shape> down_right;
-	pair<Color, Shape> down_left;
-	pair<Color, Shape> up_right;
-	pair<Color, Shape> up_left;
+	pair<Color, Shape> down_right = {Color::uncolored, Shape::none};
+	pair<Color, Shape> down_left = { Color::uncolored, Shape::none };
+	pair<Color, Shape> up_right = { Color::uncolored, Shape::none };
+	pair<Color, Shape> up_left = { Color::uncolored, Shape::none };
 
 	static ColoredShapes from_resource(ResourceType type);
 
@@ -38,4 +40,20 @@ struct ColoredShapes
 	bool operator|(Color color) const;
 
 	bool operator==(const ColoredShapes&) const;
+
+	/**
+	 * \brief 绘制
+	 * \param atlas 纹理集
+	 * \param drawer 绘制器
+	 * \param x0 x0
+	 * \param y0 y0
+	 * \param x1 x1
+	 * \param y1 y1
+	 * \param direction 方向
+	 */
+	void draw(const Atlas& atlas, TextureDrawer& drawer, float x0, float y0, float x1, float y1, Side direction) const;
+
+private:
+
+	static bool get_draw_name(string& name, const pair<Color, Shape>& part);
 };

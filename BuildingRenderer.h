@@ -7,7 +7,6 @@ class BuildingContext;
 class GameRenderer;
 
 constexpr static float ICON_PADDING = 5;
-constexpr static float ICON_ALPHA = 0.3f;
 constexpr static float EXT_SIZE = 1;
 
 /**

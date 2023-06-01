@@ -10,37 +10,50 @@ bool Belt::can_receive(const Vec2I& pos, const Side side, const BuildingContext&
 bool Belt::can_receive_dye(Color color, const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
-	return can_receive(pos, side, context) && ctx.p_item_ != 3 && ctx.item_pos[ctx.p_item_] > ctx.max_pos_[1];
+	return side == -context.direction && ctx.item_count_ != 2 && ctx.item_pos_[ctx.first_] >= 0.5f;
 }
 
 bool Belt::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, const Side side,
-                                     const BuildingContext& context) const
+                             const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
-	return can_receive(pos, side, context) && ctx.p_item_ != 3 && ctx.item_pos[ctx.p_item_] > ctx.max_pos_[1];
+	return side == -context.direction && ctx.item_count_ != 2 && ctx.item_pos_[ctx.first_] >= 0.5f;
 }
 
 void Belt::receive_dye(const Color color, const Vec2I& pos, Side side, BuildingContext& context) const
 {
-	auto& ctx = cast(context);
-	ctx.types[ctx.p_item_] = ItemType::dye;
-	ctx.indices[ctx.p_item_] = ctx.p_dye;
-	ctx.item_pos[ctx.p_item_] = 0;
-	ctx.dyes[ctx.p_dye] = color;
-	ctx.p_dye = (ctx.p_dye + 1) % 4;
-	ctx.p_item_--;
+	if (auto& ctx = cast(context); ctx.item_count_ == 0)
+	{
+		ctx.item_types_[ctx.first_] = ItemType::dye;
+		ctx.item_pos_[ctx.first_] = 0;
+		ctx.dyes_[ctx.first_] = color;
+		ctx.item_count_ = 1;
+	}
+	else if (ctx.item_count_ == 1)
+	{
+		ctx.item_types_[ctx.second_] = ItemType::dye;
+		ctx.item_pos_[ctx.second_] = 0;
+		ctx.dyes_[ctx.second_] = color;
+		ctx.item_count_ = 2;
+	}
 }
 
-void Belt::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
-                                 BuildingContext& context) const
+void Belt::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side, BuildingContext& context) const
 {
-	auto& ctx = cast(context);
-	ctx.types[ctx.p_item_] = ItemType::shape;
-	ctx.indices[ctx.p_item_] = ctx.p_shape;
-	ctx.item_pos[ctx.p_item_] = 0;
-	ctx.shapes[ctx.p_shape] = shape;
-	ctx.p_shape = (ctx.p_shape + 1) % 4;
-	ctx.p_item_--;
+	if (auto& ctx = cast(context); ctx.item_count_ == 0)
+	{
+		ctx.item_types_[ctx.first_] = ItemType::shape;
+		ctx.item_pos_[ctx.first_] = 0;
+		ctx.shapes_[ctx.first_] = shape;
+		ctx.item_count_ = 1;
+	}
+	else if (ctx.item_count_ == 1)
+	{
+		ctx.item_types_[ctx.second_] = ItemType::shape;
+		ctx.item_pos_[ctx.second_] = 0;
+		ctx.shapes_[ctx.second_] = shape;
+		ctx.item_count_ = 2;
+	}
 }
 
 void Belt::update(BuildingContext& context, GameMap& map) const
@@ -48,41 +61,37 @@ void Belt::update(BuildingContext& context, GameMap& map) const
 	auto& ctx = cast(context);
 
 	const float ss = ctx.speed_ * current_game->timer().delta;
-	for (int i = 1; i <= ctx.p_item_; ++i)
+	if (ctx.item_count_ && ctx.item_pos_[ctx.first_] < 1.0000001f)
 	{
-		ctx.item_pos[i] += ss;
-		if (ctx.item_pos[i] > ctx.max_pos_[i])
+		ctx.item_pos_[ctx.first_] += ss;
+	}
+	if (ctx.item_count_ == 2 && ctx.item_pos_[ctx.second_] < 0.5000001f)
+	{
+		ctx.item_pos_[ctx.second_] += ss;
+	}
+
+	if (ctx.item_pos_[ctx.first_] > 0.99999999f)
+	{
+		// 可输出
+		bool send = false;
+		if (ctx.item_types_[ctx.first_] == ItemType::dye)
 		{
-			ctx.item_pos[i] = ctx.max_pos_[i];
+			send = send_dye(context.pos, ctx.output_, ctx.dyes_[ctx.first_], map);
 		}
-	}
-
-	// 可输出
-	bool send = false;
-	if (ctx.types[3] == ItemType::dye)
-	{
-		send = send_dye(context.pos, ctx.output_, ctx.dyes[ctx.indices[3]], map);
-	}
-	else if (ctx.types[3] == ItemType::shape)
-	{
-		send = send_shape(context.pos, ctx.output_, ctx.shapes[ctx.indices[3]], map);
-	}
-	if (send)
-	{
-		// 迁移
-		ctx.types[3] = ctx.types[2];
-		ctx.types[2] = ctx.types[1];
-		ctx.types[1] = ctx.types[0];
-
-		ctx.indices[3] = ctx.indices[2];
-		ctx.indices[2] = ctx.indices[1];
-		ctx.indices[1] = ctx.indices[0];
-
-		ctx.item_pos[3] = ctx.item_pos[2];
-		ctx.item_pos[2] = ctx.item_pos[1];
-		ctx.item_pos[1] = ctx.item_pos[0];
-
-		ctx.p_item_++;
+		else if (ctx.item_types_[ctx.first_] == ItemType::shape)
+		{
+			send = send_shape(context.pos, ctx.output_, ctx.shapes_[ctx.first_], map);
+		}
+		if (send)
+		{
+			// 迁移
+			std::swap(ctx.first_, ctx.second_);
+			if (ctx.item_pos_[ctx.first_] > 0.5000001f)
+			{
+				ctx.item_pos_[ctx.first_] = 0.5000001f;
+			}
+			ctx.item_count_--;
+		}
 	}
 }
 

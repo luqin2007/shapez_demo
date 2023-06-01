@@ -7,7 +7,7 @@
 
 BuildingContext* Miner::build_context(const Vec2I& pos, const Side direction) const
 {
-	return new BuildingContext(*this, pos, direction);
+	return new TickableContext(*this, pos, direction, FAST);
 }
 
 bool Miner::can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const

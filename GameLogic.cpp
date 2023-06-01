@@ -43,8 +43,10 @@ void GameLogic::initialize(const long long seed)
 
 void GameLogic::update()
 {
+	// 更新计时器
 	timer_.update();
 
+	// 更新鼠标响应
 	if (MouseHelper::is_left_drag())
 	{
 		on_drag(MouseHelper::dx(), MouseHelper::dy());
@@ -65,6 +67,18 @@ void GameLogic::update()
 
 	on_wheel_roll(MouseHelper::wheel());
 	MouseHelper::update();
+
+	// 更新建筑
+	for (int i = 0; i < CELL_COUNT; ++i)
+	{
+		for (int j = 0; j < CELL_COUNT; ++j)
+		{
+			if (auto *b = map_.get_building(i, j))
+			{
+				b->building.update(*b, map_);
+			}
+		}
+	}
 }
 
 void GameLogic::destroy()
@@ -196,17 +210,16 @@ void GameLogic::on_key_press(const int key)
 
 void GameLogic::update_button_positions(const int width, const int height)
 {
-	constexpr int padding_x = 30;
-	constexpr int padding_y = 10;
+	constexpr int padding_x = 0;
 	constexpr int div = 70;
 
 	// 更新 UI 位置
-	const int x0 = (width - 720) / 2;
+	const int x0 = (width - 680) / 2;
 	const int y0 = height - 80;
-	icon_bg0.x = x0 - padding_x;
-	icon_bg0.y = y0 - padding_y;
-	icon_bg1.x = x0 + 720 + padding_x;
-	icon_bg1.y = y0 + BUTTON_SIZE + padding_y;
+	icon_bg0.x = x0 - BUTTON_PADDING - padding_x;
+	icon_bg0.y = y0 - BUTTON_PADDING;
+	icon_bg1.x = x0 + 680 + BUTTON_PADDING + padding_x;
+	icon_bg1.y = y0 + BUTTON_SIZE + BUTTON_PADDING;
 
 	int p0 = x0 + padding_x;
 	buttons["miner"] = Vec2I{ p0, y0 };

@@ -36,7 +36,7 @@ void MinerRenderer::draw_building(const int row, const int col, const BuildingCo
 		if (draw_res)
 		{
 			const auto [p0, p1] = offset_item(context.direction, map.cell_size, p, x0, y0, x1, y1);
-			renderer.tex_drawer.push(p0.x, p0.y, p1.x, p1.y, renderer.atlas, resource_icon(res));
+			renderer.tex_drawer.push(p0.x, p0.y, p1.x, p1.y, renderer.atlas, resource_icon(res), Side::up);
 		}
 	}
 
@@ -68,23 +68,23 @@ MinerRenderer::p2 MinerRenderer::offset_item(const Side direction, const float c
 	{
 	case Side::up:
 		return {
-			{x0 + 0.3f * cell_size, y0 - (pp + 0.1f) * cell_size},
-			{x1 - 0.3f * cell_size, y0 - (pp - 0.3f) * cell_size}
+			{x0 + 0.25f * cell_size, y0 - (pp - 0.3f) * cell_size},
+			{x1 - 0.25f * cell_size, y0 - (pp + 0.2f) * cell_size}
 		};
 	case Side::down:
 		return {
-			{x0 + 0.3f * cell_size, y1 + (pp - 0.3f) * cell_size},
-			{x1 - 0.3f * cell_size, y1 + (pp + 0.1f) * cell_size}
+			{x0 + 0.25f * cell_size, y1 + (pp - 0.3f) * cell_size},
+			{x1 - 0.25f * cell_size, y1 + (pp + 0.2f) * cell_size}
 		};
 	case Side::left:
 		return {
-			{x0 - (pp - 0.3f) * cell_size, y0 + 0.3f * cell_size},
-			{x0 - (pp + 0.1f) * cell_size, y1 - 0.3f * cell_size}
+			{x0 - (pp - 0.3f) * cell_size, y0 + 0.25f * cell_size},
+			{x0 - (pp + 0.2f) * cell_size, y1 - 0.25f * cell_size}
 		};
 	case Side::right:
 		return {
-			{x1 + (pp - 0.3f) * cell_size, y0 + 0.3f * cell_size},
-			{x1 + (pp + 0.1f) * cell_size, y1 - 0.3f * cell_size}
+			{x1 + (pp - 0.3f) * cell_size, y0 + 0.25f * cell_size},
+			{x1 + (pp + 0.2f) * cell_size, y1 - 0.25f * cell_size}
 		};
 	}
 	return {};
