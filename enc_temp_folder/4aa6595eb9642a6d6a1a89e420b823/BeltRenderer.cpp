@@ -260,7 +260,7 @@ Vec2 BeltRightRenderer::offset_right(const Side direction, const float cell_size
 		case Side::up:
 			return { x0 + (0.3f + pp) * cell_size, y0 + (0.5f - pp) * cell_size };
 		case Side::down:
-			return { x0 + (0.3f - pp) * cell_size, y0 + (0.1f + pp) * cell_size };
+			return { x0 + (0.3f - pp) * cell_size, y0 + (-0.1f + pp) * cell_size };
 		case Side::left:
 			return { x0 + (0.5f - pp) * cell_size, y0 + (0.3f - pp) * cell_size };
 		case Side::right:

@@ -194,6 +194,7 @@
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Balancer.cpp" />
     <ClCompile Include="Belt.cpp" />
+    <ClCompile Include="BuildingRenderer.cpp" />
     <ClCompile Include="Cutter.cpp" />
     <ClCompile Include="Hub.cpp" />
     <ClCompile Include="Miner.cpp" />
@@ -353,6 +354,7 @@
     <Image Include="image\resources\yellow.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="glsl\cell_border.frag" />
     <None Include="glsl\cell_border.vert" />
     <None Include="glsl\direct.frag" />

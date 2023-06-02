@@ -1,7 +1,14 @@
 #pragma once
 
-#include "Side.h"
+#include <string>
 
+#include "Color.h"
+#include "Side.h"
+#include "vec.h"
+
+using std::string;
+
+struct ColoredShapes;
 class GameMap;
 class BuildingContext;
 class GameRenderer;
@@ -54,7 +61,27 @@ public:
 	 * \param renderer 游戏主渲染器
 	 * \param map 地图
 	 */
-	virtual void draw_overlay(int row, int col, const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
-	{
-	}
+	virtual void draw_overlay(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+	                          const GameMap& map) const = 0;
+
+protected:
+	/**
+	 * \brief 绘制染料对应的物品
+	 * \param x0 左上角 x
+	 * \param y0 左上角 y
+	 * \param cell_size 网格大小
+	 * \param renderer 游戏主渲染器
+	 * \param color 染料颜色
+	 */
+	static void draw_color(float x0, float y0, float cell_size, GameRenderer& renderer, Color color);
+
+	/**
+	 * \brief 渲染形状物品
+	 * \param x0 左上角 x
+	 * \param y0 左上角 y
+	 * \param cell_size 网格大小
+	 * \param renderer 游戏主渲染器
+	 * \param item 物品
+	 */
+	static void draw_item(float x0, float y0, float cell_size, GameRenderer& renderer, const ColoredShapes& item);
 };

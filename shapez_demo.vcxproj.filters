@@ -347,6 +347,9 @@
     <ClCompile Include="run.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BuildingRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="image\buildings\balancer.png">
@@ -736,5 +739,6 @@
     <None Include="image\resources\star.psd">
       <Filter>资源文件\image\resources</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -150,7 +150,7 @@ Vec2 BeltLeftRenderer::offset_left(const Side direction, const float cell_size, 
 		case Side::left:
 			return {x0 + (0.7f - pp) * cell_size, y0 + 0.3f * cell_size};
 		case Side::right:
-			return {x0 + (-0.1f + pp) * cell_size, y0 + 0.3f * cell_size}; 
+			return {x0 + (0.7f - pp) * cell_size, y0 + 0.3f * cell_size};
 		}
 	}
 	else if (p <= 0.7f)
@@ -166,7 +166,7 @@ Vec2 BeltLeftRenderer::offset_left(const Side direction, const float cell_size, 
 		case Side::left:
 			return {x0 + (0.5f - pp) * cell_size, y0 + (0.3f + pp) * cell_size};
 		case Side::right:
-			return {x0 + (0.1f + pp) * cell_size, y0 + (0.3f - pp) * cell_size};
+			return {x0 + (0.3f - pp) * cell_size, y0 + (0.5f + pp) * cell_size};
 		}
 	}
 	else
@@ -182,7 +182,7 @@ Vec2 BeltLeftRenderer::offset_left(const Side direction, const float cell_size, 
 		case Side::left:
 			return {x0 + 0.3f * cell_size, y0 + (0.5f + pp) * cell_size};
 		case Side::right:
-			return {x0 + 0.3f * cell_size, y0 + (0.1f - pp) * cell_size};
+			return {x0 + 0.3f * cell_size, y0 + (0.5f - pp) * cell_size};
 		}
 	}
 	return {};
@@ -235,52 +235,15 @@ const string& BeltRightRenderer::get_building_tex(const int index) const
 Vec2 BeltRightRenderer::offset_right(const Side direction, const float cell_size, const float p,
                                      const float x0, const float y0, const float x1, const float y1)
 {
-	if (p <= 0.3f)
+	switch (direction)
 	{
-		// 上升 0.3 -> 0.2
-		const float pp = p / 3 * 2;
-		switch (direction)
-		{
-		case Side::up:
-			return { x0 + 0.3f * cell_size, y0 + (0.7f - pp) * cell_size };
-		case Side::down:
-			return { x0 + 0.3f * cell_size, y0 + (-0.1f + pp) * cell_size };
-		case Side::left:
-			return { x0 + (0.7f - pp) * cell_size, y0 + 0.3f * cell_size };
-		case Side::right:
-			return { x0 + (-0.1f + pp) * cell_size, y0 + 0.3f * cell_size };
-		}
-	}
-	else if (p <= 0.7f)
-	{
-		// 斜向 0.4 -> 0.2
-		const float pp = (p - 0.3f) / 2;
-		switch (direction)
-		{
-		case Side::up:
-			return { x0 + (0.3f + pp) * cell_size, y0 + (0.5f - pp) * cell_size };
-		case Side::down:
-			return { x0 + (0.3f - pp) * cell_size, y0 + (0.1f + pp) * cell_size };
-		case Side::left:
-			return { x0 + (0.5f - pp) * cell_size, y0 + (0.3f - pp) * cell_size };
-		case Side::right:
-			return { x0 + (0.1f + pp) * cell_size, y0 + (0.3f + pp) * cell_size };
-		}
-	}
-	else
-	{
-		// 横向 0.3 -> 0.4
-		const float pp = (p - 0.7f) / 3 * 4;
-		switch (direction)
-		{
-		case Side::up:
-			return { x0 + (0.5f + pp) * cell_size, y0 + 0.3f * cell_size };
-		case Side::down:
-			return { x0 + (0.1f - pp) * cell_size, y0 + 0.3f * cell_size };
-		case Side::left:
-			return { x0 + 0.3f * cell_size, y0 + (0.1f - pp) * cell_size };
-		case Side::right:
-			return { x0 + 0.3f * cell_size, y0 + (0.5f + pp) * cell_size };
-		}
+	case Side::up:
+		return {x0 + 0.3f * cell_size, y1 - (p + 0.3f) * cell_size};
+	case Side::down:
+		return {x0 + 0.3f * cell_size, y0 + (p - 0.1f) * cell_size};
+	case Side::left:
+		return {x1 - (p - 0.1f) * cell_size, y0 + 0.3f * cell_size};
+	case Side::right:
+		return {x0 + (p - 0.1f) * cell_size, y0 + 0.3f * cell_size};
 	}
 }

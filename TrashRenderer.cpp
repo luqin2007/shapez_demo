@@ -10,7 +10,7 @@ void TrashRenderer::draw_building(const int row, const int col, const BuildingCo
 	const float x0 = renderer.edge_pos[col].x;
 	const float y0 = renderer.edge_pos[row].y;
 	const float x1 = renderer.edge_pos[col + 1].x;
-	const float y1 = renderer.edge_pos[row + 2].y;
+	const float y1 = renderer.edge_pos[row + 1].y;
 	renderer.tex_drawer.push(x0 - EXT_SIZE, y0 - EXT_SIZE, x1 + EXT_SIZE, y1 + EXT_SIZE, renderer.atlas, "trash.png",
 	                         context.direction);
 }

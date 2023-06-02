@@ -28,3 +28,8 @@ void CutterRenderer::draw_icon(const float x, const float y, float size, GameRen
 	                         x + BUTTON_SIZE - ICON_PADDING, y + BUTTON_SIZE - ICON_PADDING,
 	                         renderer.atlas, "cutter_icon.png", Side::up);
 }
+
+void CutterRenderer::draw_overlay(int row, int col,
+                                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+{
+}

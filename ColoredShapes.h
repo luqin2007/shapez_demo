@@ -6,7 +6,6 @@
 #include "Color.h"
 #include "ResourceType.h"
 #include "Shape.h"
-#include "Side.h"
 
 using std::pair;
 
@@ -49,9 +48,8 @@ struct ColoredShapes
 	 * \param y0 y0
 	 * \param x1 x1
 	 * \param y1 y1
-	 * \param direction 方向
 	 */
-	void draw(const Atlas& atlas, TextureDrawer& drawer, float x0, float y0, float x1, float y1, Side direction) const;
+	void draw(const Atlas& atlas, TextureDrawer& drawer, float x0, float y0, float x1, float y1) const;
 
 private:
 

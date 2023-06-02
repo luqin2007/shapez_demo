@@ -24,3 +24,8 @@ void UndergroundBelt2Renderer::draw_holding(const float x, const float y, const 
 void UndergroundBelt2Renderer::draw_icon(const float x, const float y, float size, GameRenderer& renderer) const
 {
 }
+
+void UndergroundBelt2Renderer::draw_overlay(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+                                            const GameMap& map) const
+{
+}

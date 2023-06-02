@@ -68,15 +68,15 @@ bool ColoredShapes::operator==(const ColoredShapes& item) const
 		&& item.down_left == down_left && item.down_right == down_right;
 }
 
-void ColoredShapes::draw(const Atlas& atlas, TextureDrawer& drawer, const float x0, const float y0,
-                         const float x1, const float y1, const Side direction) const
+void ColoredShapes::draw(const Atlas& atlas, TextureDrawer& drawer,
+                         const float x0, const float y0, const float x1, const float y1) const
 {
 	if (up_left == up_right && up_left == down_left && up_left == down_right)
 	{
 		if (string name;
 			get_draw_name(name, up_left))
 		{
-			drawer.push(x0, y0, x1, y1, atlas, name, direction);
+			drawer.push(x0, y0, x1, y1, atlas, name);
 		}
 	}
 	else
@@ -89,28 +89,28 @@ void ColoredShapes::draw(const Atlas& atlas, TextureDrawer& drawer, const float 
 			get_draw_name(name, up_left))
 		{
 			name.append("_lt");
-			drawer.push(x0, y0, xc, yc, atlas, name, direction);
+			drawer.push(x0, y0, xc, yc, atlas, name);
 		}
 		// 右上角
 		if (string name;
 			get_draw_name(name, up_right))
 		{
 			name.append("_rt");
-			drawer.push(xc, y0, x1, yc, atlas, name, direction);
+			drawer.push(xc, y0, x1, yc, atlas, name);
 		}
 		// 左下角
 		if (string name;
 			get_draw_name(name, down_left))
 		{
 			name.append("_lb");
-			drawer.push(x0, yc, xc, y1, atlas, name, direction);
+			drawer.push(x0, yc, xc, y1, atlas, name);
 		}
 		// 右下角
 		if (string name;
 			get_draw_name(name, down_right))
 		{
 			name.append("_rb");
-			drawer.push(xc, yc, x1, y1, atlas, name, direction);
+			drawer.push(xc, yc, x1, y1, atlas, name);
 		}
 	}
 }

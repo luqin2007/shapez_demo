@@ -1,5 +1,4 @@
 #pragma once
-#include "Atlas.h"
 #include "BuildingRenderer.h"
 
 class BeltContext;
@@ -25,13 +24,16 @@ protected:
 	}
 
 	[[nodiscard]] virtual const string& get_building_tex(int index) const = 0;
-	virtual void draw_items(float x0, float y0, float x1, float y1,
-	                        float cell_size, const BeltContext& context, GameRenderer& renderer) const = 0;
 };
 
 class BeltDirectRenderer final : public BeltRenderer
 {
 	friend BeltDirect;
+
+public:
+	void draw_overlay(int row, int col,
+	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+
 protected:
 	/**
 	 * \brief 动画纹理
@@ -48,13 +50,17 @@ protected:
 	}
 
 	[[nodiscard]] const string& get_building_tex(int index) const override;
-	void draw_items(float x0, float y0, float x1, float y1,
-	                float cell_size, const BeltContext& context, GameRenderer& renderer) const override;
+	static Vec2 offset_direct(Side direction, float cell_size, float p, float x0, float y0);
 };
 
 class BeltLeftRenderer final : public BeltRenderer
 {
 	friend BeltLeft;
+
+public:
+	void draw_overlay(int row, int col,
+	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+
 protected:
 	/**
 	 * \brief 动画纹理
@@ -71,13 +77,17 @@ protected:
 	}
 
 	[[nodiscard]] const string& get_building_tex(int index) const override;
-	void draw_items(float x0, float y0, float x1, float y1,
-	                float cell_size, const BeltContext& context, GameRenderer& renderer) const override;
+	static Vec2 offset_left(Side direction, float cell_size, float p, float x0, float y0);
 };
 
 class BeltRightRenderer final : public BeltRenderer
 {
 	friend BeltRight;
+
+public:
+	void draw_overlay(int row, int col,
+	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+
 protected:
 	/**
 	 * \brief 动画纹理
@@ -94,6 +104,5 @@ protected:
 	}
 
 	[[nodiscard]] const string& get_building_tex(int index) const override;
-	void draw_items(float x0, float y0, float x1, float y1,
-	                float cell_size, const BeltContext& context, GameRenderer& renderer) const override;
+	static Vec2 offset_right(Side direction, float cell_size, float p, float x0, float y0, float x1, float y1);
 };

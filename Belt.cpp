@@ -10,14 +10,16 @@ bool Belt::can_receive(const Vec2I& pos, const Side side, const BuildingContext&
 bool Belt::can_receive_dye(Color color, const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
-	return side == -context.direction && ctx.item_count_ != 2 && ctx.item_pos_[ctx.first_] >= 0.5f;
+	return side == -context.direction && ctx.item_count_ != 2
+		&& (ctx.item_count_ == 0 || ctx.item_pos_[ctx.first_] >= 0.5f);
 }
 
 bool Belt::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, const Side side,
                              const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
-	return side == -context.direction && ctx.item_count_ != 2 && ctx.item_pos_[ctx.first_] >= 0.5f;
+	return side == -context.direction && ctx.item_count_ != 2
+		&& (ctx.item_count_ == 0 || ctx.item_pos_[ctx.first_] >= 0.5f);
 }
 
 void Belt::receive_dye(const Color color, const Vec2I& pos, Side side, BuildingContext& context) const

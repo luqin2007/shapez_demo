@@ -28,3 +28,8 @@ void MixerRenderer::draw_icon(const float x, const float y, float size, GameRend
 	                         x + BUTTON_SIZE - ICON_PADDING, y + BUTTON_SIZE - ICON_PADDING,
 	                         renderer.atlas, "mixer_icon.png", Side::up);
 }
+
+void MixerRenderer::draw_overlay(int row, int col,
+                                 const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+{
+}

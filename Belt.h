@@ -34,7 +34,7 @@ class BeltContext final : public BuildingContext
 	/**
 	 * \brief 每秒前进速度
 	 */
-	const float speed_ = 0.025f;
+	const float speed_ = 0.25f;
 	time_t place_time_;
 
 	/**

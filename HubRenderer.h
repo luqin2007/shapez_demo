@@ -1,7 +1,7 @@
 #pragma once
 #include "BuildingRenderer.h"
 
-class HubRenderer : public BuildingRenderer
+class HubRenderer final : public BuildingRenderer
 {
 public:
 	void draw_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
@@ -14,4 +14,7 @@ public:
 	void draw_icon(float x, float y, float size, GameRenderer& renderer) const override
 	{
 	}
+
+	void draw_overlay(int row, int col,
+	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
 };

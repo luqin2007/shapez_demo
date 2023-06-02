@@ -99,13 +99,13 @@ void TextureDrawer::push(const float x0, const float y0, float x1, float y1,
 		break;
 
 	case Side::down:
-		u0 = uu;
+		u0 = u;
 		v0 = v;
-		u1 = uu;
+		u1 = u;
 		v1 = vv;
-		u2 = u;
+		u2 = uu;
 		v2 = vv;
-		u3 = u;
+		u3 = uu;
 		v3 = v;
 		break;
 
@@ -114,13 +114,13 @@ void TextureDrawer::push(const float x0, const float y0, float x1, float y1,
 		x1 = x0 + dy;
 		y1 = y0 + dx;
 		u0 = uu;
-		v0 = vv;
+		v0 = v;
 		u1 = u;
-		v1 = vv;
+		v1 = v;
 		u2 = u;
-		v2 = v;
+		v2 = vv;
 		u3 = uu;
-		v3 = v;
+		v3 = vv;
 		break;
 
 	case Side::right:
