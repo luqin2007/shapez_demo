@@ -22,7 +22,7 @@ public:
 	Vec2I pos;
 
 	/**
-	 * \brief 主要输出方向（通常为 up）
+	 * \brief 方向（默认为 up）
 	 */
 	Side direction;
 	

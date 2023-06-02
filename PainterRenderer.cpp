@@ -3,6 +3,7 @@
 #include "BuildingContext.h"
 #include "GameLogic.h"
 #include "GameRenderer.h"
+#include "Painter.h"
 
 void PainterRenderer::draw_building(const int row, const int col, const BuildingContext& context,
                                     GameRenderer& renderer, const GameMap& map) const
@@ -29,7 +30,9 @@ void PainterRenderer::draw_icon(const float x, const float y, float size, GameRe
 	                         renderer.atlas, "painter_icon.png", Side::up);
 }
 
-void PainterRenderer::draw_overlay(int row, int col,
-                                   const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void PainterRenderer::draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+                                             const GameMap& map) const
 {
+	const auto& ctx = Painter::cast(context);
+	draw_output_item(ctx.right_pos_.x, ctx.right_pos_.y, map.cell_size, cw(context.direction), renderer, ctx.shapes_, ctx);
 }

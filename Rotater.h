@@ -5,10 +5,12 @@
 
 class Rotater;
 class Rotaters;
+class RotaterRenderer;
 
 class RotaterContext final : public TickableContext
 {
 	friend Rotater;
+	friend RotaterRenderer;
 
 public:
 	RotaterContext(const Building& building, const Vec2I& pos, const Side direction)
@@ -40,9 +42,8 @@ public:
 	[[nodiscard]] vector<Vec2I> all_positions(const Vec2I& pos, Side direction) const override;
 
 protected:
-	bool can_start(TickableContext& context, const GameMap& map) const override;
+	bool can_start(const TickableContext& context) const override;
 	bool on_blocking(TickableContext& context, const GameMap& map) const override;
-	bool on_finished(TickableContext& context, const GameMap& map) const override;
 
 	virtual void rotate_item(ColoredShapes& shape) const = 0;
 

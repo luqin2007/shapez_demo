@@ -10,7 +10,7 @@ BuildingContext* UndergroundBelt1::build_context(const Vec2I& pos, const Side di
 
 bool UndergroundBelt1::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
-	return side == -context.direction;
+	return side == opposite(context.direction);
 }
 
 bool UndergroundBelt1::can_receive_dye(Color color, const Vec2I& pos, Side side,
@@ -63,16 +63,16 @@ void UndergroundBelt1::update(BuildingContext& context, GameMap& map) const
 
 	if (ctx.type_ == ItemType::dye)
 	{
-		if (building->can_receive_dye(ctx.color_, context.pos, -context.direction, *target))
+		if (building->can_receive_dye(ctx.color_, context.pos, opposite(context.direction), *target))
 		{
-			building->receive_dye(ctx.color_, context.pos, -context.direction, *target);
+			building->receive_dye(ctx.color_, context.pos, opposite(context.direction), *target);
 		}
 	}
 	else
 	{
-		if (building->can_receive_shape(ctx.shapes_, context.pos, -context.direction, *target))
+		if (building->can_receive_shape(ctx.shapes_, context.pos, opposite(context.direction), *target))
 		{
-			building->receive_shape(ctx.shapes_, context.pos, -context.direction, *target);
+			building->receive_shape(ctx.shapes_, context.pos, opposite(context.direction), *target);
 		}
 	}
 }

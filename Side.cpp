@@ -1,6 +1,6 @@
 #include "Side.h"
 
-Side operator++(const Side side)
+Side cw(const Side side)
 {
 	switch (side)
 	{
@@ -12,7 +12,7 @@ Side operator++(const Side side)
 	return side;
 }
 
-Side operator--(const Side side)
+Side ccw(const Side side)
 {
 	switch (side)
 	{
@@ -24,7 +24,7 @@ Side operator--(const Side side)
 	return side;
 }
 
-Side operator-(const Side side)
+Side opposite(const Side side)
 {
 	switch (side)
 	{
@@ -34,4 +34,9 @@ Side operator-(const Side side)
 	case Side::right: return Side::left;
 	}
 	return side;
+}
+
+Side operator~(const Side side)
+{
+	return side == Side::up || side == Side::down ? Side::right : Side::down;
 }

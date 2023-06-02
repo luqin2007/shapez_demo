@@ -85,34 +85,50 @@ void ColoredShapes::draw(const Atlas& atlas, TextureDrawer& drawer,
 		const float yc = (y0 + y1) / 2;
 
 		// 左上角
-		if (string name;
-			get_draw_name(name, up_left))
+		if (string name; get_draw_name(name, up_left))
 		{
-			name.append("_lt");
+			name.append("_lb");
 			drawer.push(x0, y0, xc, yc, atlas, name);
 		}
 		// 右上角
-		if (string name;
-			get_draw_name(name, up_right))
+		if (string name; get_draw_name(name, up_right))
 		{
-			name.append("_rt");
+			name.append("_rb");
 			drawer.push(xc, y0, x1, yc, atlas, name);
 		}
 		// 左下角
-		if (string name;
-			get_draw_name(name, down_left))
+		if (string name; get_draw_name(name, down_left))
 		{
-			name.append("_lb");
+			name.append("_lt");
 			drawer.push(x0, yc, xc, y1, atlas, name);
 		}
 		// 右下角
-		if (string name;
-			get_draw_name(name, down_right))
+		if (string name; get_draw_name(name, down_right))
 		{
-			name.append("_rb");
+			name.append("_rt");
 			drawer.push(xc, yc, x1, y1, atlas, name);
 		}
 	}
+}
+
+ColoredShapes ColoredShapes::left() const
+{
+	return {
+		{Color::uncolored, Shape::none},
+		{down_left.first, down_right.second},
+		{Color::uncolored, Shape::none},
+		{up_left.first, up_left.second},
+	};
+}
+
+ColoredShapes ColoredShapes::right() const
+{
+	return {
+		{down_right.first, down_right.second},
+		{Color::uncolored, Shape::none},
+		{up_right.first, up_right.second},
+		{Color::uncolored, Shape::none},
+	};
 }
 
 bool ColoredShapes::get_draw_name(string& name, const pair<Color, Shape>& part)

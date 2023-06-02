@@ -7,7 +7,7 @@
 
 BuildingContext* Miner::build_context(const Vec2I& pos, const Side direction) const
 {
-	return new TickableContext(*this, pos, direction, FAST);
+	return new TickableContext(*this, pos, direction, SLOW);
 }
 
 bool Miner::can_receive(const Vec2I& pos, Side side, const BuildingContext& context) const
@@ -53,9 +53,9 @@ vector<Vec2I> Miner::all_positions(const Vec2I& pos, Side direction) const
 	return p;
 }
 
-bool Miner::can_start(TickableContext& context, const GameMap& map) const
+bool Miner::can_start(const TickableContext& context) const
 {
-	return map.get_resource(context.pos) != ResourceType::none;
+	return current_game && current_game->map().get_resource(context.pos) != ResourceType::none;
 }
 
 bool Miner::on_blocking(TickableContext& context, const GameMap& map) const
@@ -73,9 +73,4 @@ bool Miner::on_blocking(TickableContext& context, const GameMap& map) const
 	default:
 		return send_shape(context.pos, context.direction, ColoredShapes::from_resource(res), map);
 	}
-}
-
-bool Miner::on_finished(TickableContext& context, const GameMap& map) const
-{
-	return on_blocking(context, map);
 }

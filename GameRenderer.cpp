@@ -309,12 +309,38 @@ void GameRenderer::draw_building(const GameLogic& game, const GameMap& map)
 {
 	tex_drawer.begin();
 
-	// 地图上的建筑
+	// 物品之下的建筑
+	for (int i = cell0_.x; i < cell1_.x; i++)
+	{
+		for (int j = cell0_.y; j < cell1_.y; ++j)
+		{
+			if (const BuildingContext* ctx = map.get_building(i, j);
+				ctx && ctx->building.get_renderer().under_item && ctx->pos.x == i && ctx->pos.y == j)
+			{
+				ctx->building.get_renderer().draw_building(i, j, *ctx, *this, map);
+			}
+		}
+	}
+
+	// 物品
 	for (int i = cell0_.x; i < cell1_.x; i++)
 	{
 		for (int j = cell0_.y; j < cell1_.y; ++j)
 		{
 			if (const BuildingContext* ctx = map.get_building(i, j); ctx && ctx->pos.x == i && ctx->pos.y == j)
+			{
+				ctx->building.get_renderer().draw_items_in_building(i, j, *ctx, *this, map);
+			}
+		}
+	}
+
+	// 物品之上的建筑
+	for (int i = cell0_.x; i < cell1_.x; i++)
+	{
+		for (int j = cell0_.y; j < cell1_.y; ++j)
+		{
+			if (const BuildingContext* ctx = map.get_building(i, j);
+				ctx && !ctx->building.get_renderer().under_item && ctx->pos.x == i && ctx->pos.y == j)
 			{
 				ctx->building.get_renderer().draw_building(i, j, *ctx, *this, map);
 			}
@@ -364,19 +390,7 @@ void GameRenderer::draw_ui(const GameLogic& game)
 void GameRenderer::draw_overlay(const GameLogic& game, const GameMap& map)
 {
 	tex_drawer.begin();
-
-	// 地图上的建筑
-	for (int i = cell0_.x; i < cell1_.x; i++)
-	{
-		for (int j = cell0_.y; j < cell1_.y; ++j)
-		{
-			if (const BuildingContext* ctx = map.get_building(i, j); ctx && ctx->pos.x == i && ctx->pos.y == j)
-			{
-				ctx->building.get_renderer().draw_overlay(i, j, *ctx, *this, map);
-			}
-		}
-	}
-
+	
 	// 鼠标持有的建筑
 	const float cell_size = map.cell_size;
 	if (game.current_building)

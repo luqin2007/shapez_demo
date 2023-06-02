@@ -8,7 +8,7 @@ void TickableBuilding::update(BuildingContext& context, GameMap& map) const
 	{
 	case BuildingStatus::waiting:
 
-		if (can_start(ctx, map))
+		if (can_start(ctx))
 		{
 			// 开始运行
 			ctx.current_time_ = 0;
@@ -22,7 +22,7 @@ void TickableBuilding::update(BuildingContext& context, GameMap& map) const
 		if (ctx.current_time_ >= ctx.required_time_)
 		{
 			// 任务结束
-			if (on_finished(ctx, map))
+			if (on_blocking(ctx, map))
 			{
 				// 进入空闲状态
 				ctx.status_ = BuildingStatus::waiting;

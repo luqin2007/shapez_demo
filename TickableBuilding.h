@@ -1,13 +1,11 @@
 #pragma once
 
-#include "Timer.h"
-
 #include "Building.h"
 #include "BuildingContext.h"
 
 constexpr time_t FAST = 500;
-constexpr time_t MIDDLE = 1000;
-constexpr time_t SLOW = 2000;
+constexpr time_t MIDDLE = 1500;
+constexpr time_t SLOW = 3000;
 
 enum class BuildingStatus
 {
@@ -34,7 +32,7 @@ class MinerRenderer;
 class TickableContext : public BuildingContext
 {
 	friend TickableBuilding;
-	friend MinerRenderer;
+	friend BuildingRenderer;
 public:
 	TickableContext(const Building& building, const Vec2I& pos, const Side direction, const time_t required_time)
 		: BuildingContext(building, pos, direction), required_time_(required_time)
@@ -82,17 +80,11 @@ protected:
 	/**
 	 * \brief 检查是否可以运行
 	 */
-	virtual bool can_start(TickableContext& context, const GameMap& map) const = 0;
+	virtual bool can_start(const TickableContext& context) const = 0;
 
 	/**
 	 * \brief 每次当处于阻塞状态时的行为
 	 * \return 若返回 true，则表示阻塞状态结束
 	 */
 	virtual bool on_blocking(TickableContext& context, const GameMap& map) const = 0;
-
-	/**
-	 * \brief 当一轮操作结束时的行为
-	 * \return 若返回 false，则进入阻塞状态
-	 */
-	virtual bool on_finished(TickableContext& context, const GameMap& map) const = 0;
 };

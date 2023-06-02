@@ -31,8 +31,8 @@ void BeltRenderer::draw_icon(const float x, const float y, float size, GameRende
 	                         renderer.atlas, "belt_icon.png", Side::up);
 }
 
-void BeltDirectRenderer::draw_overlay(const int row, const int col,
-                                      const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void BeltDirectRenderer::draw_items_in_building(const int row, const int col, const BuildingContext& context,
+                                                GameRenderer& renderer, const GameMap& map) const
 {
 	const BeltContext& ctx = Belt::cast(context);
 	const float x0 = renderer.edge_pos[col].x;
@@ -90,8 +90,8 @@ Vec2 BeltDirectRenderer::offset_direct(const Side direction, const float cell_si
 	return {};
 }
 
-void BeltLeftRenderer::draw_overlay(const int row, const int col,
-                                    const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void BeltLeftRenderer::draw_items_in_building(const int row, const int col, const BuildingContext& context,
+                                              GameRenderer& renderer, const GameMap& map) const
 {
 	const BeltContext& ctx = Belt::cast(context);
 	const float x0 = renderer.edge_pos[col].x;
@@ -150,7 +150,7 @@ Vec2 BeltLeftRenderer::offset_left(const Side direction, const float cell_size, 
 		case Side::left:
 			return {x0 + (0.7f - pp) * cell_size, y0 + 0.3f * cell_size};
 		case Side::right:
-			return {x0 + (-0.1f + pp) * cell_size, y0 + 0.3f * cell_size}; 
+			return {x0 + (-0.1f + pp) * cell_size, y0 + 0.3f * cell_size};
 		}
 	}
 	else if (p <= 0.7f)
@@ -188,8 +188,8 @@ Vec2 BeltLeftRenderer::offset_left(const Side direction, const float cell_size, 
 	return {};
 }
 
-void BeltRightRenderer::draw_overlay(const int row, const int col,
-                                     const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void BeltRightRenderer::draw_items_in_building(const int row, const int col, const BuildingContext& context,
+                                               GameRenderer& renderer, const GameMap& map) const
 {
 	const BeltContext& ctx = Belt::cast(context);
 	const float x0 = renderer.edge_pos[col].x;
@@ -242,13 +242,13 @@ Vec2 BeltRightRenderer::offset_right(const Side direction, const float cell_size
 		switch (direction)
 		{
 		case Side::up:
-			return { x0 + 0.3f * cell_size, y0 + (0.7f - pp) * cell_size };
+			return {x0 + 0.3f * cell_size, y0 + (0.7f - pp) * cell_size};
 		case Side::down:
-			return { x0 + 0.3f * cell_size, y0 + (-0.1f + pp) * cell_size };
+			return {x0 + 0.3f * cell_size, y0 + (-0.1f + pp) * cell_size};
 		case Side::left:
-			return { x0 + (0.7f - pp) * cell_size, y0 + 0.3f * cell_size };
+			return {x0 + (0.7f - pp) * cell_size, y0 + 0.3f * cell_size};
 		case Side::right:
-			return { x0 + (-0.1f + pp) * cell_size, y0 + 0.3f * cell_size };
+			return {x0 + (-0.1f + pp) * cell_size, y0 + 0.3f * cell_size};
 		}
 	}
 	else if (p <= 0.7f)
@@ -258,13 +258,13 @@ Vec2 BeltRightRenderer::offset_right(const Side direction, const float cell_size
 		switch (direction)
 		{
 		case Side::up:
-			return { x0 + (0.3f + pp) * cell_size, y0 + (0.5f - pp) * cell_size };
+			return {x0 + (0.3f + pp) * cell_size, y0 + (0.5f - pp) * cell_size};
 		case Side::down:
-			return { x0 + (0.3f - pp) * cell_size, y0 + (0.1f + pp) * cell_size };
+			return {x0 + (0.3f - pp) * cell_size, y0 + (0.1f + pp) * cell_size};
 		case Side::left:
-			return { x0 + (0.5f - pp) * cell_size, y0 + (0.3f - pp) * cell_size };
+			return {x0 + (0.5f - pp) * cell_size, y0 + (0.3f - pp) * cell_size};
 		case Side::right:
-			return { x0 + (0.1f + pp) * cell_size, y0 + (0.3f + pp) * cell_size };
+			return {x0 + (0.1f + pp) * cell_size, y0 + (0.3f + pp) * cell_size};
 		}
 	}
 	else
@@ -274,13 +274,13 @@ Vec2 BeltRightRenderer::offset_right(const Side direction, const float cell_size
 		switch (direction)
 		{
 		case Side::up:
-			return { x0 + (0.5f + pp) * cell_size, y0 + 0.3f * cell_size };
+			return {x0 + (0.5f + pp) * cell_size, y0 + 0.3f * cell_size};
 		case Side::down:
-			return { x0 + (0.1f - pp) * cell_size, y0 + 0.3f * cell_size };
+			return {x0 + (0.1f - pp) * cell_size, y0 + 0.3f * cell_size};
 		case Side::left:
-			return { x0 + 0.3f * cell_size, y0 + (0.1f - pp) * cell_size };
+			return {x0 + 0.3f * cell_size, y0 + (0.1f - pp) * cell_size};
 		case Side::right:
-			return { x0 + 0.3f * cell_size, y0 + (0.5f + pp) * cell_size };
+			return {x0 + 0.3f * cell_size, y0 + (0.5f + pp) * cell_size};
 		}
 	}
 }

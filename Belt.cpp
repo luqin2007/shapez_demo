@@ -4,13 +4,13 @@
 
 bool Belt::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
-	return side == -context.direction;
+	return side == opposite(context.direction);
 }
 
 bool Belt::can_receive_dye(Color color, const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
-	return side == -context.direction && ctx.item_count_ != 2
+	return side == opposite(context.direction) && ctx.item_count_ != 2
 		&& (ctx.item_count_ == 0 || ctx.item_pos_[ctx.first_] >= 0.5f);
 }
 
@@ -18,7 +18,7 @@ bool Belt::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, const
                              const BuildingContext& context) const
 {
 	const BeltContext& ctx = cast(context);
-	return side == -context.direction && ctx.item_count_ != 2
+	return side == opposite(context.direction) && ctx.item_count_ != 2
 		&& (ctx.item_count_ == 0 || ctx.item_pos_[ctx.first_] >= 0.5f);
 }
 
@@ -122,7 +122,7 @@ const BuildingRenderer& BeltDirect::get_renderer() const
 
 BuildingContext* BeltLeft::build_context(const Vec2I& pos, const Side direction) const
 {
-	return new BeltContext(*this, pos, direction, --direction);
+	return new BeltContext(*this, pos, direction, ccw(direction));
 }
 
 const BuildingRenderer& BeltLeft::get_renderer() const
@@ -133,7 +133,7 @@ const BuildingRenderer& BeltLeft::get_renderer() const
 
 BuildingContext* BeltRight::build_context(const Vec2I& pos, const Side direction) const
 {
-	return new BeltContext(*this, pos, direction, ++direction);
+	return new BeltContext(*this, pos, direction, cw(direction));
 }
 
 const BuildingRenderer& BeltRight::get_renderer() const

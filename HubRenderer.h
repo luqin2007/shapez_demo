@@ -15,6 +15,8 @@ public:
 	{
 	}
 
-	void draw_overlay(int row, int col,
-	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+	void draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+	                            const GameMap& map) const override
+	{
+	}
 };

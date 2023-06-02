@@ -78,6 +78,13 @@ private:
 	void on_drag(float dx, float dy);
 
 	/**
+	 * \brief 鼠标右键拖动
+	 * \param dx 拖动距离 - x
+	 * \param dy 拖动距离 - y
+	 */
+	void on_right_drag(float dx, float dy);
+
+	/**
 	 * \brief 左键点击
 	 * \param x x
 	 * \param y y

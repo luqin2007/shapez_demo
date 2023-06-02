@@ -21,11 +21,7 @@ void UndergroundBelt2Renderer::draw_holding(const float x, const float y, const 
 	                         renderer.atlas, "underground_belt_exit_blue.png", direction);
 }
 
-void UndergroundBelt2Renderer::draw_icon(const float x, const float y, float size, GameRenderer& renderer) const
-{
-}
-
-void UndergroundBelt2Renderer::draw_overlay(int row, int col, const BuildingContext& context, GameRenderer& renderer,
-                                            const GameMap& map) const
+void UndergroundBelt2Renderer::draw_items_in_building(int row, int col, const BuildingContext& context,
+                                                      GameRenderer& renderer, const GameMap& map) const
 {
 }

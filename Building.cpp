@@ -13,12 +13,11 @@ bool Building::can_place(const Vec2I& pos, const Side direction, const GameMap& 
 bool Building::send_dye(const Vec2I& pos, const Side direction, const Color color, const GameMap& map)
 {
 	const Vec2I target = pos + direction;
-	const auto opposite = -direction;
 	if (BuildingContext* t_context = map.get_building(target);
-		t_context && t_context->building.can_receive_dye(color, target, opposite, *t_context))
+		t_context && t_context->building.can_receive_dye(color, target, opposite(direction), *t_context))
 	{
 		// 发送
-		t_context->building.receive_dye(color, target, opposite, *t_context);
+		t_context->building.receive_dye(color, target, opposite(direction), *t_context);
 		return true;
 	}
 
@@ -28,12 +27,11 @@ bool Building::send_dye(const Vec2I& pos, const Side direction, const Color colo
 bool Building::send_shape(const Vec2I& pos, const Side direction, const ColoredShapes& shape, const GameMap& map)
 {
 	const Vec2I target = pos + direction;
-	const auto opposite = -direction;
 	if (BuildingContext* t_context = map.get_building(target);
-		t_context && t_context->building.can_receive_shape(shape, target, opposite, *t_context))
+		t_context && t_context->building.can_receive_shape(shape, target, opposite(direction), *t_context))
 	{
 		// 发送
-		t_context->building.receive_shape(shape, target, opposite, *t_context);
+		t_context->building.receive_shape(shape, target, opposite(direction), *t_context);
 		return true;
 	}
 

@@ -12,6 +12,8 @@ namespace MouseHelper
 
 	extern bool is_right_clicked();
 
+	extern bool is_right_drag();
+
 	extern bool is_mid_clicked();
 
 	extern float x();

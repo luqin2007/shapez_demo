@@ -10,7 +10,7 @@ BuildingContext* UndergroundBelt2::build_context(const Vec2I& pos, const Side di
 
 bool UndergroundBelt2::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
-	return side == -context.direction;
+	return side == opposite(context.direction);
 }
 
 bool UndergroundBelt2::can_receive_dye(Color color, const Vec2I& pos, const Side side,
@@ -59,7 +59,7 @@ vector<Vec2I> UndergroundBelt2::all_positions(const Vec2I& pos, Side direction) 
 	return p;
 }
 
-bool UndergroundBelt2::can_start(TickableContext& context, const GameMap& map) const
+bool UndergroundBelt2::can_start(const TickableContext& context) const
 {
 	return cast(context).type_ != ItemType::none;
 }
@@ -77,9 +77,4 @@ bool UndergroundBelt2::on_blocking(TickableContext& context, const GameMap& map)
 	}
 
 	return true;
-}
-
-bool UndergroundBelt2::on_finished(TickableContext& context, const GameMap& map) const
-{
-	return on_blocking(context, map);
 }

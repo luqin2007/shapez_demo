@@ -28,8 +28,3 @@ void BalancerRenderer::draw_icon(const float x, const float y, float size, GameR
 	                         x + BUTTON_SIZE - ICON_PADDING, y + BUTTON_SIZE - ICON_PADDING,
 	                         renderer.atlas, "balancer_icon.png", Side::up);
 }
-
-void BalancerRenderer::draw_overlay(int row, int col,
-                                    const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
-{
-}

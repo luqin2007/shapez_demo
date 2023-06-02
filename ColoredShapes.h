@@ -15,9 +15,9 @@ using std::pair;
 struct ColoredShapes
 {
 	pair<Color, Shape> down_right = {Color::uncolored, Shape::none};
-	pair<Color, Shape> down_left = { Color::uncolored, Shape::none };
-	pair<Color, Shape> up_right = { Color::uncolored, Shape::none };
-	pair<Color, Shape> up_left = { Color::uncolored, Shape::none };
+	pair<Color, Shape> down_left = {Color::uncolored, Shape::none};
+	pair<Color, Shape> up_right = {Color::uncolored, Shape::none};
+	pair<Color, Shape> up_left = {Color::uncolored, Shape::none};
 
 	static ColoredShapes from_resource(ResourceType type);
 
@@ -51,7 +51,18 @@ struct ColoredShapes
 	 */
 	void draw(const Atlas& atlas, TextureDrawer& drawer, float x0, float y0, float x1, float y1) const;
 
-private:
+	/**
+	 * \brief 取图形左半部分
+	 * \return 左半部分
+	 */
+	[[nodiscard]] ColoredShapes left() const;
 
+	/**
+	 * \brief 取图形右半部分
+	 * \return 右半部分
+	 */
+	[[nodiscard]] ColoredShapes right() const;
+
+private:
 	static bool get_draw_name(string& name, const pair<Color, Shape>& part);
 };

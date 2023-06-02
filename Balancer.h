@@ -81,9 +81,8 @@ public:
 	}
 
 protected:
-	bool can_start(TickableContext& context, const GameMap& map) const override;
+	bool can_start(const TickableContext& context) const override;
 	bool on_blocking(TickableContext& context, const GameMap& map) const override;
-	bool on_finished(TickableContext& context, const GameMap& map) const override;
 
 private:
 	Balancer() = default;

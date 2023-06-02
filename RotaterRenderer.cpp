@@ -3,6 +3,7 @@
 #include "BuildingContext.h"
 #include "GameLogic.h"
 #include "GameRenderer.h"
+#include "Rotater.h"
 
 void RotaterRenderer::draw_building(const int row, const int col, const BuildingContext& context,
                                     GameRenderer& renderer, const GameMap& map) const
@@ -29,9 +30,11 @@ void RotaterRenderer::draw_icon(const float x, const float y, float size, GameRe
 	                         renderer.atlas, "rotater_icon.png", Side::up);
 }
 
-void RotaterRenderer::draw_overlay(int row, int col,
-                                   const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void RotaterRenderer::draw_items_in_building(const int row, const int col, const BuildingContext& context,
+                                             GameRenderer& renderer, const GameMap& map) const
 {
+	const auto& ctx = static_cast<const RotaterContext&>(context);
+	draw_output_item(row, col, map.cell_size, context.direction, renderer, ctx.shapes_, ctx);
 }
 
 const RotaterRenderer& RotaterRenderer::cw()

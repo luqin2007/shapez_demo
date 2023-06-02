@@ -3,6 +3,7 @@
 #include "BuildingContext.h"
 #include "GameLogic.h"
 #include "GameRenderer.h"
+#include "Mixer.h"
 
 void MixerRenderer::draw_building(const int row, const int col, const BuildingContext& context,
                                   GameRenderer& renderer, const GameMap& map) const
@@ -29,7 +30,9 @@ void MixerRenderer::draw_icon(const float x, const float y, float size, GameRend
 	                         renderer.atlas, "mixer_icon.png", Side::up);
 }
 
-void MixerRenderer::draw_overlay(int row, int col,
-                                 const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void MixerRenderer::draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+	const GameMap& map) const
 {
+	const auto& ctx = Mixer::cast(context);
+	draw_output_color(ctx.left_pos_.x, ctx.left_pos_.y, map.cell_size, context.direction, renderer, ctx.color_left_, ctx);
 }

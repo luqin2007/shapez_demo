@@ -19,7 +19,7 @@ protected:
 	time_t delta_time_ = 40;
 	const string holding_;
 
-	explicit BeltRenderer(string holding): holding_(std::move(holding))
+	explicit BeltRenderer(string holding): BuildingRenderer(true), holding_(std::move(holding))
 	{
 	}
 
@@ -31,8 +31,8 @@ class BeltDirectRenderer final : public BeltRenderer
 	friend BeltDirect;
 
 public:
-	void draw_overlay(int row, int col,
-	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+	void draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+	                            const GameMap& map) const override;
 
 protected:
 	/**
@@ -58,8 +58,8 @@ class BeltLeftRenderer final : public BeltRenderer
 	friend BeltLeft;
 
 public:
-	void draw_overlay(int row, int col,
-	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+	void draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+	                            const GameMap& map) const override;
 
 protected:
 	/**
@@ -85,8 +85,8 @@ class BeltRightRenderer final : public BeltRenderer
 	friend BeltRight;
 
 public:
-	void draw_overlay(int row, int col,
-	                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const override;
+	void draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+	                            const GameMap& map) const override;
 
 protected:
 	/**

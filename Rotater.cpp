@@ -10,7 +10,7 @@ BuildingContext* Rotater::build_context(const Vec2I& pos, const Side direction) 
 
 bool Rotater::can_receive(const Vec2I& pos, const Side side, const BuildingContext& context) const
 {
-	return side == -context.direction;
+	return side == opposite(context.direction);
 }
 
 bool Rotater::can_receive_dye(Color color, const Vec2I& pos, Side side, const BuildingContext& context) const
@@ -19,21 +19,21 @@ bool Rotater::can_receive_dye(Color color, const Vec2I& pos, Side side, const Bu
 }
 
 bool Rotater::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, const Side side,
-                                        const BuildingContext& context) const
+                                const BuildingContext& context) const
 {
-	return !cast(context).has_shape_ && side == -context.direction;
+	return !cast(context).has_shape_ && side == opposite(context.direction);
 }
 
 void Rotater::receive_dye(Color color, const Vec2I& pos, Side side, BuildingContext& context) const
 {
 }
 
-void Rotater::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
-                                    BuildingContext& context) const
+void Rotater::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side, BuildingContext& context) const
 {
 	auto& ctx = cast(context);
 	ctx.has_shape_ = true;
 	ctx.shapes_ = shape;
+	rotate_item(ctx.shapes_);
 }
 
 void Rotater::free_context(BuildingContext* context) const
@@ -48,7 +48,7 @@ vector<Vec2I> Rotater::all_positions(const Vec2I& pos, Side direction) const
 	return p;
 }
 
-bool Rotater::can_start(TickableContext& context, const GameMap& map) const
+bool Rotater::can_start(const TickableContext& context) const
 {
 	return cast(context).has_shape_;
 }
@@ -61,11 +61,6 @@ bool Rotater::on_blocking(TickableContext& context, const GameMap& map) const
 		return true;
 	}
 	return false;
-}
-
-bool Rotater::on_finished(TickableContext& context, const GameMap& map) const
-{
-	return on_blocking(context, map);
 }
 
 const BuildingRenderer& RotaterCW::get_renderer() const

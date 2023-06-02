@@ -43,6 +43,11 @@ namespace MouseHelper
 		return last_left_clicked && left_clicked;
 	}
 
+	bool is_right_drag()
+	{
+		return last_right_clicked && right_clicked;
+	}
+
 	bool is_mid_clicked()
 	{
 		return mid_clicked;

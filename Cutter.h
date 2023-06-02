@@ -4,21 +4,36 @@
 #include "TickableBuilding.h"
 
 class Cutter;
+class CutterRenderer;
 
 class CutterContext final : public TickableContext
 {
 	friend Cutter;
+	friend CutterRenderer;
 
 public:
 	CutterContext(const Building& building, const Vec2I& pos, const Side direction)
 		: TickableContext(building, pos, direction, MIDDLE)
 	{
+		// 方向向上或向右时向第一个方格输入
+		if (direction == Side::up || direction == Side::right)
+		{
+			left_pos_ = pos;
+			right_pos_ = pos + ~direction;
+		}
+		else
+		{
+			right_pos_ = pos;
+			left_pos_ = pos + ~direction;
+		}
 	}
 
 private:
-	ColoredShapes shapes_;
+	ColoredShapes left_, right_;
 	bool has_shape_ = false;
-	bool has_left_, has_right_;
+	bool has_left_ = false, has_right_ = false;
+
+	Vec2I left_pos_, right_pos_;
 };
 
 /**
@@ -46,16 +61,6 @@ public:
 	[[nodiscard]] const BuildingRenderer& get_renderer() const override;
 	[[nodiscard]] vector<Vec2I> all_positions(const Vec2I& pos, Side direction) const override;
 
-protected:
-	bool can_start(TickableContext& context, const GameMap& map) const override;
-	bool on_blocking(TickableContext& context, const GameMap& map) const override;
-	bool on_finished(TickableContext& context, const GameMap& map) const override;
-
-private:
-	Cutter() = default;
-
-	static void send_shape_items(CutterContext& context, const GameMap& map);
-
 	static CutterContext& cast(BuildingContext& context)
 	{
 		return static_cast<CutterContext&>(context);
@@ -65,4 +70,11 @@ private:
 	{
 		return static_cast<const CutterContext&>(context);
 	}
+
+protected:
+	bool can_start(const TickableContext& context) const override;
+	bool on_blocking(TickableContext& context, const GameMap& map) const override;
+
+private:
+	Cutter() = default;
 };

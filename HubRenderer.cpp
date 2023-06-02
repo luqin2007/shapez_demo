@@ -13,8 +13,3 @@ void HubRenderer::draw_building(const int row, const int col, const BuildingCont
 	renderer.tex_drawer.push(x0 - EXT_SIZE, y0 - EXT_SIZE, x1 + EXT_SIZE, y1 + EXT_SIZE, renderer.atlas, "hub.png",
 	                         context.direction);
 }
-
-void HubRenderer::draw_overlay(int row, int col,
-                               const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
-{
-}

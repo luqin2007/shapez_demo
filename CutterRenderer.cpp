@@ -1,6 +1,7 @@
 #include "CutterRenderer.h"
 
 #include "BuildingContext.h"
+#include "Cutter.h"
 #include "GameLogic.h"
 #include "GameRenderer.h"
 
@@ -29,7 +30,16 @@ void CutterRenderer::draw_icon(const float x, const float y, float size, GameRen
 	                         renderer.atlas, "cutter_icon.png", Side::up);
 }
 
-void CutterRenderer::draw_overlay(int row, int col,
-                                  const BuildingContext& context, GameRenderer& renderer, const GameMap& map) const
+void CutterRenderer::draw_items_in_building(int row, int col, const BuildingContext& context, GameRenderer& renderer,
+                                            const GameMap& map) const
 {
+	auto& ctx = Cutter::cast(context);
+	if (ctx.has_left_)
+	{
+		draw_output_item(ctx.left_pos_.x, ctx.left_pos_.y, map.cell_size, context.direction, renderer, ctx.left_, ctx);
+	}
+	if (ctx.has_right_)
+	{
+		draw_output_item(ctx.right_pos_.x, ctx.right_pos_.y, map.cell_size, context.direction, renderer, ctx.right_, ctx);
+	}
 }

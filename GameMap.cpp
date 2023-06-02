@@ -27,6 +27,13 @@ void GameMap::initialize()
 		resources_[3][i] = ResourceType::color_red;
 		resources_[4][i] = ResourceType::color_blue;
 		resources_[5][i] = ResourceType::color_green;
+
+		resources_[CELL_COUNT - 1][i] = ResourceType::shape_circle;
+		resources_[CELL_COUNT - 2][i] = ResourceType::shape_rect;
+		resources_[CELL_COUNT - 3][i] = ResourceType::shape_star;
+		resources_[CELL_COUNT - 4][i] = ResourceType::color_red;
+		resources_[CELL_COUNT - 5][i] = ResourceType::color_blue;
+		resources_[CELL_COUNT - 6][i] = ResourceType::color_green;
 	}
 
 	// 初始化 hub
@@ -55,6 +62,7 @@ bool GameMap::set_building(const int x, const int y, const Building* building, c
 				buildings_[p.x][p.y] = ctx;
 
 			building->on_placed(*ctx);
+			cout << "Placed on " << ctx->pos.x << "," << ctx->pos.y << endl;
 
 			return true;
 		}

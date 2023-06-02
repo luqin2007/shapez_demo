@@ -14,14 +14,19 @@ enum class Side
 /**
  * 顺时针旋转
  */
-Side operator++(Side side);
+Side cw(Side side);
 
 /**
  * 逆时针旋转
  */
-Side operator--(Side side);
+Side ccw(Side side);
 
 /**
  * 反向
  */
-Side operator-(Side side);
+Side opposite(Side side);
+
+/**
+ * 取建筑蔓延方向
+ */
+Side operator~(Side side);
