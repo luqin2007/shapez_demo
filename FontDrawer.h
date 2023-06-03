@@ -1,38 +1,56 @@
-// #pragma once
-//
-// #include <vector>
-// #include <cmath>
-//
-// #include <ft2build.h>
-// #include <freetype/freetype.h>
-//
-// #include "AbstractDrawer.h"
-//
-// using std::vector;
-// using std::max;
-//
-// /**
-//  * \brief 文本渲染，未实现
-//  */
-// class FontDrawer : public AbstractDrawer
-// {
-// public:
-// 	explicit FontDrawer(path path): font_path_(std::move(path)), ft_(nullptr), texture_id_(0)
-// 	{
-// 	}
-//
-// 	void initialize();
-//
-// 	void draw(const string& str, int font_size, float x, float y,
-// 	          float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f);
-//
-// 	void destroy() const;
-//
-// private:
-// 	const path font_path_;
-//
-// 	FT_Library ft_;
-//
-// 	int texture_id_;
-// 	GLuint texture_ = 0;
-// };
+#pragma once
+#include "AbstractDrawer.h"
+#include "Atlas.h"
+
+class FontDrawer : public AbstractDrawer
+{
+public:
+	explicit FontDrawer(const int count): total_(count)
+	{
+	}
+
+	/**
+	 * \brief 初始化
+	 */
+	void initialize();
+
+	/**
+	 * \brief 准备开始绘制
+	 * \param atlas 使用的纹理集
+	 */
+	void begin(const Atlas& atlas);
+
+	/**
+	 * \brief 设置颜色
+	 * \param r red 颜色分量
+	 * \param g green 颜色分量
+	 * \param b blue 颜色分量
+	 * \param a alpha 颜色分量
+	 */
+	void color(float r, float g, float b, float a);
+
+	/**
+	 * \brief 绘制文本，默认以高度 48 绘制
+	 * \param string 待绘制文本
+	 * \param x0 左上角 x 坐标
+	 * \param y0 左上角 y 坐标
+	 * \param scale 缩放
+	 */
+	void push(const char* string, float x0, float y0, float scale);
+
+	/**
+	 * \brief 绘制
+	 */
+	void draw();
+
+	/**
+	 * \brief 销毁
+	 */
+	void destroy();
+
+private:
+	const int total_;
+	int count_;
+	const Atlas* at_ = nullptr;
+	float* buf_ = nullptr;
+};

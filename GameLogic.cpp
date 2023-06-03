@@ -49,19 +49,27 @@ void GameLogic::update()
 	// 更新鼠标响应
 	if (MouseHelper::is_left_drag())
 	{
+		right_drag_time_ = 0;
 		on_drag(MouseHelper::dx(), MouseHelper::dy());
 	}
 	else if (MouseHelper::is_left_clicked())
 	{
+		right_drag_time_ = 0;
 		on_click_left(MouseHelper::x(), MouseHelper::y());
 	}
 	else if (MouseHelper::is_right_drag())
 	{
+		right_drag_time_ += timer_.delta_ms;
 		on_right_drag(MouseHelper::dx(), MouseHelper::dy());
 	}
 	else if (MouseHelper::is_right_clicked())
 	{
+		right_drag_time_ = 0;
 		on_click_right(MouseHelper::x(), MouseHelper::y());
+	}
+	else
+	{
+		right_drag_time_ = 0;
 	}
 
 	if (MouseHelper::is_mid_clicked())
@@ -125,11 +133,13 @@ void GameLogic::on_right_drag(float dx, float dy)
 		current_building = nullptr;
 		glfwSetInputMode(current_window->window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
-	else
+	else if (right_drag_time_ >= 500) // 500ms 后再移除
 	{
 		// 移除建筑
-		const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - MouseHelper::x()) / map_.cell_size);
-		const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - MouseHelper::y()) / map_.cell_size);
+		const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - MouseHelper::x()) / map_.
+			cell_size);
+		const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - MouseHelper::y()) / map_.
+			cell_size);
 		map_.remove_building(my, mx);
 	}
 }
@@ -231,6 +241,75 @@ void GameLogic::on_key_press(const int key)
 		if (current_building)
 		{
 			current_building = current_building->next_variant;
+		}
+		break;
+	case GLFW_KEY_UP:
+		// 更新屏幕中心位置
+		map_.center.y = map_.center.y - 1;
+
+		if (current_renderer && current_window)
+		{
+			// 更新渲染
+			current_renderer->update_cell_position(map_, current_window->width(), current_window->height());
+			// 更新标题栏
+			current_window->update_window_title();
+		}
+		break;
+	case GLFW_KEY_DOWN:
+		// 更新屏幕中心位置
+		map_.center.y = map_.center.y + 1;
+
+		if (current_renderer && current_window)
+		{
+			// 更新渲染
+			current_renderer->update_cell_position(map_, current_window->width(), current_window->height());
+			// 更新标题栏
+			current_window->update_window_title();
+		}
+		break;
+	case GLFW_KEY_LEFT:
+		// 更新屏幕中心位置
+		map_.center.x = map_.center.x + 1;
+
+		if (current_renderer && current_window)
+		{
+			// 更新渲染
+			current_renderer->update_cell_position(map_, current_window->width(), current_window->height());
+			// 更新标题栏
+			current_window->update_window_title();
+		}
+		break;
+	case GLFW_KEY_RIGHT:
+		// 更新屏幕中心位置
+		map_.center.x = map_.center.x - 1;
+
+		if (current_renderer && current_window)
+		{
+			// 更新渲染
+			current_renderer->update_cell_position(map_, current_window->width(), current_window->height());
+			// 更新标题栏
+			current_window->update_window_title();
+		}
+		break;
+	case GLFW_KEY_KP_ADD:
+		timer().time_multiply_ += 0.5f;
+
+		if (current_window)
+		{
+			// 更新标题栏
+			current_window->update_window_title();
+		}
+		break;
+	case GLFW_KEY_KP_DECIMAL:
+		if (timer().time_multiply_ > 0.5f)
+		{
+			timer().time_multiply_ -= 0.5f;
+		}
+
+		if (current_window)
+		{
+			// 更新标题栏
+			current_window->update_window_title();
 		}
 		break;
 	default:

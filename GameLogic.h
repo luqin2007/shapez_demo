@@ -70,6 +70,8 @@ private:
 	Timer timer_;
 	GameMap map_;
 
+	time_t right_drag_time_ = 0;
+
 	/**
 	 * \brief 鼠标拖动
 	 * \param dx 拖动距离 - x

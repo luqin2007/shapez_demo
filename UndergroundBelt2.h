@@ -6,11 +6,13 @@
 
 class UndergroundBelt1;
 class UndergroundBelt2;
+class UndergroundBelt2Renderer;
 
 class UndergroundBelt2Context final : public TickableContext
 {
 	friend UndergroundBelt1;
 	friend UndergroundBelt2;
+	friend UndergroundBelt2Renderer;
 
 public:
 	UndergroundBelt2Context(const Building& building, const Vec2I& pos, const Side direction)
@@ -48,12 +50,8 @@ public:
 	void free_context(BuildingContext* context) const override;
 	[[nodiscard]] const BuildingRenderer& get_renderer() const override;
 	[[nodiscard]] vector<Vec2I> all_positions(const Vec2I& pos, Side direction) const override;
-
-protected:
-	UndergroundBelt2() = default;
-
-	bool can_start(const TickableContext& context) const override;
-	bool on_blocking(TickableContext& context, const GameMap& map) const override;
+	void on_placed(BuildingContext& context) const override;
+	[[nodiscard]] bool can_place(const Vec2I& pos, Side direction, const GameMap& map) const override;
 
 	static const UndergroundBelt2Context& cast(const BuildingContext& context)
 	{
@@ -64,4 +62,10 @@ protected:
 	{
 		return static_cast<UndergroundBelt2Context&>(context);
 	}
+
+protected:
+	UndergroundBelt2() = default;
+
+	bool can_start(const TickableContext& context) const override;
+	bool on_blocking(TickableContext& context, const GameMap& map) const override;
 };

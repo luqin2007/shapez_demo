@@ -20,13 +20,11 @@ void GameRenderer::initialize()
 
 	cout << "GameRenderer initializing..." << endl;
 
-	cout << "Initialize font..." << endl;
-	// font_drawer_.initialize();
-
 	cout << "Initialize drawers..." << endl;
 	map_border_drawer.initialize();
 	tex_drawer.initialize();
 	shape_drawer.initialize();
+	font_drawer.initialize();
 
 	cout << "Initialize image atlas..." << endl;
 	atlas.initialize()
@@ -155,6 +153,8 @@ void GameRenderer::initialize()
 		<< ROOT / "image" / "resources" / "star_uncolored.png"
 		<< ROOT / "image" / "resources" / "star_white.png"
 		<< ROOT / "image" / "resources" / "star_yellow.png"
+		// 用到的文本
+		<< "0123456789/LVDEIR "
 		<< Action::mipmap
 		<< Action::finished;
 
@@ -183,8 +183,8 @@ void GameRenderer::destroy()
 {
 	map_border_drawer.destroy();
 	tex_drawer.destroy();
-	// font_drawer_.destroy();
 	shape_drawer.destroy();
+	font_drawer.destroy();
 	AbstractDrawer::destroy_static();
 
 	atlas.destroy();
@@ -219,7 +219,7 @@ auto GameRenderer::update_cell_position(const GameMap& map, const float width, c
 			}
 			else if (edge_pos[i].x > 0)
 			{
-				cell0_.y = i == 0 ? 0 : i - 1;
+				cell0_.y = i < 4 ? i : i - 4;
 				is_set[0] = true;
 			}
 		}
@@ -244,7 +244,7 @@ auto GameRenderer::update_cell_position(const GameMap& map, const float width, c
 			}
 			else if (edge_pos[i].y > 0)
 			{
-				cell0_.x = i == 0 ? 0 : i - 1;
+				cell0_.x = i < 4 ? i : i - 4;
 				is_set[2] = true;
 			}
 		}
@@ -390,7 +390,7 @@ void GameRenderer::draw_ui(const GameLogic& game)
 void GameRenderer::draw_overlay(const GameLogic& game, const GameMap& map)
 {
 	tex_drawer.begin();
-	
+
 	// 鼠标持有的建筑
 	const float cell_size = map.cell_size;
 	if (game.current_building)

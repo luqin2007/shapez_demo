@@ -4,11 +4,11 @@
 #include <map>
 
 #include "BorderDrawer.h"
-#include "FontDrawer.h"
 #include "Atlas.h"
 #include "GameMap.h"
 #include "resouces.h"
 #include "common.h"
+#include "FontDrawer.h"
 #include "TextureDrawer.h"
 #include "ShapeDrawer.h"
 #include "vec.h"
@@ -34,8 +34,8 @@ public:
 
 	BorderDrawer map_border_drawer{CELL_COUNT * 2 + 2};
 	TextureDrawer tex_drawer{200};
+	FontDrawer font_drawer{20};
 	ShapeDrawer shape_drawer;
-	// FontDrawer font_drawer_{ROOT / "font" / "MicrosoftYaHei.ttf"};
 
 	Atlas atlas{4096, 2048, 12, 12};
 

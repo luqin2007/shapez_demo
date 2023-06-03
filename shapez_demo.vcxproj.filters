@@ -90,9 +90,6 @@
     <ClInclude Include="Hub.h">
       <Filter>头文件\building</Filter>
     </ClInclude>
-    <ClInclude Include="FontDrawer.h">
-      <Filter>头文件\render</Filter>
-    </ClInclude>
     <ClInclude Include="Atlas.h">
       <Filter>头文件\render</Filter>
     </ClInclude>
@@ -210,6 +207,9 @@
     <ClInclude Include="UndergroundBelt2Renderer.h">
       <Filter>头文件\render</Filter>
     </ClInclude>
+    <ClInclude Include="FontDrawer.h">
+      <Filter>头文件\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameMap.cpp">
@@ -244,9 +244,6 @@
     </ClCompile>
     <ClCompile Include="Hub.cpp">
       <Filter>源文件\building</Filter>
-    </ClCompile>
-    <ClCompile Include="FontDrawer.cpp">
-      <Filter>源文件\render</Filter>
     </ClCompile>
     <ClCompile Include="Atlas.cpp">
       <Filter>源文件\render</Filter>
@@ -348,6 +345,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="BuildingRenderer.cpp">
+      <Filter>源文件\render</Filter>
+    </ClCompile>
+    <ClCompile Include="FontDrawer.cpp">
       <Filter>源文件\render</Filter>
     </ClCompile>
   </ItemGroup>
@@ -711,20 +711,11 @@
     <None Include="glsl\tex_alpha.frag">
       <Filter>资源文件\glsl</Filter>
     </None>
-    <None Include="glsl\tex_instance.vert">
-      <Filter>资源文件\glsl</Filter>
-    </None>
     <None Include="packages.config" />
     <None Include="glsl\font.frag">
       <Filter>资源文件\glsl</Filter>
     </None>
-    <None Include="glsl\font.vert">
-      <Filter>资源文件\glsl</Filter>
-    </None>
     <None Include="glsl\tex_single.vert">
-      <Filter>资源文件\glsl</Filter>
-    </None>
-    <None Include="glsl\direct.frag">
       <Filter>资源文件\glsl</Filter>
     </None>
     <None Include="glsl\shape.vert">
@@ -740,5 +731,13 @@
       <Filter>资源文件\image\resources</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="readme.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font\MicrosoftYaHei.ttf">
+      <Filter>资源文件</Filter>
+    </Font>
   </ItemGroup>
 </Project>

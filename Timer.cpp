@@ -6,8 +6,8 @@ void Timer::update()
 	current_ms = time();
 
 	// 更新时间间隔
-	delta_ms = current_ms - previous_ms;
-	running_ms = current_ms - start_ms;
+	delta_ms = (current_ms - previous_ms) * time_multiply_;
+	running_ms += delta_ms;
 	delta = static_cast<float>(delta_ms) / 1000.0f;
 	running = static_cast<float>(running_ms) / 1000.0f;
 }

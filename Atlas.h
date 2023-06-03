@@ -12,10 +12,12 @@ using std::map;
 using std::string;
 using std::filesystem::path;
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::exception;
 
 class TextureDrawer;
+class FontDrawer;
 
 /**
  * \brief 表示地图集中的一个图片
@@ -44,6 +46,16 @@ struct dot9
 	}
 };
 
+/**
+ * \brief 字体
+ */
+struct Char
+{
+	unsigned int width, height; // 字形大大小
+	int bearing_x, bearing_y; // 字形基于基线和起点的位置
+	GLuint advance; // 起点到下一个字形起点的距离
+};
+
 enum class Action
 {
 	/**
@@ -66,6 +78,7 @@ enum class Action
 class Atlas
 {
 	friend TextureDrawer;
+	friend FontDrawer;
 
 public:
 	/**
@@ -75,7 +88,7 @@ public:
 	 * \param cell_width 每个单元宽度
 	 * \param cell_height 每个单元高度
 	 */
-	Atlas(const float width, const float height, const int cell_width, const int cell_height);
+	Atlas(float width, float height, int cell_width, int cell_height);
 
 	/**
 	 * \brief 初始化
@@ -108,16 +121,26 @@ public:
 	 */
 	Atlas& operator<<(dot9 data);
 
+	/**
+	 * \brief 导入文本
+	 * \param text 待存文本
+	 * \return 当前地图集
+	 */
+	Atlas& operator<<(const char* text);
+
 	Rect& operator[](const string& name);
 
 	Rect& operator[](const char* name);
 
 private:
+	inline static int image_id_ = 0;
+
 	const float width_, height_;
 	const int cell_width_, cell_height_, col_count_, row_count_, index_;
 	bool m4_ = false;
 	map<string, Rect> atlas_;
 	map<string, dot9> dot9s_;
+	map<char, Char> chars_;
 
 	GLuint texture_ = 0;
 
@@ -127,7 +150,7 @@ private:
 	bool has_d9_ = false;
 	dot9 d9_{0, 0, 0, 0};
 
-	inline static int image_id_ = 0;
-
 	int bcd(int a, int b);
+
+	void put_image(int width, int height, GLenum format, const char* name, const void* image);
 };

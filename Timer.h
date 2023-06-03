@@ -2,11 +2,16 @@
 
 #include <chrono>
 
+class GameLogic;
+class GameWindow;
+
 /**
  * \brief 计时器
  */
 class Timer
 {
+	friend GameLogic;
+	friend GameWindow;
 public:
 	/// <summary>
 	/// 时间节点
@@ -22,6 +27,11 @@ public:
 	/// 单位 s
 	/// </summary>
 	float delta = 0, running = 0;
+
+	/**
+	 * \brief 倍速
+	 */
+	float time_multiply_ = 1;
 
 	/**
 	 * \brief 更新：推进到下一帧

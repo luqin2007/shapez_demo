@@ -59,7 +59,7 @@ void GameWindow::listen_events() const
 
 	glfwSetKeyCallback(window_, [](GLFWwindow*, const int key, int, const int action, int)
 	{
-		if (action == GLFW_PRESS && current_game)
+		if ((action == GLFW_PRESS || action == GLFW_REPEAT) && current_game)
 		{
 			current_game->on_key_press(key);
 		}
@@ -78,9 +78,9 @@ void GameWindow::update_window_title() const
 		const int gx = center.x - (width_ / 2.0f - mx) / cell_size;
 		const int gy = center.y - (height_ / 2.0f - my) / cell_size;
 		if (sprintf_s(
-			buf, "Shapez Demo %dx%d center=(%.2f,%.2f) cursor=(%.2f,%.2f)/(%d,%d) cell=%.2f render=(%d,%d)-(%d,%d)",
+			buf, "Shapez Demo %dx%d center=(%.2f,%.2f) cursor=(%.2f,%.2f)/(%d,%d) cell=%.2f render=(%d,%d)-(%d,%d) time-mul=%.1f",
 			width_, height_, center.x, center.y, mx, my, gx, gy, cell_size, 
-			current_renderer->cell0_.x, current_renderer->cell0_.y, current_renderer->cell1_.x, current_renderer->cell1_.y))
+			current_renderer->cell0_.x, current_renderer->cell0_.y, current_renderer->cell1_.x, current_renderer->cell1_.y, current_game->timer().time_multiply_))
 		{
 			glfwSetWindowTitle(current_window->window(), buf);
 		}

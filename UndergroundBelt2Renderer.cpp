@@ -2,6 +2,7 @@
 
 #include "BuildingContext.h"
 #include "GameRenderer.h"
+#include "UndergroundBelt2.h"
 
 void UndergroundBelt2Renderer::draw_building(const int row, const int col, const BuildingContext& context,
                                              GameRenderer& renderer, const GameMap& map) const
@@ -24,4 +25,13 @@ void UndergroundBelt2Renderer::draw_holding(const float x, const float y, const 
 void UndergroundBelt2Renderer::draw_items_in_building(int row, int col, const BuildingContext& context,
                                                       GameRenderer& renderer, const GameMap& map) const
 {
+	const auto& ctx = UndergroundBelt2::cast(context);
+	if (ctx.type_ == ItemType::shape)
+	{
+		draw_output_item(row, col, map.cell_size, context.direction, renderer, ctx.shapes_, ctx);
+	}
+	else if (ctx.type_ == ItemType::dye)
+	{
+		draw_output_color(row, col, map.cell_size, context.direction, renderer, ctx.color_, ctx);
+	}
 }

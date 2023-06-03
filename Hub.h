@@ -6,8 +6,6 @@
 
 using std::make_unique;
 
-class Hub;
-
 class HubContext : public BuildingContext
 {
 public:

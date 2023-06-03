@@ -42,6 +42,10 @@ void Hub::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
 
 void Hub::update(BuildingContext& context, GameMap& map) const
 {
+	if (cast(context).level == 0)
+	{
+		set_next_level(cast(context));;
+	}
 }
 
 void Hub::free_context(BuildingContext* context) const

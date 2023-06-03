@@ -43,7 +43,7 @@ void UndergroundBelt1::receive_shape(const ColoredShapes& shape, const Vec2I& po
 
 void UndergroundBelt1::update(BuildingContext& context, GameMap& map) const
 {
-	const auto& ctx = cast(context);
+	auto& ctx = cast(context);
 	if (ctx.type_ == ItemType::none)
 	{
 		return;
@@ -66,6 +66,7 @@ void UndergroundBelt1::update(BuildingContext& context, GameMap& map) const
 		if (building->can_receive_dye(ctx.color_, context.pos, opposite(context.direction), *target))
 		{
 			building->receive_dye(ctx.color_, context.pos, opposite(context.direction), *target);
+			ctx.type_ = ItemType::none;
 		}
 	}
 	else
@@ -73,6 +74,7 @@ void UndergroundBelt1::update(BuildingContext& context, GameMap& map) const
 		if (building->can_receive_shape(ctx.shapes_, context.pos, opposite(context.direction), *target))
 		{
 			building->receive_shape(ctx.shapes_, context.pos, opposite(context.direction), *target);
+			ctx.type_ = ItemType::none;
 		}
 	}
 }
@@ -93,4 +95,13 @@ vector<Vec2I> UndergroundBelt1::all_positions(const Vec2I& pos, Side direction) 
 	vector<Vec2I> p;
 	p.push_back(pos);
 	return p;
+}
+
+void UndergroundBelt1::on_placed(BuildingContext& context) const
+{
+	if (current_game)
+	{
+		current_game->current_building = &UndergroundBelt2::instance();
+		current_game->current_building_data = context.pos;
+	}
 }

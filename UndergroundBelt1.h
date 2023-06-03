@@ -8,10 +8,12 @@
 #include "UndergroundBelt2.h"
 
 class UndergroundBelt1;
+class UndergroundBelt2;
 
 class UndergroundBelt1Context final : public BuildingContext
 {
 	friend UndergroundBelt1;
+	friend UndergroundBelt2;
 
 public:
 	UndergroundBelt1Context(const Building& building, const Vec2I& pos, const Side direction)
@@ -52,13 +54,7 @@ public:
 	void free_context(BuildingContext* context) const override;
 	[[nodiscard]] const BuildingRenderer& get_renderer() const override;
 	[[nodiscard]] vector<Vec2I> all_positions(const Vec2I& pos, Side direction) const override;
-
-protected:
-	UndergroundBelt1()
-	{
-		next_variant = &UndergroundBelt2::instance();
-		const_cast<UndergroundBelt2&>(UndergroundBelt2::instance()).next_variant = this;
-	}
+	void on_placed(BuildingContext& context) const override;
 
 	static const UndergroundBelt1Context& cast(const BuildingContext& context)
 	{
@@ -68,5 +64,11 @@ protected:
 	static UndergroundBelt1Context& cast(BuildingContext& context)
 	{
 		return static_cast<UndergroundBelt1Context&>(context);
+	}
+protected:
+	UndergroundBelt1()
+	{
+		next_variant = &UndergroundBelt2::instance();
+		const_cast<UndergroundBelt2&>(UndergroundBelt2::instance()).next_variant = this;
 	}
 };

@@ -75,6 +75,11 @@
     <LibraryPath>D:\SupportLibraries\vs_libs\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>D:\SupportLibraries\vs_libs\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\SupportLibraries\vs_libs\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SupportLibraries\vs_libs\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>D:\SupportLibraries\vs_libs\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -126,6 +131,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +149,7 @@
     <ClInclude Include="Belt.h" />
     <ClInclude Include="BuildingContext.h" />
     <ClInclude Include="Cutter.h" />
+    <ClInclude Include="FontDrawer.h" />
     <ClInclude Include="Hub.h" />
     <ClInclude Include="Miner.h" />
     <ClInclude Include="Mixer.h" />
@@ -154,7 +162,6 @@
     <ClInclude Include="UndergroundBelt2.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="common.h" />
-    <ClInclude Include="FontDrawer.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameRenderer.h" />
@@ -196,6 +203,7 @@
     <ClCompile Include="Belt.cpp" />
     <ClCompile Include="BuildingRenderer.cpp" />
     <ClCompile Include="Cutter.cpp" />
+    <ClCompile Include="FontDrawer.cpp" />
     <ClCompile Include="Hub.cpp" />
     <ClCompile Include="Miner.cpp" />
     <ClCompile Include="Mixer.cpp" />
@@ -207,7 +215,6 @@
     <ClCompile Include="UndergroundBelt1.cpp" />
     <ClCompile Include="UndergroundBelt2.cpp" />
     <ClCompile Include="common.cpp" />
-    <ClCompile Include="FontDrawer.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameRenderer.cpp" />
@@ -357,17 +364,18 @@
     <None Include="ClassDiagram.cd" />
     <None Include="glsl\cell_border.frag" />
     <None Include="glsl\cell_border.vert" />
-    <None Include="glsl\direct.frag" />
     <None Include="glsl\font.frag" />
-    <None Include="glsl\font.vert" />
     <None Include="glsl\shape.vert" />
     <None Include="glsl\tex_alpha.frag" />
-    <None Include="glsl\tex_instance.vert" />
     <None Include="glsl\tex_single.vert" />
     <None Include="image\resources\circle.psd" />
     <None Include="image\resources\rect.psd" />
     <None Include="image\resources\star.psd" />
     <None Include="packages.config" />
+    <None Include="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font\MicrosoftYaHei.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
