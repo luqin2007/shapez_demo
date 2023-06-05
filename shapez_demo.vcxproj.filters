@@ -718,9 +718,6 @@
     <None Include="glsl\tex_single.vert">
       <Filter>资源文件\glsl</Filter>
     </None>
-    <None Include="glsl\shape.vert">
-      <Filter>资源文件\glsl</Filter>
-    </None>
     <None Include="image\resources\circle.psd">
       <Filter>资源文件\image\resources</Filter>
     </None>

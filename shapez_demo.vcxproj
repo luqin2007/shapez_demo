@@ -365,7 +365,6 @@
     <None Include="glsl\cell_border.frag" />
     <None Include="glsl\cell_border.vert" />
     <None Include="glsl\font.frag" />
-    <None Include="glsl\shape.vert" />
     <None Include="glsl\tex_alpha.frag" />
     <None Include="glsl\tex_single.vert" />
     <None Include="image\resources\circle.psd" />
