@@ -33,11 +33,12 @@ void FontDrawer::color(const float r, const float g, const float b, const float 
 	glUniform4f(1, r, g, b, a);
 }
 
-void FontDrawer::push(const char* string, float x0, float y0, const float scale)
+void FontDrawer::push(const char* string, const float x, float y0, const float scale)
 {
 	char ch, name[2];
 	int p = 0;
-	name[1] = '\0';
+	// 计算 x 坐标
+	float x0 = x;
 	while ((ch = string[p++]))
 	{
 		if (!at_->chars_.contains(ch))
@@ -46,7 +47,14 @@ void FontDrawer::push(const char* string, float x0, float y0, const float scale)
 			sprintf_s(ss, 200, "找不到纹理：[%c]", ch);
 			throw exception(ss);
 		}
+		const auto& [width, height, bx, by, adv] = at_->chars_.at(ch);
+		x0 -= ((adv >> 6) * scale) / 2;
+	}
 
+	name[1] = '\0';
+	p = 0;
+	while ((ch = string[p++]))
+	{
 		name[0] = ch;
 		const auto& [u, v, w, h] = at_->atlas_.at(name);
 		const auto& [width, height, bx, by, adv] = at_->chars_.at(ch);

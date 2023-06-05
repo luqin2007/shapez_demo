@@ -7,6 +7,7 @@
 #include "Balancer.h"
 #include "Belt.h"
 #include "Cutter.h"
+#include "Hub.h"
 #include "Miner.h"
 #include "Mixer.h"
 #include "Painter.h"
@@ -237,7 +238,7 @@ void GameLogic::on_key_press(const int key)
 			current_side = cw(current_side);
 		}
 		break;
-	case GLFW_KEY_Y:
+	case GLFW_KEY_T:
 		if (current_building)
 		{
 			current_building = current_building->next_variant;
@@ -310,6 +311,13 @@ void GameLogic::on_key_press(const int key)
 		{
 			// 更新标题栏
 			current_window->update_window_title();
+		}
+		break;
+	case GLFW_KEY_PAGE_UP:
+		// 跳关 调试用
+		{
+		HubContext* ctx = static_cast<HubContext*>(map_.get_building(CELL_COUNT / 2, CELL_COUNT / 2));
+		ctx->accept_count = ctx->total_count;
 		}
 		break;
 	default:

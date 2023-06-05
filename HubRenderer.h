@@ -19,4 +19,5 @@ public:
 	                            const GameMap& map) const override
 	{
 	}
+
 };

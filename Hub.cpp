@@ -18,7 +18,7 @@ bool Hub::can_receive_dye(Color color, const Vec2I& pos, Side side, const Buildi
 }
 
 bool Hub::can_receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
-									const BuildingContext& context) const
+                            const BuildingContext& context) const
 {
 	return true;
 }
@@ -34,17 +34,18 @@ void Hub::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side side,
 	{
 		ctx.accept_count++;
 	}
-	if (ctx.accept_count == ctx.total_count)
-	{
-		set_next_level(ctx);
-	}
 }
 
 void Hub::update(BuildingContext& context, GameMap& map) const
 {
-	if (cast(context).level == 0)
+	auto& ctx = cast(context);
+	if (ctx.level == 0)
 	{
 		set_next_level(cast(context));;
+	}
+	if (ctx.accept_count >= ctx.total_count)
+	{
+		set_next_level(ctx);
 	}
 }
 
@@ -78,91 +79,134 @@ void Hub::set_next_level(HubContext& context)
 	context.total_count = context.level * 10 + 5;
 	context.level++;
 
-	Shape shape;
-	auto color = Color::uncolored;
-
-	// 随机形状
-	// 1/3 概率任意形状
-	switch (random_int() % 3)
+	if (context.level <= 10)
 	{
-	case 0:
-	default:
-		shape = Shape::rect;
-		break;
-	case 1:
-		shape = Shape::fan;
-		break;
-	case 2:
-		shape = Shape::star;
-		break;
+		const Color color = random_color(context.level);
+		const Shape shape = random_shape();
+		context.shapes.up_left.first = color;
+		context.shapes.up_left.second = shape;
+		context.shapes.up_right.first = color;
+		context.shapes.up_right.second = shape;
+		context.shapes.down_left.first = color;
+		context.shapes.down_left.second = shape;
+		context.shapes.down_right.first = color;
+		context.shapes.down_right.second = shape;
 	}
-	// 随机颜色
-	// >= 10 级：75% 两种混合色；18.75% 单色；6.25% 白色
-	// >= 5 级：75% 单色；25% 无色
-	// < 5 级：无色
-	if (context.level >= 10)
+	else if (context.level <= 15)
+	{
+		const Color color1 = random_color(context.level);
+		const Color color2 = random_color(context.level);
+		const Shape shape1 = random_shape();
+		const Shape shape2 = random_shape();
+		if (random_int() % 2)
+		{
+			context.shapes.up_left.first = color1;
+			context.shapes.up_left.second = shape1;
+			context.shapes.up_right.first = color1;
+			context.shapes.up_right.second = shape1;
+			context.shapes.down_left.first = color2;
+			context.shapes.down_left.second = shape2;
+			context.shapes.down_right.first = color2;
+			context.shapes.down_right.second = shape2;
+		}
+		else
+		{
+			context.shapes.up_left.first = color1;
+			context.shapes.up_left.second = shape1;
+			context.shapes.up_right.first = color2;
+			context.shapes.up_right.second = shape2;
+			context.shapes.down_left.first = color1;
+			context.shapes.down_left.second = shape1;
+			context.shapes.down_right.first = color2;
+			context.shapes.down_right.second = shape2;
+		}
+	}
+	else
+	{
+		const Color color1 = random_color(context.level);
+		const Color color2 = random_color(context.level);
+		const Color color3 = random_color(context.level);
+		const Color color4 = random_color(context.level);
+		const Shape shape1 = random_shape();
+		const Shape shape2 = random_shape();
+		const Shape shape3 = random_shape();
+		const Shape shape4 = random_shape();
+		context.shapes.up_left.first = color1;
+		context.shapes.up_left.second = shape1;
+		context.shapes.up_right.first = color2;
+		context.shapes.up_right.second = shape2;
+		context.shapes.down_left.first = color3;
+		context.shapes.down_left.second = shape3;
+		context.shapes.down_right.first = color4;
+		context.shapes.down_right.second = shape4;
+	}
+}
+
+Color Hub::random_color(const int level)
+{
+	if (level >= 10)
 	{
 		switch (random_int() % 4)
 		{
 		case 0:
 			// 25%
-			color = Color::yellow;
-			break;
+			return Color::yellow;
 		case 1:
 			// 25%
-			color = Color::cyan;
-			break;
+			return Color::cyan;
 		case 2:
 			// 25%
-			color = Color::purple;
-			break;
+			return Color::purple;
 		default:
 			switch (random_int() % 4)
 			{
 			case 0:
 				// 6.25%
-				color = Color::red;
-				break;
+				return Color::red;
 			case 1:
 				// 6.25%
-				color = Color::blue;
-				break;
+				return Color::blue;
 			case 2:
 				// 6.25%
-				color = Color::green;
-				break;
+				return Color::green;
 			default:
 				// 6.25%
-				color = Color::white;
+				return Color::white;
 			}
 		}
 	}
-	else if (context.level >= 5)
+	else if (level >= 5)
 	{
 		switch (random_int() % 4)
 		{
 		case 0:
 			// 25%
-			color = Color::red;
-			break;
+			return Color::red;
 		case 1:
 			// 25%
-			color = Color::blue;
-			break;
+			return Color::blue;
 		case 2:
 			// 25%
-			color = Color::green;
-			break;
+			return Color::green;
 		default:
 			// 25%
-			color = Color::uncolored;
+			return Color::uncolored;
 		}
 	}
 
-	context.shapes = {
-		{color, shape},
-		{color, shape},
-		{color, shape},
-		{color, shape}
-	};
+	return Color::uncolored;
+}
+
+Shape Hub::random_shape()
+{
+	switch (random_int() % 3)
+	{
+	case 0:
+	default:
+		return Shape::rect;
+	case 1:
+		return Shape::fan;
+	case 2:
+		return Shape::star;
+	}
 }

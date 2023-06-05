@@ -70,4 +70,8 @@ private:
 	}
 
 	static void set_next_level(HubContext& context);
+
+	static Color random_color(int level);
+
+	static Shape random_shape();
 };

@@ -32,11 +32,11 @@ public:
 	/**
 	 * \brief 绘制文本，默认以高度 48 绘制
 	 * \param string 待绘制文本
-	 * \param x0 左上角 x 坐标
+	 * \param x 中心 x 坐标
 	 * \param y0 左上角 y 坐标
 	 * \param scale 缩放
 	 */
-	void push(const char* string, float x0, float y0, float scale);
+	void push(const char* string, float x, float y0, float scale);
 
 	/**
 	 * \brief 绘制
