@@ -21,19 +21,19 @@ void GameMap::initialize()
 	// 初始化资源
 	for (int i = 0; i < CELL_COUNT; ++i)
 	{
-		resources_[0 + 50][i] = ResourceType::shape_circle;
-		resources_[1 + 50][i] = ResourceType::shape_rect;
-		resources_[2 + 50][i] = ResourceType::shape_star;
-		resources_[3 + 50][i] = ResourceType::color_red;
-		resources_[4 + 50][i] = ResourceType::color_blue;
-		resources_[5 + 50][i] = ResourceType::color_green;
+		resources_[0 + 70][i] = ResourceType::shape_circle;
+		resources_[1 + 70][i] = ResourceType::shape_rect;
+		resources_[2 + 70][i] = ResourceType::shape_star;
+		resources_[3 + 70][i] = ResourceType::color_red;
+		resources_[4 + 70][i] = ResourceType::color_blue;
+		resources_[5 + 70][i] = ResourceType::color_green;
 
-		resources_[CELL_COUNT - 1 - 50][i] = ResourceType::shape_circle;
-		resources_[CELL_COUNT - 2 - 50][i] = ResourceType::shape_rect;
-		resources_[CELL_COUNT - 3 - 50][i] = ResourceType::shape_star;
-		resources_[CELL_COUNT - 4 - 50][i] = ResourceType::color_red;
-		resources_[CELL_COUNT - 5 - 50][i] = ResourceType::color_blue;
-		resources_[CELL_COUNT - 6 - 50][i] = ResourceType::color_green;
+		resources_[CELL_COUNT - 1 - 70][i] = ResourceType::shape_circle;
+		resources_[CELL_COUNT - 2 - 70][i] = ResourceType::shape_rect;
+		resources_[CELL_COUNT - 3 - 70][i] = ResourceType::shape_star;
+		resources_[CELL_COUNT - 4 - 70][i] = ResourceType::color_red;
+		resources_[CELL_COUNT - 5 - 70][i] = ResourceType::color_blue;
+		resources_[CELL_COUNT - 6 - 70][i] = ResourceType::color_green;
 	}
 
 	// 初始化 hub

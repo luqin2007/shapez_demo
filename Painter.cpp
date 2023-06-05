@@ -87,7 +87,7 @@ bool Painter::can_start(const TickableContext& context) const
 bool Painter::on_blocking(TickableContext& context, const GameMap& map) const
 {
 	if (auto& ctx = cast(context);
-		send_shape(context.pos + ~context.direction, cw(context.direction), ctx.shapes_, map))
+		send_shape(ctx.right_pos_, cw(context.direction), ctx.shapes_, map))
 	{
 		ctx.has_color_ = false;
 		ctx.has_shape_ = false;
