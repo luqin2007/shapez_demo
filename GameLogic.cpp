@@ -28,10 +28,14 @@ void GameLogic::initialize(const long long seed)
 	// 初始化建筑
 	buildings["miner"] = &Miner::instance();
 	buildings["belt"] = &Belts::direct();
+	buildings["belt_left"] = &Belts::left();
+	buildings["belt_right"] = &Belts::right();
 	buildings["balancer"] = &Balancer::instance();
 	buildings["rotater"] = &Rotaters::cw();
+	buildings["rotater_ccw"] = &Rotaters::ccw();
 	buildings["miner"] = &Miner::instance();
 	buildings["underground_belt"] = &UndergroundBelt1::instance();
+	buildings["underground_belt2"] = &UndergroundBelt2::instance();
 	buildings["cutter"] = &Cutter::instance();
 	buildings["mixer"] = &Mixer::instance();
 	buildings["painter"] = &Painter::instance();

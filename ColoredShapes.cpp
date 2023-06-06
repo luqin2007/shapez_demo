@@ -115,7 +115,7 @@ ColoredShapes ColoredShapes::left() const
 {
 	return {
 		{Color::uncolored, Shape::none},
-		{down_left.first, down_right.second},
+		{down_left.first, down_left.second},
 		{Color::uncolored, Shape::none},
 		{up_left.first, up_left.second},
 	};
