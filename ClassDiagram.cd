@@ -3,40 +3,40 @@
   <Class Name="GameLogic" Collapsed="true">
     <Position X="39.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAQAlAAAAAAAAQQAYAEDAGAAAAAQAAAAAAAAAEAsAAA=</HashCode>
+      <HashCode>EAQAlAAAAAAAAQQAYAEDAGQAAAAQAAAAAAAAAMAsAAA=</HashCode>
       <FileName>GameLogic.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMap" Collapsed="true">
-    <Position X="35.75" Y="1.5" Width="1.5" />
+    <Position X="41" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAMAAAABAAAAQAAAEAAAACAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>GameMap.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameRenderer" Collapsed="true">
-    <Position X="37.5" Y="1.5" Width="1.5" />
+    <Position X="35.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAAIACAAQQIEBAUAAQABAAAABAAAACAAGEIA=</HashCode>
+      <HashCode>AAAAAAACAAIACAAQQIEBAUAAQABAAABBAAAACAAGEIA=</HashCode>
       <FileName>GameRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameWindow" Collapsed="true">
-    <Position X="39.25" Y="1.5" Width="1.5" />
+    <Position X="37.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAICgAAAARgQAEAAEAAAAAAAAAJAIEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAIQgAAAARgQAEAAEAAAAAAAAAJAAEAAAAAAAA=</HashCode>
       <FileName>GameWindow.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Main" Collapsed="true">
-    <Position X="35.75" Y="2.5" Width="1.5" />
+    <Position X="39.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAA=</HashCode>
       <FileName>Main.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AbstractDrawer" Collapsed="true">
-    <Position X="2.75" Y="3.5" Width="1.5" />
+    <Position X="3.75" Y="12.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAABAAAAAAAAAAASAAAwDAIAA=</HashCode>
       <FileName>AbstractDrawer.h</FileName>
@@ -45,140 +45,147 @@
   <Class Name="Atlas" Collapsed="true">
     <Position X="35.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CIAACAAAAAAAgQBgQIHAAGAAACEAAAgAAOAAAAABAIA=</HashCode>
+      <HashCode>CoAACAAAQAAAgQBgQIHAAGAAACEAAAgAAOAAAAABAIA=</HashCode>
       <FileName>Atlas.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FontDrawer" Collapsed="true">
+    <Position X="5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAABAMAAEAQAAAAAACAgEAIAAAAAAE=</HashCode>
+      <FileName>FontDrawer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildingRenderer" Collapsed="true">
     <Position X="16.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAgAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAQAAIAAIAAAAAAgAQABAAAgAAAADAAAAAgABAA=</HashCode>
       <FileName>BuildingRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BorderDrawer" Collapsed="true">
-    <Position X="5" Y="4.75" Width="1.5" />
+    <Position X="7.25" Y="13.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAAAAAABAMAAEAQAAAAAAAAAEAIAAAAAAE=</HashCode>
       <FileName>BorderDrawer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PainterRenderer" Collapsed="true">
-    <Position X="10.5" Y="1.75" Width="1.5" />
+    <Position X="24" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PainterRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MinerRenderer" Collapsed="true">
-    <Position X="15" Y="1.75" Width="1.5" />
+    <Position X="28.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAIAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MinerRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BalancerRenderer" Collapsed="true">
-    <Position X="19.5" Y="1.75" Width="1.5" />
+    <Position X="1.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BalancerRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltRenderer" Collapsed="true">
-    <Position X="26.25" Y="1.75" Width="1.5" />
+    <Position X="8.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAAAAAAAACAIQABAAAAAAAAAAAABARAAAA=</HashCode>
       <FileName>BeltRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltDirectRenderer" Collapsed="true">
-    <Position X="24" Y="3.25" Width="1.5" />
+    <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAABAAAAAAQAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>BeltRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltLeftRenderer" Collapsed="true">
-    <Position X="26.25" Y="3.25" Width="1.5" />
+    <Position X="8.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAA=</HashCode>
+      <HashCode>AABCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>BeltRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltRightRenderer" Collapsed="true">
-    <Position X="28.5" Y="3.25" Width="1.5" />
+    <Position X="10.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAECAAAAAABAAAAAAQAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>BeltRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CutterRenderer" Collapsed="true">
-    <Position X="3.75" Y="1.75" Width="1.5" />
+    <Position X="17.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CutterRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HubRenderer" Collapsed="true">
-    <Position X="8.25" Y="1.75" Width="1.5" />
+    <Position X="21.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>HubRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MixerRenderer" Collapsed="true">
-    <Position X="12.75" Y="1.75" Width="1.5" />
+    <Position X="26.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MixerRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RotaterRenderer" Collapsed="true">
-    <Position X="17.25" Y="1.75" Width="1.5" />
+    <Position X="30.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAEIgAAAAAgAAAAAAAAQABAAABAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAEIgAAAAAgAAAAAAAAQABAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RotaterRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StackerRenderer" Collapsed="true">
-    <Position X="21.75" Y="1.75" Width="1.5" />
+    <Position X="3.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>StackerRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrashRenderer" Collapsed="true">
-    <Position X="30.75" Y="1.75" Width="1.5" />
+    <Position X="12.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TrashRenderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ShapeDrawer" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="0.5" Y="13.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAIEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ShapeDrawer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TextureDrawer" Collapsed="true">
-    <Position X="2.75" Y="4.75" Width="1.5" />
+    <Position X="2.75" Y="13.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAABAMAAEAQBAAgAAAAAEAYAAAAAgE=</HashCode>
       <FileName>TextureDrawer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UndergroundBelt2Renderer" Collapsed="true">
-    <Position X="1.5" Y="1.75" Width="1.5" />
+    <Position X="15" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UndergroundBelt2Renderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UndergroundBelt1Renderer" Collapsed="true">
-    <Position X="6" Y="1.75" Width="1.5" />
+    <Position X="19.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAQABAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UndergroundBelt1Renderer.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -190,49 +197,49 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BalancerContext" Collapsed="true">
-    <Position X="8" Y="13.25" Width="1.5" />
+    <Position X="12.5" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAAAAAAYAAAAAAABAAAAAAAAAAAAAgAIAAAA=</HashCode>
       <FileName>Balancer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Balancer" Collapsed="true">
-    <Position X="10.75" Y="7.25" Width="1.5" />
+    <Position X="22" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAgAABAAABABAACGAAEgABBAAgAAAAMAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAgAABAAABABAACGAAEAABBAAgAAAAMAAAAAAA=</HashCode>
       <FileName>Balancer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltContext" Collapsed="true">
-    <Position X="19.25" Y="11.75" Width="1.5" />
+    <Position X="1.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIQAAAAAYAAAAAAAAEAAAAAEIAAAQAAAEAAgAAAAEA=</HashCode>
       <FileName>Belt.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Belt" Collapsed="true">
-    <Position X="28.75" Y="5.75" Width="1.5" />
+    <Position X="4" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAgAABAAAAABAAAAAAkAAAAAAgAAAAIAAAEAAA=</HashCode>
       <FileName>Belt.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltDirect" Collapsed="true">
-    <Position X="26.5" Y="7.25" Width="1.5" />
+    <Position X="1.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAABAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Belt.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltLeft" Collapsed="true">
-    <Position X="28.75" Y="7.25" Width="1.5" />
+    <Position X="4" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAABAAAAACAAAAAAAAA=</HashCode>
       <FileName>Belt.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeltRight" Collapsed="true">
-    <Position X="31" Y="7.25" Width="1.5" />
+    <Position X="6.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAABAAAAAABAAAAAAAA=</HashCode>
       <FileName>Belt.h</FileName>
@@ -246,177 +253,184 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BuildingContext" Collapsed="true">
-    <Position X="11.25" Y="10.5" Width="1.5" />
+    <Position X="11.25" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAIAAAAAAAAIAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>BuildingContext.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CutterContext" Collapsed="true">
-    <Position X="10.25" Y="13.25" Width="1.5" />
+    <Position X="14.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAYAAgAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAABAQAAAAAAAAAAAAAgAYAAAAAAhAA=</HashCode>
       <FileName>Cutter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Cutter" Collapsed="true">
-    <Position X="13" Y="7.25" Width="1.5" />
+    <Position X="24.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAgEABAAABABAACEAAEgABBAAgAIAAIAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAgAABAAABABAACEAAEAABBAAgAIAAIAAAAAAA=</HashCode>
       <FileName>Cutter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HubContext" Collapsed="true">
-    <Position X="21.5" Y="11.75" Width="1.5" />
+    <Position X="3.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAQAAAAAAAAAAABQA=</HashCode>
       <FileName>Hub.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Hub" Collapsed="true">
-    <Position X="33.25" Y="5.75" Width="1.5" />
+    <Position X="8.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAEAgAABAAABABACAAAAEAABBAAgAAAAIAAAEAAA=</HashCode>
+      <HashCode>CAAAAEAgACBAAABABACAAAAEAABBAAgAAAgIAAAEAAA=</HashCode>
       <FileName>Hub.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Miner" Collapsed="true">
-    <Position X="1.75" Y="7.25" Width="1.5" />
+    <Position X="13" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAEAgAAAAAABABAACEAAEgABBAAgAAAAIAAAAAAA=</HashCode>
+      <HashCode>CAAAAEAgAAAAAABABAACEAAEAABBAAgAAAAIAAAAAAA=</HashCode>
       <FileName>Miner.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MixerContext" Collapsed="true">
-    <Position X="1.25" Y="13.25" Width="1.5" />
+    <Position X="5.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAgAAAAAAAQBAA=</HashCode>
       <FileName>Mixer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Mixer" Collapsed="true">
-    <Position X="4" Y="7.25" Width="1.5" />
+    <Position X="15.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAEAgAABAAABABAACEAAEgABBAAgAAAAIAAAAAAA=</HashCode>
+      <HashCode>CAAAAEAgAABAAABABAACEAAEAABBAAgAAAAIAAAAAAA=</HashCode>
       <FileName>Mixer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PainterContext" Collapsed="true">
-    <Position X="5.75" Y="13.25" Width="1.5" />
+    <Position X="10.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAACAAAAAAAAAAACAAIAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAACAAAAAAAAAAACgAIAAgAAABAA=</HashCode>
       <FileName>Painter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Painter" Collapsed="true">
-    <Position X="8.5" Y="7.25" Width="1.5" />
+    <Position X="19.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAkAgAABAAABABAACEAAEgABBAAgAAAAIAAAAAAA=</HashCode>
+      <HashCode>AAAAAkAgAABAAABABAACEAAEAABBAAgAAAAIAAAAAAA=</HashCode>
       <FileName>Painter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RotaterContext" Collapsed="true">
-    <Position X="12.5" Y="13.25" Width="1.5" />
+    <Position X="17" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAA=</HashCode>
       <FileName>Rotater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Rotater" Collapsed="true">
-    <Position X="16.25" Y="7.25" Width="1.5" />
+    <Position X="27.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAEAgAABAAABABAACEAAEgAAAAAgAAAAIAAAAAAA=</HashCode>
+      <HashCode>AEAAAEAgAABAAABABAACEAAEAAAAAAgAAAAIAAAAAAA=</HashCode>
       <FileName>Rotater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RotaterCW" Collapsed="true">
-    <Position X="15.25" Y="8.75" Width="1.5" />
+    <Position X="26.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rotater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RotaterCCW" Collapsed="true">
-    <Position X="17.5" Y="8.75" Width="1.5" />
+    <Position X="28.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAEAAAAAA=</HashCode>
       <FileName>Rotater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Rotaters" Collapsed="true">
-    <Position X="37.5" Y="2.5" Width="1.5" />
+    <Position X="35.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rotater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StackerContext" Collapsed="true">
-    <Position X="3.5" Y="13.25" Width="1.5" />
+    <Position X="8" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAgAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAgAAAAgAAABIA=</HashCode>
       <FileName>Stacker.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Stacker" Collapsed="true">
-    <Position X="6.25" Y="7.25" Width="1.5" />
+    <Position X="17.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAgAABAAABABAACEAAEgABBAAgAAAIIAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAgAABAAABABAACEAAEAABBAAgAAAIIAAAAAAA=</HashCode>
       <FileName>Stacker.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Trash" Collapsed="true">
-    <Position X="22" Y="5.75" Width="1.5" />
+    <Position X="31" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAgAAAAAABABAAAAAAEAABJAAgAAAAIAAAEAAA=</HashCode>
       <FileName>Trash.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UndergroundBelt1Context" Collapsed="true">
-    <Position X="17" Y="11.75" Width="1.5" />
+    <Position X="21.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAACAAAAAAAAAAAAAAAAAAAACAAAAAgAAABAA=</HashCode>
       <FileName>UndergroundBelt1.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UndergroundBelt1" Collapsed="true">
-    <Position X="24.25" Y="5.75" Width="1.5" />
+    <Position X="33.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAEAgAABAAABABAAAAAAEAABBAAgAAAAIAAAEAAA=</HashCode>
+      <HashCode>AAAIAEAgAABAAABABAAAAAAEAABBAAgAAAAIAAgEAAA=</HashCode>
       <FileName>UndergroundBelt1.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UndergroundBelt2Context" Collapsed="true">
-    <Position X="14.75" Y="13.25" Width="1.5" />
+    <Position X="19.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAACAAACAAAAAgAAAAAA=</HashCode>
       <FileName>UndergroundBelt2.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UndergroundBelt2" Collapsed="true">
-    <Position X="19.75" Y="7.25" Width="1.5" />
+    <Position X="10.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAEAgAABAAABABAACEAAEgABBAAgAAAAIAAAAAAA=</HashCode>
+      <HashCode>AAAQAEAgAABAAABABAgCEAAEAABBAAgAAAAIAAgAAAA=</HashCode>
       <FileName>UndergroundBelt2.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TickableContext" Collapsed="true">
-    <Position X="8" Y="11.75" Width="1.5" />
+    <Position X="12.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>TickableBuilding.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TickableBuilding" Collapsed="true">
-    <Position X="10.75" Y="5.75" Width="1.5" />
+    <Position X="19.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAAAAACEAAAgAAAAAAAAAAAAAAEAAE=</HashCode>
+      <HashCode>AAAAAAAAAABAAAAAAAACEAAAAAAAAAAAAAAAAAAEAAE=</HashCode>
       <FileName>TickableBuilding.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Timer" Collapsed="true">
-    <Position X="39.25" Y="2.5" Width="1.5" />
+  <Class Name="MouseHelper" Collapsed="true">
+    <Position X="41" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgBAAAEAAAAAAAAIAAAAAAABAgAAAAAAAAAAEAEggA=</HashCode>
+      <HashCode>AQAAAIoAAAhAACAwAEEIAAAAACAAgAAAACBkEAIEBAQ=</HashCode>
+      <FileName>MouseHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="37.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBAAAEAAAAAAAAIAAAgAAABAgAAAAAAAAAAEAEggA=</HashCode>
       <FileName>Timer.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -428,9 +442,16 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="dot9" Collapsed="true">
-    <Position X="37.5" Y="3.75" Width="1.5" />
+    <Position X="39.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAAAAAAAAAAAEAAAIAAAAAAAAAgAAgAA=</HashCode>
+      <FileName>Atlas.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Char" Collapsed="true">
+    <Position X="35.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAABAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Atlas.h</FileName>
     </TypeIdentifier>
   </Struct>
@@ -442,14 +463,14 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="Image" Collapsed="true">
-    <Position X="39.25" Y="3.75" Width="1.5" />
+    <Position X="41" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAAAAIAAAAQAAAAAAA=</HashCode>
       <FileName>resouces.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="Vec2I" Collapsed="true">
-    <Position X="35.75" Y="5.75" Width="1.5" />
+    <Position X="41" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAQAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>vec.h</FileName>
@@ -463,70 +484,56 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="ColoredShapes" Collapsed="true">
-    <Position X="35.75" Y="3.75" Width="1.5" />
+    <Position X="37.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIEAAAAAAAAEAAAQAMAAQAAAAEAAAIAAAAgAQAAAAA=</HashCode>
+      <HashCode>AAIEAAAAAAAAEAAAQAMAAQAAAAEIAAIAAAAgAQAAgAA=</HashCode>
       <FileName>ColoredShapes.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Typedef Name="PFNWGLGETPROCADDRESSPROC_PRIVATE" Collapsed="true">
-    <Position X="37.5" Y="9.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>D:\SupportLibraries\vs_libs\src\glad.c</FileName>
-    </TypeIdentifier>
-  </Typedef>
-  <Typedef Name="PFNGLXGETPROCADDRESSPROC_PRIVATE" Collapsed="true">
-    <Position X="35.75" Y="9.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>D:\SupportLibraries\vs_libs\src\glad.c</FileName>
-    </TypeIdentifier>
-  </Typedef>
   <Enum Name="Action" Collapsed="true">
-    <Position X="35.75" Y="7" Width="1.5" />
+    <Position X="35.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAQAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Atlas.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="BuildingStatus" Collapsed="true">
-    <Position X="37.5" Y="7" Width="1.5" />
+    <Position X="37.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAEA=</HashCode>
       <FileName>TickableBuilding.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Color" Collapsed="true">
-    <Position X="39.25" Y="7" Width="1.5" />
+    <Position X="39.25" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAgAAEAAAAAIEAAAAAAAAAAAAIAAAAAAAggA=</HashCode>
       <FileName>Color.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="ItemType" Collapsed="true">
-    <Position X="35.75" Y="7.75" Width="1.5" />
+    <Position X="41" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>ItemType.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="ResourceType" Collapsed="true">
-    <Position X="37.5" Y="7.75" Width="1.5" />
+    <Position X="35.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAQAAAAAAAAAAAAAAAAAIIABAAAAAAAAAAAgAAACAA=</HashCode>
       <FileName>ResourceType.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shape" Collapsed="true">
-    <Position X="39.25" Y="7.75" Width="1.5" />
+    <Position X="37.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQCAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shape.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Side" Collapsed="true">
-    <Position X="35.75" Y="8.5" Width="1.5" />
+    <Position X="39.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAAAAgAAgAA=</HashCode>
       <FileName>Side.h</FileName>

@@ -199,7 +199,7 @@ void GameRenderer::update_cell_size(const GameMap& map)
 	}
 }
 
-auto GameRenderer::update_cell_position(const GameMap& map, const float width, const float height) -> void
+void GameRenderer::update_cell_position(const GameMap& map, const float width, const float height)
 {
 	const float xx = -map.center.x * map.cell_size + width / 2.0f;
 	const float yy = -map.center.y * map.cell_size + height / 2.0f;
@@ -370,8 +370,8 @@ void GameRenderer::draw_ui(const GameLogic& game)
 		const Building* building = game.buildings.at(name);
 		building->get_renderer().draw_icon(x, y, BUTTON_SIZE, *this);
 
-		const float mouse_x = MouseHelper::x();
-		const float mouse_y = MouseHelper::y();
+		const float mouse_x = current_game->mouse().x();
+		const float mouse_y = current_game->mouse().y();
 		if (!current_game->current_building
 			&& is_in(x, mouse_x, BUTTON_SIZE)
 			&& is_in(y, mouse_y, BUTTON_SIZE))
@@ -395,8 +395,8 @@ void GameRenderer::draw_overlay(const GameLogic& game, const GameMap& map)
 	const float cell_size = map.cell_size;
 	if (game.current_building)
 	{
-		const float xx = MouseHelper::x() - cell_size / 2;
-		const float yy = MouseHelper::y() - cell_size / 2;
+		const float xx = current_game->mouse().x() - cell_size / 2;
+		const float yy = current_game->mouse().y() - cell_size / 2;
 		game.current_building->get_renderer().draw_holding(xx, yy, game.current_side, *this, map);
 	}
 

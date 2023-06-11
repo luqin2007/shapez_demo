@@ -727,10 +727,10 @@
     <None Include="image\resources\star.psd">
       <Filter>资源文件\image\resources</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
     <None Include="readme.md">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="font\MicrosoftYaHei.ttf">

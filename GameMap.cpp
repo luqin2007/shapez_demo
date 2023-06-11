@@ -95,3 +95,21 @@ void GameMap::remove_building(const int x, const int y)
 		ctx->building.free_context(ctx);
 	}
 }
+
+void GameMap::destroy()
+{
+	for (const auto& raw_buildings : buildings_)
+	{
+		for (const auto ctx : raw_buildings)
+		{
+			if (!ctx) continue;
+
+			for (const auto& pos : ctx->building.all_positions(ctx->pos, ctx->direction))
+			{
+				buildings_[pos.x][pos.y] = nullptr;
+			}
+
+			ctx->building.free_context(ctx);
+		}
+	}
+}

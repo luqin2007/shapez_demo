@@ -60,6 +60,8 @@ public:
 
 	void remove_building(int x, int y);
 
+	void destroy();
+
 private:
 	/**
 	 * \brief 地图资源

@@ -37,10 +37,10 @@ void Painter::receive_dye(const Color color, const Vec2I& pos, Side side, Buildi
 
 	if (ctx.has_shape_)
 	{
-		ctx.shapes_.up_left.first = ctx.shapes_.up_left.first + ctx.color_;
-		ctx.shapes_.up_right.first = ctx.shapes_.up_right.first + ctx.color_;
-		ctx.shapes_.down_left.first = ctx.shapes_.down_left.first + ctx.color_;
-		ctx.shapes_.down_right.first = ctx.shapes_.down_right.first + ctx.color_;
+		ctx.shapes_.up_left.first = ctx.color_;
+		ctx.shapes_.up_right.first = ctx.color_;
+		ctx.shapes_.down_left.first = ctx.color_;
+		ctx.shapes_.down_right.first = ctx.color_;
 	}
 }
 
@@ -52,10 +52,10 @@ void Painter::receive_shape(const ColoredShapes& shape, const Vec2I& pos, Side s
 
 	if (ctx.has_color_)
 	{
-		ctx.shapes_.up_left.first = ctx.shapes_.up_left.first + ctx.color_;
-		ctx.shapes_.up_right.first = ctx.shapes_.up_right.first + ctx.color_;
-		ctx.shapes_.down_left.first = ctx.shapes_.down_left.first + ctx.color_;
-		ctx.shapes_.down_right.first = ctx.shapes_.down_right.first + ctx.color_;
+		ctx.shapes_.up_left.first = ctx.color_;
+		ctx.shapes_.up_right.first = ctx.color_;
+		ctx.shapes_.down_left.first = ctx.color_;
+		ctx.shapes_.down_right.first = ctx.color_;
 	}
 }
 

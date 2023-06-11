@@ -5,6 +5,7 @@
 #include "GameMap.h"
 #include "Timer.h"
 #include "Common.h"
+#include "MouseHelper.h"
 
 using std::max;
 using std::min;
@@ -53,6 +54,11 @@ public:
 		return timer_;
 	}
 
+	MouseHelper& mouse()
+	{
+		return mouse_;
+	}
+
 	/**
 	 * \brief 按键按下
 	 * \param key 按下的键
@@ -68,6 +74,7 @@ public:
 
 private:
 	Timer timer_;
+	MouseHelper mouse_;
 	GameMap map_;
 
 	time_t right_drag_time_ = 0;

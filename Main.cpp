@@ -7,7 +7,7 @@ void Main::run()
 	game_.initialize(Timer::time());
 	renderer_.initialize();
 	// 游戏循环
-	while (window_.is_active())
+	while (window_.is_alive())
 	{
 		game_.update();
 		renderer_.update(game_);

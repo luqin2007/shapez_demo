@@ -23,7 +23,7 @@ void GameLogic::initialize(const long long seed)
 	random_seed(seed);
 	timer_.reset();
 	map_.initialize();
-	MouseHelper::initialize();
+	mouse_.initialize();
 
 	// 初始化建筑
 	buildings["miner"] = &Miner::instance();
@@ -52,38 +52,38 @@ void GameLogic::update()
 	timer_.update();
 
 	// 更新鼠标响应
-	if (MouseHelper::is_left_drag())
+	if (mouse_.is_left_drag())
 	{
 		right_drag_time_ = 0;
-		on_drag(MouseHelper::dx(), MouseHelper::dy());
+		on_drag(mouse_.dx(), mouse_.dy());
 	}
-	else if (MouseHelper::is_left_clicked())
+	else if (mouse_.is_left_clicked())
 	{
 		right_drag_time_ = 0;
-		on_click_left(MouseHelper::x(), MouseHelper::y());
+		on_click_left(mouse_.x(), mouse_.y());
 	}
-	else if (MouseHelper::is_right_drag())
+	else if (mouse_.is_right_drag())
 	{
 		right_drag_time_ += timer_.delta_ms;
-		on_right_drag(MouseHelper::dx(), MouseHelper::dy());
+		on_right_drag(mouse_.dx(), mouse_.dy());
 	}
-	else if (MouseHelper::is_right_clicked())
+	else if (mouse_.is_right_clicked())
 	{
 		right_drag_time_ = 0;
-		on_click_right(MouseHelper::x(), MouseHelper::y());
+		on_click_right(mouse_.x(), mouse_.y());
 	}
 	else
 	{
 		right_drag_time_ = 0;
 	}
 
-	if (MouseHelper::is_mid_clicked())
+	if (mouse_.is_mid_clicked())
 	{
 		on_click_middle();
 	}
 
-	on_wheel_roll(MouseHelper::wheel());
-	MouseHelper::update();
+	on_wheel_roll(mouse_.wheel());
+	mouse_.update();
 
 	// 更新建筑
 	for (int i = 0; i < CELL_COUNT; ++i)
@@ -101,6 +101,8 @@ void GameLogic::update()
 void GameLogic::destroy()
 {
 	// 保存存档
+	// 销毁地图
+	map_.destroy();
 }
 
 void GameLogic::on_drag(const float dx, const float dy)
@@ -108,8 +110,8 @@ void GameLogic::on_drag(const float dx, const float dy)
 	if (current_building)
 	{
 		// 拖放建筑
-		const float x = MouseHelper::x();
-		const float y = MouseHelper::y();
+		const float x = mouse_.x();
+		const float y = mouse_.y();
 		const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - x) / map_.cell_size);
 		const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - y) / map_.cell_size);
 		map_.set_building(my, mx, current_building, current_side);
@@ -141,9 +143,9 @@ void GameLogic::on_right_drag(float dx, float dy)
 	else if (right_drag_time_ >= 500) // 500ms 后再移除
 	{
 		// 移除建筑
-		const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - MouseHelper::x()) / map_.
+		const int mx = static_cast<int>(map_.center.x - (current_window->width() / 2.0f - mouse_.x()) / map_.
 			cell_size);
-		const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - MouseHelper::y()) / map_.
+		const int my = static_cast<int>(map_.center.y - (current_window->height() / 2.0f - mouse_.y()) / map_.
 			cell_size);
 		map_.remove_building(my, mx);
 	}

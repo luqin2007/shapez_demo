@@ -29,27 +29,27 @@ void GameWindow::listen_events() const
 	{
 		if (button == GLFW_MOUSE_BUTTON_LEFT)
 		{
-			MouseHelper::set_left_click(action != GLFW_RELEASE);
+			current_game->mouse().set_left_click(action != GLFW_RELEASE);
 		}
 		else if (button == GLFW_MOUSE_BUTTON_MIDDLE)
 		{
-			MouseHelper::set_mid_click(action != GLFW_RELEASE);
+			current_game->mouse().set_mid_click(action != GLFW_RELEASE);
 		}
 		else if (button == GLFW_MOUSE_BUTTON_RIGHT)
 		{
-			MouseHelper::set_right_click(action != GLFW_RELEASE);
+			current_game->mouse().set_right_click(action != GLFW_RELEASE);
 		}
 	});
 
 	glfwSetCursorPosCallback(window_, [](GLFWwindow*, const double x, const double y)
 	{
-		MouseHelper::set_position(x, y);
+		current_game->mouse().set_position(x, y);
 		current_window->update_window_title();
 	});
 
 	glfwSetScrollCallback(window_, [](GLFWwindow*, double, const double y)
 	{
-		MouseHelper::set_wheel(y);
+		current_game->mouse().set_wheel(y);
 	});
 
 	glfwSetFramebufferSizeCallback(window_, [](GLFWwindow*, const int width, const int height)
@@ -72,8 +72,8 @@ void GameWindow::update_window_title() const
 	{
 		char buf[300];
 		const auto& center = current_game->map().center;
-		const float mx = MouseHelper::x();
-		const float my = MouseHelper::y();
+		const float mx = current_game->mouse().x();
+		const float my = current_game->mouse().y();
 		const float cell_size = current_game->map().cell_size;
 		const int gx = center.x - (width_ / 2.0f - mx) / cell_size;
 		const int gy = center.y - (height_ / 2.0f - my) / cell_size;
@@ -116,12 +116,7 @@ void GameWindow::on_resize(const int width, const int height)
 	update_window_title();
 }
 
-bool GameWindow::is_active() const
+bool GameWindow::is_alive() const
 {
 	return !glfwWindowShouldClose(window_);
-}
-
-void GameWindow::close() const
-{
-	glfwSetWindowShouldClose(window_, true);
 }

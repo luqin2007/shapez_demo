@@ -1,38 +1,46 @@
 #pragma once
 
-namespace MouseHelper
+class MouseHelper
 {
-	extern void update();
+public:
+	void update();
 
-	extern void initialize();
+	void initialize();
 
-	extern bool is_left_clicked();
+	[[nodiscard]] bool is_left_clicked() const;
 
-	extern bool is_left_drag();
+	[[nodiscard]] bool is_left_drag() const;
 
-	extern bool is_right_clicked();
+	[[nodiscard]] bool is_right_clicked() const;
 
-	extern bool is_right_drag();
+	[[nodiscard]] bool is_right_drag() const;
 
-	extern bool is_mid_clicked();
+	[[nodiscard]] bool is_mid_clicked() const;
 
-	extern float x();
+	[[nodiscard]] float x() const;
 
-	extern float y();
+	[[nodiscard]] float y() const;
 
-	extern float dx();
+	[[nodiscard]] float dx() const;
 
-	extern float dy();
+	[[nodiscard]] float dy() const;
 
-	extern float wheel();
+	[[nodiscard]] float wheel() const;
 
-	extern void set_left_click(bool click);
+	void set_left_click(bool click);
 
-	extern void set_mid_click(bool click);
+	void set_mid_click(bool click);
 
-	extern void set_right_click(bool click);
+	void set_right_click(bool click);
 
-	extern void set_position(double x, double y);
+	void set_position(double x, double y);
 
-	extern void set_wheel(double v);
+	void set_wheel(double v);
+
+private:
+	bool last_left_clicked_ = false, last_right_clicked_ = false;
+	bool left_clicked_ = false, mid_clicked_ = false, right_clicked_ = false;
+	bool pos_initialized_ = false;
+	float wheel_distance_ = 0;
+	float x_pos_ = 0, y_pos_ = 0, last_x_pos_ = 0, last_y_pos_ = 0;
 };

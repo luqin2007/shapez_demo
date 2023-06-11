@@ -1,112 +1,103 @@
 #include "MouseHelper.h"
 
-namespace MouseHelper
+void MouseHelper::update()
 {
-	bool last_left_clicked, last_right_clicked;
-	bool left_clicked, mid_clicked, right_clicked;
-	bool pos_initialized;
-	float wheel_distance;
-	float x_pos, y_pos, last_x_pos, last_y_pos;
+	last_left_clicked_ = left_clicked_;
+	last_right_clicked_ = right_clicked_;
+	last_x_pos_ = x_pos_;
+	last_y_pos_ = y_pos_;
+	wheel_distance_ = 0;
+}
 
-	void update()
-	{
-		last_left_clicked = left_clicked;
-		last_right_clicked = right_clicked;
-		last_x_pos = x_pos;
-		last_y_pos = y_pos;
-		wheel_distance = 0;
-	}
+void MouseHelper::initialize()
+{
+	last_left_clicked_ = false;
+	left_clicked_ = false;
+	last_right_clicked_ = false;
+	right_clicked_ = false;
+	mid_clicked_ = false;
+	pos_initialized_ = false;
+	update();
+}
 
-	void initialize()
-	{
-		last_left_clicked = false;
-		left_clicked = false;
-		last_right_clicked = false;
-		right_clicked = false;
-		mid_clicked = false;
-		pos_initialized = false;
-		update();
-	}
+bool MouseHelper::is_left_clicked() const
+{
+	return last_left_clicked_ && !left_clicked_;
+}
 
-	bool is_left_clicked()
-	{
-		return last_left_clicked && !left_clicked;
-	}
+bool MouseHelper::is_right_clicked() const
+{
+	return last_right_clicked_ && !right_clicked_;
+}
 
-	bool is_right_clicked()
-	{
-		return last_right_clicked && !right_clicked;
-	}
+bool MouseHelper::is_left_drag() const
+{
+	return last_left_clicked_ && left_clicked_;
+}
 
-	bool is_left_drag()
-	{
-		return last_left_clicked && left_clicked;
-	}
+bool MouseHelper::is_right_drag() const
+{
+	return last_right_clicked_ && right_clicked_;
+}
 
-	bool is_right_drag()
-	{
-		return last_right_clicked && right_clicked;
-	}
+bool MouseHelper::is_mid_clicked() const
+{
+	return mid_clicked_;
+}
 
-	bool is_mid_clicked()
-	{
-		return mid_clicked;
-	}
+float MouseHelper::x() const
+{
+	return x_pos_;
+}
 
-	float x()
-	{
-		return x_pos;
-	}
+float MouseHelper::y() const
+{
+	return y_pos_;
+}
 
-	float y()
-	{
-		return y_pos;
-	}
+float MouseHelper::dx() const
+{
+	return x_pos_ - last_x_pos_;
+}
 
-	float dx()
-	{
-		return x_pos - last_x_pos;
-	}
+float MouseHelper::dy() const
+{
+	return y_pos_ - last_y_pos_;
+}
 
-	float dy()
-	{
-		return y_pos - last_y_pos;
-	}
+float MouseHelper::wheel() const
+{
+	return wheel_distance_;
+}
 
-	float wheel()
-	{
-		return wheel_distance;
-	}
+void MouseHelper::set_left_click(const bool click)
+{
+	left_clicked_ = click;
+}
 
-	void set_left_click(const bool click)
-	{
-		left_clicked = click;
-	}
+void MouseHelper::set_mid_click(const bool click)
+{
+	mid_clicked_ = click;
+}
 
-	void set_mid_click(const bool click)
-	{
-		mid_clicked = click;
-	}
+void MouseHelper::set_right_click(const bool click)
+{
+	right_clicked_ = click;
+}
 
-	void set_right_click(const bool click)
+void MouseHelper::set_position(const double x, const double y)
+{
+	x_pos_ = static_cast<float>(x);
+	y_pos_ = static_cast<float>(y);
+	if (!pos_initialized_)
 	{
-		right_clicked = click;
+		last_x_pos_ = x_pos_;
+		last_y_pos_ = y_pos_;
+		pos_initialized_ = true;
 	}
+}
 
-	void set_position(const double x, const double y)
-	{
-		x_pos = static_cast<float>(x);
-		y_pos = static_cast<float>(y);
-		if (!pos_initialized)
-		{
-			last_x_pos = x_pos;
-			last_y_pos = y_pos;
-			pos_initialized = true;
-		}
-	}
-
-	void set_wheel(const double v)
-	{
-		wheel_distance = static_cast<float>(v);
-	}
+void MouseHelper::set_wheel(const double v)
+{
+	wheel_distance_ = static_cast<float>(v);
 }
