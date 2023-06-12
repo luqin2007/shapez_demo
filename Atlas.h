@@ -1,14 +1,14 @@
 #pragma once
 
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <filesystem>
 #include <exception>
 
 #include <glad/glad.h>
 
-using std::map;
+using std::unordered_map;
 using std::string;
 using std::filesystem::path;
 using std::cout;
@@ -138,9 +138,9 @@ private:
 	const float width_, height_;
 	const int cell_width_, cell_height_, col_count_, row_count_, index_;
 	bool m4_ = false;
-	map<string, Rect> atlas_;
-	map<string, dot9> dot9s_;
-	map<char, Char> chars_;
+	unordered_map<string, Rect> atlas_;
+	unordered_map<string, dot9> dot9s_;
+	unordered_map<char, Char> chars_;
 
 	GLuint texture_ = 0;
 
