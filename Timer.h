@@ -29,11 +29,6 @@ public:
 	float delta = 0, running = 0;
 
 	/**
-	 * \brief 倍速
-	 */
-	float time_multiply_ = 1;
-
-	/**
 	 * \brief 更新：推进到下一帧
 	 */
 	void update();
@@ -44,4 +39,12 @@ public:
 	void reset();
 
 	static time_t time();
+
+private:
+
+	/**
+	 * \brief 倍速
+	 */
+	float time_multiply_ = 1;
+
 };

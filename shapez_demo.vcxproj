@@ -363,6 +363,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="glsl\cell_border.frag" />
     <None Include="glsl\cell_border.vert" />
     <None Include="glsl\font.frag" />
